@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+ 
+    <context:component-scan
+        base-package="net.oldcounty.controller" />
+  <bean id="multipartResolver"
+  class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+  
+    <bean id="viewResolver"
+        class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass"
+            value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+	    
+
+ <bean id="urlMapping"
+  class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+  <property name="interceptors">
+   <list>
+    <ref local="localeChangeInterceptor"/>
+   </list>
+  </property>
+  <property name="urlMap">
+   <map>
+    <entry key="login">
+    	<ref bean="ListenerController"/>
+    </entry>
+    <entry key="logout">
+    	<ref bean="ListenerController"/>
+    </entry>
+    <entry key="delete">
+    	<ref bean="ListenerController"/>
+    </entry>    
+     <entry key="edit">
+    	<ref bean="ListenerController"/>
+    </entry>    
+     <entry key="register">
+    	<ref bean="ListenerController"/>
+    </entry>    
+    <entry key="search">
+    	<ref bean="ListenerController"/>
+    </entry>              
+	<entry key="members">
+    	<ref bean="ListenerController"/>
+    </entry>    
+    <entry key="profile">
+    	<ref bean="ListenerController"/>
+    </entry>    
+    <entry key="messages">
+    	<ref bean="ListenerController"/>
+    </entry>   
+	<entry key="user">
+    	<ref bean="ListenerController"/>
+    </entry>
+	<entry key="index">
+    	<ref bean="ListenerController"/>
+    </entry>    
+
+
+
+	<entry key="jsoninterests">
+    	<ref bean="ListenerController"/>
+    </entry>    
+   	<entry key="jsonlocations">
+    	<ref bean="ListenerController"/>
+    </entry>    
+    	<entry key="jsonmembers">
+    	<ref bean="ListenerController"/>
+    </entry>    
+    	<entry key="jsonuniqueuser">
+    	<ref bean="ListenerController"/>
+    </entry>    
+     
+    
+    <entry key="galleryupload">
+     	<ref bean="fileUploadFormController"/>
+    </entry>   
+	<entry key="gallery">
+    	<ref bean="ListenerController"/>
+    </entry>     
+   </map>
+  </property>
+ </bean>
+ 
+
+ <bean id="ListenerController" class="net.oldcounty.controller.ListenerController"/>
+
+
+ <bean id="fileUploadValidator" class="net.fileupload.FileUploadValidator"/>
+ 
+ <bean id="fileUploadFormController" class="net.fileupload.FileUploadController">
+  <property name="sessionForm"><value>false</value></property>
+  <property name="commandName"><value>fileUpload</value></property>
+  <property name="commandClass"><value>net.fileupload.FileUpload</value></property>
+  <property name="validator"><ref bean="fileUploadValidator"/></property>
+  <property name="formView"><value>gallery/fileuploadform</value></property>
+  <property name="successView"><value>gallery/fileuploadsuccess</value></property>
+ </bean>
+ 
+ <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+  <property name="paramName" value="hl"/>
+ </bean>
+ <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+ 
+
+</beans>
