@@ -18,8 +18,8 @@
 
 					<nav id="loginmenu">
 						<ul>
-							<li><a class="form" href="register.php">Sign up</a></li>
-							<li><a href="#">Login</a></li>
+							<li><a class="form" href="register">Sign up</a></li>
+							<li><a class="form" href="login">Login</a></li>
 						</ul>
 					</nav>
 				</div>

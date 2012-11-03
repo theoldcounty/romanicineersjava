@@ -540,6 +540,7 @@
 		float:left;
 		background:orange;
 		border:1px solid black;
+		list-style-type:none;
 	}
 
 	.physical{
@@ -594,17 +595,20 @@
 		background:red;
 		margin-right: 10px;
 		margin-bottom: 10px;
+		display:block;
 	}
+	
+	
 	.profilePics ul li img{
 		width:125px;
 	}
 
-	.profilepics ul li img.portrait{
+	.profilePics ul li img.portrait{
 		width:115px;
 		height:auto;
 	}
 
-	.profilepics ul li img.widescreen{
+	.profilePics ul li img.widescreen{
 		width:auto;
 		height:115px;
 	}
