@@ -33,8 +33,7 @@ class ServiceSerlvet {
 		HttpSession session = serlvetService(request);
     	String inSession = PersonController.inSession(session);		
 		
-		request.setAttribute("inSession", inSession);	
-		
+		request.setAttribute("inSession", inSession);		
 	}	
 	
 }

@@ -8,7 +8,7 @@
 			<table border="1">
 				<c:forEach var="person" items="${response}">
 					<tr>
-						<td><a href="profile?id=${person._id}">${person.username}</a></td>
+						<td><a href="user?id=${person._id}">${person.username}</a></td>
 						<td><a href="delete?id=${person._id}">x</a></td>
 						<td>${person.emailaddress}</td>
 						<td>${person.password}</td>

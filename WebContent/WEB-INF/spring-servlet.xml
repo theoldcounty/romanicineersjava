@@ -13,8 +13,7 @@
   <bean id="multipartResolver"
   class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
   
-    <bean id="viewResolver"
-        class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass"
             value="org.springframework.web.servlet.view.JstlView" />
         <property name="prefix" value="/WEB-INF/jsp/" />
@@ -22,8 +21,7 @@
     </bean>
 	    
 
- <bean id="urlMapping"
-  class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+ <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
   <property name="interceptors">
    <list>
     <ref local="localeChangeInterceptor"/>
@@ -50,9 +48,6 @@
     	<ref bean="ListenerController"/>
     </entry>              
 	<entry key="members">
-    	<ref bean="ListenerController"/>
-    </entry>    
-    <entry key="profile">
     	<ref bean="ListenerController"/>
     </entry>    
     <entry key="messages">

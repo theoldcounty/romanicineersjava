@@ -3,6 +3,56 @@
 
 $(document).ready(function() {
 
+	console.log("ready to run google map function");
+	
+	
+	var lat = $('#canvasMap').data('lat');
+	var long = $('#canvasMap').data('long');
+	
+	googlemaper.setup(lat, long);
+    googlemaper.setUserMarker(lat, long);
+    
+    /*
+    var venues = [
+	                 ['Bondi Beach', -33.890542, 151.274856, 4],
+	                 ['Coogee Beach', -33.923036, 151.259052, 5],
+	                 ['Cronulla Beach', -34.028249, 151.157507, 3],
+	                 ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+	                 ['Maroubra Beach', -33.950198, 151.259302, 1]
+	             ];
+    googlemaper.setVenueMarkers(googlemaper.map, venues);*/	
+	
+    
+	/*
+	var optionObj = {
+		"data":
+		{
+			"min": -100,
+			"max": 100,
+			"width": 700,
+			"height": 700,
+			"thickness": .3,
+			"cursor":true,
+			"displayInput":false,
+			"displayPrevious": true,
+			"fgColor": "#ffec03",
+			"skin": "tron",
+			"angleOffset": -125,
+			"readOnly" : true,
+			"angleArc":250
+		},
+		"value": 35,
+		"type": "standard"
+	}
+
+	renderKnobs.init(".jqueryKnob", optionObj);	
+	*/
+	
+	
+	
+	
+	
+	
 	console.log("adding colorbox");
 	$(".group").colorbox({
 		rel:'group',
@@ -46,6 +96,8 @@ $(document).ready(function() {
 		}
 	});
 
+	
+	
 	console.log("make a stand");
 	var searchFilter = new searchFilters();
 
@@ -54,14 +106,6 @@ $(document).ready(function() {
 
 
 	// Initialize Backbone views.
-	console.log("setting slider backbone.");
-	console.log("slider-controls-nav", $('[data-role="slider-controls-nav"]'));
-
-
-	$('[data-role="slider-controls-nav"]').each(function() {
-		new sliderControls({el: $(this)});
-	});
-
 
 
 		var sliderpreviews = [
@@ -226,7 +270,7 @@ $(window).resize(function() {
 		goPie.updateCharts('#seekingPie', futureFoodPieJson);
 	});
 
-
+/*
 	$(window).on("click", function() {
 
 		var interestPieJson = [
@@ -276,7 +320,7 @@ $(window).resize(function() {
 
 		goPie.updateCharts('#seekingPie', futureFoodPieJson);
 	});
-
+*/
 
 
 	var visitJson= {

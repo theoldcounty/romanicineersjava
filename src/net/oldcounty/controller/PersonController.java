@@ -1,9 +1,14 @@
 package net.oldcounty.controller;
 
 import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpSession;
 
@@ -54,7 +59,7 @@ public class PersonController extends ServiceSerlvet {
 		
 		if(isValidInputs){		
 			//_getCollection
-			DBCollection collection = MongoApp.getCollection();
+			DBCollection collection = MongoApp.getCollection("myCollection");
 			
 		    // search query
 		    BasicDBObject searchQuery = new BasicDBObject();
@@ -116,16 +121,31 @@ public class PersonController extends ServiceSerlvet {
 	 * @throws UnknownHostException 
 	 **/
 	public static List<DBObject> registerUser(
+			String realname,
 			String username,
 			String emailaddress,
+			String confirmemailaddress,
 			String password,
 			String confirmpassword,
-			String gender,
+			String whichscreenname,    			
 			String birthyear,
 			String birthmonth,
 			String birthday,
+			String about,
+			String country,
+			String gender,
 			String ethnicity,
-			String country
+			String kindofrelationship,
+			String bodytype,    	
+			String haircolor,
+			String eyecolor,
+			String children,
+			String education,
+			String occupation,
+			String[] languages,
+			String[] interests,
+			Integer[] interestknobs,
+			Integer[] personality
 				) throws UnknownHostException, MongoException
 		{
 		System.out.println("running usercontrol register user");
@@ -134,7 +154,7 @@ public class PersonController extends ServiceSerlvet {
 		List<DBObject> response = new ArrayList<DBObject>();
 
 			//_getCollection
-			DBCollection collection = MongoApp.getCollection();
+			DBCollection collection = MongoApp.getCollection("myCollection");
 			
 			Date now = new Date();
 			BasicDBObject time = new BasicDBObject("ts", now);			
@@ -186,13 +206,31 @@ public class PersonController extends ServiceSerlvet {
 			    // create a document to store attributes
 			    BasicDBObject document = new BasicDBObject();
 			    
+			    
+			    document.put("realname", realname);
 			    document.put("username", username);
 			    document.put("emailaddress", emailaddress);
-			    document.put("password", password);			    
-			    document.put("gender", gender);	
-			    document.put("birthdate", birthyear+birthmonth+birthday);	
-			    document.put("ethnicity", ethnicity);	
+			    document.put("password", password);		    
+			   		    
+			    document.put("whichscreenname", whichscreenname);			    
+			    
+			    document.put("about", about);
+			   			    
+			    document.put("birthdate", birthyear+birthmonth+birthday);
+			    	
 			    document.put("country", country);			    
+			    
+			    document.put("gender", gender);
+			    document.put("ethnicity", ethnicity);
+			    document.put("kindofrelationship", kindofrelationship);
+			    document.put("bodytype", bodytype);
+			    document.put("haircolor", haircolor);
+			    document.put("eyecolor", eyecolor);
+			    document.put("children", children);
+			    document.put("education", education);
+			    document.put("occupation", occupation);			    
+
+			    document.put("languages", languages);				
 			    
 			    document.put("registeredon", time);
 			    document.put("lastupdated", time);
@@ -201,8 +239,102 @@ public class PersonController extends ServiceSerlvet {
 			    
 			    // save it into collection named "myCollection"
 			    collection.insert(document);
-			    ObjectId Lastid = (ObjectId)document.get( "_id" );
+			    ObjectId lastid = (ObjectId)document.get( "_id" );
+	
+			    
+			    /*add to new collection personality*/	
+			    List<DBObject> responseUserPersonality = addUserPersonality(
+			    		lastid,
+			    		personality
+			    );
+			    System.out.println("userPersonality "+responseUserPersonality+"<br>");			 
+				/*add to new collection personality*/
+
+			    /*add to new interests chart*/	
+			    Map<String,Integer> userInterests = new LinkedHashMap<String,Integer>();
+		    	if(interests!=null){
+		    		int index = 0;
+		    		for(String interest : interests)
+			    	{
+			    		userInterests.put(interest,interestknobs[index]);
+			    		index++;
+			    	}
+		    	}
+		    						
+			    List<DBObject> responseInterestsChart = addUserInterests(
+		    		lastid,
+		    		userInterests
+			    );
+			    
+			    System.out.println("userInterests "+responseInterestsChart+"<br>");		
+			    
+				/*add to new interests chart*/
+			    
+		    	document.put("uniqueid", lastid);
+
+				results.put("response", "OK");
+				results.put("description", "User has been registered");		    	
+		    	results.put("user", document);
+		    }
+		    else
+		    {
+				results.put("response", "FAIL");
+				results.put("description", "Failed to register user");	    	
+		    }
 		    
+		    response.add(results);
+		return response;
+	}
+	
+
+	
+
+	/**
+	 * Add User Personality
+	 * @param id
+	 * @throws MongoException 
+	 * @throws UnknownHostException 
+	 **/
+	public static List<DBObject> addUserPersonality(
+					ObjectId lastid,
+				    Integer[] personality		
+				) throws UnknownHostException, MongoException
+		{
+		
+		//__Prepare response
+		List<DBObject> response = new ArrayList<DBObject>();
+
+			//_getCollection
+			DBCollection collection = MongoApp.getCollection("userPersonality");
+
+			BasicDBObject results = new BasicDBObject();			
+		    Boolean isValidInputs = true;
+		    
+		    if(isValidInputs){
+			    // create a document to store attributes
+			    BasicDBObject document = new BasicDBObject();
+			    BasicDBObject personaltraits = new BasicDBObject();
+			    
+			    /*add to new collection personality*/				    
+					String[] personalTypes ={"confidence","reasoning","emotion","daring","attachment","sensitivity","comedy"};
+					Integer j = 0;
+					for(Integer traits : personality)
+			    	{
+			    		System.out.println("traits "+traits);
+			    		personaltraits.put(personalTypes[j], traits);
+			    		j++;
+			    	}
+				
+				    document.put("_id", lastid);
+				    document.put("personality", personaltraits);
+				/*add to new collection personality*/
+				
+			    // save it into collection named "userPersonality"
+			    collection.insert(document);
+			    ObjectId Lastid = (ObjectId)document.get( "_id" );
+			    
+			    //System.out.println("Personality recorded"); 	
+			    
 		    	document.put("uniqueid", Lastid);
 
 				results.put("response", "OK");
@@ -213,6 +345,63 @@ public class PersonController extends ServiceSerlvet {
 		    {
 				results.put("response", "FAIL");
 				results.put("description", "Failed to register user");	    	
+		    }
+		    
+		    response.add(results);
+		return response;
+	}
+	
+
+	/**
+	 * Add User Personality
+	 * @param id
+	 * @throws MongoException 
+	 * @throws UnknownHostException 
+	 **/
+	public static List<DBObject> addUserInterests(
+				ObjectId lastid,
+				Map<String,Integer> interests			
+			) throws UnknownHostException, MongoException
+		{		
+			//__Prepare response
+			List<DBObject> response = new ArrayList<DBObject>();
+
+			//_getCollection
+			DBCollection collection = MongoApp.getCollection("userPersonality");
+		    BasicDBObject results = new BasicDBObject();
+			
+		    Boolean isValidInputs = true;
+		    
+		    if(isValidInputs){
+			    // create a document to store attributes
+			    BasicDBObject document = new BasicDBObject();
+			    BasicDBObject curiosity = new BasicDBObject();
+			    
+			    /*add to new collection personality*/
+		        	if(interests!=null){
+			    		for (Entry<String, Integer> entry : interests.entrySet()) {
+			    		    curiosity.put(entry.getKey(), entry.getValue());			    		
+			    		}
+			    	}
+			    	
+			    	document.put("_id", lastid);
+			    	document.put("curiosity", curiosity);
+				/*add to new collection personality*/
+			    
+			    // save it into collection named "userPersonality"
+			    collection.insert(document);
+			    ObjectId Lastid = (ObjectId)document.get( "_id" );	
+			    
+		    	document.put("uniqueid", Lastid);
+
+				results.put("response", "OK");
+				results.put("description", "Interests have been recorded");		    	
+		    	results.put("user", document);
+		    }
+		    else
+		    {
+				results.put("response", "FAIL");
+				results.put("description", "Failed record Interests");	    	
 		    }
 		    
 		    response.add(results);
@@ -241,6 +430,8 @@ public class PersonController extends ServiceSerlvet {
 	    
 	    List<DBObject> uniqueUser = searchUsers(searchQuery);
 	    
+	    System.out.println(uniqueUser);
+	    
 			if(uniqueUser.size()>0 ){
 				results.put("response", "OK");
 				results.put("description", "The specific user has been found");		    	
@@ -256,6 +447,42 @@ public class PersonController extends ServiceSerlvet {
 		return response;
 	}	
 	
+
+	/**
+	 * Get User Age
+	 * @param birthdate
+	 **/
+	public static Integer getAge(String birthdate) {
+		System.out.println("get age of the user.");
+
+		int yearDOB = Integer.parseInt(birthdate.substring(0, 4));
+		int monthDOB = Integer.parseInt(birthdate.substring(4, 6));
+		int dayDOB = Integer.parseInt(birthdate.substring(6, 8));
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy");
+		java.util.Date date = new java.util.Date();
+		int thisYear = Integer.parseInt(dateFormat.format(date));
+
+		dateFormat = new SimpleDateFormat("MM");
+		date = new java.util.Date();
+		int thisMonth = Integer.parseInt(dateFormat.format(date));
+
+		dateFormat = new SimpleDateFormat("dd");
+		date = new java.util.Date();
+		int thisDay = Integer.parseInt(dateFormat.format(date));
+
+		int age = thisYear - yearDOB;
+
+		if(thisMonth < monthDOB){
+			age = age - 1;
+		}
+	
+		if(thisMonth == monthDOB && thisDay < dayDOB){
+			age = age - 1;
+		}
+ 		    
+	    return age;
+	}		
 	
 	/**
 	 * Get User List
@@ -269,14 +496,15 @@ public class PersonController extends ServiceSerlvet {
 		List<DBObject> results = new ArrayList<DBObject>();
 		
 		//_getCollection
-		DBCollection collection = MongoApp.getCollection();
+		DBCollection collection = MongoApp.getCollection("myCollection");
 		
 	    DBCursor cursor = collection.find(searchQuery);
 		    
         // loop over the cursor and display the result
     	while (cursor.hasNext()) {
 	    	results.add(cursor.next());
-	    }    		    
+	    }
+    	
 	    return results;
 	}	
 	
@@ -295,7 +523,7 @@ public class PersonController extends ServiceSerlvet {
 	    	obj.put("_id", new ObjectId(objId));
 
 			//_getCollection
-			MongoApp.deleteCollectionEntry(obj);
+			MongoApp.deleteCollectionEntry(obj, "myCollection");
 
 			results.put("response", "OK");
 			results.put("description", "User has been deleted");
@@ -326,7 +554,7 @@ public class PersonController extends ServiceSerlvet {
 			
 			if(isLoggedIn){		
 				//_getCollection
-				DBCollection collection = MongoApp.getCollection();
+				DBCollection collection = MongoApp.getCollection("myCollection");
 			    
 			    //get time
 			    Date now = new Date();
@@ -382,7 +610,7 @@ public class PersonController extends ServiceSerlvet {
 		List<DBObject> response = new ArrayList<DBObject>();
 
 			//_getCollection
-			DBCollection collection = MongoApp.getCollection();
+			DBCollection collection = MongoApp.getCollection("myCollection");
 			
 			//Time
 			Date now = new Date();
@@ -465,14 +693,6 @@ public class PersonController extends ServiceSerlvet {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	public static List<DBObject> editUserBasic(
 			String id,
 			String seeking
@@ -484,7 +704,7 @@ public class PersonController extends ServiceSerlvet {
 		List<DBObject> response = new ArrayList<DBObject>();
 
 			//_getCollection
-			DBCollection collection = MongoApp.getCollection();
+			DBCollection collection = MongoApp.getCollection("myCollection");
 
 			//Time
 			Date now = new Date();

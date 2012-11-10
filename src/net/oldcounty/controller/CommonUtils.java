@@ -88,7 +88,7 @@ public class CommonUtils{
 		Boolean result = true;
 		
 		//_getCollection
-		DBCollection collection = MongoApp.getCollection();
+		DBCollection collection = MongoApp.getCollection("myCollection");
 		
 	    // search query
 	    BasicDBObject searchQuery = new BasicDBObject();
@@ -130,7 +130,7 @@ public class CommonUtils{
 		Boolean result = false;
 		
 		//_getCollection
-		DBCollection collection = MongoApp.getCollection();
+		DBCollection collection = MongoApp.getCollection("myCollection");
 		
 	    // search query
 	    BasicDBObject searchQuery = new BasicDBObject();

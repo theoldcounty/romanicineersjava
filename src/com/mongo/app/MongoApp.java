@@ -42,8 +42,8 @@ public class MongoApp {
 	/**
 	 * delete collection entry
 	 **/
-	public static void deleteCollectionEntry(BasicDBObject obj) throws UnknownHostException, MongoException{
-		DBCollection collection = getCollection();
+	public static void deleteCollectionEntry(BasicDBObject obj, String collectionName) throws UnknownHostException, MongoException{
+		DBCollection collection = getCollection(collectionName);
 		collection.remove(obj);
 	}
 	
@@ -52,7 +52,7 @@ public class MongoApp {
 	 **/
 	public static void cleanCollection() throws UnknownHostException, MongoException{
 	    //empty object clears ALL entries	
-	    deleteCollectionEntry(new BasicDBObject());
+	    deleteCollectionEntry(new BasicDBObject(), "myCollection");
 	}
 
 	/**
@@ -60,11 +60,11 @@ public class MongoApp {
 	 * @throws MongoException 
 	 * @throws UnknownHostException 
 	 **/	
-	public static DBCollection getCollection() throws UnknownHostException, MongoException {
+	public static DBCollection getCollection(String collectionName) throws UnknownHostException, MongoException {
 		// if database doesn't exists, mongoDB will create it
 	    DB db = getDatabase();
 
-	    String collectionName = "myCollection";
+	    //String collectionName = "myCollection";
 	    
 	    // Get collection from MongoDB, database named "mydb"
 	    // if collection doesn't exists, mongoDB will create it
@@ -73,16 +73,16 @@ public class MongoApp {
 	    return collection;
 	}
 	
-	
+	/*
     public static void main(String[] args) {
 
 		try {
-			getCollection();
+			getCollection("myCollection");
 			//cleanCollection();
 		} catch (UnknownHostException e) {
 		    e.printStackTrace();
 		} catch (MongoException e) {
 		    e.printStackTrace();
 		}
-    }
+    }*/
 }
