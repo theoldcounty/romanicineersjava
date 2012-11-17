@@ -118,7 +118,7 @@ var isotopefilters = Backbone.View.extend({
 
 						break;
 					case "interest":
-							var data = ["Sex", "Movies", "Football", "Robots", "Spaceflight"];
+							var data = ["Cinema", "Sex", "Movies", "Football", "Robots", "Spaceflight"];
 						break;
 				}
 

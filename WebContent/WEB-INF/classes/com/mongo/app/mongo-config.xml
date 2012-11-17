@@ -16,7 +16,8 @@
      <constructor-arg ref="mongo"/>
      <constructor-arg value="mydb"/>
      <constructor-arg value="mycollection"/>
-     <constructor-arg value="userPersonality"/>     
+     <constructor-arg value="userPersonality"/>
+     <constructor-arg value="userPieCharts"/>  
    </bean>
     
    <bean id="initService" class="org.krams.tutorial.service.InitService" init-method="init"></bean>

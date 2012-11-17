@@ -43,13 +43,7 @@ var searchFilters = Backbone.View.extend({
 			console.log("filterChoice", filterChoice);
 			window.location.hash = "?q="+filterChoice;
 
-
-
-
 			//window.location = 'http://davidwalsh.name'; //redirects to homepage
-
-
-
 
 			var obj = { filter: $('.element:interest('+filterChoice+')') };
 			that.runIsotope(obj);

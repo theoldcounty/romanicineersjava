@@ -19,7 +19,8 @@
         <property name="prefix" value="/WEB-INF/jsp/" />
         <property name="suffix" value=".jsp" />
     </bean>
-	    
+	     
+
 
  <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
   <property name="interceptors">
@@ -62,9 +63,18 @@
 
 
 
-	<entry key="jsoninterests">
+
+
+	<entry key="jsonpersonality">
     	<ref bean="ListenerController"/>
-    </entry>    
+    </entry> 
+	<entry key="jsonpiechart">
+    	<ref bean="ListenerController"/>
+    </entry>  
+    <entry key="jsonbubblechart">
+    	<ref bean="ListenerController"/>
+    </entry> 
+      
    	<entry key="jsonlocations">
     	<ref bean="ListenerController"/>
     </entry>    

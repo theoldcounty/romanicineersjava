@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -142,9 +143,18 @@ public class PersonController extends ServiceSerlvet {
 			String children,
 			String education,
 			String occupation,
+			String latitude,
+			String longitude,			
 			String[] languages,
 			String[] interests,
 			Integer[] interestknobs,
+			String[] seekings,
+			Integer[] seekingknobs,	
+			String[] visitings,
+			Integer[] visitingknobs,
+			String goal1,
+			String goal2,
+			String goal3,
 			Integer[] personality
 				) throws UnknownHostException, MongoException
 		{
@@ -228,9 +238,16 @@ public class PersonController extends ServiceSerlvet {
 			    document.put("eyecolor", eyecolor);
 			    document.put("children", children);
 			    document.put("education", education);
-			    document.put("occupation", occupation);			    
+			    document.put("occupation", occupation);	
+			    
+			    document.put("latitude", latitude);
+			    document.put("longitude", longitude);
 
-			    document.put("languages", languages);				
+			    document.put("languages", languages);	
+			    
+			    document.put("goal1", goal1);
+			    document.put("goal2", goal2);
+			    document.put("goal3", goal3);
 			    
 			    document.put("registeredon", time);
 			    document.put("lastupdated", time);
@@ -250,7 +267,8 @@ public class PersonController extends ServiceSerlvet {
 			    System.out.println("userPersonality "+responseUserPersonality+"<br>");			 
 				/*add to new collection personality*/
 
-			    /*add to new interests chart*/	
+			    
+			    /*add to new interests chart*/
 			    Map<String,Integer> userInterests = new LinkedHashMap<String,Integer>();
 		    	if(interests!=null){
 		    		int index = 0;
@@ -259,16 +277,58 @@ public class PersonController extends ServiceSerlvet {
 			    		userInterests.put(interest,interestknobs[index]);
 			    		index++;
 			    	}
-		    	}
-		    						
-			    List<DBObject> responseInterestsChart = addUserInterests(
+		    	}		    						
+			    List<DBObject> responseInterestsChart = addUserPieChart(
 		    		lastid,
+		    		"interests",
 		    		userInterests
 			    );
+			    System.out.println("userInterests "+responseInterestsChart+"<br>");
+			    /*add to new interests chart*/	
+			   
+
 			    
-			    System.out.println("userInterests "+responseInterestsChart+"<br>");		
 			    
-				/*add to new interests chart*/
+			    
+			    /*add to new seeking chart*/	
+			    Map<String,Integer> userSeeking = new LinkedHashMap<String,Integer>();
+		    	if(seekings!=null){
+		    		int index = 0;
+		    		for(String seeking : seekings)
+			    	{
+		    			userSeeking.put(seeking,seekingknobs[index]);
+			    		index++;
+			    	}
+		    	}		    						
+			    List<DBObject> responseSeekingChart = addUserPieChart(
+		    		lastid,
+		    		"seeking",
+		    		userSeeking
+			    );
+			    System.out.println("userSeeking "+responseSeekingChart+"<br>");
+			    /*add to new seeking chart*/			    
+			    
+			    
+
+			    
+			    /*add to new visiting chart*/	
+			    Map<String,Integer> userVisiting = new LinkedHashMap<String,Integer>();
+		    	if(seekings!=null){
+		    		int index = 0;
+		    		for(String visiting : visitings)
+			    	{
+		    			userVisiting.put(visiting,visitingknobs[index]);
+			    		index++;
+			    	}
+		    	}		    						
+			    List<DBObject> responseVisitingChart = addUserBubbleChart(
+		    		lastid,
+		    		"visiting",
+		    		userVisiting
+			    );
+			    System.out.println("userVisiting "+responseVisitingChart+"<br>");
+			    /*add to new visiting chart*/			    
+			    
 			    
 		    	document.put("uniqueid", lastid);
 
@@ -331,11 +391,6 @@ public class PersonController extends ServiceSerlvet {
 				
 			    // save it into collection named "userPersonality"
 			    collection.insert(document);
-			    ObjectId Lastid = (ObjectId)document.get( "_id" );
-			    
-			    //System.out.println("Personality recorded"); 	
-			    
-		    	document.put("uniqueid", Lastid);
 
 				results.put("response", "OK");
 				results.put("description", "User has been registered");		    	
@@ -350,6 +405,42 @@ public class PersonController extends ServiceSerlvet {
 		    response.add(results);
 		return response;
 	}
+
+	/**
+	 * Get UserPersonality
+	 * @param id
+	 * @throws MongoException 
+	 * @throws UnknownHostException 
+	 **/
+	public static List<DBObject> getUserPersonality(String objId) throws UnknownHostException, MongoException{
+		System.out.println("get personality");
+
+		//__Prepare response
+		List<DBObject> response = new ArrayList<DBObject>();
+		
+		BasicDBObject results = new BasicDBObject();
+		
+	    // search query
+	    BasicDBObject searchQuery = new BasicDBObject();
+	    	searchQuery.put("_id", new ObjectId(objId));
+	    
+	    List<DBObject> uniquePersonality = searchCollections(searchQuery, "userPersonality");
+     
+		if(uniquePersonality.size()>0 ){
+			results.put("response", "OK");
+			results.put("description", "The specific user has been found");		    	
+			results.put("personality", uniquePersonality.get(0).get("personality"));		
+		}
+		else
+		{
+			results.put("response", "FAIL");
+			results.put("description", "Failed to get personality traits");	    	
+		}	    
+		response.add(results);
+	    
+		return response;
+	}
+	
 	
 
 	/**
@@ -358,41 +449,42 @@ public class PersonController extends ServiceSerlvet {
 	 * @throws MongoException 
 	 * @throws UnknownHostException 
 	 **/
-	public static List<DBObject> addUserInterests(
+	public static List<DBObject> addUserPieChart(
 				ObjectId lastid,
+				String chartType,
 				Map<String,Integer> interests			
 			) throws UnknownHostException, MongoException
 		{		
+			System.out.println("add a CHART");
+		
 			//__Prepare response
 			List<DBObject> response = new ArrayList<DBObject>();
 
+			
 			//_getCollection
-			DBCollection collection = MongoApp.getCollection("userPersonality");
-		    BasicDBObject results = new BasicDBObject();
+			DBCollection collection = MongoApp.getCollection("userPieCharts");
+		    
+			
+			BasicDBObject results = new BasicDBObject();
 			
 		    Boolean isValidInputs = true;
 		    
 		    if(isValidInputs){
 			    // create a document to store attributes
 			    BasicDBObject document = new BasicDBObject();
-			    BasicDBObject curiosity = new BasicDBObject();
+			    BasicDBObject dataResults = new BasicDBObject();
 			    
-			    /*add to new collection personality*/
 		        	if(interests!=null){
 			    		for (Entry<String, Integer> entry : interests.entrySet()) {
-			    		    curiosity.put(entry.getKey(), entry.getValue());			    		
+			    			dataResults.put(entry.getKey(), entry.getValue());			    		
 			    		}
 			    	}
+			    	document.put("uid", lastid);
+			    	document.put("chartType", chartType);
+			    	document.put("dataResults", dataResults);
 			    	
-			    	document.put("_id", lastid);
-			    	document.put("curiosity", curiosity);
-				/*add to new collection personality*/
-			    
-			    // save it into collection named "userPersonality"
+			    // save it into collection
 			    collection.insert(document);
-			    ObjectId Lastid = (ObjectId)document.get( "_id" );	
-			    
-		    	document.put("uniqueid", Lastid);
 
 				results.put("response", "OK");
 				results.put("description", "Interests have been recorded");		    	
@@ -405,8 +497,164 @@ public class PersonController extends ServiceSerlvet {
 		    }
 		    
 		    response.add(results);
+		    
 		return response;
 	}
+
+	
+	/**
+	 * Get UserInterests
+	 * @param id
+	 * @throws MongoException 
+	 * @throws UnknownHostException 
+	 **/
+	public static List<DBObject> getUserPieChart(
+				String objId,
+				String chartType
+		) throws UnknownHostException, MongoException{
+		System.out.println("get interests");
+
+		//__Prepare response
+		List<DBObject> response = new ArrayList<DBObject>();
+		
+		BasicDBObject results = new BasicDBObject();
+		
+	    // search query
+	    BasicDBObject searchQuery = new BasicDBObject();
+	    	searchQuery.put("uid", new ObjectId(objId));
+	    	searchQuery.put("chartType", chartType);
+	    
+	    //{ x : 3, y : "foo" }	
+	    	 System.out.println(searchQuery);	
+	    	
+	    	
+	    List<DBObject> uniqueInterests = searchCollections(searchQuery, "userPieCharts");
+	    System.out.println(uniqueInterests);
+	    
+		if(uniqueInterests.size()>0 ){
+			results.put("response", "OK");
+			results.put("description", "The specific user has been found");		    	
+			results.put("dataResults", uniqueInterests.get(0).get("dataResults"));		
+		}
+		else
+		{
+			results.put("response", "FAIL");
+			results.put("description", "Failed to get interest list");	    	
+		}	    
+		response.add(results);
+	    
+		return response;
+	}	
+	
+	
+	
+	
+
+
+	/**
+	 * Add User Bubble
+	 * @param id
+	 * @throws MongoException 
+	 * @throws UnknownHostException 
+	 **/
+	public static List<DBObject> addUserBubbleChart(
+				ObjectId lastid,
+				String chartType,
+				Map<String,Integer> interests			
+			) throws UnknownHostException, MongoException
+		{		
+			System.out.println("add a bubble CHART");
+		
+			//__Prepare response
+			List<DBObject> response = new ArrayList<DBObject>();
+
+			
+			//_getCollection
+			DBCollection collection = MongoApp.getCollection("userBubbleCharts");
+		    
+			
+			BasicDBObject results = new BasicDBObject();
+			
+		    Boolean isValidInputs = true;
+		    
+		    if(isValidInputs){
+			    // create a document to store attributes
+			    BasicDBObject document = new BasicDBObject();
+			    BasicDBObject dataResults = new BasicDBObject();
+			    
+		        	if(interests!=null){
+			    		for (Entry<String, Integer> entry : interests.entrySet()) {
+			    			dataResults.put(entry.getKey(), entry.getValue());			    		
+			    		}
+			    	}
+			    	document.put("uid", lastid);
+			    	document.put("chartType", chartType);
+			    	document.put("dataResults", dataResults);
+			    	
+			    // save it into collection
+			    collection.insert(document);
+
+				results.put("response", "OK");
+				results.put("description", "Interests have been recorded");		    	
+		    	results.put("user", document);
+		    }
+		    else
+		    {
+				results.put("response", "FAIL");
+				results.put("description", "Failed record Interests");	    	
+		    }
+		    
+		    response.add(results);
+		    
+		return response;
+	}
+	
+	
+	/**
+	 * Get User Bubble
+	 * @param id
+	 * @throws MongoException 
+	 * @throws UnknownHostException 
+	 **/
+	public static List<DBObject> getUserBubbleChart(
+				String objId,
+				String chartType
+		) throws UnknownHostException, MongoException{
+		System.out.println("get bubble interests");
+
+		//__Prepare response
+		List<DBObject> response = new ArrayList<DBObject>();
+		
+		BasicDBObject results = new BasicDBObject();
+		
+	    // search query
+	    BasicDBObject searchQuery = new BasicDBObject();
+	    	searchQuery.put("uid", new ObjectId(objId));
+	    	searchQuery.put("chartType", chartType);
+	    
+	    //{ x : 3, y : "foo" }	
+	    	 System.out.println(searchQuery);	
+	    	
+	    	
+	    List<DBObject> uniqueInterests = searchCollections(searchQuery, "userBubbleCharts");
+	    System.out.println(uniqueInterests);
+	    
+		if(uniqueInterests.size()>0 ){
+			results.put("response", "OK");
+			results.put("description", "The specific user has been found");		    	
+			results.put("dataResults", uniqueInterests.get(0).get("dataResults"));		
+		}
+		else
+		{
+			results.put("response", "FAIL");
+			results.put("description", "Failed to get interest list");	    	
+		}	    
+		response.add(results);
+	    
+		return response;
+	}	
+	
+		
 	
 	
 	
@@ -428,7 +676,7 @@ public class PersonController extends ServiceSerlvet {
 	    BasicDBObject searchQuery = new BasicDBObject();
 	    	searchQuery.put("_id", new ObjectId(objId));
 	    
-	    List<DBObject> uniqueUser = searchUsers(searchQuery);
+	    List<DBObject> uniqueUser = searchCollections(searchQuery, "myCollection");
 	    
 	    System.out.println(uniqueUser);
 	    
@@ -484,19 +732,69 @@ public class PersonController extends ServiceSerlvet {
 	    return age;
 	}		
 	
+	
+	
+	
+	public static HashMap<Integer,Object> getGallery(
+			String objId, 
+			Boolean isHero
+		) {
+		//BasicDBObject gallery = new BasicDBObject();
+		
+		//isHero
+		
+			//full img name and thumbnail img name
+		HashMap<Integer,Object> gallery = new HashMap<Integer,Object>();
+		
+		BasicDBObject pictureMap = new BasicDBObject();
+			pictureMap.put("thumbnail","http://www.hdwallpapersdepot.com/wp-content/uploads/2012/07/Jessica-Alba-3.jpg");	
+			pictureMap.put("full","http://www.hdwallpapersdepot.com/wp-content/uploads/2012/07/Jessica-Alba-3.jpg");
+				
+			gallery.put(0,pictureMap);
+		
+		BasicDBObject pictureMap2 = new BasicDBObject();	
+			pictureMap2.put("thumbnail","http://photos.imageevent.com/afap/wallpapers/stars/jessicaalba//Jessica%20Alba%20---1.jpg");	
+			pictureMap2.put("full","http://photos.imageevent.com/afap/wallpapers/stars/jessicaalba//Jessica%20Alba%20---1.jpg");
+			
+			gallery.put(1,pictureMap2);
+		
+			
+			
+			/*	
+			gallery.put("http://www.hdwallpapersdepot.com/wp-content/uploads/2012/07/Jessica-Alba-3.jpg","http://www.hdwallpapersdepot.com/wp-content/uploads/2012/07/Jessica-Alba-3.jpg");
+			gallery.put("http://www.hdwallpapersdepot.com/wp-content/uploads/2012/07/Jessica-Alba.jpg","http://www.hdwallpapersdepot.com/wp-content/uploads/2012/07/Jessica-Alba.jpg");
+			gallery.put("http://photos.imageevent.com/afap/wallpapers/stars/jessicaalba//Jessica%20Alba%20---1.jpg","http://photos.imageevent.com/afap/wallpapers/stars/jessicaalba//Jessica%20Alba%20---1.jpg");
+			gallery.put("http://www.topnews.in/light/files/Jessica-Alba_9.jpg","http://www.topnews.in/light/files/Jessica-Alba_9.jpg");
+			gallery.put("http://4.bp.blogspot.com/_aGZwEIFiNOA/S_S6JNZpk1I/AAAAAAAAD08/Pd-A9qq8o7Y/s1600/Jessica-Alba-fashion--26-celebrity-64992_492_650.jpg","http://4.bp.blogspot.com/_aGZwEIFiNOA/S_S6JNZpk1I/AAAAAAAAD08/Pd-A9qq8o7Y/s1600/Jessica-Alba-fashion--26-celebrity-64992_492_650.jpg");
+			gallery.put("http://3.bp.blogspot.com/_aGZwEIFiNOA/S_S6Qx_lo9I/AAAAAAAAD1E/-ho-n1K4SdM/s1600/jessica-alba-49.jpg","http://3.bp.blogspot.com/_aGZwEIFiNOA/S_S6Qx_lo9I/AAAAAAAAD1E/-ho-n1K4SdM/s1600/jessica-alba-49.jpg");
+			gallery.put("http://3.bp.blogspot.com/_aGZwEIFiNOA/S_S6Qx_lo9I/AAAAAAAAD1E/-ho-n1K4SdM/s1600/jessica-alba-49.jpg","http://3.bp.blogspot.com/_aGZwEIFiNOA/S_S6Qx_lo9I/AAAAAAAAD1E/-ho-n1K4SdM/s1600/jessica-alba-49.jpg");
+			gallery.put("http://4.bp.blogspot.com/_llNxv7aJ0ww/TPBd4xz5TDI/AAAAAAAAAEM/7W49xhVeTFk/s1600/Jessica-Alba-fashion--26-celebrity-64991_907_1200.jpg","http://4.bp.blogspot.com/_llNxv7aJ0ww/TPBd4xz5TDI/AAAAAAAAAEM/7W49xhVeTFk/s1600/Jessica-Alba-fashion--26-celebrity-64991_907_1200.jpg");
+			gallery.put("http://www.fansshare.com/photos/jessicaalba/jessica-alba-no-clothes-1371176159.jpg","http://www.fansshare.com/photos/jessicaalba/jessica-alba-no-clothes-1371176159.jpg");
+			*/
+			
+		return gallery;
+	}	
+	
+	
+	
+	
+	
 	/**
 	 * Get User List
 	 * @param id
 	 * @throws MongoException 
 	 * @throws UnknownHostException 
 	 **/
-	public static List<DBObject> searchUsers(BasicDBObject searchQuery) throws UnknownHostException, MongoException{
-		System.out.println("running usercontrol get user");
+	public static List<DBObject> searchCollections(
+			BasicDBObject searchQuery, 
+			String collectionName
+		) throws UnknownHostException, MongoException{
+
 		//__Prepare result
 		List<DBObject> results = new ArrayList<DBObject>();
 		
 		//_getCollection
-		DBCollection collection = MongoApp.getCollection("myCollection");
+		DBCollection collection = MongoApp.getCollection(collectionName);
 		
 	    DBCursor cursor = collection.find(searchQuery);
 		    

@@ -1,7 +1,9 @@
 package net.oldcounty.controller;
  
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,13 +32,15 @@ public class ListenerController extends ServiceSerlvet{
 	
     /**
      * Get Home
+     * @throws MongoException 
+     * @throws UnknownHostException 
     */	
 	@RequestMapping("/*")
 	public ModelAndView getHome2(
     		HttpServletRequest request, 
     		HttpServletResponse response,
 			String message
-	)
+	) throws UnknownHostException, MongoException
 	{
     	HttpSession session = serlvetService(request);
     	String inSession = PersonController.inSession(session);
@@ -44,6 +48,10 @@ public class ListenerController extends ServiceSerlvet{
     	
     	System.out.println("Session inSession " + inSession);	 
     	request.setAttribute("page", "home");
+    	
+    	BasicDBObject searchQuery = new BasicDBObject();
+    	List<DBObject> people = PersonController.searchCollections(searchQuery, "myCollection");    	
+    	request.setAttribute("people", people);    	
     	
 		String messages = "test home";
 		return new ModelAndView("../../index", "message", messages);	
@@ -69,25 +77,197 @@ public class ListenerController extends ServiceSerlvet{
 	}
 	*/
 	
+
 	
 	
+	
+	
+	  
+    /**
+     * jsonpersonality
+     * @throws MongoException 
+     * @throws UnknownHostException 
+    */
+    @RequestMapping(method=RequestMethod.GET, value={"/jsonpersonality","/jsonpersonality/{id}"})
+    public ModelAndView jsonPersonality(
+    		HttpServletRequest request, 
+    		HttpServletResponse response,
+    		//@PathVariable(value="id") String id
+    		@RequestParam(value="id", required=false) String id
+    ) throws UnknownHostException, MongoException {
+    	ServiceSerlvet.appendSesssion(request);    	    		
+    	List<DBObject> json = PersonController.getUserPersonality(id);    	
+		return new ModelAndView("json/json", "json", json);
+    }
+    
+    
+    /**
+     * jsonmembers
+     * @throws MongoException 
+     * @throws UnknownHostException 
+    */
+   
+    @RequestMapping(method=RequestMethod.GET, value={"/jsonmembers","/jsonmembers/{id}"})
+    public ModelAndView jsonMembers(
+    		HttpServletRequest request, 
+    		HttpServletResponse response,
+    		@RequestParam(value="limit", required=false) Integer limit
+    ) throws UnknownHostException, MongoException {
+    	ServiceSerlvet.appendSesssion(request);
+    	
+
+    	List<DBObject> peopleList = new ArrayList<DBObject>();
+    	
+    	BasicDBObject searchQuery = new BasicDBObject();
+    	List<DBObject> json = PersonController.searchCollections(searchQuery, "myCollection");    	
+  
+    	Iterator<DBObject> iterator = json.iterator();
+    	while (iterator.hasNext()) {
+    		
+    		DBObject o = iterator.next();
+    		
+    		
+	            System.out.println(o.get("_id").toString());
+            
+	            Boolean isOnline = false;
+	            if((Integer) o.get("isloggedon") == 1){
+	            	isOnline = true;            	
+	            }
+	        	
+	            List<DBObject> interestData = PersonController.getUserPieChart(o.get("_id").toString(), "interests");  
+
+	            String realname = o.get("realname").toString();
+	            String username = o.get("username").toString();
+	            String whichscreenname = o.get("whichscreenname").toString();	            
+	            
+	            String title = username;
+	            if(whichscreenname == "realname"){	            	
+	            	title = realname;
+	            }
+	            
+	            String name = title.replaceAll(" ", "_").toLowerCase();
+	            
+	    	    //personObj
+	    	    	BasicDBObject personObj = new BasicDBObject();    	
+	    	    		personObj.put("id", o.get("_id").toString());
+	    	    		personObj.put("title", title);
+	    	    		personObj.put("name", name);
+	    	    		personObj.put("country", o.get("country"));    		
+	    	    		personObj.put("online", isOnline);
+	    	    		personObj.put("gender", o.get("gender"));
+	    	    		personObj.put("pictureAvatar", "http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg");
+	    	    		personObj.put("interestData", interestData.get(0).get("dataResults"));
+	    	    		    	    		
+	        	//personObj	    	    	
+	    	    peopleList.add(personObj);    
+	    	 
+    	}
+    	System.out.println(peopleList);
+
+    	//loop through json and populate with only the required data
+	
+    	//request.setAttribute("people", people);      	
+    		
+		return new ModelAndView("json/json", "json", peopleList);
+    }
+      
+    
+    /**
+     * jsonuniqueuser
+     * @throws MongoException 
+     * @throws UnknownHostException 
+    */
+    @RequestMapping(method=RequestMethod.GET, value={"/jsonuniqueuser","/jsonuniqueuser/{id}"})
+    public ModelAndView jsonUniqueuser(
+    		HttpServletRequest request, 
+    		HttpServletResponse response,
+    		@RequestParam(value="id", required=false) String id
+    ) throws UnknownHostException, MongoException {
+    	ServiceSerlvet.appendSesssion(request);    	
+
+    	List<DBObject> peopleList = new ArrayList<DBObject>();
+    	
+    	BasicDBObject searchQuery = new BasicDBObject();
+    		searchQuery.put("_id", new ObjectId(id));
+    		
+    	List<DBObject> json = PersonController.searchCollections(searchQuery, "myCollection");    	
+  
+    	Iterator<DBObject> iterator = json.iterator();
+    	while (iterator.hasNext()) {
+    		 
+    		DBObject o = iterator.next();
+			
+	    	    //personObj
+	    	    	BasicDBObject personObj = new BasicDBObject();    	
+	    	    		personObj.put("id", o.get("_id").toString());
+	    	    		personObj.put("avatar", "http://www.examiner.com/images/blog/replicate/EXID26323/images/brad_pitt_salary_paid_money_earn_earning_movie_star_rich_famous_imdb.jpg");
+	    	    		
+	    	    		personObj.put("followers", 25);
+	    	    		personObj.put("pictureCount", 20);
+	    	    		
+	    			BasicDBObject goalObj = new BasicDBObject();
+	    				goalObj.put("head", o.get("goal1").toString());
+	    				goalObj.put("heart", o.get("goal2").toString());
+	    				goalObj.put("hand", o.get("goal3").toString());
+	    				
+	    		    	personObj.put("goals", goalObj);
+	        	//personObj
+	    	    	
+	    	    peopleList.add(personObj);            
+    	}
+    	System.out.println(peopleList);
+
+    	//loop through json and populate with only the required data
+
+    	//request.setAttribute("people", people);      	
+    		
+		return new ModelAndView("json/json", "json", peopleList);
+    }
+          
+    
+    
+	//getUserInterests
 	
 	/**
      * jsoninterests
      * @throws MongoException 
      * @throws UnknownHostException 
     */
-    @RequestMapping("/jsoninterests")
+    @RequestMapping(method=RequestMethod.GET, value={"/jsonpiechart","/jsonpiechart/{id}"})
     public ModelAndView jsonInterests(
     		HttpServletRequest request, 
-    		HttpServletResponse response
-    		) throws UnknownHostException, MongoException 
-    {	    	
+    		HttpServletResponse response,
+    		@RequestParam(value="chartType", required=false) String chartType,
+    		@RequestParam(value="id", required=false) String id
+    ) throws UnknownHostException, MongoException {
+    	ServiceSerlvet.appendSesssion(request);    	    	
     	
-		String message = "test";
-		return new ModelAndView("json/jsoninterests", "message", message); 
-    }    
+    	//String chartType = "interests";
+    	List<DBObject> json = PersonController.getUserPieChart(id, chartType);    	
+		return new ModelAndView("json/json", "json", json);
+    }
 
+    
+	/**
+     * jsonbubblechart
+     * @throws MongoException 
+     * @throws UnknownHostException 
+    */
+    @RequestMapping(method=RequestMethod.GET, value={"/jsonbubblechart","/jsonbubblechart/{id}"})
+    public ModelAndView jsonBubblechart(
+    		HttpServletRequest request, 
+    		HttpServletResponse response,
+    		@RequestParam(value="chartType", required=false) String chartType,
+    		@RequestParam(value="id", required=false) String id
+    ) throws UnknownHostException, MongoException {
+    	ServiceSerlvet.appendSesssion(request);    	    	
+    	
+    	//String chartType = "interests";
+    	List<DBObject> json = PersonController.getUserBubbleChart(id, chartType);    	
+		return new ModelAndView("json/json", "json", json);
+    }  
+    
+    
     
 	/**
      * jsonlocations
@@ -105,48 +285,7 @@ public class ListenerController extends ServiceSerlvet{
 		return new ModelAndView("json/jsonlocations", "message", message); 
     }    
 	
-	/**
-     * jsonmembers
-     * @throws MongoException 
-     * @throws UnknownHostException 
-    */
-    @RequestMapping("/jsonmembers")
-    public ModelAndView jsonMembers(
-    		HttpServletRequest request, 
-    		HttpServletResponse response
-    		) throws UnknownHostException, MongoException 
-    {	    	
-    	
-		String message = "test";
-		return new ModelAndView("json/jsonmembers", "message", message); 
-    }    
-	
-	
-	/**
-     * jsonuniqueuser
-     * @throws MongoException 
-     * @throws UnknownHostException 
-    */
-    @RequestMapping("/jsonuniqueuser")
-    public ModelAndView jsonUniqueUser(
-    		HttpServletRequest request, 
-    		HttpServletResponse response
-    		) throws UnknownHostException, MongoException 
-    {	    	
-    	
-		String message = "test";
-		return new ModelAndView("json/jsonuniqueuser", "message", message); 
-    }    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
     /**
@@ -267,7 +406,21 @@ public class ListenerController extends ServiceSerlvet{
     		
     		@RequestParam(value="interests", required=false) String[] interests,
     		@RequestParam(value="interestknobs", required=false) Integer[] interestknobs,
+    		
+    		@RequestParam(value="seekings", required=false) String[] seekings,
+    		@RequestParam(value="seekingknobs", required=false) Integer[] seekingknobs,
+    		    		
+    		@RequestParam(value="visitings", required=false) String[] visitings,
+    		@RequestParam(value="visitingknobs", required=false) Integer[] visitingknobs,
+    		    	
     		@RequestParam(value="personality", required=false) Integer[] personality,
+    		
+    		@RequestParam(value="latitude", required=false) String latitude,
+    		@RequestParam(value="longitude", required=false) String longitude,
+    		
+    		@RequestParam(value="goal1", required=false) String goal1,
+    		@RequestParam(value="goal2", required=false) String goal2,
+    		@RequestParam(value="goal3", required=false) String goal3,
     		
     		//@RequestParam(value="lookingfor", required=false) String lookingfor,    		
     		
@@ -319,33 +472,6 @@ public class ListenerController extends ServiceSerlvet{
 	    	
 	    	//languages  	
 	    	
-	    	/*
-	    	request.setAttribute("username", username);
-	    	request.setAttribute("emailaddress", emailaddress);
-	    	request.setAttribute("confirmemailaddress", confirmemailaddress);
-	    	request.setAttribute("password", password);
-	    	request.setAttribute("confirmpassword", confirmpassword);
-	    	
-	    	request.setAttribute("birthyear", birthyear);
-	    	request.setAttribute("birthmonth", birthmonth);
-	    	request.setAttribute("birthday", birthday);
-	    	request.setAttribute("about", about);	    	
-	    	request.setAttribute("country", country);
-
-	    	request.setAttribute("gender", gender);
-	    	request.setAttribute("ethnicity", ethnicity);
-	    	request.setAttribute("kindofrelationship", kindofrelationship);
-	    	request.setAttribute("bodytype", bodytype);	    	
-	    	request.setAttribute("haircolor", haircolor);
-	    	request.setAttribute("eyecolor", eyecolor);
-	    	request.setAttribute("children", children);
-	    	request.setAttribute("education", education);
-	    	request.setAttribute("occupation", occupation);*/
-	    	//request.setAttribute("languages", languages);
-	    	
-	    	
-    		
-	    	
 	    	/*_Store*/
 	
 	    	List<DBObject> registerResponse = PersonController.registerUser(
@@ -370,9 +496,18 @@ public class ListenerController extends ServiceSerlvet{
 				children,
 				education,
 				occupation,
+				latitude,
+				longitude,
 				languages,
 				interests,
 				interestknobs,
+				seekings,
+				seekingknobs,
+				visitings,
+				visitingknobs,
+				goal1,
+				goal2,
+				goal3,
 				personality
 	    	);
 		        		    
@@ -429,7 +564,7 @@ public class ListenerController extends ServiceSerlvet{
     	ServiceSerlvet.appendSesssion(request);
     	//get search ALL users
     	BasicDBObject searchQuery = new BasicDBObject();
-    	List<DBObject> dataresponse = PersonController.searchUsers(searchQuery);    	
+    	List<DBObject> dataresponse = PersonController.searchCollections(searchQuery, "myCollection");    	
     	
     	request.setAttribute("page", "members");
     	return new ModelAndView("memberlist", "response", dataresponse);
@@ -473,7 +608,7 @@ public class ListenerController extends ServiceSerlvet{
     	//get search ALL users
     	BasicDBObject searchQuery = new BasicDBObject();
     		searchQuery.put("_id", new ObjectId(id));
-    	List<DBObject> searchResponse = PersonController.searchUsers(searchQuery);    	
+    	List<DBObject> searchResponse = PersonController.searchCollections(searchQuery, "myCollection");    	
     
     	//append actual age to the returned user object.
     	DBObject newInformation = new BasicDBObject();
@@ -482,6 +617,17 @@ public class ListenerController extends ServiceSerlvet{
     
     	Integer ageInYears = PersonController.getAge(birthdate);
     	newInformation.put("ageInYears", ageInYears);    	
+    	
+    	
+    	HashMap<Integer,Object> gallery = PersonController.getGallery(
+    			id, 
+    			false
+    	);
+    	
+    	newInformation.put("gallery", gallery);
+    	
+    	Integer countGallery = gallery.size();    	
+    	newInformation.put("countGallery", countGallery);
     	
     	searchResponse.add(newInformation);
     	
@@ -724,4 +870,33 @@ public class ListenerController extends ServiceSerlvet{
 
 
     
+    /*
+     * Gallery Add methods
+    */    
+    @RequestMapping(method=RequestMethod.GET, value={"/fileupload"})
+    public ModelAndView galleryAdd(
+    		HttpServletRequest request, 
+    		HttpServletResponse response
+    	) {
+		String viewPage = "gallery/fileuploadform";
+		
+		return new ModelAndView(viewPage);
+    }    
+    
+    
+    /*
+     * Gallery Add methods
+    */    
+    @RequestMapping(method=RequestMethod.GET, value={"/fileuploadsuccess"})
+    public ModelAndView galleryCompleted(
+    		HttpServletRequest request, 
+    		HttpServletResponse response,
+    		@RequestParam(value="mode", required=false) String mode
+    	) {
+		String viewPage = "gallery/fileuploadsuccess";
+		
+		return new ModelAndView(viewPage);
+    }
+    
+   
 }

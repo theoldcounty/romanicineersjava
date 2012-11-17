@@ -17,7 +17,11 @@
     <url-pattern>/index/*</url-pattern>
     <url-pattern>/user/*</url-pattern>
 
-    <url-pattern>/jsoninterests/*</url-pattern>
+	
+	<url-pattern>/jsonpersonality/*</url-pattern>
+    <url-pattern>/jsonpiechart/*</url-pattern>
+    <url-pattern>/jsonbubblechart/*</url-pattern>
+    
     <url-pattern>/jsonlocations/*</url-pattern>
     <url-pattern>/jsonmembers/*</url-pattern>
     <url-pattern>/jsonuniqueuser/*</url-pattern>

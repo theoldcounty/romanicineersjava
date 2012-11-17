@@ -13,20 +13,33 @@ var userTip = Backbone.View.extend({
 		var userId = $(that).data('user-id');
 		var userName = $(that).data('user-name');
 		var userGender = $(that).data('user-gender').toLowerCase();
+		
+		//console.log("userId", userId);
+
 
 //http://localhost/romancineers/js/json/romancineers.gethomepie.json
-		$.getJSON(utils.feedHomePie, function(json) {
+		
+		var jsonUrl = 'jsonuniqueuser?id='+userId;
+		
+		$.getJSON(jsonUrl, function(json) {
+			console.log("json", json);
+			
 			var userAvatar = json[0].avatar;
 			var userGoals = json[0].goals;
-			var userInterestPie = json[0].interestPie;
+			
+			var userFollows = json[0].followers;
+			var userPictureCount = json[0].pictureCount;
 
+			//var featureImageThumbnail = value.pictureFeature;
+			
 			var contentsObj = {
 							userId: userId,
 							name: userName,
 							avatar: userAvatar,
 							goals: userGoals,
 							gender: userGender,
-							interestPieJson: userInterestPie
+							followers: userFollows,
+							pictureCount: userPictureCount
 						};
 
 			callback(contentsObj);
@@ -84,7 +97,7 @@ var userTip = Backbone.View.extend({
 						h : 210,
 						r: 65,
 						ir: 35
-					}
+					};
 
 		goPie.initChart('#biometricPie', specs);
 		//create the biometric pie chart
@@ -94,6 +107,32 @@ var userTip = Backbone.View.extend({
 
 		var that = this;
 
+		
+		$(".hotspothead").mouseenter(function(e) {
+			//hover on
+			$('.head').fadeIn(200);
+		}).mouseleave(function(e){
+			//hover off
+			$('.head').fadeOut(200);
+		});		
+		
+		$(".hotspotheart").mouseenter(function(e) {
+			//hover on
+			$('.heart').fadeIn(200);
+		}).mouseleave(function(e){
+			//hover off
+			$('.heart').fadeOut(200);
+		});	
+		
+		$(".hotspothand").mouseenter(function(e) {
+			//hover on
+			$('.hand').fadeIn(200);
+		}).mouseleave(function(e){
+			//hover off
+			$('.hand').fadeOut(200);
+		});	
+		
+		
 		$(".users li").on({
 			mouseenter: function(e){
 				that.eventOnItem();
@@ -125,7 +164,6 @@ var userTip = Backbone.View.extend({
 
 				var listEl = this;
 				that.getObj(listEl, function(contentsObj){
-
 					that.populate(contentsObj); //show the tip
 					that.show(0); //show the tip
 				});
@@ -186,9 +224,20 @@ var userTip = Backbone.View.extend({
 		$('.bioimg .goals .hand').text(contentsObj.goals.hand);
 
 		$('.biospec .gender').removeClass().addClass('gender').addClass(contentsObj.gender);
-
+		
+		$('.icons .myphotos span').text(contentsObj.pictureCount);
+		$('.icons .followers span').text(contentsObj.followers);
+		
+		var profileLink = 'user?id='+contentsObj.userId;
+		$('.fullprofile a').attr("href", profileLink);
 		//update the biometric pie chart
-		goPie.updateCharts('#biometricPie', contentsObj.interestPieJson);
+		
+		/*interest d3 pie chart*/		
+		//contentsObj.userId = "509f43fad1ef48c2c49c7a09";
+		var jsonUrl = 'jsonpiechart?id='+contentsObj.userId+'&chartType=interests';
+		var holder = '#biometricPie';
+		goPie.chosenUpdateChart(jsonUrl, holder);
+		/*interest d3 pie chart*/
 	},
 	reposition:function(left, top){
 		$('#tooltip').css('left', left).css('top', top);

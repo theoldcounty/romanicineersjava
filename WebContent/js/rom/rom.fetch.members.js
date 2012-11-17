@@ -19,6 +19,8 @@ var fetchMembers = Backbone.View.extend({
 
 	getTemplate: function(value){
 		console.log("value", value);
+		
+		console.log("value.interestData", value.interestData);
 
 		var country = "United States";
 		var interests = "movies";
@@ -40,7 +42,7 @@ var fetchMembers = Backbone.View.extend({
 
 	populateHome: function(data){
 		//console.log("data", data);
-
+		console.log("populate home");
 
 		$('.users.isotope').empty();
 		//$('.users').isotope('destroy');

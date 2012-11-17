@@ -49,6 +49,9 @@
 								<div class="head"></div>
 								<div class="heart"></div>
 								<div class="hand"></div>
+								<div class="hotspothead"></div>
+								<div class="hotspotheart"></div>
+								<div class="hotspothand"></div>								
 							</div>
 						</div>
 						<div class="biospec">
@@ -58,11 +61,11 @@
 						</div>
 					</div>
 				</div>
-				<div class="fullprofile"><div class="placement">See full profile</div></div>
+				<div class="fullprofile"><div class="placement"><a href="#">See full profile</a></div></div>
 				<nav class="icons">
 					<ul>
-						<li class="myphotos"><a href="#">My Photos</a></li>
-						<li class="followers"><a href="#">Followers</a></li>
+						<li class="myphotos"><a href="#">My Photos</a> <span>0</span></li>
+						<li class="followers"><a href="#">Followers</a> <span>0</span></li>
 						<li class="followme"><a href="#">Follow me</a></li>
 						<li class="talktome"><a href="#">Talk to me</a></li>
 					</ul>
@@ -96,6 +99,10 @@
 
 
 					<ul class="users">
+						<!-- 
+						<c:forEach var="person" items="${people}">
+							<li class="element odd" data-user-country="${person.country}" data-user-interests="movies" data-user-online="${person.isloggedon}" data-user-gender="${person.gender}" data-user-name="${person.username}" data-user-id="${person._id}"><div class="avatar"><a href="user?id=${person._id}"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></div></li>
+						</c:forEach> 					
 						<li class="element odd" data-user-country="United Kingdom" data-user-interests="movies" data-user-online="1" data-user-gender="Male" data-user-name="Brad Pitt" data-user-id="21"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></div></li>
 						<li class="element even" data-user-country="United Kingdom" data-user-interests="oil painting, sex" data-user-gender="Female" data-user-name="Jessica Alba" data-user-id="23"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://images.cryhavok.org/d/1707-2/Jessica+Alba+in+Fishnets.jpg"></a></div></li>
 						<li class="element odd" data-user-country="United Kingdom" data-user-interests="robots, sex" data-user-gender="Female" data-user-name="Beyonce Knowles" data-user-id="25"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://images.starpulse.com/Photos/Previews/Beyonce-Knowles-sb32.jpg"></a></div></li>
@@ -117,6 +124,7 @@
 						<li class="element odd" data-user-country="United Kingdom" data-user-interests="sex, football, movies" data-user-gender="Female" data-user-name="Jamie Pressley" data-user-id="34"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://media.santabanta.com/newsite/cinemascope/feed/amrita-puri10.jpg"></a></div></li>
 						<li class="element even" data-user-country="France" data-user-interests="sex, football, movies" data-user-gender="Female" data-user-name="Jamie Pressley" data-user-id="34"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://img.ezinemark.com/imagemanager2/files/30004254/2011/10/2011-10-14-16-02-44-5-the-italian-actress-and-model-sara-tommasi-used-to.jpeg"></a></div></li>
 						<li class="element odd" data-user-country="Spain" data-user-interests="movies" data-user-gender="Female" data-user-name="Jamie Pressley" data-user-id="34"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://s1.moviefanfare.com/uploads/2010/09/scarlett-johansson1.jpg"></a></div></li>
+						 -->
 					</ul>
 
 					<a id="getMore" href="#">More Members</a>

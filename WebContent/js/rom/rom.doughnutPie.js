@@ -63,17 +63,15 @@
 			//setColors
 			this.currentPieData = options.data;
 
-			console.log("this.currentPieData", this.currentPieData);
-
-
-			console.log("options", options);
+			//console.log("this.currentPieData", this.currentPieData);
+			//console.log("options", options);
 
 
 			//options.specs.h
 			//options.specs.w
 
 			var setColors = options.specs.colors;
-			console.log("setColors", setColors);
+			//console.log("setColors", setColors);
 
 			this.isInit = true;
 			this.homegrownparent = obj.id;
@@ -509,7 +507,7 @@ var goPie = {
 							}
 						];
 
-					console.log("specs", specs);
+					//console.log("specs", specs);
 
 					var colorPalette = specs.color;
 					var w = specs.w;
@@ -573,5 +571,51 @@ var goPie = {
 	},
 	updateCharts: function(pieElement, dynamicData){
 		$(pieElement).doughnutPie('transitions', dynamicData); // Pass object "{}" to "init" as arguments
-	}
+	},
+	chosenChart: function(jsonUrl, colorCode, holder){
+				
+		$.getJSON(jsonUrl, function(data){			
+			var dataPieJson = [];
+			var dataArray = data[0].dataResults;
+			$.each(dataArray, function(key, val) {				
+				var tempObj = {
+							title: key,
+							octetTotalCount: val
+							};
+				
+				dataPieJson.push(tempObj);
+			});
+			
+			var specs = {
+							color : colorCode,
+							w : 300,
+							h : 240,
+							r: 80,
+							ir: 45
+						};
+
+			goPie.initChart(holder, specs);
+			goPie.updateCharts(holder, dataPieJson);
+		});		
+	},
+	chosenUpdateChart: function(jsonUrl, holder){
+		//console.log("chosenUpdateChart");
+		
+		$.getJSON(jsonUrl, function(data){
+			var dataPieJson = [];			
+			if(data[0].response == "OK"){
+				var dataArray = data[0].dataResults;
+			
+				$.each(dataArray, function(key, val) {				
+					var tempObj = {
+								title: key,
+								octetTotalCount: val
+								};
+					
+					dataPieJson.push(tempObj);
+				});				
+				goPie.updateCharts(holder, dataPieJson);
+			}			
+		});		
+	}	
 };

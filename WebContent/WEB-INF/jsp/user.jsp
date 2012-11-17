@@ -8,6 +8,8 @@
 
 					<jsp:include page="includes/filters.jsp" />
 ${people[0]}
+
+${people[1]}
 					<div class="gendersign"></div>
 					<h2>
 						<c:if test="${people[0].whichscreenname == 'realname'}">
@@ -30,21 +32,17 @@ ${people[0]}
 					<div class="gallery">
 						<div class="featureImg"><img src="http://www.hdwallpapersdepot.com/wp-content/uploads/2012/07/4.jpg"></div>
 						<div class="profilePics">
-							<div id="galleryCarousel" data-carousel="">
-								<div class="wrapper">
-								<ul>
-									<li><a class="group" href="photos.php"><img src="http://www.hdwallpapersdepot.com/wp-content/uploads/2012/07/Jessica-Alba-3.jpg"></a></li>
-									<li><a class="group" href="photos.php"><img src="http://www.hdwallpapersdepot.com/wp-content/uploads/2012/07/Jessica-Alba.jpg"></a></li>
-									<li><a class="group" href="photos.php"><img src="http://photos.imageevent.com/afap/wallpapers/stars/jessicaalba//Jessica%20Alba%20---1.jpg"></a></li>
-									<li><a class="group" href="photos.php"><img src="http://www.topnews.in/light/files/Jessica-Alba_9.jpg"></a></li>
-									<li><a class="group" href="photos.php"><img src="http://4.bp.blogspot.com/_aGZwEIFiNOA/S_S6JNZpk1I/AAAAAAAAD08/Pd-A9qq8o7Y/s1600/Jessica-Alba-fashion--26-celebrity-64992_492_650.jpg"></a></li>
-									<li><a class="group" href="http://3.bp.blogspot.com/_aGZwEIFiNOA/S_S6Qx_lo9I/AAAAAAAAD1E/-ho-n1K4SdM/s1600/jessica-alba-49.jpg"><img src="http://3.bp.blogspot.com/_aGZwEIFiNOA/S_S6Qx_lo9I/AAAAAAAAD1E/-ho-n1K4SdM/s1600/jessica-alba-49.jpg"></a></li>
-									<li><a class="group" href="http://4.bp.blogspot.com/_llNxv7aJ0ww/TPBd4xz5TDI/AAAAAAAAAEM/7W49xhVeTFk/s1600/Jessica-Alba-fashion--26-celebrity-64991_907_1200.jpg"><img src="http://4.bp.blogspot.com/_llNxv7aJ0ww/TPBd4xz5TDI/AAAAAAAAAEM/7W49xhVeTFk/s1600/Jessica-Alba-fashion--26-celebrity-64991_907_1200.jpg"></a></li>
-									<li><a class="group" href="http://www.fansshare.com/photos/jessicaalba/jessica-alba-no-clothes-1371176159.jpg"><img src="http://www.fansshare.com/photos/jessicaalba/jessica-alba-no-clothes-1371176159.jpg"></a></li>
-									<li><a class="group" href="http://www.whatsonxiamen.com/ent_images/9683_3.jpg"><img src="http://www.whatsonxiamen.com/ent_images/9683_3.jpg"></a></li>
-								</ul>
+							<c:if test="${people[1].countGallery > 1}">
+								<div id="galleryCarousel" data-carousel="" data-count="${people[1].countGallery}">
+									<div class="wrapper">
+									<ul>
+										<c:set var="pictures" value="${people[1].gallery}"/>									
+										<c:forEach items="${pictures}" varStatus="loop"> 
+											<li><a class="group" href="${pictures[loop.index].full}"><img src="${pictures[loop.index].thumbnail}"></a></li>
+										</c:forEach>								</ul>
+									</div>
 								</div>
-							</div>
+							</c:if>
 						</div>
 					</div>
 
@@ -96,7 +94,7 @@ ${people[0]}
 			</div>
 			<div id="googlebelt">
 				<div class="title"><span>My Location</span></div>
-				<div class="location"><div id="canvasMap" data-lat="-34.397" data-long="150.644"></div></div>
+				<div class="location"><div id="canvasMap" data-lat="${people[0].latitude}" data-long="${people[0].longitude}"></div></div>
 			</div>
 	</div><!--container-->
 			

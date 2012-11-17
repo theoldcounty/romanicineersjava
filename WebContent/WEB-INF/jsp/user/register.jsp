@@ -7,9 +7,12 @@
 		<div class="registration">
 
 			<ul>
-				<li><a href="#step1">Step 1</a></li>
-				<li><a href="#step2">Step 2</a></li>
-				<li><a href="#step3">Step 3</a></li>
+				<li><a href="#step1">Step 1<br>identification</a></li>
+				<li><a href="#step2">Step 2<br>your qualities</a></li>
+				<li><a href="#step3">Step 3<br>your personality</a></li>
+				<li><a href="#step4">Step 4<br>your interests</a></li>
+				<li><a href="#step5">Step 5<br>What are you seeking</a></li>
+				<li><a href="#step6">Step 6<br>Places you would love to visit</a></li>
 			</ul>
 
 		<form id="registerForm" action="register" method="post" action="">
@@ -102,7 +105,12 @@
 						</c:choose>
 					</c:forEach>
 				</select>
+
+				<label>Latitude*</label>
+				<input type="text" name="latitude" value="51.523911">
 				
+				<label>Longitude*</label>
+				<input type="text" name="longitude" value="-0.12763">								
 				
 				<label>Looking For*</label>
 				<select name="lookingfor">
@@ -176,13 +184,13 @@
 				
 				<fieldset class="goaldriven">
 					<label>Please indicate what mostly drives your life</label>
-					<select>
+					<select name="goal1">
 						<option value="Driven 01">Driven 01</option>				
 					</select>
-					<select>
+					<select name="goal2">
 						<option value="Driven 02">Driven 02</option>				
 					</select>
-					<select>
+					<select name="goal3">
 						<option value="Driven 03">Driven 03</option>				
 					</select>
 				</fieldset>
@@ -198,47 +206,130 @@
 					<span data-field="personality">70</span>
 				</div>
 				
+									
+			</fieldset>
+	
+			<fieldset id="step4">
+
+
 				<label>Please indicate 5 of your interest and their importance from 0 to 100</label>
 				
 				<fieldset class="doughnutWrap">
 					<select name="interests">
-						<option value="Interest 01">Interest 01</option>				
+						<option value="Cinema">Cinema</option>
+						<option value="Clubbing">Clubbing</option>
+						<option value="Football">Football</option>
+						<option value="Baseball">Baseball</option>					
 					</select>
-					<fieldset data-fieldname="interestknobs" id="knob1" class="knob" data-role="doughnut-knob" data-value="5"></fieldset>
+					<fieldset data-fieldname="interestknobs" id="knob1" class="knob" data-color="#E2B227" data-role="doughnut-knob" data-value="5"></fieldset>
 				</fieldset>
 				
 				<fieldset class="doughnutWrap">
 					<select name="interests">
 						<option value="Interest 02">Interest 02</option>				
 					</select>
-					<fieldset data-fieldname="interestknobs" id="knob2" class="knob" data-role="doughnut-knob" data-value="15"></fieldset>
+					<fieldset data-fieldname="interestknobs" id="knob2" class="knob" data-color="#E2B227" data-role="doughnut-knob" data-value="15"></fieldset>
 				</fieldset>
 						
 				<fieldset class="doughnutWrap">	
 					<select name="interests">
 						<option value="Interest 03">Interest 03</option>				
 					</select>
-					<fieldset data-fieldname="interestknobs" id="knob3" class="knob" data-role="doughnut-knob" data-value="45"></fieldset>
+					<fieldset data-fieldname="interestknobs" id="knob3" class="knob" data-color="#E2B227" data-role="doughnut-knob" data-value="45"></fieldset>
 				</fieldset>
 				
 				<fieldset class="doughnutWrap">
 					<select name="interests">
 						<option value="Interest 04">Interest 04</option>				
 					</select>
-					<fieldset data-fieldname="interestknobs" id="knob4" class="knob" data-role="doughnut-knob" data-value="85"></fieldset>
+					<fieldset data-fieldname="interestknobs" id="knob4" class="knob" data-color="#E2B227" data-role="doughnut-knob" data-value="85"></fieldset>
 				</fieldset>		
 							
 				<fieldset class="doughnutWrap">		
 					<select name="interests">
 						<option value="Interest 05">Interest 05</option>				
 					</select>
-					<fieldset data-fieldname="interestknobs" id="knob5" class="knob" data-role="doughnut-knob" data-value="35"></fieldset>		
+					<fieldset data-fieldname="interestknobs" id="knob5" class="knob" data-color="#E2B227" data-role="doughnut-knob" data-value="35"></fieldset>		
 				</fieldset>
 	
+				
+			</fieldset>			
+			
+			<fieldset id="step5">
+			
+				<label>Please indicate 5 qualities you are seeking in a relationship and their importance from 0 to 100</label>
+				
+				<fieldset class="doughnutWrap">
+					<select name="seekings">
+						<option value="Dating">Dating</option>
+						<option value="Sex">Sex</option>
+						<option value="Clubbing">Clubbing</option>				
+					</select>
+					<fieldset data-fieldname="seekingknobs" id="knob6" class="knob" data-color="#B23959" data-role="doughnut-knob" data-value="5"></fieldset>
+				</fieldset>
+				
+				<fieldset class="doughnutWrap">
+					<select name="seekings">
+						<option value="Seeking 03">Seeking 03</option>				
+					</select>
+					<fieldset data-fieldname="seekingknobs" id="knob7" class="knob" data-color="#B23959" data-role="doughnut-knob" data-value="15"></fieldset>
+				</fieldset>
+						
+				<fieldset class="doughnutWrap">	
+					<select name="seekings">
+						<option value="Seeking 04">Seeking 04</option>				
+					</select>
+					<fieldset data-fieldname="seekingknobs" id="knob8" class="knob" data-color="#B23959" data-role="doughnut-knob" data-value="45"></fieldset>
+				</fieldset>
+				
+				<fieldset class="doughnutWrap">
+					<select name="seekings">
+						<option value="Seeking 04">Seeking 04</option>				
+					</select>
+					<fieldset data-fieldname="seekingknobs" id="knob9" class="knob" data-color="#B23959" data-role="doughnut-knob" data-value="85"></fieldset>
+				</fieldset>		
+							
+				<fieldset class="doughnutWrap">		
+					<select name="seekings">
+						<option value="Seeking 05">Seeking 05</option>				
+					</select>
+					<fieldset data-fieldname="seekingknobs" id="knob10" class="knob" data-color="#B23959" data-role="doughnut-knob" data-value="35"></fieldset>		
+				</fieldset>			
+			
+			
+						
+			</fieldset>
+			
+			<fieldset id="step6">
+			
+				<label>Please indicate 5 places you would love to visit and their importance from 0 to 100</label>
+				
+				<fieldset class="doughnutWrap">
+					<select name="visitings">
+						<option value="Paris">Paris</option>
+						<option value="America">America</option>
+						<option value="China">China</option>				
+					</select>
+					<fieldset data-fieldname="visitingknobs" id="knob11" class="knob" data-color="#B23959" data-role="doughnut-knob" data-value="5"></fieldset>
+				</fieldset>
+				
+				<fieldset class="doughnutWrap">
+					<select name="visitings">
+						<option value="Paris">Paris</option>
+						<option value="America">America</option>
+						<option value="China">China</option>				
+					</select>
+					<fieldset data-fieldname="visitingknobs" id="knob12" class="knob" data-color="#B23959" data-role="doughnut-knob" data-value="15"></fieldset>
+				</fieldset>
+						
+		
+			
+				
 				<span class="error"></span>
 				<input type="hidden" value="submitted" name="submitted"/>
-				<input type="submit" value="submit" name="submit"/>											
-			</fieldset>
+				<input type="submit" value="submit" name="submit"/>				
+			
+			</fieldset>>
 		</form>
 		
 		</div>
@@ -312,7 +403,7 @@
 					"width": 150,
 					"height": 150,					
 					"displayPrevious": true,
-					"fgColor": "#E2B227"
+					"fgColor": $(this).data('color')
 				},
 				"fieldName": $(this).data('fieldname'),
 				"value": $(this).data('value'),

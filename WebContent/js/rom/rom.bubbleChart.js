@@ -6,7 +6,7 @@
 	var methods = {
 		init: function(options) {
 			// Repeat over each element in selector
-			console.log("init");
+			//console.log("init");
 
 			return this.each(function() {
 				var $this = $(this);
@@ -146,3 +146,42 @@
 	}
 
 })(jQuery);
+
+
+var goBubble = {
+	chosenChart: function(jsonUrl, colourBands, holder){
+		
+		$.getJSON(jsonUrl, function(data){			
+			var dataBubbleJson = [];
+			var dataArray = data[0].dataResults;
+			$.each(dataArray, function(key, val) {				
+
+				var colourChoice = colourBands[Math.floor(Math.random()*colourBands.length)];	
+				var tempObj = {
+					"name": colourChoice,
+					"children": 
+					[
+						{
+							"name": key,
+							"size": val
+						}
+					]		
+				};		
+				dataBubbleJson.push(tempObj);
+			});
+			
+			var visitJson= {
+							 "name": "flare",
+							 "children": [
+									{
+										"name": "analytics",
+										"children": dataBubbleJson
+									}
+								]
+							};
+			//console.log("old bubble json", visitJson);
+			$(holder).bubbleChart('init', visitJson);
+		});
+	}
+};
+

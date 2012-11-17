@@ -67,7 +67,8 @@ $.fn.homegrowncarousel = function(params) {
 			},
 			init:function(homegrownparent){
 				params.homegrownparent = homegrownparent.id;
-
+					
+				console.log("home grown parents");
 				//add wrappers
 				var previousTemplate = '<div class="previous"><a href="#">Prev</a></div>';
 				var nextTemplate = '<div class="next"><a href="#">Next</a></div>';
@@ -84,18 +85,18 @@ $.fn.homegrowncarousel = function(params) {
 
 				console.log("this.itemsPerRow", this.itemsPerRow);
 
-				if(limits <= this.itemsPerRow){
-					console.log("hide the next");
-					//not enough items?
-					//hide next arrow
-					params.hidenshowControl("next", 0);
-				}
-
 				params.disableLeft = false;
 				params.hidenshowControl("previous", 0);
 
 				params.disableRight = false;
 				params.hidenshowControl("next", 1);
+				
+				if(limits <= this.itemsPerRow){
+					console.log("hide the next");
+					//not enough items?
+					//hide next arrow
+					params.hidenshowControl("next", 0);
+				}				
 
 				$('#'+params.homegrownparent + ' .wrapper ul').fadeIn(1500);
 			},
@@ -172,6 +173,7 @@ $.fn.homegrowncarousel = function(params) {
 					params.hidenshowControl("next", 0);
 				}else{
 					//show the right
+					console.log("show the right arrow");
 					params.disableRight = false;
 					params.hidenshowControl("next", 1);
 				}
