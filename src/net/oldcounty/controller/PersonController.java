@@ -1,5 +1,6 @@
 package net.oldcounty.controller;
 
+import java.io.File;
 import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.util.Map.Entry;
 import javax.servlet.http.HttpSession;
 
 import org.bson.types.ObjectId;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mongo.app.MongoApp;
 import com.mongodb.BasicDBObject;
@@ -155,7 +157,8 @@ public class PersonController extends ServiceSerlvet {
 			String goal1,
 			String goal2,
 			String goal3,
-			Integer[] personality
+			Integer[] personality,
+			MultipartFile[] file
 				) throws UnknownHostException, MongoException
 		{
 		System.out.println("running usercontrol register user");
@@ -258,6 +261,12 @@ public class PersonController extends ServiceSerlvet {
 			    collection.insert(document);
 			    ObjectId lastid = (ObjectId)document.get( "_id" );
 	
+			    
+			    /*check file*/
+			   // MultipartFile multipartFile = fileUpload.getFile();
+			    System.out.println("file "+file+"<br>");
+			    
+			    
 			    
 			    /*add to new collection personality*/	
 			    List<DBObject> responseUserPersonality = addUserPersonality(

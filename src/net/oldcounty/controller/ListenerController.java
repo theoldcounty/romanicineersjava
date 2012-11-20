@@ -12,7 +12,7 @@ import java.util.Map.Entry;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import java.io.FileOutputStream;
 import org.bson.BasicBSONObject;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Controller;
@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mongodb.BasicDBObject;
@@ -422,7 +425,10 @@ public class ListenerController extends ServiceSerlvet{
     		@RequestParam(value="goal2", required=false) String goal2,
     		@RequestParam(value="goal3", required=false) String goal3,
     		
-    		//@RequestParam(value="lookingfor", required=false) String lookingfor,    		
+    		//@RequestParam(value="lookingfor", required=false) String lookingfor,  
+    		
+    		@RequestParam(value="file", required=false) MultipartFile[] file,
+    		
     		
     		@RequestParam(value="submitted", required=false) String submitted    		
     		) throws UnknownHostException, MongoException 
@@ -430,6 +436,9 @@ public class ListenerController extends ServiceSerlvet{
     	HttpSession session = serlvetService(request);
     	String inSession = PersonController.inSession(session);
     	ServiceSerlvet.appendSesssion(request);
+    	
+    	
+    	System.out.println("file: "+file);
     	
     	System.out.println("inSession: "+inSession);
 
@@ -508,7 +517,8 @@ public class ListenerController extends ServiceSerlvet{
 				goal1,
 				goal2,
 				goal3,
-				personality
+				personality,
+				file
 	    	);
 		        		    
 		    //BasicDBObject recentuser = PersonController.getUniqueUser(Lastid.toString());

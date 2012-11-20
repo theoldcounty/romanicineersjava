@@ -15,7 +15,7 @@
 				<li><a href="#step6">Step 6<br>Places you would love to visit</a></li>
 			</ul>
 
-		<form id="registerForm" action="register" method="post" action="">
+		<form id="registerForm" action="register" enctype="multipart/form-data" method="post" action="">
 			<fieldset id="step1">
 				<h2>Create your account in 5 minutes!</h2>
 
@@ -24,6 +24,9 @@
 
 				<label>Username* [Username can be selected as a screen name]</label>
 				<input type="text" name="username" value="${username}">
+
+				<label>File* </label>
+				<input type="file" name="file" id="file" />
 
 				<label>Email*</label>
 				<input type="text" name="emailaddress" value="${emailaddress}">
