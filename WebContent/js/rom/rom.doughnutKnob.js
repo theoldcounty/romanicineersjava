@@ -1,3 +1,11 @@
+/*
+*
+* Author: Rob Shan Lone
+* Copyright (c) 2012 The Old County Limited.
+*
+* All rights reserved.
+*/
+
 (function($) {
 	var privateFunction = function() {
 		// code here
@@ -6,7 +14,7 @@
 	var methods = {
 		init: function(options) {
 			// Repeat over each element in selector
-		
+
 			return this.each(function() {
 				var $this = $(this);
 
@@ -34,8 +42,8 @@
 				// run code here
 				methods.setup(this, options);
 			});
-	
-			
+
+
 		},
 
 		destroy: function(options) {
@@ -50,15 +58,15 @@
 
 		setup: function(obj, options){
 			//setColors
-			
+
 			//options.fieldName
-			
+
 			var element = '#'+obj.id;
-			
-			
+
+
 			console.log("options", options);
-			
-			
+
+
 			//create element on the fly
 			//<input class="knob" data-width="150" data-cursor=true data-fgColor="#222222" data-thickness=.3 value="29">
 			var initialValue = options.value;
@@ -77,8 +85,8 @@
 				this.createStandard(knobElement);
 			}else{
 				//this.createInfinite($(element +' .knob');
-			}	
-			
+			}
+
 		},
 		createStandard: function(knobElement){
 

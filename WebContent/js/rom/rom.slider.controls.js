@@ -1,3 +1,11 @@
+/*
+*
+* Author: Rob Shan Lone
+* Copyright (c) 2012 The Old County Limited.
+*
+* All rights reserved.
+*/
+
 /**
 	* @class Romance Slider Controls
 	* @description Slider Controls
@@ -15,7 +23,7 @@ var sliderControls = Backbone.View.extend({
             var value = parseInt($(this).text(), 10);
             // var id = $(this).data('field')+'id';
             //$(this).attr("id", id);
-            
+
 			$(this).empty().slider({
 				value: value,
 				orientation: "horizontal",
@@ -24,29 +32,29 @@ var sliderControls = Backbone.View.extend({
 			}).bind('slidechange',function(event,ui){
 				that.changedEvent(event, ui);
 			});
-			
+
 			var thatEl = this;
 			var t = window.setInterval(function(){
 				$(thatEl).slider( "option", "value", 50 );
 				clearTimeout(t);
 			},100);
-			
-			
+
+
 			var fieldName = $(this).data('field');
 			var input = '<input id="slider'+j+'" type="hidden" name="'+fieldName+'" value="">';
 			$(this).append(input);
 			j++;
         });
-        
-        
+
+
 	},
-	
+
 	changedEvent: function(event, ui){
 		//console.log("event", event);
 		//console.log("ui", ui);
 		var element = $(ui.handle);
 		var value = ui.value;
-		
+
 		element.parent().find('input').val(value);
 	}
 });

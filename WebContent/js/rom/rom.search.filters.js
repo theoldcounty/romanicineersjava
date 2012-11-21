@@ -1,3 +1,11 @@
+/*
+*
+* Author: Rob Shan Lone
+* Copyright (c) 2012 The Old County Limited.
+*
+* All rights reserved.
+*/
+
 /**
 	* @class Romance User Tip
 	* @description Tool Tip to reveal more member details

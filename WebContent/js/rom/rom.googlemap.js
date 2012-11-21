@@ -1,5 +1,13 @@
+/*
+*
+* Author: Rob Shan Lone
+* Copyright (c) 2012 The Old County Limited.
+*
+* All rights reserved.
+*/
+
 var googlemaper = {
-					zoom:8,			
+					zoom:8,
 					map: null,
 					latInterest: 0,
 					longInterest: 0,
@@ -8,32 +16,32 @@ var googlemaper = {
 					setup: function(latInterest, longInterest){
 						this.latInterest = latInterest;
 						this.longInterest = longInterest;
-						
+
 						var mapOptions = {
 							zoom: this.zoom,
 							center: new google.maps.LatLng(latInterest, longInterest),
 							mapTypeId: google.maps.MapTypeId.ROADMAP
 						};
-				        
+
 				        var theMap = $('#canvasMap')[0];
-				        this.map = new google.maps.Map(theMap, mapOptions);					
+				        this.map = new google.maps.Map(theMap, mapOptions);
 
 					},
 					setUserMarker: function(latUser, longUser){
-						
+
 						this.latUser = latUser;
 						this.longUser = longUser;
-						
+
 				        var image = 'http://www.nrtca.co.uk/map_marker_icon.gif';
 				        var myLatLng = new google.maps.LatLng(latUser, longUser);
-				        
+
 				        var beachMarker = new google.maps.Marker({
 				            position: myLatLng,
 				            map: this.map,
 				            icon: image
-				        });						
-						
-					},					
+				        });
+
+					},
 					setVenueMarkers: function(map, locations) {
 				        // Add markers to the map
 
@@ -79,5 +87,5 @@ var googlemaper = {
 				              zIndex: beach[3]
 				          });
 				        }
-				      }					
+				      }
 				};

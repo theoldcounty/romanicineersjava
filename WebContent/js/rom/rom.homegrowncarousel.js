@@ -1,4 +1,12 @@
 /*
+*
+* Author: Rob Shan Lone
+* Copyright (c) 2012 The Old County Limited.
+*
+* All rights reserved.
+*/
+
+/*
 	homegrowncarousel
 	_copyright:: Rob Lone.
 */
@@ -67,7 +75,7 @@ $.fn.homegrowncarousel = function(params) {
 			},
 			init:function(homegrownparent){
 				params.homegrownparent = homegrownparent.id;
-					
+
 				console.log("home grown parents");
 				//add wrappers
 				var previousTemplate = '<div class="previous"><a href="#">Prev</a></div>';
@@ -90,13 +98,13 @@ $.fn.homegrowncarousel = function(params) {
 
 				params.disableRight = false;
 				params.hidenshowControl("next", 1);
-				
+
 				if(limits <= this.itemsPerRow){
 					console.log("hide the next");
 					//not enough items?
 					//hide next arrow
 					params.hidenshowControl("next", 0);
-				}				
+				}
 
 				$('#'+params.homegrownparent + ' .wrapper ul').fadeIn(1500);
 			},

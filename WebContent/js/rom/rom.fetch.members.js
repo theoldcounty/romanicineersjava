@@ -1,3 +1,11 @@
+/*
+*
+* Author: Rob Shan Lone
+* Copyright (c) 2012 The Old County Limited.
+*
+* All rights reserved.
+*/
+
 /**
 	* @class Romance Fetch Members
 	* @description Retrieving members
@@ -19,7 +27,7 @@ var fetchMembers = Backbone.View.extend({
 
 	getTemplate: function(value){
 		console.log("value", value);
-		
+
 		console.log("value.interestData", value.interestData);
 
 		var country = "United States";

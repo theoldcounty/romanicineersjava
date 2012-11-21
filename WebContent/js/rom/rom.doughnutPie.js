@@ -1,3 +1,11 @@
+/*
+*
+* Author: Rob Shan Lone
+* Copyright (c) 2012 The Old County Limited.
+*
+* All rights reserved.
+*/
+
 (function($) {
 	var privateFunction = function() {
 		// code here
@@ -573,19 +581,19 @@ var goPie = {
 		$(pieElement).doughnutPie('transitions', dynamicData); // Pass object "{}" to "init" as arguments
 	},
 	chosenChart: function(jsonUrl, colorCode, holder){
-				
-		$.getJSON(jsonUrl, function(data){			
+
+		$.getJSON(jsonUrl, function(data){
 			var dataPieJson = [];
 			var dataArray = data[0].dataResults;
-			$.each(dataArray, function(key, val) {				
+			$.each(dataArray, function(key, val) {
 				var tempObj = {
 							title: key,
 							octetTotalCount: val
 							};
-				
+
 				dataPieJson.push(tempObj);
 			});
-			
+
 			var specs = {
 							color : colorCode,
 							w : 300,
@@ -596,26 +604,26 @@ var goPie = {
 
 			goPie.initChart(holder, specs);
 			goPie.updateCharts(holder, dataPieJson);
-		});		
+		});
 	},
 	chosenUpdateChart: function(jsonUrl, holder){
 		//console.log("chosenUpdateChart");
-		
+
 		$.getJSON(jsonUrl, function(data){
-			var dataPieJson = [];			
+			var dataPieJson = [];
 			if(data[0].response == "OK"){
 				var dataArray = data[0].dataResults;
-			
-				$.each(dataArray, function(key, val) {				
+
+				$.each(dataArray, function(key, val) {
 					var tempObj = {
 								title: key,
 								octetTotalCount: val
 								};
-					
+
 					dataPieJson.push(tempObj);
-				});				
+				});
 				goPie.updateCharts(holder, dataPieJson);
-			}			
-		});		
-	}	
+			}
+		});
+	}
 };

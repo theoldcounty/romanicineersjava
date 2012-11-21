@@ -1,4 +1,11 @@
- 
+/*
+*
+* Author: Rob Shan Lone
+* Copyright (c) 2012 The Old County Limited.
+*
+* All rights reserved.
+*/
+
 	/*Globals*/
 		html{
 
@@ -28,7 +35,7 @@
 			padding: 2px;
 			display:none;
 		}
-		
+
 		.goals .heart{
 			background: red;
 			position: absolute;
@@ -46,17 +53,17 @@
 			padding: 2px;
 			display:none;
 		}
-				
+
 		.hotspothead{
 			background:blue;
 			height:14px;
 			width:14px;
-			cursor:pointer;	
+			cursor:pointer;
 			position: absolute;
 			top: 123px;
-			left: 29px;			
+			left: 29px;
 		}
-		
+
 		.hotspotheart{
 			background:blue;
 			height:14px;
@@ -64,9 +71,9 @@
 			cursor:pointer;
 			position: absolute;
 			top: 139px;
-			left: 63px;			
+			left: 63px;
 		}
-		
+
 		.hotspothand{
 			background:blue;
 			height:14px;
@@ -74,9 +81,9 @@
 			cursor:pointer;
 			position: absolute;
 			top: 152px;
-			left: 82px;		
-		}								
-		
+			left: 82px;
+		}
+
 		.fullprofile a{
 			color:red;
 		}
@@ -657,8 +664,8 @@
 		margin-bottom: 10px;
 		display:block;
 	}
-	
-	
+
+
 	.profilePics ul li img{
 		width:125px;
 	}
@@ -726,7 +733,7 @@
 		padding-bottom:10px;
 		width: 100%;
 	}
-	
+
 	fieldset.wrapper{
 		overflow:hidden;
 		padding: 0;
@@ -741,7 +748,7 @@
 		width:45%;
 		float: left;
 	}
-		
+
 	fieldset.bio{
 		width:45%;
 		float: right;
@@ -755,28 +762,28 @@
 		padding-bottom:0;
 		border: 1px solid black;
 	}
-	
-	
+
+
 	.goaldriven{
 		overflow:hidden;
 	}
-	
+
 	.goaldriven select{
 		float:left;
 		width:30%;
 	}
-	
+
 	input[type="text"].day,
 	input[type="text"].month,
 	input[type="text"].year{
 		width: 16%;
 		text-align: center;
 	}
-	
+
 	textarea{
 		border: 1px solid #000000;
 	}
-	
+
 	.ui-tabs{
 		padding:0;
 	}
@@ -786,8 +793,8 @@
 		border: 1px solid black;
 		padding: 1%;
 	}
-	
-	
+
+
 	fieldset.doughnutWrap{
 		overflow:hidden;
 		padding: 0;
@@ -795,8 +802,8 @@
 	fieldset.doughnutWrap select{
 		width: 480px;
 		float:left;
-	}	
-	
+	}
+
 /*form*/
 
 	.myprofile .collection{

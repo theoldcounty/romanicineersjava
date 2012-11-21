@@ -1,3 +1,11 @@
+/*
+*
+* Author: Rob Shan Lone
+* Copyright (c) 2012 The Old County Limited.
+*
+* All rights reserved.
+*/
+
 package com.mongo.app;
 
 import java.net.UnknownHostException;
@@ -9,23 +17,23 @@ import com.mongodb.MongoException;
 
 /**
  * Java MongoDB Example
- * 
+ *
  */
 public class MongoApp {
-		
+
 
 	/**
 	 * get database
-	 * @throws MongoException 
-	 * @throws UnknownHostException 
-	 **/	
+	 * @throws MongoException
+	 * @throws UnknownHostException
+	 **/
 	public static DB getDatabase() throws UnknownHostException, MongoException{
 		//String host = "46.38.190.133";
 		//Integer port = 29017;
 
 		String host = "127.0.0.1";
 		Integer port = 27017;
-		
+
 	    // connect to mongoDB
 	    Mongo mongo = new Mongo(host, port);
 
@@ -34,11 +42,11 @@ public class MongoApp {
 	    DB db = mongo.getDB(dbName);
 
 	    return db;
-	}	
-	
+	}
 
-	
-	
+
+
+
 	/**
 	 * delete collection entry
 	 **/
@@ -46,33 +54,33 @@ public class MongoApp {
 		DBCollection collection = getCollection(collectionName);
 		collection.remove(obj);
 	}
-	
+
 	/**
 	 * empty database
 	 **/
 	public static void cleanCollection() throws UnknownHostException, MongoException{
-	    //empty object clears ALL entries	
+	    //empty object clears ALL entries
 	    deleteCollectionEntry(new BasicDBObject(), "myCollection");
 	}
 
 	/**
 	 * get collection
-	 * @throws MongoException 
-	 * @throws UnknownHostException 
-	 **/	
+	 * @throws MongoException
+	 * @throws UnknownHostException
+	 **/
 	public static DBCollection getCollection(String collectionName) throws UnknownHostException, MongoException {
 		// if database doesn't exists, mongoDB will create it
 	    DB db = getDatabase();
 
 	    //String collectionName = "myCollection";
-	    
+
 	    // Get collection from MongoDB, database named "mydb"
 	    // if collection doesn't exists, mongoDB will create it
 	    DBCollection collection = db.getCollection(collectionName);
-	    
+
 	    return collection;
 	}
-	
+
 	/*
     public static void main(String[] args) {
 

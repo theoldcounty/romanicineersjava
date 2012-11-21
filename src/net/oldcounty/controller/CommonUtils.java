@@ -1,3 +1,11 @@
+/*
+*
+* Author: Rob Shan Lone
+* Copyright (c) 2012 The Old County Limited.
+*
+* All rights reserved.
+*/
+
 package net.oldcounty.controller;
 
 import java.net.UnknownHostException;
@@ -27,7 +35,7 @@ public class CommonUtils{
 	public static boolean isOlderThan18(String dob){
 		//__Prepare result
 		Boolean result = true;
-		
+
 		int yearDOB = Integer.parseInt(dob.substring(0, 4));
 		int monthDOB = Integer.parseInt(dob.substring(4, 6));
 		int dayDOB = Integer.parseInt(dob.substring(6, 8));
@@ -49,27 +57,27 @@ public class CommonUtils{
 		if(thisMonth < monthDOB){
 			age = age - 1;
 		}
-	
+
 		if(thisMonth == monthDOB && thisDay < dayDOB){
 			age = age - 1;
 		}
 
-		
+
 		if(age <18){
 			result = false;
 		}
-		
+
 		return result;
-	}		
-	
+	}
+
 	public static boolean isValidDate(String dt){
 		//__Prepare result
 		Boolean result = true;
-		
-		 String dateformat = "yyyyMMdd";  
-		 
-         try{   
-             SimpleDateFormat sdf = new SimpleDateFormat(dateformat);   
+
+		 String dateformat = "yyyyMMdd";
+
+         try{
+             SimpleDateFormat sdf = new SimpleDateFormat(dateformat);
              sdf.setLenient(false);
              sdf.parse(dt);
          }
@@ -81,32 +89,32 @@ public class CommonUtils{
          }
 
 		return result;
-	}	
-	
+	}
+
 	public static Boolean isEmailUnique(String emailaddress) throws UnknownHostException, MongoException {
 		//__Prepare result
 		Boolean result = true;
-		
+
 		//_getCollection
 		DBCollection collection = MongoApp.getCollection("myCollection");
-		
+
 	    // search query
 	    BasicDBObject searchQuery = new BasicDBObject();
 	    	searchQuery.put("emailaddress", emailaddress);
-	   
+
 	    DBCursor cursor = collection.find(searchQuery);
 
 	    if(cursor.count() >0){
-	    	result = false;	    	
+	    	result = false;
 	    }
-	    
+
 		return result;
 	}
 
 	public static boolean isEmpty(String variable) {
 		//__Prepare result
 		Boolean result = true;
-		
+
 		if(variable != null)
 		{
 			result = false;
@@ -117,38 +125,38 @@ public class CommonUtils{
 	public static boolean doPasswordsMatch(String password, String confirmpassword) {
 		//__Prepare result
 		Boolean result = true;
-		
+
 		if(!password.equals(confirmpassword))
 		{
 			result = false;
 		}
 		return result;
-	}	
-	
+	}
+
 	public static boolean checkLoggedIn(String objId) throws UnknownHostException, MongoException {
 		//__Prepare result
 		Boolean result = false;
-		
+
 		//_getCollection
 		DBCollection collection = MongoApp.getCollection("myCollection");
-		
+
 	    // search query
 	    BasicDBObject searchQuery = new BasicDBObject();
 	    	searchQuery.put("_id", new ObjectId(objId));
 	    	searchQuery.put("isloggedon", 1);
-	   
+
 	    DBCursor cursor = collection.find(searchQuery);
-	    
+
 	    System.out.println(cursor.count());
-	    
+
 	    if(cursor.count() >0){
-	    	result = true;	    	
+	    	result = true;
 	    }
-	    
+
 		return result;
 	}
-	
-	
+
+
 	public static Map<String, String> getEthnicity() {
 		Map<String,String> ethnicity = new LinkedHashMap<String,String>();
 			ethnicity.put("0","Caucasian");
@@ -160,13 +168,13 @@ public class CommonUtils{
 			ethnicity.put("6","Native American");
 			ethnicity.put("7","Mixed Race");
 			ethnicity.put("8","Other Ethnicity");
-				    
+
 		return ethnicity;
 	}
 
 	public static Map<String, String> getCountries() {
 		Map<String,String> country = new LinkedHashMap<String,String>();
-		
+
 	    Locale[] locales = Locale.getAvailableLocales();
 	    for (Locale locale : locales) {
 	      String iso = locale.getISO3Country();
@@ -175,8 +183,8 @@ public class CommonUtils{
 	      if (!"".equals(iso) && !"".equals(name)) {
 	        country.put(iso, name);
 	      }
-	    }		
-				    
+	    }
+
 		return country;
 	}
 
@@ -184,9 +192,9 @@ public class CommonUtils{
 		Map<String,String> gender = new LinkedHashMap<String,String>();
 			gender.put("0","Male");
 			gender.put("1","Female");
-			    
+
 		return gender;
 	}
 
-	
+
 }

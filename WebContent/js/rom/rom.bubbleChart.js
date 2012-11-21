@@ -1,3 +1,11 @@
+/*
+*
+* Author: Rob Shan Lone
+* Copyright (c) 2012 The Old County Limited.
+*
+* All rights reserved.
+*/
+
 (function($) {
 	var privateFunction = function() {
 		// code here
@@ -150,26 +158,26 @@
 
 var goBubble = {
 	chosenChart: function(jsonUrl, colourBands, holder){
-		
-		$.getJSON(jsonUrl, function(data){			
+
+		$.getJSON(jsonUrl, function(data){
 			var dataBubbleJson = [];
 			var dataArray = data[0].dataResults;
-			$.each(dataArray, function(key, val) {				
+			$.each(dataArray, function(key, val) {
 
-				var colourChoice = colourBands[Math.floor(Math.random()*colourBands.length)];	
+				var colourChoice = colourBands[Math.floor(Math.random()*colourBands.length)];
 				var tempObj = {
 					"name": colourChoice,
-					"children": 
+					"children":
 					[
 						{
 							"name": key,
 							"size": val
 						}
-					]		
-				};		
+					]
+				};
 				dataBubbleJson.push(tempObj);
 			});
-			
+
 			var visitJson= {
 							 "name": "flare",
 							 "children": [

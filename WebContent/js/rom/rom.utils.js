@@ -1,4 +1,12 @@
 /*
+*
+* Author: Rob Shan Lone
+* Copyright (c) 2012 The Old County Limited.
+*
+* All rights reserved.
+*/
+
+/*
 	Romancineers Utils
 		Common Utils
 */
