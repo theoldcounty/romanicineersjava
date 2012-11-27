@@ -65,7 +65,7 @@ public class ListenerController extends ServiceSerlvet{
     	request.setAttribute("people", people);
 
 		String messages = "test home";
-		return new ModelAndView("../../index", "message", messages);
+		return new ModelAndView("index", "message", messages);
 	}
 
 	/*

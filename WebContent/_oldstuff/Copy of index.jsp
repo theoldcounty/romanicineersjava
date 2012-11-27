@@ -1,4 +1,4 @@
-<jsp:include page="WEB-INF/jsp/includes/header.jsp" />
+<!--<jsp:include page="WEB-INF/jsp/includes/header.jsp" />-->
 <!--include header-->
 	<div class="container">
 		<h2>The proto dating site</h2>
@@ -34,4 +34,4 @@
 		       
 	</div>       
 <!--include footer-->    
-<jsp:include page="WEB-INF/jsp/includes/footer.jsp" />
+<!--<jsp:include page="WEB-INF/jsp/includes/footer.jsp" />-->

@@ -332,7 +332,7 @@
 				<input type="hidden" value="submitted" name="submitted"/>
 				<input type="submit" value="submit" name="submit"/>				
 			
-			</fieldset>>
+			</fieldset>
 		</form>
 		
 		</div>
