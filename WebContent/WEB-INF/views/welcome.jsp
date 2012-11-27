@@ -51,7 +51,7 @@
 								<div class="hand"></div>
 								<div class="hotspothead"></div>
 								<div class="hotspotheart"></div>
-								<div class="hotspothand"></div>								
+								<div class="hotspothand"></div>
 							</div>
 						</div>
 						<div class="biospec">
@@ -77,7 +77,7 @@
 					<jsp:include page="includes/filters.jsp" />
 
 
-					<h2>Welcome on visual dating, find love, in a visual way</h2>
+					<h2>TESTWelcome on visual dating, find love, in a visual way</h2>
 
 <!--
 <section id="options" class="clearfix">
@@ -99,10 +99,10 @@
 
 
 					<ul class="users">
-						<!-- 
+						<!--
 						<c:forEach var="person" items="${people}">
 							<li class="element odd" data-user-country="${person.country}" data-user-interests="movies" data-user-online="${person.isloggedon}" data-user-gender="${person.gender}" data-user-name="${person.username}" data-user-id="${person._id}"><div class="avatar"><a href="user?id=${person._id}"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></div></li>
-						</c:forEach> 					
+						</c:forEach>
 						<li class="element odd" data-user-country="United Kingdom" data-user-interests="movies" data-user-online="1" data-user-gender="Male" data-user-name="Brad Pitt" data-user-id="21"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></div></li>
 						<li class="element even" data-user-country="United Kingdom" data-user-interests="oil painting, sex" data-user-gender="Female" data-user-name="Jessica Alba" data-user-id="23"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://images.cryhavok.org/d/1707-2/Jessica+Alba+in+Fishnets.jpg"></a></div></li>
 						<li class="element odd" data-user-country="United Kingdom" data-user-interests="robots, sex" data-user-gender="Female" data-user-name="Beyonce Knowles" data-user-id="25"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://images.starpulse.com/Photos/Previews/Beyonce-Knowles-sb32.jpg"></a></div></li>
