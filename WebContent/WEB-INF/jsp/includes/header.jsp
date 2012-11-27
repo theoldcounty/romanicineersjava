@@ -10,7 +10,7 @@
 		<header>
 			<div class="wrap">
 				<div class="alignheader">
-					<a href="/" title="Home" rel="home" id="logo"><img src="images/logo.png" alt="Home"></a>
+					<a href="/" title="Home" rel="home" id="logo"><img src="resources/images/logo.png" alt="Home"></a>
 					<nav id="loginmenu">
 						<c:choose>
 						  <c:when test="${inSession != null}">
@@ -46,5 +46,5 @@
 					</ul>
 				</nav>
 			</div>
-		</div>		
+		</div>
 <!-- ${inSession}-->
