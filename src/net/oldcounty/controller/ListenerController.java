@@ -12,25 +12,22 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.FileOutputStream;
-import org.bson.BasicBSONObject;
+
+import net.oldcounty.manager.PersonManager;
+import net.oldcounty.model.Person;
+
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mongodb.BasicDBObject;
@@ -40,13 +37,15 @@ import com.mongodb.MongoException;
 @Controller
 public class ListenerController extends ServiceSerlvet{
 
+	private PersonManager personManager;
+	
 
     /**
      * Get Home
      * @throws MongoException
      * @throws UnknownHostException
     */
-	@RequestMapping("/*")
+	//@RequestMapping("/*")
 	public ModelAndView getHome2(
     		HttpServletRequest request,
     		HttpServletResponse response,
@@ -444,91 +443,47 @@ public class ListenerController extends ServiceSerlvet{
     	HttpSession session = serlvetService(request);
     	String inSession = PersonController.inSession(session);
     	ServiceSerlvet.appendSesssion(request);
+    	
+    	Person person = new Person();
 
-
-    	System.out.println("file: "+file);
-
-    	System.out.println("inSession: "+inSession);
-
-    	Map<String,String> countryList = CommonUtils.getCountries();
-    	String countriesCommonKey = "GBR"; //United Kingdom
-
-    	Map<String,String> ethnicityList = CommonUtils.getEthnicity();
-    	String ethnicityCommonKey = "0"; //Caucasian
-
-
-    	request.setAttribute("countryCommonKey", countriesCommonKey);
-    	request.setAttribute("countryList", countryList);
-
-    	request.setAttribute("ethnicityCommonKey", ethnicityCommonKey);
-    	request.setAttribute("ethnicityList", ethnicityList);
-
-    	System.out.println("submitted: "+submitted);
+    	person.setRealname(realname);
+    	person.setUsername(username);
+    	person.setEmailaddress(emailaddress);
+    	person.setConfirmemailaddress(confirmemailaddress);
+    	person.setPassword(password);
+    	person.setConfirmpassword(confirmpassword);
+    	person.setWhichscreenname(whichscreenname);
+    	person.setBirthyear(birthyear);
+    	person.setBirthmonth(birthmonth);
+    	person.setBirthday(birthday);
+    	person.setAbout(about);
+    	person.setCountry(country);
+    	person.setGender(gender);
+    	person.setEthnicity(ethnicity);
+    	person.setKindofrelationship(kindofrelationship);
+    	person.setBodytype(bodytype);
+    	person.setHaircolor(haircolor);
+    	person.setEyecolor(eyecolor);
+    	person.setChildren(children);
+    	person.setEducation(education);
+    	person.setOccupation(occupation);
+    	person.setLongitude(longitude);
+    	person.setLatitude(latitude);
+    	person.setLanguages(languages);
+    	person.setInterests(interests);
+    	person.setInterestknobs(interestknobs);
+    	person.setSeekings(seekings);
+    	person.setSeekingknobs(seekingknobs);
+    	person.setVisitings(visitings);
+    	person.setVisitingknobs(visitingknobs);
+    	person.setGoal1(goal1);
+    	person.setGoal2(goal2);
+    	person.setGoal3(goal3);
+    	person.setPersonality(personality);
+    	
+    	List<DBObject> registerResponse = personManager.registerUser(person);
     	if(submitted !=null){
-
-    		System.out.println("realname "+realname);
-	    	System.out.println("username "+username);
-	    	System.out.println("emailaddress "+emailaddress);
-	    	System.out.println("confirmemailaddress "+confirmemailaddress);
-	    	System.out.println("password "+password);
-	    	System.out.println("confirmpassword "+confirmpassword);
-	    	System.out.println("gender "+gender);
-
-	    	System.out.println("birthyear "+birthyear);
-	    	System.out.println("birthmonth "+birthmonth);
-	    	System.out.println("birthday "+birthday);
-	    	System.out.println("ethnicity "+ethnicity);
-	    	System.out.println("country "+country);
-
-	    	if(languages!=null){
-		    	for(String language : languages)
-		    	{
-		    		System.out.println("language "+language);
-		    	}
-	    	}
-
-	    	//languages
-
-	    	/*_Store*/
-
-	    	List<DBObject> registerResponse = PersonController.registerUser(
-    			realname,
-    			username,
-    			emailaddress,
-    			confirmemailaddress,
-    			password,
-    			confirmpassword,
-    			whichscreenname,
-    			birthyear,
-    			birthmonth,
-    			birthday,
-    			about,
-    			country,
-				gender,
-				ethnicity,
-				kindofrelationship,
-				bodytype,
-				haircolor,
-				eyecolor,
-				children,
-				education,
-				occupation,
-				latitude,
-				longitude,
-				languages,
-				interests,
-				interestknobs,
-				seekings,
-				seekingknobs,
-				visitings,
-				visitingknobs,
-				goal1,
-				goal2,
-				goal3,
-				personality,
-				file
-	    	);
-
+	    	
 		    //BasicDBObject recentuser = PersonController.getUniqueUser(Lastid.toString());
 	    	System.out.println("registerResponse"+registerResponse);
 
@@ -568,7 +523,48 @@ public class ListenerController extends ServiceSerlvet{
     	}
     }
 
+    /**
+     * Show Register User
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/showRegisterUser")
+    public ModelAndView showRegisterUser(
+    		HttpServletRequest request,
+    		HttpServletResponse response
+    		    		) throws UnknownHostException, MongoException
+    {
+    	HttpSession session = serlvetService(request);
+    	String inSession = PersonController.inSession(session);
+    	ServiceSerlvet.appendSesssion(request);    	
 
+    	Map<String,String> countryList = CommonUtils.getCountries();
+    	String countriesCommonKey = "GBR"; //United Kingdom
+
+    	Map<String,String> ethnicityList = CommonUtils.getEthnicity();
+    	String ethnicityCommonKey = "0"; //Caucasian
+
+    	request.setAttribute("countryCommonKey", countriesCommonKey);
+    	request.setAttribute("countryList", countryList);
+
+    	request.setAttribute("ethnicityCommonKey", ethnicityCommonKey);
+    	request.setAttribute("ethnicityList", ethnicityList);
+
+       	//if the user has logged into the session
+    	if(inSession != null){
+    		//they will need to logout in order to re-register a new account
+    		String message = "You have been automatically logged out";
+    		PersonController.logoutUser(inSession, session);
+    		return new ModelAndView("user/register", "message", message);
+    	}
+    	else{
+    		//the guest can register
+    		String message = "Dear Guest please register";
+    		return new ModelAndView("user/register", "message", message);
+    	}
+    }
+    
+    
     /*
      * Member List
      * Displays All Users
@@ -916,5 +912,9 @@ public class ListenerController extends ServiceSerlvet{
 		return new ModelAndView(viewPage);
     }
 
+    public void setPersonManager(PersonManager personManager){
+    	this.personManager = personManager;
+    }
+    
 
 }
