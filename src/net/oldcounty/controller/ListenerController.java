@@ -12,6 +12,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import net.oldcounty.manager.PersonManager;
+import net.oldcounty.model.Interests;
 import net.oldcounty.model.Person;
 
 import org.bson.types.ObjectId;
@@ -469,7 +471,27 @@ public class ListenerController extends ServiceSerlvet{
     	person.setPersonality(personality);
     	
     	
-    	//response test 
+    	
+    	/*new interest code*/
+	    /*add to new interests chart*/
+	    Map<String,Integer> userInterests = new LinkedHashMap<String,Integer>();
+    	if(interests!=null){
+    		int index = 0;
+    		for(String interest : interests)
+	    	{
+	    		userInterests.put(interest,interestknobs[index]);
+	    		index++;
+	    	}
+    	}
+    	
+	    
+    	Object userId = "5koiopewr03oewrew"; //last id by registered user
+    	Interests interest = new Interests();
+    	interest.setUid(userId);
+    	interest.setChartType("interests");
+    	interest.setDataResults(userInterests);
+    	List<DBObject> interestResponse = personManager.addUserPieChart(interest);
+    	/*new interest code*/
 
 		
     	if(submitted !=null){
@@ -514,6 +536,137 @@ public class ListenerController extends ServiceSerlvet{
     	}
     }
 
+    
+
+    /*
+     * Edit User
+    */
+    /**
+     * Register
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/edit")
+    public ModelAndView editDisplay(
+    		HttpServletRequest request,
+    		HttpServletResponse response,
+
+    		//account
+    		@RequestParam(value="username", required=false) String username,
+    		@RequestParam(value="emailaddress", required=false) String emailaddress,
+    		@RequestParam(value="confirmemailaddress", required=false) String confirmemailaddress,
+    		@RequestParam(value="password", required=false) String password,
+    		@RequestParam(value="confirmpassword", required=false) String confirmpassword,
+    		@RequestParam(value="gender", required=false) String gender,
+    		@RequestParam(value="birthyear", required=false) String birthyear,
+    		@RequestParam(value="birthmonth", required=false) String birthmonth,
+    		@RequestParam(value="birthday", required=false) String birthday,
+    		@RequestParam(value="ethnicity", required=false) String ethnicity,
+    		@RequestParam(value="country", required=false) String country,
+    		@RequestParam(value="submitaccount", required=false) String submitaccount,
+
+    		//basics
+    		@RequestParam(value="seeking", required=false) String seeking,
+    		@RequestParam(value="submitbasics", required=false) String submitbasics
+    		) throws UnknownHostException, MongoException
+    {
+    	HttpSession session = serlvetService(request);
+    	String inSession = PersonController.inSession(session);
+    	ServiceSerlvet.appendSesssion(request);
+    	System.out.println("inSession: "+inSession);
+    	System.out.println("edit");
+    	List<DBObject> person = null;
+
+    	Map<String,String> countryList = CommonUtils.getCountries();
+    	String countriesCommonKey = "GBR"; //United Kingdom
+
+    	Map<String,String> genderList = CommonUtils.getGender();
+    	String genderCommonKey = "0"; //Male
+
+    	Map<String,String> ethnicityList = CommonUtils.getEthnicity();
+    	String ethnicityCommonKey = "0"; //Caucasian
+
+    	request.setAttribute("countryCommonKey", countriesCommonKey);
+    	request.setAttribute("countryList", countryList);
+    	
+    	request.setAttribute("genderCommonKey", genderCommonKey);
+    	request.setAttribute("genderList", genderList);
+    	request.setAttribute("ethnicityCommonKey", ethnicityCommonKey);
+    	request.setAttribute("ethnicityList", ethnicityList);
+
+    	//basics
+    	String seekingGenderCommonKey = "1"; //Female
+    	request.setAttribute("seekingGenderCommonKey", seekingGenderCommonKey);
+
+    	if(inSession != null){
+    		//edit account details
+	    	if(submitaccount!=null){
+
+	    		System.out.println("submitaccount"+submitaccount);
+		    	System.out.println("username"+username);
+		    	System.out.println("emailaddress"+emailaddress);
+		    	System.out.println("confirmemailaddress"+confirmemailaddress);
+		    	System.out.println("password"+password);
+		    	System.out.println("confirmpassword"+confirmpassword);
+		    	System.out.println("gender"+gender);
+		    	System.out.println("birthyear"+birthyear);
+		    	System.out.println("birthmonth"+birthmonth);
+		    	System.out.println("birthday"+birthday);
+		    	System.out.println("ethnicity"+ethnicity);
+		    	System.out.println("country"+country);
+
+		    	/*_Store*/
+		    	List<DBObject> editResponse = PersonController.editUser(
+		    			inSession, username, emailaddress, password, gender, birthyear, birthmonth, birthday, ethnicity, country
+			    );
+
+			    System.out.println("response from edit user method: "+editResponse);
+
+			    //BasicDBObject recentuser = PersonController.getUniqueUser(Lastid.toString());
+	    	}
+
+	    	if(submitbasics!=null){
+	    		System.out.println("submitbasics"+submitbasics);
+
+	    		System.out.println("seeking"+seeking);
+
+
+		    	List<DBObject> editBasicsResponse = PersonController.editUserBasic(
+		    			inSession, seeking
+			    );
+		    	System.out.println("response from edit basics user method: "+editBasicsResponse);
+	    	}
+
+    		//get user
+    		person = PersonController.getUniqueUser(inSession);
+    		System.out.println(person.get(0).get("user"));
+	    	return new ModelAndView("jsp/user/edit", "response", person.get(0).get("user"));
+    	}
+    	else
+    	{
+    		//need to be logged in to edit your page
+			String message = "back to home";
+			return getHome2(request, response, message);
+    	}
+    }
+
+    /*
+     * Delete User
+    */
+    @RequestMapping(method=RequestMethod.GET, value={"/delete","/delete/{id}"})
+    public ModelAndView deleteDisplay(
+    		HttpServletRequest request,
+    		HttpServletResponse response,
+    		@RequestParam(value="id", required=false) String id
+    ) throws UnknownHostException, MongoException {
+    	ServiceSerlvet.appendSesssion(request);
+    	BasicDBObject deleteResponse = PersonController.deleteUser(id);
+
+    	System.out.println("response from user to delete method: "+deleteResponse);
+
+		return new ModelAndView("jsp/user/delete", "people", deleteResponse);
+    }    
+    
     /**
      * Show Register User
      * @throws MongoException
@@ -647,134 +800,8 @@ public class ListenerController extends ServiceSerlvet{
 		return new ModelAndView("jsp/user", "people", searchResponse);
     }
 
-    /*
-     * Edit User
-    */
-    /**
-     * Register
-     * @throws MongoException
-     * @throws UnknownHostException
-    */
-    @RequestMapping("/edit")
-    public ModelAndView editDisplay(
-    		HttpServletRequest request,
-    		HttpServletResponse response,
-
-    		//account
-    		@RequestParam(value="username", required=false) String username,
-    		@RequestParam(value="emailaddress", required=false) String emailaddress,
-    		@RequestParam(value="confirmemailaddress", required=false) String confirmemailaddress,
-    		@RequestParam(value="password", required=false) String password,
-    		@RequestParam(value="confirmpassword", required=false) String confirmpassword,
-    		@RequestParam(value="gender", required=false) String gender,
-    		@RequestParam(value="birthyear", required=false) String birthyear,
-    		@RequestParam(value="birthmonth", required=false) String birthmonth,
-    		@RequestParam(value="birthday", required=false) String birthday,
-    		@RequestParam(value="ethnicity", required=false) String ethnicity,
-    		@RequestParam(value="country", required=false) String country,
-    		@RequestParam(value="submitaccount", required=false) String submitaccount,
-
-    		//basics
-    		@RequestParam(value="seeking", required=false) String seeking,
-    		@RequestParam(value="submitbasics", required=false) String submitbasics
-    		) throws UnknownHostException, MongoException
-    {
-    	HttpSession session = serlvetService(request);
-    	String inSession = PersonController.inSession(session);
-    	ServiceSerlvet.appendSesssion(request);
-    	System.out.println("inSession: "+inSession);
-    	System.out.println("edit");
-    	List<DBObject> person = null;
-
-    	Map<String,String> countryList = CommonUtils.getCountries();
-    	String countriesCommonKey = "GBR"; //United Kingdom
-
-    	Map<String,String> genderList = CommonUtils.getGender();
-    	String genderCommonKey = "0"; //Male
-
-    	Map<String,String> ethnicityList = CommonUtils.getEthnicity();
-    	String ethnicityCommonKey = "0"; //Caucasian
-
-    	request.setAttribute("countryCommonKey", countriesCommonKey);
-    	request.setAttribute("countryList", countryList);
-    	
-    	request.setAttribute("genderCommonKey", genderCommonKey);
-    	request.setAttribute("genderList", genderList);
-    	request.setAttribute("ethnicityCommonKey", ethnicityCommonKey);
-    	request.setAttribute("ethnicityList", ethnicityList);
-
-    	//basics
-    	String seekingGenderCommonKey = "1"; //Female
-    	request.setAttribute("seekingGenderCommonKey", seekingGenderCommonKey);
-
-    	if(inSession != null){
-    		//edit account details
-	    	if(submitaccount!=null){
-
-	    		System.out.println("submitaccount"+submitaccount);
-		    	System.out.println("username"+username);
-		    	System.out.println("emailaddress"+emailaddress);
-		    	System.out.println("confirmemailaddress"+confirmemailaddress);
-		    	System.out.println("password"+password);
-		    	System.out.println("confirmpassword"+confirmpassword);
-		    	System.out.println("gender"+gender);
-		    	System.out.println("birthyear"+birthyear);
-		    	System.out.println("birthmonth"+birthmonth);
-		    	System.out.println("birthday"+birthday);
-		    	System.out.println("ethnicity"+ethnicity);
-		    	System.out.println("country"+country);
-
-		    	/*_Store*/
-		    	List<DBObject> editResponse = PersonController.editUser(
-		    			inSession, username, emailaddress, password, gender, birthyear, birthmonth, birthday, ethnicity, country
-			    );
-
-			    System.out.println("response from edit user method: "+editResponse);
-
-			    //BasicDBObject recentuser = PersonController.getUniqueUser(Lastid.toString());
-	    	}
-
-	    	if(submitbasics!=null){
-	    		System.out.println("submitbasics"+submitbasics);
-
-	    		System.out.println("seeking"+seeking);
-
-
-		    	List<DBObject> editBasicsResponse = PersonController.editUserBasic(
-		    			inSession, seeking
-			    );
-		    	System.out.println("response from edit basics user method: "+editBasicsResponse);
-	    	}
-
-    		//get user
-    		person = PersonController.getUniqueUser(inSession);
-    		System.out.println(person.get(0).get("user"));
-	    	return new ModelAndView("jsp/user/edit", "response", person.get(0).get("user"));
-    	}
-    	else
-    	{
-    		//need to be logged in to edit your page
-			String message = "back to home";
-			return getHome2(request, response, message);
-    	}
-    }
-
-    /*
-     * Delete User
-    */
-    @RequestMapping(method=RequestMethod.GET, value={"/delete","/delete/{id}"})
-    public ModelAndView deleteDisplay(
-    		HttpServletRequest request,
-    		HttpServletResponse response,
-    		@RequestParam(value="id", required=false) String id
-    ) throws UnknownHostException, MongoException {
-    	ServiceSerlvet.appendSesssion(request);
-    	BasicDBObject deleteResponse = PersonController.deleteUser(id);
-
-    	System.out.println("response from user to delete method: "+deleteResponse);
-
-		return new ModelAndView("jsp/user/delete", "people", deleteResponse);
-    }
+    
+    
 
     /*
      * Messages

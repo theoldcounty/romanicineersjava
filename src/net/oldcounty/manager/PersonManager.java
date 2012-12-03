@@ -8,6 +8,8 @@ import java.util.Map.Entry;
 
 import net.oldcounty.controller.CommonUtils;
 import net.oldcounty.dao.PersonDao;
+import net.oldcounty.dao.InterestDao;
+import net.oldcounty.model.Interests;
 import net.oldcounty.model.Person;
 
 import org.bson.types.ObjectId;
@@ -174,45 +176,24 @@ public class PersonManager {
 	 * @throws MongoException
 	 * @throws UnknownHostException
 	 **/
-	public static List<DBObject> addUserPieChart(
-				ObjectId lastid,
-				String chartType,
-				Map<String,Integer> interests
-			) throws UnknownHostException, MongoException
-		{
+	public static List<DBObject> addUserPieChart(Interests interest) 
+	{
 			System.out.println("add a CHART");
+
 
 			//__Prepare response
 			List<DBObject> response = new ArrayList<DBObject>();
 
-
-			//_getCollection
-			DBCollection collection = MongoApp.getCollection("userPieCharts");
-
 			BasicDBObject results = new BasicDBObject();
 
-		    Boolean isValidInputs = true;
+		    Boolean isValid = true;
 
-		    if(isValidInputs){
-			    // create a document to store attributes
-			    BasicDBObject document = new BasicDBObject();
-			    BasicDBObject dataResults = new BasicDBObject();
-
-		        	if(interests!=null){
-			    		for (Entry<String, Integer> entry : interests.entrySet()) {
-			    			dataResults.put(entry.getKey(), entry.getValue());
-			    		}
-			    	}
-			    	document.put("uid", lastid);
-			    	document.put("chartType", chartType);
-			    	document.put("dataResults", dataResults);
-
-			    // save it into collection
-			    collection.insert(document);
-
+		    if(isValid){
+		    	List<DBObject> latestInterests = InterestDao.addUserPieChart(interest);
+				
 				results.put("response", "OK");
 				results.put("description", "Interests have been recorded");
-		    	results.put("user", document);
+		    	results.put("userInterests", latestInterests);
 		    }
 		    else
 		    {
