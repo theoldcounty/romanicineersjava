@@ -49,5 +49,4 @@
 	</bean>
 	
 	<bean id="personDao" class="net.oldcounty.dao.PersonDao"/>
-
 </beans>
