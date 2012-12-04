@@ -1,6 +1,8 @@
 package net.oldcounty.dao;
 
 import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,8 +17,14 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.MongoException;
 
+/**
+ * PersonDao
+ * @param person
+ * Used to set and get a user
+ **/
 public class PersonDao {
 
+	/*Register Methods*/	
 	public static List<DBObject> registerUser(Person person){
 		
 		List<DBObject> response = new ArrayList<DBObject>();
@@ -181,13 +189,140 @@ public class PersonDao {
 	    System.out.println("userVisiting "+responseVisitingChart+"<br>");
 	    //add to new visiting chart
 */
-
     	document.put("uniqueid", lastid);		
 
-    	
-    	
-    	
 		return response;
 	}
 	
+	
+	/*Edit Methods*/	
+	public static void editUser(Person person){
+		
+		
+	}	
+	
+	
+	/*Login Methods*/
+	public static void loginUser(Person person){
+		
+		
+	}
+	
+	public static void logoutUser(Person person){
+		
+		
+	}
+	
+	
+	public static void banUser(Person person){
+		
+		
+	}
+	
+	
+	
+	/**
+	 * Delete User
+	 * @param id
+	 * @throws MongoException
+	 * @throws UnknownHostException
+	 **/
+	public static BasicDBObject deleteUser(String objId) throws UnknownHostException, MongoException{
+
+		//__Prepare result
+		BasicDBObject results = new BasicDBObject();
+
+	    BasicDBObject obj = new BasicDBObject();
+	    	obj.put("_id", new ObjectId(objId));
+
+			//_getCollection
+			MongoApp.deleteCollectionEntry(obj, "myCollection");
+
+			results.put("response", "OK");
+			results.put("description", "User has been deleted");
+
+		return results;
+	}
+	
+	
+
+	/**
+	 * Get User
+	 * @param id
+	 * @throws MongoException
+	 * @throws UnknownHostException
+	 **/
+	public static List<DBObject> getUniqueUser(String objId) throws UnknownHostException, MongoException{
+		System.out.println("running usercontrol get unique user details");
+
+		//__Prepare response
+		List<DBObject> response = new ArrayList<DBObject>();
+
+		BasicDBObject results = new BasicDBObject();
+
+	    // search query
+	    BasicDBObject searchQuery = new BasicDBObject();
+	    	searchQuery.put("_id", new ObjectId(objId));
+
+	    List<DBObject> uniqueUser = MongoApp.searchCollections(searchQuery, "myCollection");
+
+	    System.out.println(uniqueUser);
+
+			if(uniqueUser.size()>0 ){
+				results.put("response", "OK");
+				results.put("description", "The specific user has been found");
+				results.put("user", uniqueUser);
+			}
+			else
+			{
+				results.put("response", "FAIL");
+				results.put("description", "Failed to specific user, could have been deleted");
+			}
+			response.add(results);
+
+		return response;
+	}
+	
+	
+	
+
+	/**
+	 * Get User Age
+	 * @param birthdate
+	 **/
+	public static Integer getAge(String birthdate) {
+		System.out.println("get age of the user.");
+
+		int yearDOB = Integer.parseInt(birthdate.substring(0, 4));
+		int monthDOB = Integer.parseInt(birthdate.substring(4, 6));
+		int dayDOB = Integer.parseInt(birthdate.substring(6, 8));
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy");
+		java.util.Date date = new java.util.Date();
+		int thisYear = Integer.parseInt(dateFormat.format(date));
+
+		dateFormat = new SimpleDateFormat("MM");
+		date = new java.util.Date();
+		int thisMonth = Integer.parseInt(dateFormat.format(date));
+
+		dateFormat = new SimpleDateFormat("dd");
+		date = new java.util.Date();
+		int thisDay = Integer.parseInt(dateFormat.format(date));
+
+		int age = thisYear - yearDOB;
+
+		if(thisMonth < monthDOB){
+			age = age - 1;
+		}
+
+		if(thisMonth == monthDOB && thisDay < dayDOB){
+			age = age - 1;
+		}
+
+	    return age;
+	}
+
+	
 }
+
+

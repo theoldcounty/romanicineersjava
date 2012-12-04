@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 
 import org.bson.types.ObjectId;
 
-import net.oldcounty.model.Interests;
+import net.oldcounty.model.Trivia;
 
 import com.mongo.app.MongoApp;
 import com.mongodb.BasicDBObject;
@@ -16,63 +16,70 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoException;
 
 /**
- * InterestDao
- * @param interest
- * Used to set and get interest pie charts per user
+ * TriviaDao
+ * @param trivia
+ * Used to set and get the bubble charts per user
  **/
-public class InterestDao {
+public class TriviaDao {
 
-	public static List<DBObject> addUserPieChart(Interests interest){
+	public static List<DBObject> addBubbleChart(Trivia trivia){
 		
 		List<DBObject> response = new ArrayList<DBObject>();
-		    	
+
 		//_getCollection
 		DBCollection collection = null;
 		try {
-			collection = MongoApp.getCollection("userPieCharts");
+			collection = MongoApp.getCollection("userBubbleCharts");
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (MongoException e) {
 			e.printStackTrace();
 		}
 		
-	    BasicDBObject document = new BasicDBObject();
-	    BasicDBObject dataResults = new BasicDBObject();
-
-        	if(interest.getDataResults()!=null){
-	    		for (Entry<String, Integer> entry : interest.getDataResults().entrySet()) {
-	    			dataResults.put(entry.getKey(), entry.getValue());
-	    		}
-	    	}
-	    	document.put("uid", interest.getUid());
-	    	document.put("chartType", interest.getChartType());
-	    	document.put("dataResults", dataResults);
-
-	    // save it into collection named "interest"
-	    collection.insert(document);
-	    ObjectId lastid = (ObjectId)document.get( "_id" );
-		
 		BasicDBObject results = new BasicDBObject();
-		
-		results.put("response", "OK");
-		results.put("lastId", lastid);
-		response.add(results);	    
-	    
-    	document.put("uniqueid", lastid);    	
-    	
+
+	    Boolean isValidInputs = true;
+
+	    if(isValidInputs){
+		    // create a document to store attributes
+		    BasicDBObject document = new BasicDBObject();
+		    BasicDBObject dataResults = new BasicDBObject();
+
+	        	if(trivia!=null){
+		    		for (Entry<String, Integer> entry : trivia.getTriviaResults().entrySet()) {
+		    			dataResults.put(entry.getKey(), entry.getValue());
+		    		}
+		    	}
+		    	document.put("uid", trivia.getUid());
+		    	document.put("chartType", trivia.getChartType());
+		    	document.put("dataResults", dataResults);
+
+		    // save it into collection
+		    collection.insert(document);
+
+			results.put("response", "OK");
+			results.put("description", "Interests have been recorded");
+	    	results.put("user", document);
+	    }
+	    else
+	    {
+			results.put("response", "FAIL");
+			results.put("description", "Failed record Interests");
+	    }
+
+	    response.add(results);
+
 		return response;
 	}
 	
-	
 	/**
-	 * Get UserInterests
+	 * Get User Bubble
 	 * @param id
 	 * @throws MongoException
 	 * @throws UnknownHostException
 	 **/
-	public static List<DBObject> getUserPieChart(Interests interest){
-		System.out.println("get interests");
-
+	public static List<DBObject> getUserBubbleChart(Trivia trivia){
+		
 		//__Prepare response
 		List<DBObject> response = new ArrayList<DBObject>();
 
@@ -80,12 +87,12 @@ public class InterestDao {
 
 	    // search query
 	    BasicDBObject searchQuery = new BasicDBObject();
-	    	searchQuery.put("uid", interest.getUid());
-	    	searchQuery.put("chartType", interest.getChartType());
+	    	searchQuery.put("uid", trivia.getUid());
+	    	searchQuery.put("chartType", trivia.getChartType());
 
 	    List<DBObject> uniqueInterests = null;
 		try {
-			uniqueInterests = MongoApp.searchCollections(searchQuery, "userPieCharts");
+			uniqueInterests = MongoApp.searchCollections(searchQuery, "userBubbleCharts");
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (MongoException e) {
@@ -106,4 +113,5 @@ public class InterestDao {
 
 		return response;
 	}	
+	
 }

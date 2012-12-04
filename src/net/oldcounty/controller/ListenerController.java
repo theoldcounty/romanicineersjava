@@ -89,6 +89,9 @@ public class ListenerController extends ServiceSerlvet{
 	}
 	*/
 
+	
+	
+/*json requests*/	
 
     /**
      * jsonpersonality
@@ -287,7 +290,18 @@ public class ListenerController extends ServiceSerlvet{
 		String message = "test";
 		return new ModelAndView("jsp/json/response", "message", message);
     }
+/*json requests*/
+    
+    
+    
+    
+    
 
+/*granualar url mapping*/    
+    
+
+/*Forms*/    
+    
     /**
      * Login
      * @throws MongoException
@@ -330,43 +344,6 @@ public class ListenerController extends ServiceSerlvet{
 		}
     }
 
-    /**
-     * Login
-     * @throws MongoException
-     * @throws UnknownHostException
-    */
-    @RequestMapping("/logout")
-    public ModelAndView logoutDisplay(
-    		HttpServletRequest request,
-    		HttpServletResponse response
-    		) throws UnknownHostException, MongoException
-    {
-    	HttpSession session = serlvetService(request);
-    	String inSession = PersonController.inSession(session); //get from java cookie
-    	ServiceSerlvet.appendSesssion(request);
-
-    	//if the user has logged into the session
-    	if(inSession != null){
-    		List<DBObject> dataresponse = PersonController.logoutUser(inSession, session);
-    		System.out.println("user logging out response"+dataresponse);
-
-    		//can send the log out data response to the jsp page
-			if(dataresponse.get(0).get("response") == "OK"){
-				String message = "sucessfully logged out, redirected back to the home page";
-				return getHome2(request, response, message);
-			}
-			else
-			{
-				String message = "An error has occured";
-				return new ModelAndView("jsp/user/logout", "message", message);
-			}
-    	}
-    	else{
-    		//user is not logged in, they do not need to logout again
-			String message = "Our apologies you do not need to logout";
-			return getHome2(request, response, message);
-    	}
-    }
 
     /**
      * Register
@@ -649,6 +626,56 @@ public class ListenerController extends ServiceSerlvet{
 			return getHome2(request, response, message);
     	}
     }
+    
+    
+/*Forms*/    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /**
+     * Logout
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/logout")
+    public ModelAndView logoutDisplay(
+    		HttpServletRequest request,
+    		HttpServletResponse response
+    		) throws UnknownHostException, MongoException
+    {
+    	HttpSession session = serlvetService(request);
+    	String inSession = PersonController.inSession(session); //get from java cookie
+    	ServiceSerlvet.appendSesssion(request);
+
+    	//if the user has logged into the session
+    	if(inSession != null){
+    		List<DBObject> dataresponse = PersonController.logoutUser(inSession, session);
+    		System.out.println("user logging out response"+dataresponse);
+
+    		//can send the log out data response to the jsp page
+			if(dataresponse.get(0).get("response") == "OK"){
+				String message = "sucessfully logged out, redirected back to the home page";
+				return getHome2(request, response, message);
+			}
+			else
+			{
+				String message = "An error has occured";
+				return new ModelAndView("jsp/user/logout", "message", message);
+			}
+    	}
+    	else{
+    		//user is not logged in, they do not need to logout again
+			String message = "Our apologies you do not need to logout";
+			return getHome2(request, response, message);
+    	}
+    }
+
 
     /*
      * Delete User
@@ -800,6 +827,29 @@ public class ListenerController extends ServiceSerlvet{
 		return new ModelAndView("jsp/user", "people", searchResponse);
     }
 
+    
+    
+    
+    
+    
+    
+    
+/*messaging and gallery for later*/    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 
