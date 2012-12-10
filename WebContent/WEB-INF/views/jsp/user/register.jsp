@@ -362,6 +362,8 @@
 			    	console.log("json response. " + data);
 			    	var obj = jQuery.parseJSON(data);
 			    	
+			    	console.log("obj " + obj);
+			    	
 			    	if(obj[0].response == "OK"){
 			    		console.log("user registered succeffully");
 			    		//close color box

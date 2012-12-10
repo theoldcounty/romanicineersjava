@@ -1,4 +1,4 @@
-<jsp:include page="includes/header.jsp" />
+<jsp:include page="jsp/includes/header.jsp" />
 <!--include header-->
 
 	<!--
@@ -74,7 +74,7 @@
 			<div id="contents">
 				<div class="wrap">
 
-					<jsp:include page="includes/filters.jsp" />
+					<jsp:include page="jsp/includes/filters.jsp" />
 
 
 					<h2>TESTWelcome on visual dating, find love, in a visual way</h2>
@@ -138,4 +138,4 @@
 
 
 <!--include footer-->
-<jsp:include page="includes/footer.jsp" />
+<jsp:include page="jsp/includes/footer.jsp" />

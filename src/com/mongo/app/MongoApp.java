@@ -9,9 +9,14 @@
 package com.mongo.app;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
 
@@ -81,6 +86,27 @@ public class MongoApp {
 	    return collection;
 	}
 
+	
+	public static List<DBObject> searchCollections(
+			BasicDBObject searchQuery,
+			String collectionName
+		) throws UnknownHostException, MongoException{
+
+		//__Prepare result
+		List<DBObject> results = new ArrayList<DBObject>();
+
+		//_getCollection
+		DBCollection collection = MongoApp.getCollection(collectionName);
+
+	    DBCursor cursor = collection.find(searchQuery);
+
+        // loop over the cursor and display the result
+    	while (cursor.hasNext()) {
+	    	results.add(cursor.next());
+	    }
+
+	    return results;
+	}	
 	/*
     public static void main(String[] args) {
 

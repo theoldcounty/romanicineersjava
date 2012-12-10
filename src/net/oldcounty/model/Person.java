@@ -1,7 +1,6 @@
 package net.oldcounty.model;
 
 public class Person {
-
 	String realname;
 	String username;
 	String emailaddress;

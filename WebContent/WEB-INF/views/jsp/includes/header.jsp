@@ -21,7 +21,7 @@
 						  </c:when>
 						  <c:otherwise>
 								<ul>
-									<li><a class="form" href="register">Sign up</a></li>
+									<li><a class="form" href="showRegisterUser">Sign up</a></li>
 									<li><a class="form" href="login">Login</a></li>
 								</ul>
 						  </c:otherwise>
@@ -46,5 +46,5 @@
 					</ul>
 				</nav>
 			</div>
-		</div>
+		</div>		
 <!-- ${inSession}-->

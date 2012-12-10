@@ -12,6 +12,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import net.oldcounty.manager.PersonManager;
+import net.oldcounty.model.Interests;
 import net.oldcounty.model.Person;
 
 import org.bson.types.ObjectId;
@@ -87,11 +89,9 @@ public class ListenerController extends ServiceSerlvet{
 	}
 	*/
 
-
-
-
-
-
+	
+	
+/*json requests*/	
 
     /**
      * jsonpersonality
@@ -107,7 +107,7 @@ public class ListenerController extends ServiceSerlvet{
     ) throws UnknownHostException, MongoException {
     	ServiceSerlvet.appendSesssion(request);
     	List<DBObject> json = PersonController.getUserPersonality(id);
-		return new ModelAndView("json/json", "json", json);
+		return new ModelAndView("jsp/json/response", "json", json);
     }
 
 
@@ -116,7 +116,6 @@ public class ListenerController extends ServiceSerlvet{
      * @throws MongoException
      * @throws UnknownHostException
     */
-
     @RequestMapping(method=RequestMethod.GET, value={"/jsonmembers","/jsonmembers/{id}"})
     public ModelAndView jsonMembers(
     		HttpServletRequest request,
@@ -124,7 +123,6 @@ public class ListenerController extends ServiceSerlvet{
     		@RequestParam(value="limit", required=false) Integer limit
     ) throws UnknownHostException, MongoException {
     	ServiceSerlvet.appendSesssion(request);
-
 
     	List<DBObject> peopleList = new ArrayList<DBObject>();
 
@@ -135,7 +133,6 @@ public class ListenerController extends ServiceSerlvet{
     	while (iterator.hasNext()) {
 
     		DBObject o = iterator.next();
-
 
 	            System.out.println(o.get("_id").toString());
 
@@ -178,7 +175,7 @@ public class ListenerController extends ServiceSerlvet{
 
     	//request.setAttribute("people", people);
 
-		return new ModelAndView("json/json", "json", peopleList);
+		return new ModelAndView("jsp/json/response", "json", peopleList);
     }
 
 
@@ -231,9 +228,8 @@ public class ListenerController extends ServiceSerlvet{
 
     	//request.setAttribute("people", people);
 
-		return new ModelAndView("json/json", "json", peopleList);
+		return new ModelAndView("jsp/json/response", "json", peopleList);
     }
-
 
 
 	//getUserInterests
@@ -254,7 +250,7 @@ public class ListenerController extends ServiceSerlvet{
 
     	//String chartType = "interests";
     	List<DBObject> json = PersonController.getUserPieChart(id, chartType);
-		return new ModelAndView("json/json", "json", json);
+		return new ModelAndView("jsp/json/response", "json", json);
     }
 
 
@@ -274,7 +270,7 @@ public class ListenerController extends ServiceSerlvet{
 
     	//String chartType = "interests";
     	List<DBObject> json = PersonController.getUserBubbleChart(id, chartType);
-		return new ModelAndView("json/json", "json", json);
+		return new ModelAndView("jsp/json/response", "json", json);
     }
 
 
@@ -292,12 +288,20 @@ public class ListenerController extends ServiceSerlvet{
     {
 
 		String message = "test";
-		return new ModelAndView("json/jsonlocations", "message", message);
+		return new ModelAndView("jsp/json/response", "message", message);
     }
+/*json requests*/
+    
+    
+    
+    
+    
 
+/*granualar url mapping*/    
+    
 
-
-
+/*Forms*/    
+    
     /**
      * Login
      * @throws MongoException
@@ -331,7 +335,7 @@ public class ListenerController extends ServiceSerlvet{
 				}
 			}
 			String message = "login";
-			return new ModelAndView("user/login", "message", message);
+			return new ModelAndView("jsp/user/login", "message", message);
 		}
 		else
 		{
@@ -340,43 +344,6 @@ public class ListenerController extends ServiceSerlvet{
 		}
     }
 
-    /**
-     * Login
-     * @throws MongoException
-     * @throws UnknownHostException
-    */
-    @RequestMapping("/logout")
-    public ModelAndView logoutDisplay(
-    		HttpServletRequest request,
-    		HttpServletResponse response
-    		) throws UnknownHostException, MongoException
-    {
-    	HttpSession session = serlvetService(request);
-    	String inSession = PersonController.inSession(session); //get from java cookie
-    	ServiceSerlvet.appendSesssion(request);
-
-    	//if the user has logged into the session
-    	if(inSession != null){
-    		List<DBObject> dataresponse = PersonController.logoutUser(inSession, session);
-    		System.out.println("user logging out response"+dataresponse);
-
-    		//can send the log out data response to the jsp page
-			if(dataresponse.get(0).get("response") == "OK"){
-				String message = "sucessfully logged out, redirected back to the home page";
-				return getHome2(request, response, message);
-			}
-			else
-			{
-				String message = "An error has occured";
-				return new ModelAndView("user/logout", "message", message);
-			}
-    	}
-    	else{
-    		//user is not logged in, they do not need to logout again
-			String message = "Our apologies you do not need to logout";
-			return getHome2(request, response, message);
-    	}
-    }
 
     /**
      * Register
@@ -436,7 +403,6 @@ public class ListenerController extends ServiceSerlvet{
 
     		@RequestParam(value="file", required=false) MultipartFile[] file,
 
-
     		@RequestParam(value="submitted", required=false) String submitted
     		) throws UnknownHostException, MongoException
     {
@@ -481,9 +447,34 @@ public class ListenerController extends ServiceSerlvet{
     	person.setGoal3(goal3);
     	person.setPersonality(personality);
     	
-    	List<DBObject> registerResponse = personManager.registerUser(person);
+    	
+    	
+    	/*new interest code*/
+	    /*add to new interests chart*/
+	    Map<String,Integer> userInterests = new LinkedHashMap<String,Integer>();
+    	if(interests!=null){
+    		int index = 0;
+    		for(String interest : interests)
+	    	{
+	    		userInterests.put(interest,interestknobs[index]);
+	    		index++;
+	    	}
+    	}
+    	
+	    
+    	Object userId = "5koiopewr03oewrew"; //last id by registered user
+    	Interests interest = new Interests();
+    	interest.setUid(userId);
+    	interest.setChartType("interests");
+    	interest.setDataResults(userInterests);
+    	List<DBObject> interestResponse = personManager.addUserPieChart(interest);
+    	/*new interest code*/
+
+		
     	if(submitted !=null){
-	    	
+
+    		List<DBObject> registerResponse = personManager.registerUser(person);
+        	
 		    //BasicDBObject recentuser = PersonController.getUniqueUser(Lastid.toString());
 	    	System.out.println("registerResponse"+registerResponse);
 
@@ -497,173 +488,32 @@ public class ListenerController extends ServiceSerlvet{
 					//String jsonResponse = "You have successfully registered and logged in, enjoy the site.";
 					//return getHome(request, response);
 					ServiceSerlvet.appendSesssion(request);
-					return new ModelAndView("json/response", "jsonResponse", dataresponse);
+					return new ModelAndView("jsp/json/response", "jsonResponse", dataresponse);
 		    	}
 		    }
 	    	else{
 	    		//the guest can register
 	    		//String message = "An error occured";
 	    		//return new ModelAndView("user/register", "message", message);
-	    		return new ModelAndView("json/response", "jsonResponse", registerResponse);
+	    		return new ModelAndView("jsp/json/response", "jsonResponse", registerResponse);
 	    	}
     	}
-
 
     	//if the user has logged into the session
     	if(inSession != null){
     		//they will need to logout in order to re-register a new account
     		String message = "You have been automatically logged out";
     		PersonController.logoutUser(inSession, session);
-    		return new ModelAndView("user/register", "message", message);
+    		return new ModelAndView("jsp/user/register", "message", message);
     	}
     	else{
     		//the guest can register
     		String message = "Dear Guest please register";
-    		return new ModelAndView("user/register", "message", message);
+    		return new ModelAndView("jsp/user/register", "message", message);
     	}
     }
 
-    /**
-     * Show Register User
-     * @throws MongoException
-     * @throws UnknownHostException
-    */
-    @RequestMapping("/showRegisterUser")
-    public ModelAndView showRegisterUser(
-    		HttpServletRequest request,
-    		HttpServletResponse response
-    		    		) throws UnknownHostException, MongoException
-    {
-    	HttpSession session = serlvetService(request);
-    	String inSession = PersonController.inSession(session);
-    	ServiceSerlvet.appendSesssion(request);    	
-
-    	Map<String,String> countryList = CommonUtils.getCountries();
-    	String countriesCommonKey = "GBR"; //United Kingdom
-
-    	Map<String,String> ethnicityList = CommonUtils.getEthnicity();
-    	String ethnicityCommonKey = "0"; //Caucasian
-
-    	request.setAttribute("countryCommonKey", countriesCommonKey);
-    	request.setAttribute("countryList", countryList);
-
-    	request.setAttribute("ethnicityCommonKey", ethnicityCommonKey);
-    	request.setAttribute("ethnicityList", ethnicityList);
-
-       	//if the user has logged into the session
-    	if(inSession != null){
-    		//they will need to logout in order to re-register a new account
-    		String message = "You have been automatically logged out";
-    		PersonController.logoutUser(inSession, session);
-    		return new ModelAndView("user/register", "message", message);
-    	}
-    	else{
-    		//the guest can register
-    		String message = "Dear Guest please register";
-    		return new ModelAndView("user/register", "message", message);
-    	}
-    }
     
-    
-    /*
-     * Member List
-     * Displays All Users
-    */
-    @RequestMapping("/members")
-    public ModelAndView memberList(
-	    		HttpServletRequest request,
-	    		HttpServletResponse response
-    		) throws UnknownHostException, MongoException
-    {
-    	ServiceSerlvet.appendSesssion(request);
-    	//get search ALL users
-    	BasicDBObject searchQuery = new BasicDBObject();
-    	List<DBObject> dataresponse = PersonController.searchCollections(searchQuery, "myCollection");
-
-    	request.setAttribute("page", "members");
-    	return new ModelAndView("memberlist", "response", dataresponse);
-    }
-
-
-    /*
-     * Search List
-     * /search/?gender=m&race=asian
-    */
-    @RequestMapping(method=RequestMethod.GET, value={"/search","/search/{query}"})
-    public ModelAndView searchResults(
-    		HttpServletRequest request,
-    		HttpServletResponse response,
-    		@RequestParam(value="query", required=false) String query
-    	)
-    {
-    	ServiceSerlvet.appendSesssion(request);
-    	String message = "search view for "+query;
-    	request.setAttribute("page", "search");
-
-		return new ModelAndView("searchview", "message", message);
-    }
-
-
-
-    /*
-     * User
-    */
-    @RequestMapping(method=RequestMethod.GET, value={"/user","/user/{id}"})
-    public ModelAndView profileDisplay(
-    		HttpServletRequest request,
-    		HttpServletResponse response,
-    		//@PathVariable(value="id") String id
-    		@RequestParam(value="id", required=false) String id
-    ) throws UnknownHostException, MongoException {
-    	ServiceSerlvet.appendSesssion(request);
-
-    	request.setAttribute("page", "user");
-
-    	//get search ALL users
-    	BasicDBObject searchQuery = new BasicDBObject();
-    		searchQuery.put("_id", new ObjectId(id));
-    	List<DBObject> searchResponse = PersonController.searchCollections(searchQuery, "myCollection");
-
-    	//append actual age to the returned user object.
-    	DBObject newInformation = new BasicDBObject();
-
-    	String birthdate = (String) searchResponse.get(0).get("birthdate");
-
-    	Integer ageInYears = PersonController.getAge(birthdate);
-    	newInformation.put("ageInYears", ageInYears);
-
-
-    	HashMap<Integer,Object> gallery = PersonController.getGallery(
-    			id,
-    			false
-    	);
-
-    	newInformation.put("gallery", gallery);
-
-    	Integer countGallery = gallery.size();
-    	newInformation.put("countGallery", countGallery);
-
-    	searchResponse.add(newInformation);
-
-
-    	System.out.println("response from search user method: "+searchResponse);
-
-    	Map<String,String> countryList = CommonUtils.getCountries();
-    	Map<String,String> genderList = CommonUtils.getGender();
-    	Map<String,String> ethnicityList = CommonUtils.getEthnicity();
-
-
-    	request.setAttribute("countryList", countryList);
-    	request.setAttribute("genderList", genderList);
-    	request.setAttribute("ethnicityList", ethnicityList);
-
-    	ServiceSerlvet.appendSesssion(request);
-
-		return new ModelAndView("user", "people", searchResponse);
-    }
-
-
-
 
     /*
      * Edit User
@@ -704,24 +554,20 @@ public class ListenerController extends ServiceSerlvet{
     	System.out.println("edit");
     	List<DBObject> person = null;
 
-
     	Map<String,String> countryList = CommonUtils.getCountries();
     	String countriesCommonKey = "GBR"; //United Kingdom
 
     	Map<String,String> genderList = CommonUtils.getGender();
     	String genderCommonKey = "0"; //Male
 
-
     	Map<String,String> ethnicityList = CommonUtils.getEthnicity();
     	String ethnicityCommonKey = "0"; //Caucasian
 
     	request.setAttribute("countryCommonKey", countriesCommonKey);
     	request.setAttribute("countryList", countryList);
-
+    	
     	request.setAttribute("genderCommonKey", genderCommonKey);
-
     	request.setAttribute("genderList", genderList);
-
     	request.setAttribute("ethnicityCommonKey", ethnicityCommonKey);
     	request.setAttribute("ethnicityList", ethnicityList);
 
@@ -730,7 +576,6 @@ public class ListenerController extends ServiceSerlvet{
     	request.setAttribute("seekingGenderCommonKey", seekingGenderCommonKey);
 
     	if(inSession != null){
-
     		//edit account details
 	    	if(submitaccount!=null){
 
@@ -748,7 +593,6 @@ public class ListenerController extends ServiceSerlvet{
 		    	System.out.println("country"+country);
 
 		    	/*_Store*/
-
 		    	List<DBObject> editResponse = PersonController.editUser(
 		    			inSession, username, emailaddress, password, gender, birthyear, birthmonth, birthday, ethnicity, country
 			    );
@@ -757,7 +601,6 @@ public class ListenerController extends ServiceSerlvet{
 
 			    //BasicDBObject recentuser = PersonController.getUniqueUser(Lastid.toString());
 	    	}
-
 
 	    	if(submitbasics!=null){
 	    		System.out.println("submitbasics"+submitbasics);
@@ -771,12 +614,10 @@ public class ListenerController extends ServiceSerlvet{
 		    	System.out.println("response from edit basics user method: "+editBasicsResponse);
 	    	}
 
-
-
     		//get user
     		person = PersonController.getUniqueUser(inSession);
     		System.out.println(person.get(0).get("user"));
-	    	return new ModelAndView("user/edit", "response", person.get(0).get("user"));
+	    	return new ModelAndView("jsp/user/edit", "response", person.get(0).get("user"));
     	}
     	else
     	{
@@ -784,10 +625,57 @@ public class ListenerController extends ServiceSerlvet{
 			String message = "back to home";
 			return getHome2(request, response, message);
     	}
-
-		//String message = "edit";
-
     }
+    
+    
+/*Forms*/    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /**
+     * Logout
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/logout")
+    public ModelAndView logoutDisplay(
+    		HttpServletRequest request,
+    		HttpServletResponse response
+    		) throws UnknownHostException, MongoException
+    {
+    	HttpSession session = serlvetService(request);
+    	String inSession = PersonController.inSession(session); //get from java cookie
+    	ServiceSerlvet.appendSesssion(request);
+
+    	//if the user has logged into the session
+    	if(inSession != null){
+    		List<DBObject> dataresponse = PersonController.logoutUser(inSession, session);
+    		System.out.println("user logging out response"+dataresponse);
+
+    		//can send the log out data response to the jsp page
+			if(dataresponse.get(0).get("response") == "OK"){
+				String message = "sucessfully logged out, redirected back to the home page";
+				return getHome2(request, response, message);
+			}
+			else
+			{
+				String message = "An error has occured";
+				return new ModelAndView("jsp/user/logout", "message", message);
+			}
+    	}
+    	else{
+    		//user is not logged in, they do not need to logout again
+			String message = "Our apologies you do not need to logout";
+			return getHome2(request, response, message);
+    	}
+    }
+
 
     /*
      * Delete User
@@ -803,8 +691,167 @@ public class ListenerController extends ServiceSerlvet{
 
     	System.out.println("response from user to delete method: "+deleteResponse);
 
-		return new ModelAndView("user/delete", "people", deleteResponse);
+		return new ModelAndView("jsp/user/delete", "people", deleteResponse);
+    }    
+    
+    /**
+     * Show Register User
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/showRegisterUser")
+    public ModelAndView showRegisterUser(
+    		HttpServletRequest request,
+    		HttpServletResponse response
+    		    		) throws UnknownHostException, MongoException
+    {
+    	HttpSession session = serlvetService(request);
+    	String inSession = PersonController.inSession(session);
+    	ServiceSerlvet.appendSesssion(request);    	
+
+    	Map<String,String> countryList = CommonUtils.getCountries();
+    	String countriesCommonKey = "GBR"; //United Kingdom
+
+    	Map<String,String> ethnicityList = CommonUtils.getEthnicity();
+    	String ethnicityCommonKey = "0"; //Caucasian
+
+    	request.setAttribute("countryCommonKey", countriesCommonKey);
+    	request.setAttribute("countryList", countryList);
+
+    	request.setAttribute("ethnicityCommonKey", ethnicityCommonKey);
+    	request.setAttribute("ethnicityList", ethnicityList);
+
+       	//if the user has logged into the session
+    	if(inSession != null){
+    		//they will need to logout in order to re-register a new account
+    		String message = "You have been automatically logged out";
+    		PersonController.logoutUser(inSession, session);
+    		return new ModelAndView("jsp/user/register", "message", message);
+    	}
+    	else{
+    		//the guest can register
+    		String message = "Dear Guest please register";
+    		return new ModelAndView("jsp/user/register", "message", message);
+    	}
+    }    
+    
+    /*
+     * Member List
+     * Displays All Users
+    */
+    @RequestMapping("/members")
+    public ModelAndView memberList(
+	    		HttpServletRequest request,
+	    		HttpServletResponse response
+    		) throws UnknownHostException, MongoException
+    {
+    	ServiceSerlvet.appendSesssion(request);
+    	//get search ALL users
+    	BasicDBObject searchQuery = new BasicDBObject();
+    	List<DBObject> dataresponse = PersonController.searchCollections(searchQuery, "myCollection");
+
+    	request.setAttribute("page", "members");
+    	return new ModelAndView("jsp/memberlist", "response", dataresponse);
     }
+
+    /*
+     * Search List
+     * /search/?gender=m&race=asian
+    */
+    @RequestMapping(method=RequestMethod.GET, value={"/search","/search/{query}"})
+    public ModelAndView searchResults(
+    		HttpServletRequest request,
+    		HttpServletResponse response,
+    		@RequestParam(value="query", required=false) String query
+    	)
+    {
+    	ServiceSerlvet.appendSesssion(request);
+    	String message = "search view for "+query;
+    	request.setAttribute("page", "search");
+
+		return new ModelAndView("jsp/searchview", "message", message);
+    }
+
+
+    /*
+     * User
+    */
+    @RequestMapping(method=RequestMethod.GET, value={"/user","/user/{id}"})
+    public ModelAndView profileDisplay(
+    		HttpServletRequest request,
+    		HttpServletResponse response,
+    		//@PathVariable(value="id") String id
+    		@RequestParam(value="id", required=false) String id
+    ) throws UnknownHostException, MongoException {
+    	ServiceSerlvet.appendSesssion(request);
+
+    	request.setAttribute("page", "user");
+
+    	//get search ALL users
+    	BasicDBObject searchQuery = new BasicDBObject();
+    		searchQuery.put("_id", new ObjectId(id));
+    	List<DBObject> searchResponse = PersonController.searchCollections(searchQuery, "myCollection");
+
+    	//append actual age to the returned user object.
+    	DBObject newInformation = new BasicDBObject();
+
+    	String birthdate = (String) searchResponse.get(0).get("birthdate");
+
+    	Integer ageInYears = PersonController.getAge(birthdate);
+    	newInformation.put("ageInYears", ageInYears);
+
+    	HashMap<Integer,Object> gallery = PersonController.getGallery(
+    			id,
+    			false
+    	);
+
+    	newInformation.put("gallery", gallery);
+
+    	Integer countGallery = gallery.size();
+    	newInformation.put("countGallery", countGallery);
+
+    	searchResponse.add(newInformation);
+
+    	System.out.println("response from search user method: "+searchResponse);
+
+    	Map<String,String> countryList = CommonUtils.getCountries();
+    	Map<String,String> genderList = CommonUtils.getGender();
+    	Map<String,String> ethnicityList = CommonUtils.getEthnicity();
+
+    	request.setAttribute("countryList", countryList);
+    	request.setAttribute("genderList", genderList);
+    	request.setAttribute("ethnicityList", ethnicityList);
+
+    	ServiceSerlvet.appendSesssion(request);
+
+		return new ModelAndView("jsp/user", "people", searchResponse);
+    }
+
+    
+    
+    
+    
+    
+    
+    
+/*messaging and gallery for later*/    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /*
      * Messages
@@ -822,7 +869,7 @@ public class ListenerController extends ServiceSerlvet{
     	//if user is not logged in - they are redirected to login page
 
     	String message = "the message system";
-    	String viewPage = "messagesview";
+    	String viewPage = "jsp/messagesview";
 
 		 if(mode != null){
 		    	if(mode.equalsIgnoreCase("compose")){
@@ -844,7 +891,6 @@ public class ListenerController extends ServiceSerlvet{
 		    	}
 		 }
 
-
     	/*
     	    /inbox/compose
     	    /inbox/received
@@ -852,17 +898,14 @@ public class ListenerController extends ServiceSerlvet{
     	    messenging system
     	    - allow users to send and recieve messages
     	*/
-
 		return new ModelAndView(viewPage, "message", message);
     }
-
 
 
 
     /*
      * Gallery methods
     */
-
     @RequestMapping(method=RequestMethod.GET, value={"/gallery"})
     public ModelAndView galleryDisplay(
     		HttpServletRequest request,
@@ -872,17 +915,12 @@ public class ListenerController extends ServiceSerlvet{
     	ServiceSerlvet.appendSesssion(request);
     	String message = "search view for "+mode;
 
-
 		List<DBObject> images = GalleryController.getGallery();
 		System.out.println(images);
 
-		String viewPage = "gallery/galleryview";
-
-		return new ModelAndView(viewPage, "images", images);
+		return new ModelAndView("jsp/gallery/galleryview", "images", images);
     }
-
-
-
+    
 
     /*
      * Gallery Add methods
@@ -892,11 +930,8 @@ public class ListenerController extends ServiceSerlvet{
     		HttpServletRequest request,
     		HttpServletResponse response
     	) {
-		String viewPage = "gallery/fileuploadform";
-
-		return new ModelAndView(viewPage);
+		return new ModelAndView("jsp/gallery/fileuploadform");
     }
-
 
     /*
      * Gallery Add methods
@@ -907,14 +942,10 @@ public class ListenerController extends ServiceSerlvet{
     		HttpServletResponse response,
     		@RequestParam(value="mode", required=false) String mode
     	) {
-		String viewPage = "gallery/fileuploadsuccess";
-
-		return new ModelAndView(viewPage);
+		return new ModelAndView("jsp/gallery/fileuploadsuccess");
     }
 
     public void setPersonManager(PersonManager personManager){
     	this.personManager = personManager;
     }
-    
-
 }
