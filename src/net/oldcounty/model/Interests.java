@@ -3,26 +3,34 @@ package net.oldcounty.model;
 import java.util.Map;
 
 public class Interests {
-	Object uid;
-	String chartType;
-	Map<String,Integer> dataResults;
-
-	public Object getUid() {
-		return uid;
-	}
-	public void setUid(Object uid) {
-		this.uid = uid;
-	}
-	public String getChartType() {
-		return chartType;
-	}
-	public void setChartType(String chartType) {
-		this.chartType = chartType;
+	String name; //name of the chart, e.g. hobbies, sports, favourite foods
+	Object userId; //the user id associated with this chart
+	Map<String,Integer> interestData;
+	
+	//set name of the chart
+	public void setName(String name){
+		this.name = name;		
 	}	
-	public Map<String, Integer> getDataResults() {
-		return dataResults;
+	//get name of the chart
+	public String getName() {
+		return name;
 	}
-	public void setDataResults(Map<String,Integer> dataResults) {
-		this.dataResults = dataResults;
+
+	//set associated user id object
+	public void setUserId(Object userId) {
+		this.userId = userId;
+	}
+	//get associated user id object
+	public Object getUserId() {
+		return userId;
+	}
+	
+	//set associated interest data
+	public void setResults(Map<String,Integer> interestData){
+		this.interestData = interestData;
+	}	
+	//get associated interest data
+	public Map<String, Integer> getResults(){
+		return interestData;
 	}
 }

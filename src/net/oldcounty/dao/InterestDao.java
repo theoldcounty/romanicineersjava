@@ -22,14 +22,16 @@ import com.mongodb.MongoException;
  **/
 public class InterestDao {
 
-	public static List<DBObject> addUserPieChart(Interests interest){
+	static String collectionName = "interestCollection";
+	
+	public static List<DBObject> addInterest(Interests interest){
 		
 		List<DBObject> response = new ArrayList<DBObject>();
 		    	
 		//_getCollection
 		DBCollection collection = null;
 		try {
-			collection = MongoApp.getCollection("userPieCharts");
+			collection = MongoApp.getCollection(collectionName);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (MongoException e) {
@@ -39,13 +41,13 @@ public class InterestDao {
 	    BasicDBObject document = new BasicDBObject();
 	    BasicDBObject dataResults = new BasicDBObject();
 
-        	if(interest.getDataResults()!=null){
-	    		for (Entry<String, Integer> entry : interest.getDataResults().entrySet()) {
+        	if(interest.getResults()!=null){
+	    		for (Entry<String, Integer> entry : interest.getResults().entrySet()) {
 	    			dataResults.put(entry.getKey(), entry.getValue());
 	    		}
 	    	}
-	    	document.put("uid", interest.getUid());
-	    	document.put("chartType", interest.getChartType());
+	    	document.put("uid", interest.getUserId());
+	    	document.put("chartType", interest.getName());
 	    	document.put("dataResults", dataResults);
 
 	    // save it into collection named "interest"
@@ -70,7 +72,7 @@ public class InterestDao {
 	 * @throws MongoException
 	 * @throws UnknownHostException
 	 **/
-	public static List<DBObject> getUserPieChart(Interests interest){
+	public static List<DBObject> getInterest(Interests interest){
 		System.out.println("get interests");
 
 		//__Prepare response
@@ -80,12 +82,12 @@ public class InterestDao {
 
 	    // search query
 	    BasicDBObject searchQuery = new BasicDBObject();
-	    	searchQuery.put("uid", interest.getUid());
-	    	searchQuery.put("chartType", interest.getChartType());
+	    	searchQuery.put("uid", interest.getUserId());
+	    	searchQuery.put("chartType", interest.getName());
 
 	    List<DBObject> uniqueInterests = null;
 		try {
-			uniqueInterests = MongoApp.searchCollections(searchQuery, "userPieCharts");
+			uniqueInterests = MongoApp.searchCollections(searchQuery, collectionName);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (MongoException e) {
@@ -105,5 +107,7 @@ public class InterestDao {
 		response.add(results);
 
 		return response;
-	}	
+	}
+
+
 }
