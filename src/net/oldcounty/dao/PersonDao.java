@@ -69,6 +69,7 @@ public class PersonDao {
 	    document.put("goal1", person.getGoal1());
 	    document.put("goal2", person.getGoal2());
 	    document.put("goal3", person.getGoal3());
+	    document.put("personality", person.getPersonality());	    
 
 	    document.put("registeredon", time);
 	    document.put("lastupdated", time);
@@ -226,7 +227,7 @@ public class PersonDao {
 	 * @throws UnknownHostException
 	 **/
 	public static List<DBObject> getPersonality(String objId) throws UnknownHostException, MongoException{
-		System.out.println("get personality");
+		System.out.println("get personality"+objId);
 
 		//__Prepare response
 		List<DBObject> response = new ArrayList<DBObject>();
@@ -237,8 +238,8 @@ public class PersonDao {
 	    BasicDBObject searchQuery = new BasicDBObject();
 	    	searchQuery.put("_id", new ObjectId(objId));
 
-	    List<DBObject> uniquePersonality = searchUsers(searchQuery, "userPersonality");
-
+	    List<DBObject> uniquePersonality = searchUsers(searchQuery, "myCollection");
+	    System.out.println(uniquePersonality);
 		if(uniquePersonality.size()>0 ){
 			results.put("response", "OK");
 			results.put("description", "The specific user has been found");

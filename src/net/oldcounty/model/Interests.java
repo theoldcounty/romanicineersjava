@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class Interests {
 	String name; //name of the chart, e.g. hobbies, sports, favourite foods
-	Object userId; //the user id associated with this chart
+	String userId; //the user id associated with this chart
 	Map<String,Integer> interestData;
 	
 	//set name of the chart
@@ -17,11 +17,11 @@ public class Interests {
 	}
 
 	//set associated user id object
-	public void setUserId(Object userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	//get associated user id object
-	public Object getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 	

@@ -143,19 +143,30 @@ public class ListenerController{
     	person.setGoal1(goal1);
     	person.setGoal2(goal2);
     	person.setGoal3(goal3);
-    	person.setPersonality(personality);
+    	
+    	BasicDBObject personaltraits = new BasicDBObject();
+
+    	if(personality != null){
+		    /*add to new collection personality*/
+			String[] personalTypes ={"confidence","reasoning","emotion","daring","attachment","sensitivity","comedy"};
+			Integer j = 0;
+			for(Integer traits : personality)
+	    	{
+	    		//System.out.println("traits "+traits);
+	    		personaltraits.put(personalTypes[j], traits);
+	    		j++;
+	    	}	
+    	}
+    	person.setPersonality(personaltraits);
     	
     	
     	//_ register the user into the database
     	List<DBObject> registerResponse = personManager.registerUser(person);
     	
     	if(registerResponse.get(0).get("response") == "OK"){
-    			Object userId = registerResponse.get(0).get("lastId"); //get actual user id
-    			//"5koiopewr03oewrew";
-    			System.out.println("using UID "+userId);
+    			String userId = registerResponse.get(0).get("lastId").toString(); //get actual user id
     			
-		    	/*new interest code*/
-			    /*add to new interests chart*/
+		    	/*_interests chart*/
 			    Map<String,Integer> interestData = new LinkedHashMap<String,Integer>();
 		    	if(interests!=null){
 		    		int index = 0;
@@ -165,7 +176,7 @@ public class ListenerController{
 			    		index++;
 			    	}
 		    	}
-		    	
+		    			    	
 		    	Interests interest = new Interests();
 			    	interest.setUserId(userId);
 			    	interest.setName("interests");
@@ -173,11 +184,60 @@ public class ListenerController{
 			    	
 		    	List<DBObject> interestResponse = InterestDao.addInterest(interest);
 		    	if(interestResponse.get(0).get("response") == "OK"){
-		    		System.out.println("interests added b "+ userId);
+		    		System.out.println("interests added ::  "+ userId);
 		    		//check if the chart has been added successfully.
 		    	}
+		    	/*_interests chart*/
 		    	
-		    	/*new interest code*/
+
+		    	
+		    	/*_seeking chart*/
+			    Map<String,Integer> seekingData = new LinkedHashMap<String,Integer>();
+		    	if(interests!=null){
+		    		int index = 0;
+		    		for(String seeking : seekings)
+			    	{
+		    			seekingData.put(seeking,seekingknobs[index]);
+			    		index++;
+			    	}
+		    	}
+		    			    	
+		    	Interests seeking = new Interests();
+			    	seeking.setUserId(userId);
+			    	seeking.setName("seeking");
+			    	seeking.setResults(seekingData);
+			    	
+		    	List<DBObject> seekingResponse = InterestDao.addInterest(seeking);
+		    	if(seekingResponse.get(0).get("response") == "OK"){
+		    		System.out.println("seeking added ::  "+ userId);
+		    		//check if the chart has been added successfully.
+		    	}
+		    	/*_seeking chart*/	
+
+		    	/*_visiting chart*/
+			    Map<String,Integer> visitingData = new LinkedHashMap<String,Integer>();
+		    	if(interests!=null){
+		    		int index = 0;
+		    		for(String visiting : visitings)
+			    	{
+		    			visitingData.put(visiting,visitingknobs[index]);
+			    		index++;
+			    	}
+		    	}
+		    			    	
+		    	Interests visiting = new Interests();
+		    		visiting.setUserId(userId);
+			    	visiting.setName("visiting");
+			    	visiting.setResults(visitingData);
+			    	
+		    	List<DBObject> visitingResponse = InterestDao.addInterest(visiting);
+		    	if(visitingResponse.get(0).get("response") == "OK"){
+		    		System.out.println("visiting added ::  "+ userId);
+		    		//check if the chart has been added successfully.
+		    	}
+		    	/*_visiting chart*/	
+		    	
+		    	
     	}
     	//last id by registered user - dummy user id
 
@@ -206,8 +266,7 @@ public class ListenerController{
     		String message = "Dear Guest please register";
     		return new ModelAndView("jsp/user/register", "message", message);
     	}    	
-    	
-    	
+    	    	
     }
 
 
@@ -314,11 +373,14 @@ public class ListenerController{
     	else if(servicerequest.equals("getInterests")){
 			//request interest data 
     		//chartname, visiting, interests
+    		
+    		System.out.println(id);
+    		System.out.println(chartname);
     		//id
-		    	Interests interest = new Interests();
-			    	interest.setUserId(id);
-			    	interest.setName("interests");
-    		json = InterestDao.getInterest(interest);
+		    	Interests obj = new Interests();
+			    	obj.setUserId(id);
+			    	obj.setName(chartname);
+    		json = InterestDao.getInterest(obj);
 		}
     	
 		return new ModelAndView("jsp/json/response", "json", json);

@@ -78,8 +78,11 @@ public class InterestDao {
 
 	    // search query
 	    BasicDBObject searchQuery = new BasicDBObject();
-	    	//searchQuery.put("uid", interest.getUserId());
+	    	searchQuery.put("uid", interest.getUserId());
 	    	searchQuery.put("chartType", interest.getName());
+
+	    System.out.println(interest.getUserId());
+	    System.out.println(interest.getName());	
 	    	
 	    List<DBObject> uniqueInterests = null;
 		try {
@@ -89,6 +92,8 @@ public class InterestDao {
 		} catch (MongoException e) {
 			e.printStackTrace();
 		}
+		
+		System.out.print(uniqueInterests);
 		
 		if(uniqueInterests.size()>0 ){
 			results.put("response", "OK");

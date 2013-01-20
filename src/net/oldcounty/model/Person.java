@@ -1,5 +1,7 @@
 package net.oldcounty.model;
 
+import com.mongodb.BasicDBObject;
+
 public class Person {
 	String realname;
 	String username;
@@ -34,7 +36,7 @@ public class Person {
 	String goal1;
 	String goal2;
 	String goal3;
-	Integer[] personality;
+	BasicDBObject personality;
 	
 	public String getRealname() {
 		return realname;
@@ -234,10 +236,10 @@ public class Person {
 	public void setGoal3(String goal3) {
 		this.goal3 = goal3;
 	}
-	public Integer[] getPersonality() {
+	public BasicDBObject getPersonality() {
 		return personality;
 	}
-	public void setPersonality(Integer[] personality) {
-		this.personality = personality;
+	public void setPersonality(BasicDBObject personaltraits) {
+		this.personality = personaltraits;
 	}	
 }

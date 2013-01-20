@@ -136,7 +136,7 @@ var romController = {
 
 			//console.log("userId", userId);
 			/*personality sliders*/
-			var personalityUrl = 'jsonpersonality?id='+userId;
+			var personalityUrl = 'api?servicerequest=getPersonality&id='+userId;
 			$.getJSON(personalityUrl, function(data){
 				var sliderpreviews = [];
 
@@ -191,21 +191,21 @@ var romController = {
 
 
 			/*interest d3 pie chart*/
-			var jsonUrl = 'jsonpiechart?id='+userId+'&chartType=interests';
+			var jsonUrl = 'api?servicerequest=getInterests&id='+userId+'&chartname=interests';
 			var holder = '#interestsPie';
 			var colorCode = 'spectral';
 			goPie.chosenChart(jsonUrl, colorCode, holder);
 			/*interest d3 pie chart*/
 
 			/*seeking d3 pie chart*/
-			var jsonUrl = 'jsonpiechart?id='+userId+'&chartType=seeking';
+			var jsonUrl = 'api?servicerequest=getInterests&id='+userId+'&chartname=seeking';
 			var holder = '#seekingPie';
 			var colorCode = 'brightOrange';
 			goPie.chosenChart(jsonUrl, colorCode, holder);
 			/*seeking d3 pie chart*/
 
 			/*visiting d3 bubble chart*/
-			var jsonUrl = 'jsonbubblechart?id='+userId+'&chartType=visiting';
+			var jsonUrl = 'api?servicerequest=getInterests&id='+userId+'&chartname=visiting';
 			var holder = '#quizchart';
 			var colourBands = ["rgba(0,0,0,0.2)", "rgba(230,0,0,0.2)", "rgba(212, 222, 22, 0.2)"];
 			goBubble.chosenChart(jsonUrl, colourBands, holder);
