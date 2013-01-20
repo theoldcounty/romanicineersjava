@@ -34,8 +34,11 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-data-mongodb-1.0.0.M2.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-expression-3.1.0.M2.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-tx-3.1.0.M1.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/NetBeans 7.1/enterprise/modules/ext/servlet3.0-jsp2.2-api.jar"/>
-	<classpathentry kind="lib" path="D:/home1/SA/theoldcounty/repo/WebContent/WEB-INF/lib/commons-fileupload-1.2.2.jar"/>
-	<classpathentry kind="lib" path="D:/home1/SA/theoldcounty/repo/WebContent/WEB-INF/lib/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/MyEclipse/Common/plugins/com.genuitec.eclipse.j2eedt.core_10.0.0.me201203160414/data/libraryset/EE_6/javax.servlet.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://java.sun.com/javaee/6/docs/api/"/>
+			<attribute name="deploy-excludes" value=""/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>

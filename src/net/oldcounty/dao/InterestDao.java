@@ -50,17 +50,14 @@ public class InterestDao {
 	    	document.put("chartType", interest.getName());
 	    	document.put("dataResults", dataResults);
 
-	    // save it into collection named "interest"
 	    collection.insert(document);
 	    ObjectId lastid = (ObjectId)document.get( "_id" );
-		
+	    
 		BasicDBObject results = new BasicDBObject();
 		
 		results.put("response", "OK");
 		results.put("lastId", lastid);
-		response.add(results);	    
-	    
-    	document.put("uniqueid", lastid);    	
+		response.add(results);	
     	
 		return response;
 	}
@@ -73,18 +70,17 @@ public class InterestDao {
 	 * @throws UnknownHostException
 	 **/
 	public static List<DBObject> getInterest(Interests interest){
-		System.out.println("get interests");
-
+		
 		//__Prepare response
 		List<DBObject> response = new ArrayList<DBObject>();
-
+		
 		BasicDBObject results = new BasicDBObject();
 
 	    // search query
 	    BasicDBObject searchQuery = new BasicDBObject();
-	    	searchQuery.put("uid", interest.getUserId());
+	    	//searchQuery.put("uid", interest.getUserId());
 	    	searchQuery.put("chartType", interest.getName());
-
+	    	
 	    List<DBObject> uniqueInterests = null;
 		try {
 			uniqueInterests = MongoApp.searchCollections(searchQuery, collectionName);
@@ -93,7 +89,7 @@ public class InterestDao {
 		} catch (MongoException e) {
 			e.printStackTrace();
 		}
-
+		
 		if(uniqueInterests.size()>0 ){
 			results.put("response", "OK");
 			results.put("description", "The specific user has been found");

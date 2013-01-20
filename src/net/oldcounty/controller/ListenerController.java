@@ -16,16 +16,15 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import net.oldcounty.dao.InterestDao;
+import net.oldcounty.dao.PersonDao;
 import net.oldcounty.manager.PersonManager;
 import net.oldcounty.model.Interests;
 import net.oldcounty.model.Person;
 
+import org.bson.BasicBSONObject;
 import org.bson.types.ObjectId;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,20 +37,20 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoException;
 
 @Controller
-public class ListenerController extends ServiceSerlvet{
+public class ListenerController{
 
 	private PersonManager personManager;
 
 
     /**
      * Register
+     * @return 
      * @throws MongoException
      * @throws UnknownHostException
     */
     @RequestMapping("/register")
-    public void registerDisplay(
+    public ModelAndView registerDisplay(
     		HttpServletRequest request,
-    		HttpServletResponse response,
     		@RequestParam(value="realname", required=false) String realname,
     		@RequestParam(value="username", required=false) String username,
     		@RequestParam(value="emailaddress", required=false) String emailaddress,
@@ -151,8 +150,10 @@ public class ListenerController extends ServiceSerlvet{
     	List<DBObject> registerResponse = personManager.registerUser(person);
     	
     	if(registerResponse.get(0).get("response") == "OK"){
-    			Object userId = "5koiopewr03oewrew";//registerResponse.get(0).get("user"); //get actual user id
-    	
+    			Object userId = registerResponse.get(0).get("lastId"); //get actual user id
+    			//"5koiopewr03oewrew";
+    			System.out.println("using UID "+userId);
+    			
 		    	/*new interest code*/
 			    /*add to new interests chart*/
 			    Map<String,Integer> interestData = new LinkedHashMap<String,Integer>();
@@ -172,13 +173,41 @@ public class ListenerController extends ServiceSerlvet{
 			    	
 		    	List<DBObject> interestResponse = InterestDao.addInterest(interest);
 		    	if(interestResponse.get(0).get("response") == "OK"){
+		    		System.out.println("interests added b "+ userId);
 		    		//check if the chart has been added successfully.
 		    	}
 		    	
 		    	/*new interest code*/
     	}
     	//last id by registered user - dummy user id
-	
+
+    	Map<String,String> countryList = CommonUtils.getCountries();
+    	String countriesCommonKey = "GBR"; //United Kingdom
+
+    	Map<String,String> ethnicityList = CommonUtils.getEthnicity();
+    	String ethnicityCommonKey = "0"; //Caucasian
+
+    	request.setAttribute("countryCommonKey", countriesCommonKey);
+    	request.setAttribute("countryList", countryList);
+
+    	request.setAttribute("ethnicityCommonKey", ethnicityCommonKey);
+    	request.setAttribute("ethnicityList", ethnicityList);
+    	
+    	Boolean inSession = null;
+       	//if the user has logged into the session
+    	if(inSession != null){
+    		//they will need to logout in order to re-register a new account
+    		String message = "You have been automatically logged out";
+    		//PersonController.logoutUser(inSession, session);
+    		return new ModelAndView("jsp/user/register", "message", message);
+    	}
+    	else{
+    		//the guest can register
+    		String message = "Dear Guest please register";
+    		return new ModelAndView("jsp/user/register", "message", message);
+    	}    	
+    	
+    	
     }
 
 
@@ -186,4 +215,112 @@ public class ListenerController extends ServiceSerlvet{
     public void setPersonManager(PersonManager personManager){
     	this.personManager = personManager;
     }
+    
+    
+    
+    /*
+     * Member List
+     * Displays All Users
+    */
+    @RequestMapping("/members")
+    public ModelAndView memberList(
+	    		HttpServletRequest request
+    		) throws UnknownHostException, MongoException
+    {
+    	//ServiceSerlvet.appendSesssion(request);
+    	//get search ALL users
+    	BasicDBObject searchQuery = new BasicDBObject();
+    	List<DBObject> dataresponse = PersonDao.searchUsers(searchQuery, "myCollection");
+
+    	request.setAttribute("page", "members");
+    	return new ModelAndView("jsp/memberlist", "response", dataresponse);
+    }
+    
+
+    /*
+     * User
+    */
+    @RequestMapping(method=RequestMethod.GET, value={"/user","/user/{id}"})
+    public ModelAndView profileDisplay(
+    		HttpServletRequest request,
+    		@RequestParam(value="id", required=false) String id
+    ) throws UnknownHostException, MongoException {
+    	//ServiceSerlvet.appendSesssion(request);
+
+    	request.setAttribute("page", "user");
+
+    	//get search ALL users
+    	BasicDBObject searchQuery = new BasicDBObject();
+    		searchQuery.put("_id", new ObjectId(id));
+    	List<DBObject> searchResponse = PersonDao.searchUsers(searchQuery, "myCollection");
+
+    	//append actual age to the returned user object.
+    	DBObject newInformation = new BasicDBObject();
+
+    	String birthdate = (String) searchResponse.get(0).get("birthdate");
+
+    	Integer ageInYears = PersonDao.getAge(birthdate);
+    	newInformation.put("ageInYears", ageInYears);
+
+    	/*
+    	HashMap<Integer,Object> gallery = PersonController.getGallery(
+    			id,
+    			false
+    	);
+
+    	newInformation.put("gallery", gallery);
+
+    	Integer countGallery = gallery.size();
+    	newInformation.put("countGallery", countGallery);
+		*/
+    	
+    	searchResponse.add(newInformation);
+
+    	Map<String,String> countryList = CommonUtils.getCountries();
+    	Map<String,String> genderList = CommonUtils.getGender();
+    	Map<String,String> ethnicityList = CommonUtils.getEthnicity();
+
+    	request.setAttribute("countryList", countryList);
+    	request.setAttribute("genderList", genderList);
+    	request.setAttribute("ethnicityList", ethnicityList);
+
+    	//ServiceSerlvet.appendSesssion(request);
+
+		return new ModelAndView("jsp/user", "people", searchResponse);
+    }
+    
+    
+
+    /*
+     * Api
+    */
+    @RequestMapping(method=RequestMethod.GET, value={"/api","/api/{servicerequest}/{id}/{chartname}"})
+    public ModelAndView apiService(
+    		HttpServletRequest request,
+    		@RequestParam(value="id", required=false) String id,
+    		@RequestParam(value="servicerequest", required=false) String servicerequest,
+    		@RequestParam(value="chartname", required=false) String chartname
+    ) throws UnknownHostException, MongoException {
+    	//ServiceSerlvet.appendSesssion(request);
+       	
+  	
+    	List<DBObject> json = null;
+    	
+    	if(servicerequest.equals("getPersonality")){
+    		//request personality data    	
+    		//id
+    		json = PersonDao.getPersonality(id);
+    	}
+    	else if(servicerequest.equals("getInterests")){
+			//request interest data 
+    		//chartname, visiting, interests
+    		//id
+		    	Interests interest = new Interests();
+			    	interest.setUserId(id);
+			    	interest.setName("interests");
+    		json = InterestDao.getInterest(interest);
+		}
+    	
+		return new ModelAndView("jsp/json/response", "json", json);
+    }    
 }

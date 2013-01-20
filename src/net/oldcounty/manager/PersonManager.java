@@ -85,7 +85,7 @@ public class PersonManager {
 						}
 						
 						if(
-								!CommonUtils.isOlderThan18(person.getBirthyear()+person.getBirthmonth()+person.getBirthday())
+							!CommonUtils.isOlderThan18(person.getBirthyear()+person.getBirthmonth()+person.getBirthday())
 						){
 							isValidInputs = false;
 							results.put("error", "You need to be over 18 to access this site");
@@ -100,7 +100,8 @@ public class PersonManager {
 				    	
 						results.put("response", "OK");
 						results.put("description", "User has been registered");
-				    	results.put("user", latestUser);
+				    	results.put("user", latestUser.get(0));
+				    	results.put("lastId", latestUser.get(0).get("lastId"));
 				    }
 				    else
 				    {

@@ -14,6 +14,7 @@ import net.oldcounty.model.Person;
 import com.mongo.app.MongoApp;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoException;
 
@@ -84,113 +85,6 @@ public class PersonDao {
 		results.put("lastId", lastid);
 		response.add(results);	    
 	    
-
-	    /*check file*/
-	   // MultipartFile multipartFile = fileUpload.getFile();
-	    //System.out.println("file "+file+"<br>");
-
-
-/*
-	    //add to new collection personality
-	    List<DBObject> responseUserPersonality = null;
-		try {
-			responseUserPersonality = addUserPersonality(
-					lastid,
-					person.getPersonality()
-			);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (MongoException e) {
-			e.printStackTrace();
-		}
-	    System.out.println("userPersonality "+responseUserPersonality+"<br>");
-		//add to new collection personality
-
-
-	    //add to new interests chart
-	    Map<String,Integer> userInterests = new LinkedHashMap<String,Integer>();
-    	if(person.getInterests()!=null){
-    		int index = 0;
-    		for(String interest : person.getInterests())
-	    	{
-	    		userInterests.put(interest,person.getInterestknobs()[index]);
-	    		index++;
-	    	}
-    	}
-	    List<DBObject> responseInterestsChart = null;
-		try {
-			responseInterestsChart = addUserPieChart(
-				lastid,
-				"interests",
-				userInterests
-			);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (MongoException e) {
-			e.printStackTrace();
-		}
-	    System.out.println("userInterests "+responseInterestsChart+"<br>");
-	    //add to new interests chart
-
-
-
-
-
-	    //add to new seeking chart
-	    Map<String,Integer> userSeeking = new LinkedHashMap<String,Integer>();
-    	if(person.getSeekings()!=null){
-    		int index = 0;
-    		for(String seeking : person.getSeekings())
-	    	{
-    			userSeeking.put(seeking,person.getSeekingknobs()[index]);
-	    		index++;
-	    	}
-    	}
-	    List<DBObject> responseSeekingChart = null;
-		try {
-			responseSeekingChart = addUserPieChart(
-				lastid,
-				"seeking",
-				userSeeking
-			);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (MongoException e) {
-			e.printStackTrace();
-		}
-	    System.out.println("userSeeking "+responseSeekingChart+"<br>");
-	    //add to new seeking chart
-
-
-
-
-	    //add to new visiting chart
-	    Map<String,Integer> userVisiting = new LinkedHashMap<String,Integer>();
-    	if(person.getVisitings()!=null){
-    		int index = 0;
-    		for(String visiting : person.getVisitings())
-	    	{
-    			userVisiting.put(visiting,person.getVisitingknobs()[index]);
-	    		index++;
-	    	}
-    	}
-	    List<DBObject> responseVisitingChart = null;
-		try {
-			responseVisitingChart = addUserBubbleChart(
-				lastid,
-				"visiting",
-				userVisiting
-			);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (MongoException e) {
-			e.printStackTrace();
-		}
-	    System.out.println("userVisiting "+responseVisitingChart+"<br>");
-	    //add to new visiting chart
-*/
-    	document.put("uniqueid", lastid);		
-
 		return response;
 	}
 	
@@ -321,6 +215,72 @@ public class PersonDao {
 
 	    return age;
 	}
+
+
+	
+	
+	/**
+	 * Get UserPersonality
+	 * @param id
+	 * @throws MongoException
+	 * @throws UnknownHostException
+	 **/
+	public static List<DBObject> getPersonality(String objId) throws UnknownHostException, MongoException{
+		System.out.println("get personality");
+
+		//__Prepare response
+		List<DBObject> response = new ArrayList<DBObject>();
+
+		BasicDBObject results = new BasicDBObject();
+
+	    // search query
+	    BasicDBObject searchQuery = new BasicDBObject();
+	    	searchQuery.put("_id", new ObjectId(objId));
+
+	    List<DBObject> uniquePersonality = searchUsers(searchQuery, "userPersonality");
+
+		if(uniquePersonality.size()>0 ){
+			results.put("response", "OK");
+			results.put("description", "The specific user has been found");
+			results.put("personality", uniquePersonality.get(0).get("personality"));
+		}
+		else
+		{
+			results.put("response", "FAIL");
+			results.put("description", "Failed to get personality traits");
+		}
+		response.add(results);
+
+		return response;
+	}	
+	
+	
+	/**
+	 * Get User List
+	 * @param id
+	 * @throws MongoException
+	 * @throws UnknownHostException
+	 **/
+	public static List<DBObject> searchUsers(
+			BasicDBObject searchQuery,
+			String collectionName
+		) throws UnknownHostException, MongoException{
+
+		//__Prepare result
+		List<DBObject> results = new ArrayList<DBObject>();
+
+		//_getCollection
+		DBCollection collection = MongoApp.getCollection(collectionName);
+
+	    DBCursor cursor = collection.find(searchQuery);
+
+        // loop over the cursor and display the result
+    	while (cursor.hasNext()) {
+	    	results.add(cursor.next());
+	    }
+
+	    return results;
+	}	
 
 	
 }
