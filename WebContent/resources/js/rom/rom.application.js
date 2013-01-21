@@ -50,44 +50,58 @@ var romController = {
 
 
 						this.getUsers(function(response){
-							console.log("response", response);
+							//console.log("response", response);
 
 							var usertip = new userTip();
 							var isoFilter= new isotopefilters();
 						});
 
 					},
+					getInterests: function(id, callback){
+						var interests = "";
+						var interestUrl = 'api?servicerequest=getInterests&id='+id+'&chartname=interests';
+						
+						$.getJSON(interestUrl, function(interestdata){
+							//console.log("interestdata", interestdata);
+							
+							if(interestdata[0].response == "OK"){
+								$.each(interestdata[0].dataResults, function(key, variable) {
+									interests+=key+',';
+								});
+								interests = interests.substring(0, interests.length - 1);
+								callback(interests);
+							}
+						});
+					},
 					getUsers: function(callback){
-
+						var that = this;
 						$('.users').empty();
-						var peopleUrl = 'jsonmembers';
+						var peopleUrl = 'api?servicerequest=getMembers&skips=0&limits=20';
 						if(peopleUrl != null){
 							$.getJSON(peopleUrl, function(data){
 								//console.log("data",data);
 
 								//data
-								$.each(data, function(index, value) {
+								$.each(data[0].users, function(index, value) {
 									//console.log("data", data);
-
-									var interests = "";
-									if(value.interestData != null){
-										$.each(value.interestData, function(key, variable) {
-											interests+=key+',';
-										});
-									}
-									interests = interests.substring(0, interests.length - 1);
-
+									var id = value._id.$oid;
+									
 									//populate person
 									var country = value.country;
 									var gender = value.gender;
-									var title = value.title;
-									var id = value.id;
-									var url = "user?id="+value.id;
-									var featureAvatarThumbnail = value.pictureAvatar;
+									var title = value.username;
+									var isOnline = value.isloggedon;
+									
+									var url = "user?id="+id;
+									var featureAvatarThumbnail = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTL5GtjP3j0_EYZBejnEs-Wx9CQu_bIlNmDJNG-6rfwa55cEi-";//value.pictureAvatar;
 
 									//populate person
-									var template = '<li class="element odd" data-user-country="'+country+'" data-user-interests="'+interests+'" data-user-online="1" data-user-gender="'+gender+'" data-user-name="'+title+'" data-user-id="'+id+'"><div class="avatar"><a href="'+url+'"><img src="'+featureAvatarThumbnail+'"></a></div></li>';
+									var template = '<li class="element odd" data-user-country="'+country+'" data-user-interests="" data-user-online="'+isOnline+'" data-user-gender="'+gender+'" data-user-name="'+title+'" data-user-id="'+id+'"><div class="avatar"><a href="'+url+'"><img src="'+featureAvatarThumbnail+'"></a></div></li>';
 									$('.users').append(template);
+									
+									that.getInterests(id, function(interests){
+										$('.users').find('li[data-user-id='+id+']').attr('data-user-interests', interests);
+									});									
 								});
 
 								callback(true);
@@ -97,10 +111,6 @@ var romController = {
 			};
 
 			controllerUsers.init();
-
-
-
-
 
 		},
 		user: function(){
@@ -233,7 +243,7 @@ $(document).ready(function() {
 	romController.global();
 	if(lastParameter == ""){
 		//home page
-		console.log("home");
+		//console.log("home");
 		romController.home();
 	}
 

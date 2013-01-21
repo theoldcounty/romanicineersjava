@@ -22,21 +22,17 @@ var userTip = Backbone.View.extend({
 		var userName = $(that).data('user-name');
 		var userGender = $(that).data('user-gender').toLowerCase();
 
-		//console.log("userId", userId);
-
-
-//http://localhost/romancineers/js/json/romancineers.gethomepie.json
-
-		var jsonUrl = 'jsonuniqueuser?id='+userId;
+		var jsonUrl = 'api?servicerequest=getMembers&skips=0&limits=1&id='+userId;
 
 		$.getJSON(jsonUrl, function(json) {
-			console.log("json", json);
 
-			var userAvatar = json[0].avatar;
-			var userGoals = json[0].goals;
+			var userAvatar = json[0].users[0].avatar;
+			var goal1 = json[0].users[0].goal1;
+			var goal2 = json[0].users[0].goal2;
+			var goal3 = json[0].users[0].goal3;
 
-			var userFollows = json[0].followers;
-			var userPictureCount = json[0].pictureCount;
+			var userFollows = json[0].users[0].followers;
+			var userPictureCount = json[0].users[0].pictureCount;
 
 			//var featureImageThumbnail = value.pictureFeature;
 
@@ -44,12 +40,15 @@ var userTip = Backbone.View.extend({
 							userId: userId,
 							name: userName,
 							avatar: userAvatar,
-							goals: userGoals,
+							goals: {
+								head: goal1,
+								heart: goal2,
+								hand: goal3					
+							},
 							gender: userGender,
 							followers: userFollows,
 							pictureCount: userPictureCount
 						};
-
 			callback(contentsObj);
 		});
 	},
@@ -242,7 +241,7 @@ var userTip = Backbone.View.extend({
 
 		/*interest d3 pie chart*/
 		//contentsObj.userId = "509f43fad1ef48c2c49c7a09";
-		var jsonUrl = 'jsonpiechart?id='+contentsObj.userId+'&chartType=interests';
+		var jsonUrl = 'api?servicerequest=getInterests&id='+contentsObj.userId+'&chartname=interests';
 		var holder = '#biometricPie';
 		goPie.chosenUpdateChart(jsonUrl, holder);
 		/*interest d3 pie chart*/
@@ -272,7 +271,6 @@ var userTip = Backbone.View.extend({
 		{
 			$('#tooltip .costainner').fadeOut(duration, function(){
 				$('#tooltip').fadeOut(duration);
-
 			});
 		}
 		this.isactive = false;

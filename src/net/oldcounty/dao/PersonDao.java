@@ -238,7 +238,9 @@ public class PersonDao {
 	    BasicDBObject searchQuery = new BasicDBObject();
 	    	searchQuery.put("_id", new ObjectId(objId));
 
-	    List<DBObject> uniquePersonality = searchUsers(searchQuery, "myCollection");
+    	//skip 0
+    	//limit 1
+	    List<DBObject> uniquePersonality = searchUsers(searchQuery, 0, 1, "myCollection");
 	    System.out.println(uniquePersonality);
 		if(uniquePersonality.size()>0 ){
 			results.put("response", "OK");
@@ -254,7 +256,54 @@ public class PersonDao {
 
 		return response;
 	}	
+
+
 	
+	/**
+	 * Get Members
+	 * @param id
+	 * @throws MongoException
+	 * @throws UnknownHostException
+	 **/
+	public static List<DBObject> getMembers(
+			Integer skips,
+			Integer limits,
+			BasicDBObject filter
+		) throws UnknownHostException, MongoException{
+		
+		//__Prepare response
+		List<DBObject> response = new ArrayList<DBObject>();
+
+		BasicDBObject results = new BasicDBObject();
+
+	    // search query
+		
+	    //BasicDBObject searchQuery = new BasicDBObject();
+	    	//filter online
+	    	//filter ethnicity
+
+	    	
+    	//skip 0
+    	//limit 1
+	    List<DBObject> users = searchUsers(filter, skips, limits, "myCollection");
+	    System.out.println(users);
+		if(users.size()>0 ){
+			results.put("response", "OK");
+			results.put("description", "Found list of users");
+			results.put("users", users);
+		}
+		else
+		{
+			results.put("response", "FAIL");
+			results.put("description", "Failed to get a list of users");
+		}
+		response.add(results);
+
+		return response;
+	}	
+	
+	
+
 	
 	/**
 	 * Get User List
@@ -264,6 +313,8 @@ public class PersonDao {
 	 **/
 	public static List<DBObject> searchUsers(
 			BasicDBObject searchQuery,
+			Integer skips,
+			Integer limits,
 			String collectionName
 		) throws UnknownHostException, MongoException{
 
@@ -272,8 +323,9 @@ public class PersonDao {
 
 		//_getCollection
 		DBCollection collection = MongoApp.getCollection(collectionName);
-
-	    DBCursor cursor = collection.find(searchQuery);
+		//1000-1100th elements
+	    DBCursor cursor = collection.find(searchQuery).skip(skips).limit(limits);
+	    
 
         // loop over the cursor and display the result
     	while (cursor.hasNext()) {

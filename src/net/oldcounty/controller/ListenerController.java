@@ -289,8 +289,11 @@ public class ListenerController{
     	//ServiceSerlvet.appendSesssion(request);
     	//get search ALL users
     	BasicDBObject searchQuery = new BasicDBObject();
-    	List<DBObject> dataresponse = PersonDao.searchUsers(searchQuery, "myCollection");
-
+    	//skip 0
+    	//limit 30
+    	List<DBObject> dataresponse = PersonDao.searchUsers(searchQuery, 0, 30, "myCollection");
+    	 System.out.println(dataresponse);
+    	 
     	request.setAttribute("page", "members");
     	return new ModelAndView("jsp/memberlist", "response", dataresponse);
     }
@@ -311,7 +314,10 @@ public class ListenerController{
     	//get search ALL users
     	BasicDBObject searchQuery = new BasicDBObject();
     		searchQuery.put("_id", new ObjectId(id));
-    	List<DBObject> searchResponse = PersonDao.searchUsers(searchQuery, "myCollection");
+    	
+    	//skip 0
+    	//limit 1   		
+    	List<DBObject> searchResponse = PersonDao.searchUsers(searchQuery, 0, 1, "myCollection");
 
     	//append actual age to the returned user object.
     	DBObject newInformation = new BasicDBObject();
@@ -353,19 +359,57 @@ public class ListenerController{
     /*
      * Api
     */
-    @RequestMapping(method=RequestMethod.GET, value={"/api","/api/{servicerequest}/{id}/{chartname}"})
+    @RequestMapping(method=RequestMethod.GET, value={"/api","/api/{servicerequest}/{id}/{chartname}/{skips}/{limits}"})
     public ModelAndView apiService(
     		HttpServletRequest request,
     		@RequestParam(value="id", required=false) String id,
     		@RequestParam(value="servicerequest", required=false) String servicerequest,
-    		@RequestParam(value="chartname", required=false) String chartname
+    		@RequestParam(value="chartname", required=false) String chartname,
+    		@RequestParam(value="skips", required=false) Integer skips,
+    		@RequestParam(value="limits", required=false) Integer limits,
+    		@RequestParam(value="bodytype", required=false) String bodytype,
+    		@RequestParam(value="haircolor", required=false) String haircolor,
+    		@RequestParam(value="eyecolor", required=false) String eyecolor,
+    		@RequestParam(value="ethnicity", required=false) String ethnicity,
+    		@RequestParam(value="gender", required=false) String gender
     ) throws UnknownHostException, MongoException {
     	//ServiceSerlvet.appendSesssion(request);
        	
   	
     	List<DBObject> json = null;
     	
-    	if(servicerequest.equals("getPersonality")){
+    	if(servicerequest.equals("getMembers")){
+    		//request personality data    	
+    		//id
+    		//Integer skips = 0;
+    		//Integer limits = 20;
+    		System.out.println(id);
+    		BasicDBObject filter = new BasicDBObject();  		
+    			//filter.put("isloggedon", "1");
+    		
+    			if(id != null){
+    				filter.put("_id", new ObjectId(id));
+    			}
+
+    			if(bodytype != null){
+    				filter.put("bodytype", bodytype);
+    			}
+    			if(haircolor != null){
+    				filter.put("haircolor", haircolor);
+    			}
+    			if(eyecolor != null){
+    				filter.put("eyecolor", eyecolor);
+    			}    			
+    			if(ethnicity != null){
+    				filter.put("ethnicity", ethnicity);
+    			}
+    			if(gender != null){
+    				filter.put("gender", gender);
+    			}
+    			
+    		json = PersonDao.getMembers(skips, limits, filter);
+    	}
+    	else if(servicerequest.equals("getPersonality")){
     		//request personality data    	
     		//id
     		json = PersonDao.getPersonality(id);
