@@ -732,7 +732,31 @@
 		padding-top:10px;
 		padding-bottom:10px;
 		width: 100%;
+		font-size: 13px;
 	}
+	#registerForm h2{
+		margin:0;
+		font-size: 14px;	
+	}
+
+	.ui-tabs .ui-tabs-nav li a {
+		padding: 5%;
+		width: 90%;
+	}
+	
+	.ui-tabs .ui-tabs-nav{
+		border: 0;
+		border-radius: 0;
+		padding: 0;
+		background: none;
+	}
+	
+	.ui-tabs .ui-tabs-nav li{
+		width: 33%;
+		margin: 0!important;
+		border-radius: 0;
+	}
+
 
 	fieldset.wrapper{
 		overflow:hidden;
@@ -741,21 +765,29 @@
 		width: 100%;
 	}
 	fieldset.dob{
-		width:45%;
+		width: 45%;
 		float: left;
+		padding: 0;
+		border: 0;
 	}
 	fieldset.gender{
-		width:45%;
+		width: 100%;
 		float: left;
+		border: 0;
+		padding: 0;
+		font-size: 13px;
 	}
 
 	fieldset.bio{
 		width:45%;
 		float: right;
 	}
+	.ui-widget select{
+		font-size: 13px!important;		
+	}
 
 	.registration input[type="text"]{
-		height: 50px;
+		height: 40px;
 		width: 98%;
 		padding:2%;
 		padding-top:0;
@@ -890,6 +922,14 @@
 	}
 
 
+
+	#registerForm .sliderToggles{
+		overflow: hidden;
+		width: 75%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
     .sliderToggles{
 		overflow:hidden;
 		width:250px;

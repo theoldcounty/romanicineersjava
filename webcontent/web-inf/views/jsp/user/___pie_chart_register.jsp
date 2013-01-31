@@ -2,11 +2,17 @@
 <!--include header-->
 
 <div id="colorboxWrapper" class="regular">
+		<h1>Visual Dating</h1>
+
 		<div class="registration">
+
 			<ul>
 				<li><a href="#step1">Step 1<br>identification</a></li>
 				<li><a href="#step2">Step 2<br>your qualities</a></li>
 				<li><a href="#step3">Step 3<br>your personality</a></li>
+				<li><a href="#step4">Step 4<br>your interests</a></li>
+				<li><a href="#step5">Step 5<br>What are you seeking</a></li>
+				<li><a href="#step6">Step 6<br>Places you would love to visit</a></li>
 			</ul>
 
 		<form id="registerForm" action="register" enctype="multipart/form-data" method="post" action="">
@@ -19,12 +25,16 @@
 				<label>Username* [Username can be selected as a screen name]</label>
 				<input type="text" name="username" value="${username}">
 
+				<label>File* </label>
+				<input type="file" name="file" id="file" />
+
 				<label>Email*</label>
 				<input type="text" name="emailaddress" value="${emailaddress}">
 				
 				<label>Confirmed Email*</label>
 				<input type="text" name="confirmemailaddress" value="${confirmemailaddress}">				
 
+			
 				<label>Password*</label>
 				<input type="password" name="password" value="${password}">
 
@@ -35,6 +45,7 @@
 				<input type="radio" name="whichscreenname" value="realname">Please, use my name in full as a screen name<br>
 				<input type="radio" name="whichscreenname" value="username">Please, use my username as a screen name			
 			</fieldset>
+			
 			
 			<fieldset id="step2">
 				<fieldset class="wrapper">
@@ -47,9 +58,16 @@
 					
 					<fieldset class="gender">
 						<label>Gender*</label>
-						<input type="radio" name="gender" value="Male" selected="selected">Male <input type="radio" name="gender" value="Female">Female
+						<input type="radio" name="gender" value="Male" selected="selected">Male<br>
+						<input type="radio" name="gender" value="Female">Female
+					</fieldset>
+
+					<fieldset class="bio">
+						<label>A little bit about you*</label>
+						<textarea id="about" name="about" col="2" rows="5"></textarea>
 					</fieldset>
 				</fieldset>
+
 
 				<label>Ethnicity</label>
 				${person.ethnicity}
@@ -71,6 +89,7 @@
 						</c:forEach>
 				</select>
 
+
 				<label>Country</label>
 				${person.country}
 				<select name="country">
@@ -90,8 +109,11 @@
 					</c:forEach>
 				</select>
 
-				<input type="hidden" name="latitude" value="51.523911">
-				<input type="hidden" name="longitude" value="-0.12763">								
+				<label>Latitude*</label>
+				<input type="text" name="latitude" value="51.523911">
+				
+				<label>Longitude*</label>
+				<input type="text" name="longitude" value="-0.12763">								
 				
 				<label>Looking For*</label>
 				<select name="lookingfor">
@@ -104,6 +126,50 @@
 					<option value="Serious">Serious</option>
 					<option value="A Fling">A Fling</option>					
 				</select>
+
+				<label>Body Type*</label>
+				<select name="bodytype">
+					<option value="Athletic">Athletic</option>
+					<option value="Average">Average</option>					
+				</select>
+				
+				<label>Hair Colour*</label>
+				<select name="haircolor">
+					<option value="Blonde">Blonde</option>
+					<option value="Brown">Brown</option>
+					<option value="Brunette">Brunette</option>
+					<option value="Black">Black</option>
+					<option value="Brunette">Red</option>					
+				</select>
+
+				<label>Eye Colour*</label>
+				<select name="eyecolor">
+					<option value="Blue">Blue</option>
+					<option value="Brown">Brown</option>
+					<option value="Green">Green</option>
+					<option value="Hazel">Hazel</option>					
+				</select>
+
+				<label>Children*</label>
+				<select name="children">
+					<option value="None">None</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>					
+				</select>
+
+				<label>Education*</label>
+				<select name="education">
+					<option value="None">None</option>
+					<option value="School">School</option>
+					<option value="Degree">Degree</option>
+					<option value="Masters">Masters</option>					
+				</select>
+
+
+				<label>Occupation*</label>
+				<input type="text" name="occupation">
 
 				<label>Language*</label>
 				<select name="languages" multiple="multiple">
@@ -122,29 +188,13 @@
 				<fieldset class="goaldriven">
 					<label>Please indicate what mostly drives your life</label>
 					<select name="goal1">
-						<option value="Creativity">Creativity</option>
-						<option value="Drama">Drama</option>
-						<option value="Entertainment">Entertainment</option>
-						<option value="Family">Family</option>
-						<option value="Power">Power</option>
-						<option value="Popularity">Popularity</option>		
+						<option value="Driven 01">Driven 01</option>				
 					</select>
 					<select name="goal2">
-						<option value="Health">Health</option>
-						<option value="Hobbies">Hobbies</option>
-						<option value="Fun">Fun</option>
-						<option value="Friends">Friends</option>
-						<option value="Education">Education</option>
-						<option value="Marriage">Marriage</option>			
+						<option value="Driven 02">Driven 02</option>				
 					</select>
 					<select name="goal3">
-						<option value="Adventure">Adventure</option>
-						<option value="Career">Career</option>
-						<option value="Community">Community</option>
-						<option value="Music">Music</option>
-						<option value="Sports">Sports</option>
-						<option value="Travel">Travel</option>
-						<option value="Possessions">Possessions</option>		
+						<option value="Driven 03">Driven 03</option>				
 					</select>
 				</fieldset>
 				
@@ -158,13 +208,133 @@
 					<span data-field="personality">45</span>
 					<span data-field="personality">70</span>
 				</div>
+				
+									
+			</fieldset>
+	
+			<fieldset id="step4">
 
+
+				<label>Please indicate 5 of your interest and their importance from 0 to 100</label>
+				
+				<fieldset class="doughnutWrap">
+					<select name="interests">
+						<option value="Cinema">Cinema</option>
+						<option value="Clubbing">Clubbing</option>
+						<option value="Football">Football</option>
+						<option value="Baseball">Baseball</option>					
+					</select>
+					<fieldset data-fieldname="interestknobs" id="knob1" class="knob" data-color="#E2B227" data-role="doughnut-knob" data-value="5"></fieldset>
+				</fieldset>
+				
+				<fieldset class="doughnutWrap">
+					<select name="interests">
+						<option value="Interest 02">Interest 02</option>				
+					</select>
+					<fieldset data-fieldname="interestknobs" id="knob2" class="knob" data-color="#E2B227" data-role="doughnut-knob" data-value="15"></fieldset>
+				</fieldset>
+						
+				<fieldset class="doughnutWrap">	
+					<select name="interests">
+						<option value="Interest 03">Interest 03</option>				
+					</select>
+					<fieldset data-fieldname="interestknobs" id="knob3" class="knob" data-color="#E2B227" data-role="doughnut-knob" data-value="45"></fieldset>
+				</fieldset>
+				
+				<fieldset class="doughnutWrap">
+					<select name="interests">
+						<option value="Interest 04">Interest 04</option>				
+					</select>
+					<fieldset data-fieldname="interestknobs" id="knob4" class="knob" data-color="#E2B227" data-role="doughnut-knob" data-value="85"></fieldset>
+				</fieldset>		
+							
+				<fieldset class="doughnutWrap">		
+					<select name="interests">
+						<option value="Interest 05">Interest 05</option>				
+					</select>
+					<fieldset data-fieldname="interestknobs" id="knob5" class="knob" data-color="#E2B227" data-role="doughnut-knob" data-value="35"></fieldset>		
+				</fieldset>
+	
+				
+			</fieldset>			
+			
+			<fieldset id="step5">
+			
+				<label>Please indicate 5 qualities you are seeking in a relationship and their importance from 0 to 100</label>
+				
+				<fieldset class="doughnutWrap">
+					<select name="seekings">
+						<option value="Dating">Dating</option>
+						<option value="Sex">Sex</option>
+						<option value="Clubbing">Clubbing</option>				
+					</select>
+					<fieldset data-fieldname="seekingknobs" id="knob6" class="knob" data-color="#B23959" data-role="doughnut-knob" data-value="5"></fieldset>
+				</fieldset>
+				
+				<fieldset class="doughnutWrap">
+					<select name="seekings">
+						<option value="Seeking 03">Seeking 03</option>				
+					</select>
+					<fieldset data-fieldname="seekingknobs" id="knob7" class="knob" data-color="#B23959" data-role="doughnut-knob" data-value="15"></fieldset>
+				</fieldset>
+						
+				<fieldset class="doughnutWrap">	
+					<select name="seekings">
+						<option value="Seeking 04">Seeking 04</option>				
+					</select>
+					<fieldset data-fieldname="seekingknobs" id="knob8" class="knob" data-color="#B23959" data-role="doughnut-knob" data-value="45"></fieldset>
+				</fieldset>
+				
+				<fieldset class="doughnutWrap">
+					<select name="seekings">
+						<option value="Seeking 04">Seeking 04</option>				
+					</select>
+					<fieldset data-fieldname="seekingknobs" id="knob9" class="knob" data-color="#B23959" data-role="doughnut-knob" data-value="85"></fieldset>
+				</fieldset>		
+							
+				<fieldset class="doughnutWrap">		
+					<select name="seekings">
+						<option value="Seeking 05">Seeking 05</option>				
+					</select>
+					<fieldset data-fieldname="seekingknobs" id="knob10" class="knob" data-color="#B23959" data-role="doughnut-knob" data-value="35"></fieldset>		
+				</fieldset>			
+			
+			
+						
+			</fieldset>
+			
+			<fieldset id="step6">
+			
+				<label>Please indicate 5 places you would love to visit and their importance from 0 to 100</label>
+				
+				<fieldset class="doughnutWrap">
+					<select name="visitings">
+						<option value="Paris">Paris</option>
+						<option value="America">America</option>
+						<option value="China">China</option>				
+					</select>
+					<fieldset data-fieldname="visitingknobs" id="knob11" class="knob" data-color="#B23959" data-role="doughnut-knob" data-value="5"></fieldset>
+				</fieldset>
+				
+				<fieldset class="doughnutWrap">
+					<select name="visitings">
+						<option value="Paris">Paris</option>
+						<option value="America">America</option>
+						<option value="China">China</option>				
+					</select>
+					<fieldset data-fieldname="visitingknobs" id="knob12" class="knob" data-color="#B23959" data-role="doughnut-knob" data-value="15"></fieldset>
+				</fieldset>
+						
+		
+			
 				
 				<span class="error"></span>
 				<input type="hidden" value="submitted" name="submitted"/>
-				<input type="submit" value="submit" name="submit"/>								
-			</fieldset>	
-		</form>		
+				<input type="submit" value="submit" name="submit"/>				
+			
+			</fieldset>
+		</form>
+		
 		</div>
 </div>
 
