@@ -48,7 +48,6 @@ var romController = {
 			var controllerUsers = {
 					init: function(){
 
-
 						this.getUsers(function(response){
 							//console.log("response", response);
 
@@ -109,7 +108,7 @@ var romController = {
 						}
 					}
 			};
-
+			
 			controllerUsers.init();
 
 		},

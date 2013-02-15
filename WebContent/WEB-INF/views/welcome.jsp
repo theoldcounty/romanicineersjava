@@ -56,7 +56,10 @@
 						</div>
 						<div class="biospec">
 							<h2>Jean Midel</h2>
-							<div class="piechart"><div id="biometricPie"></div></div>
+							<div class="piechart">
+								<div id="biometricPie"></div>
+								<div class="nodata">No data</div>
+							</div>
 							<div class="gender"></div>
 						</div>
 					</div>

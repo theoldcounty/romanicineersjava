@@ -8,7 +8,6 @@
 
 					<jsp:include page="includes/filters.jsp" />
 ${people[0]}
-
 ${people[1]}
 					<div class="gendersign"></div>
 					<h2>
@@ -80,14 +79,26 @@ ${people[1]}
 						<li>
 							<h2>My main interests</h2>
 							<div id="interestsPie"></div>
+							<div class="nodata">
+								<p>Show you are interesting, add a visual chart</p>
+								<a class="cboxElement" href="edit_chart">Add Chart</a>
+							</div>
 						</li>
 						<li>
 							<h2>I'm Seeking for</h2>
 							<div id="seekingPie"></div>
+							<div class="nodata">
+								<p>Show what you want in a relationship, add a visual chart</p>
+								<a class="cboxElement" href="edit_chart">Add Chart</a>
+							</div>
 						</li>
 						<li>
 							<h2>Quiz</h2>
 							<div id="quizchart"></div>
+							<div class="nodata">
+								<p>Where do you want to visit?, add a visual chart</p>
+								<a class="cboxElement" href="edit_chart">Add Chart</a>
+							</div>
 						</li>
 					</ul>
 				</div>

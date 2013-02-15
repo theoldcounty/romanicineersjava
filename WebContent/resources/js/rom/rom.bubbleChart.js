@@ -178,18 +178,26 @@ var goBubble = {
 				dataBubbleJson.push(tempObj);
 			});
 
-			var visitJson= {
-							 "name": "flare",
-							 "children": [
-									{
-										"name": "analytics",
-										"children": dataBubbleJson
-									}
-								]
-							};
-			//console.log("old bubble json", visitJson);
-			$(holder).bubbleChart('init', visitJson);
+			
+			var datalength = dataBubbleJson.length;
+			if(datalength > 0){
+				$(holder).show();
+				$(holder).attr("data-response", "true");
+				var visitJson= {
+						 "name": "flare",
+						 "children": [
+								{
+									"name": "analytics",
+									"children": dataBubbleJson
+								}
+							]
+				};
+				$(holder).bubbleChart('init', visitJson);		
+			}else{
+				$(holder).hide();
+				$(holder).attr("data-response", "false");
+			}
+			
 		});
 	}
 };
-

@@ -602,12 +602,17 @@ var goPie = {
 							ir: 45
 						};
 
-			goPie.initChart(holder, specs);
-			goPie.updateCharts(holder, dataPieJson);
+			var datalength = dataPieJson.length;
+			if(datalength > 0){
+				goPie.initChart(holder, specs);
+				goPie.updateCharts(holder, dataPieJson);
+				$(holder).attr("data-response", "true");
+			}else{
+				$(holder).attr("data-response", "false");
+			}
 		});
 	},
 	chosenUpdateChart: function(jsonUrl, holder){
-		//console.log("chosenUpdateChart");
 
 		$.getJSON(jsonUrl, function(data){
 			var dataPieJson = [];
@@ -623,6 +628,15 @@ var goPie = {
 					dataPieJson.push(tempObj);
 				});
 				goPie.updateCharts(holder, dataPieJson);
+			}
+			
+			var datalength = dataPieJson.length;
+			if(datalength > 0){
+				$(holder).show();
+				$(holder).attr("data-response", "true");
+			}else{
+				$(holder).hide();
+				$(holder).attr("data-response", "false");
 			}
 		});
 	}

@@ -42,6 +42,36 @@ public class ListenerController{
 	private PersonManager personManager;
 
 
+
+    /**
+     * Register
+     * @return 
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/edit_chart")
+    public ModelAndView editDisplay(
+    		HttpServletRequest request,
+    		@RequestParam(value="interests", required=false) String[] interests,
+    		@RequestParam(value="interestknobs", required=false) Integer[] interestknobs
+    		) throws UnknownHostException, MongoException
+    {
+    	Boolean inSession = null;
+       	//if the user has logged into the session
+    	if(inSession != null){
+    		//they will need to logout in order to re-register a new account
+    		String message = "You can not edit anything, you are not logged in";
+    		//PersonController.logoutUser(inSession, session);
+    		return new ModelAndView("jsp/user/edit_chart", "message", message);
+    	}
+    	else{
+    		//the guest can register
+    		String message = "Edit a chart test";
+    		return new ModelAndView("jsp/user/edit_chart", "message", message);
+    	}  
+    	
+    }
+    
     /**
      * Register
      * @return 
