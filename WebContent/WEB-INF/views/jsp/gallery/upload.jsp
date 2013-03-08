@@ -26,39 +26,8 @@
         <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     </head>
     <body>
-        <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="https://github.com/blueimp/jQuery-File-Upload">jQuery File Upload</a>
-                    <div class="nav-collapse">
-                        <ul class="nav">
-                            <li class="active"><a href="#">Demo</a></li>
-                            <li><a href="https://github.com/blueimp/jQuery-File-Upload/downloads">Downloads</a></li>
-                            <li><a href="https://github.com/blueimp/jQuery-File-Upload">Source Code</a></li>
-                            <li><a href="https://github.com/blueimp/jQuery-File-Upload/wiki">Documentation</a></li>
-                            <li><a href="https://github.com/blueimp/jQuery-File-Upload/issues">Issues</a></li>
-                            <li><a href="test/">Test</a></li>
-                            <li><a href="https://blueimp.net">&copy; Sebastian Tschan</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <div class="container">
-            <div class="page-header">
-                <h1>jQuery File Upload Demo</h1>
-            </div>
-            <blockquote>
-                <p>File Upload widget with multiple file selection, drag&amp;drop support, progress bars and preview images for jQuery.<br>
-                    Supports cross-domain, chunked and resumable file uploads and client-side image resizing.<br>
-                    Works with any server-side platform (PHP, Python, Ruby on Rails, Java, Node.js, Go etc.) that supports standard HTML form file uploads.</p>
-            </blockquote>
-            <br>
             <!-- The file upload form used as target for the file upload widget -->
             <form id="fileupload" action="upload" method="POST" enctype="multipart/form-data">
                 <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
@@ -101,17 +70,8 @@
                 <table role="presentation" class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
             </form>
             <br>
-            <div class="well">
-                <h3>Demo Notes</h3>
-                <ul>
-                    <li>The maximum file size for uploads in this demo is <strong>5 MB</strong> (default file size is unlimited).</li>
-                    <li>Only image files (<strong>JPG, GIF, PNG</strong>) are allowed in this demo (by default there is no file type restriction).</li>
-                    <li>Uploaded files will be deleted automatically after <strong>5 minutes</strong> (demo setting).</li>
-                    <li>You can <strong>drag &amp; drop</strong> files from your desktop on this webpage with Google Chrome, Mozilla Firefox and Apple Safari.</li>
-                    <li>Please refer to the <a href="https://github.com/blueimp/jQuery-File-Upload">project website</a> and <a href="https://github.com/blueimp/jQuery-File-Upload/wiki">documentation</a> for more information.</li>
-                    <li>Built with Twitter's <a href="http://twitter.github.com/bootstrap/">Bootstrap</a> toolkit and Icons from <a href="http://glyphicons.com/">Glyphicons</a>.</li>
-                </ul>
-            </div>
+            
+            
         </div>
         <!-- modal-gallery is the modal dialog used for the image gallery -->
         <div id="modal-gallery" class="modal modal-gallery hide fade" data-filter=":odd">
@@ -199,18 +159,30 @@
         </tr>
         {% } %}
     </script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    
+    
+  <!--   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> -->
+	
+    
     <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+    
     <script src="resources/upload/js/vendor/jquery.ui.widget.js"></script>
     <!-- The Templates plugin is included to render the upload/download listings -->
+    
     <script src="http://blueimp.github.com/JavaScript-Templates/tmpl.min.js"></script>
     <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+    
     <script src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"></script>
     <!-- The Canvas to Blob plugin is included for image resizing functionality -->
+    
     <script src="http://blueimp.github.com/JavaScript-Canvas-to-Blob/canvas-to-blob.min.js"></script>
     <!-- Bootstrap JS and Bootstrap Image Gallery are not required, but included for the demo -->
+    
+    <!-- 
     <script src="http://blueimp.github.com/cdn/js/bootstrap.min.js"></script>
     <script src="http://blueimp.github.com/Bootstrap-Image-Gallery/js/bootstrap-image-gallery.min.js"></script>
+     -->
+    
     <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
     <script src="resources/upload/js/jquery.iframe-transport.js"></script>
     <!-- The basic File Upload plugin -->

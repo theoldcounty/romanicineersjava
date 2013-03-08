@@ -43,6 +43,17 @@ var sliderControls = Backbone.View.extend({
 			var fieldName = $(this).data('field');
 			var input = '<input id="slider'+j+'" type="hidden" name="'+fieldName+'" value="">';
 			$(this).append(input);
+			
+			var negative = $(this).data('negative');
+			var positive = $(this).data('positive');
+			
+			
+			console.log("negative", negative);
+			console.log("positive", positive);
+			
+			$(this).append('<span class="negative">'+negative+'</span>');
+			$(this).append('<span class="positive">'+positive+'</span>');
+			
 			j++;
         });
 

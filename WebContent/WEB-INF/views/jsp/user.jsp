@@ -7,8 +7,8 @@
 				<div class="wrap">
 
 					<jsp:include page="includes/filters.jsp" />
-${people[0]}
-${people[1]}
+						${people[0]}
+						${people[1]}
 					<div class="gendersign"></div>
 					<h2>
 						<c:if test="${people[0].whichscreenname == 'realname'}">
@@ -29,7 +29,10 @@ ${people[1]}
 						, ${people[1].ageInYears} years old</div>
 
 					<div class="gallery">
-						<div class="featureImg"><img src="http://www.hdwallpapersdepot.com/wp-content/uploads/2012/07/4.jpg"></div>
+						<div class="featureImg">
+							<img src="http://www.hdwallpapersdepot.com/wp-content/uploads/2012/07/4.jpg">
+							<a class="iframebox" href="showUpload">Add Picture</a>
+						</div>
 						<div class="profilePics">
 							<c:if test="${people[1].countGallery > 1}">
 								<div id="galleryCarousel" data-carousel="" data-count="${people[1].countGallery}">
@@ -38,7 +41,8 @@ ${people[1]}
 										<c:set var="pictures" value="${people[1].gallery}"/>									
 										<c:forEach items="${pictures}" varStatus="loop"> 
 											<li><a class="group" href="${pictures[loop.index].full}"><img src="${pictures[loop.index].thumbnail}"></a></li>
-										</c:forEach>								</ul>
+										</c:forEach>
+									</ul>
 									</div>
 								</div>
 							</c:if>

@@ -11,33 +11,33 @@
 
 		<form id="registerForm" action="register" enctype="multipart/form-data" method="post" action="">
 			<fieldset id="step1">
-				<h2>Create your account in 5 minutes!</h2>
-
-				<label>Name In full* [your name can be selected as a screen name]</label>
-				<input type="text" name="realname" value="${realname}">
-
-				<label>Username* [Username can be selected as a screen name]</label>
-				<input type="text" name="username" value="${username}">
-
-				<label>Email*</label>
-				<input type="text" name="emailaddress" value="${emailaddress}">
+				<fieldset class="fifty-fifty">
+					<h2>Create your account in 5 minutes!</h2>
+	
+					<label>Name In full* [your name can be selected as a screen name]</label>
+					<input type="text" name="realname" value="${realname}">
+	
+					<label>Username* [Username can be selected as a screen name]</label>
+					<input type="text" name="username" value="${username}">
+	
+					<label>Email*</label>
+					<input type="text" name="emailaddress" value="${emailaddress}">
+					
+					<label>Confirmed Email*</label>
+					<input type="text" name="confirmemailaddress" value="${confirmemailaddress}">				
+	
+					<label>Password*</label>
+					<input type="password" name="password" value="${password}">
+	
+					<label>Confirmed Password*</label>
+					<input type="password" name="confirmpassword" value="${confirmpassword}">
+									
+					<br>
+					<input type="radio" name="whichscreenname" value="realname">Please, use my name in full as a screen name<br>
+					<input type="radio" name="whichscreenname" value="username">Please, use my username as a screen name			
+				</fieldset>	
 				
-				<label>Confirmed Email*</label>
-				<input type="text" name="confirmemailaddress" value="${confirmemailaddress}">				
-
-				<label>Password*</label>
-				<input type="password" name="password" value="${password}">
-
-				<label>Confirmed Password*</label>
-				<input type="password" name="confirmpassword" value="${confirmpassword}">
-								
-				<br>
-				<input type="radio" name="whichscreenname" value="realname">Please, use my name in full as a screen name<br>
-				<input type="radio" name="whichscreenname" value="username">Please, use my username as a screen name			
-			</fieldset>
-			
-			<fieldset id="step2">
-				<fieldset class="wrapper">
+				<fieldset class="fifty-fifty last">
 					<fieldset class="dob">
 						<label>Date of Birth*</label>
 						<input type="text" name="birthday" placeholder="dd" class="day">
@@ -47,9 +47,14 @@
 					
 					<fieldset class="gender">
 						<label>Gender*</label>
-						<input type="radio" name="gender" value="Male" selected="selected">Male <input type="radio" name="gender" value="Female">Female
+						<input type="radio" name="gender" value="Male" checked="checked">Male <input type="radio" name="gender" value="Female">Female
 					</fieldset>
-				</fieldset>
+				</fieldset>			
+			
+			</fieldset>
+			
+			<fieldset id="step2">
+				
 
 				<label>Ethnicity</label>
 				${person.ethnicity}
@@ -150,13 +155,13 @@
 				
 				<label>Please indicate what describes you more</label>
 				<div id="controls" class="sliderToggles" data-role="slider-controls-nav">
-					<span data-field="personality">88</span>
-					<span data-field="personality">77</span>
-					<span data-field="personality">55</span>
-					<span data-field="personality">33</span>
-					<span data-field="personality">40</span>
-					<span data-field="personality">45</span>
-					<span data-field="personality">70</span>
+					<span data-negative="Reserved" data-positive="Outgoing" data-field="personality">88</span>
+					<span data-negative="Direct" data-positive="Flexible"  data-field="personality">77</span>
+					<span data-negative="Senstitive" data-positive="Steady"  data-field="personality">55</span>
+					<span data-negative="Consitent" data-positive="Curious"  data-field="personality">33</span>
+					<span data-negative="Couple" data-positive="Family"  data-field="personality">40</span>
+					<span data-negative="Tender" data-positive="Passionate"  data-field="personality">45</span>
+					<span data-negative="Focus" data-positive="Funny"  data-field="personality">70</span>
 				</div>
 
 				

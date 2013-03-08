@@ -2,10 +2,7 @@
 <!--include header-->
 
 <div id="colorboxWrapper" class="regular">
-		<h1>Visual Dating</h1>
-
 		<div class="registration">
-
 		
 		<form id="registerForm" action="edit_chart" enctype="multipart/form-data" method="post" action="">
 						
@@ -132,8 +129,8 @@
 				{
 					"min": 0,
 					"max": 100,
-					"width": 150,
-					"height": 150,					
+					"width": 95,
+					"height": 95,					
 					"displayPrevious": true,
 					"fgColor": $(this).data('color')
 				},

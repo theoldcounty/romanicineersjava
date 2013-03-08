@@ -730,13 +730,16 @@
 /*form*/
 	.registration label{
 		padding-top:10px;
-		padding-bottom:10px;
+		padding-bottom:3px;
 		width: 100%;
-		font-size: 13px;
+		font-size: 12px;
 	}
 	#registerForm h2{
 		margin:0;
 		font-size: 14px;	
+	}
+	.ui-tabs .ui-tabs-panel{
+		font-size: 14px;
 	}
 
 	.ui-tabs .ui-tabs-nav li a {
@@ -758,6 +761,21 @@
 	}
 
 
+	fieldset.fifty-fifty{
+		overflow:hidden;
+		padding: 0;
+		border: 0;
+		width: 49%;
+		margin-right: 9px;
+		float:left;
+	}
+	
+	fieldset.fifty-fifty.last{
+		margin-right: 0;
+		float: right;
+		width: 45%;
+	}
+
 	fieldset.wrapper{
 		overflow:hidden;
 		padding: 0;
@@ -765,7 +783,7 @@
 		width: 100%;
 	}
 	fieldset.dob{
-		width: 45%;
+		width: 50%;
 		float: left;
 		padding: 0;
 		border: 0;
@@ -786,15 +804,21 @@
 		font-size: 13px!important;		
 	}
 
+	.registration input[type="password"],
 	.registration input[type="text"]{
-		height: 40px;
-		width: 98%;
-		padding:2%;
-		padding-top:0;
-		padding-bottom:0;
+		height: 32px;
+		width: 95%;
+		padding: 2%;
+		padding-top: 0;
+		padding-bottom: 0;
 		border: 1px solid black;
+		font-size: 13px;
 	}
-
+	.registration input[type="radio"]{
+		margin: 0;
+		margin-right: 10px;
+		margin-top: 10px;		
+	}
 
 	.goaldriven{
 		overflow:hidden;
@@ -808,7 +832,7 @@
 	input[type="text"].day,
 	input[type="text"].month,
 	input[type="text"].year{
-		width: 16%;
+		width: 26%;
 		text-align: center;
 	}
 
@@ -830,10 +854,14 @@
 	fieldset.doughnutWrap{
 		overflow:hidden;
 		padding: 0;
+		border:0;
+		margin:0;
+		margin-top: 8px;
 	}
 	fieldset.doughnutWrap select{
 		width: 480px;
 		float:left;
+		margin-top: 30px;
 	}
 
 /*form*/
@@ -910,6 +938,9 @@
 
 	.knob{
 		float: right;
+		margin: 0;
+		padding: 0;
+		border: 0;
 	}
 
 	circle {
@@ -924,21 +955,44 @@
 
 
 	#registerForm .sliderToggles{
-		overflow: hidden;
-		width: 75%;
+		width: 100%;
 		margin-left: auto;
 		margin-right: auto;
+		overflow: hidden;
 	}
 	
     .sliderToggles{
-		overflow:hidden;
 		width:250px;
 	}
 	.sliderToggles span {
-        width:200px;
-		float:left;
-		margin:15px;
-		height: 10px;
+		width: 68%;
+		float: left;
+		margin: 15px;
+		height: 13px;
+		margin-left: 0;
+		margin-right: 0;
+		left: 111px;
+		margin-top: 8px;
+		margin-bottom: 10px;
+    }
+    
+    .sliderToggles span.negative{
+		position: absolute;
+		left: -112px;
+		top: -5px;
+		width: auto;
+		margin: 0;
+		height: auto;
+    }
+    .sliderToggles span.positive{
+		position: absolute;
+		right: -116px;
+		float: right;
+		width: auto;
+		top: -5px;
+		margin: 0;
+		height: auto;
+		left: auto; 
     }
 
 	.indicators{

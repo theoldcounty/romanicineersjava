@@ -137,6 +137,29 @@ var romController = {
 					//alert('onClosed: colorbox has completely closed');
 				}
 			});
+			
+			
+			//calls js that is used only on user page
+			$(".iframebox").colorbox({
+				//iframe:true,
+				width:"65%",
+				height:"75%",
+				onOpen:function(){
+					//alert('onOpen: colorbox is about to open');
+				},
+				onLoad:function(){
+					//alert('onLoad: colorbox has started to load the targeted content');
+				},
+				onComplete:function(){
+					//alert('onComplete: colorbox has displayed the loaded content');
+				},
+				onCleanup:function(){
+					//alert('onCleanup: colorbox has begun the close process');
+				},
+				onClosed:function(){
+					//alert('onClosed: colorbox has completely closed');
+				}
+			});			
 
 			//get data id of user
 
