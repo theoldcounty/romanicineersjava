@@ -161,7 +161,7 @@
     </script>
     
     
-  <!--   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	
     
     <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
@@ -178,10 +178,10 @@
     <script src="http://blueimp.github.com/JavaScript-Canvas-to-Blob/canvas-to-blob.min.js"></script>
     <!-- Bootstrap JS and Bootstrap Image Gallery are not required, but included for the demo -->
     
-    <!-- 
+ 
     <script src="http://blueimp.github.com/cdn/js/bootstrap.min.js"></script>
     <script src="http://blueimp.github.com/Bootstrap-Image-Gallery/js/bootstrap-image-gallery.min.js"></script>
-     -->
+   
     
     <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
     <script src="resources/upload/js/jquery.iframe-transport.js"></script>
