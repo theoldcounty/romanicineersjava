@@ -13,6 +13,13 @@
 		<script type="text/javascript" src="resources/js/libs/colorbrewer/colorbrewer.js"></script>
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 
+
+		<!--integration of basic image uploader-->
+		<script src="resources/upload/js/vendor/jquery.ui.widget.js"></script>
+		<script src="resources/upload/js/jquery.iframe-transport.js"></script>
+		<script src="resources/upload/js/jquery.fileupload.js"></script>
+
+
 		<!--general utils-->
 		
 		<script type="text/javascript" src="resources/js/rom/rom.utils.js"></script>

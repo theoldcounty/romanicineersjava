@@ -31,7 +31,7 @@
 					<div class="gallery">
 						<div class="featureImg">
 							<img src="http://www.hdwallpapersdepot.com/wp-content/uploads/2012/07/4.jpg">
-							<a class="iframebox" href="showUpload">Add Picture</a>
+							<a class="iframebox" href="showUpload2">Add Picture</a>
 						</div>
 						<div class="profilePics">
 							<c:if test="${people[1].countGallery > 1}">
