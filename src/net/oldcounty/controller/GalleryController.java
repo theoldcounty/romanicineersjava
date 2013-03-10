@@ -235,4 +235,10 @@ public class GalleryController {
 		return new ModelAndView("jsp/gallery/upload");
 	}
 
+	
+	@RequestMapping("/showUpload2")
+	public ModelAndView showUpload2(HttpServletRequest request)
+			throws UnknownHostException, MongoException {
+		return new ModelAndView("jsp/gallery/basicuploader");
+	}	
 }
