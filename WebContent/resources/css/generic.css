@@ -736,7 +736,7 @@
 	}
 	#registerForm h2{
 		margin:0;
-		font-size: 14px;	
+		font-size: 14px;
 	}
 	.ui-tabs .ui-tabs-panel{
 		font-size: 14px;
@@ -746,14 +746,14 @@
 		padding: 5%;
 		width: 90%;
 	}
-	
+
 	.ui-tabs .ui-tabs-nav{
 		border: 0;
 		border-radius: 0;
 		padding: 0;
 		background: none;
 	}
-	
+
 	.ui-tabs .ui-tabs-nav li{
 		width: 33%;
 		margin: 0!important;
@@ -769,7 +769,7 @@
 		margin-right: 9px;
 		float:left;
 	}
-	
+
 	fieldset.fifty-fifty.last{
 		margin-right: 0;
 		float: right;
@@ -801,7 +801,7 @@
 		float: right;
 	}
 	.ui-widget select{
-		font-size: 13px!important;		
+		font-size: 13px!important;
 	}
 
 	.registration input[type="password"],
@@ -817,7 +817,7 @@
 	.registration input[type="radio"]{
 		margin: 0;
 		margin-right: 10px;
-		margin-top: 10px;		
+		margin-top: 10px;
 	}
 
 	.goaldriven{
@@ -960,7 +960,7 @@
 		margin-right: auto;
 		overflow: hidden;
 	}
-	
+
     .sliderToggles{
 		width:250px;
 	}
@@ -975,7 +975,7 @@
 		margin-top: 8px;
 		margin-bottom: 10px;
     }
-    
+
     .sliderToggles span.negative{
 		position: absolute;
 		left: -112px;
@@ -992,7 +992,7 @@
 		top: -5px;
 		margin: 0;
 		height: auto;
-		left: auto; 
+		left: auto;
     }
 
 	.indicators{
@@ -1162,7 +1162,7 @@
 
 
 	#colorboxWrapper.regular{
-		height:620px;
+		height:560px;
 		width:780px;
 		display:block;
 	}

@@ -458,5 +458,53 @@ public class ListenerController{
 		}
     	
 		return new ModelAndView("jsp/json/response", "json", json);
+    }
+    
+    
+    
+    
+    
+    
+    /*
+     * getInterestJson
+    */
+    @RequestMapping("/getInterestJson")
+    public ModelAndView getInterestJson(
+	    		HttpServletRequest request
+    		) throws UnknownHostException, MongoException
+    {
+    	String json = null;
+    	return new ModelAndView("jsp/json/interest", "response", json);
+    }
+    
+    
+    
+    
+    
+    /*
+     * getPlaceJson
+    */
+    @RequestMapping("/getPlaceJson")
+    public ModelAndView getPlaceJson(
+	    		HttpServletRequest request
+    		) throws UnknownHostException, MongoException
+    {
+    	String json = null;
+    	return new ModelAndView("jsp/json/places", "response", json);
     }    
+    
+
+    /*
+     * getSeekingJson
+    */
+    @RequestMapping("/getSeekingJson")
+    public ModelAndView getSeekingJson(
+	    		HttpServletRequest request
+    		) throws UnknownHostException, MongoException
+    {
+    	String json = null;
+    	return new ModelAndView("jsp/json/seeking", "response", json);
+    }    
+            
+    
 }

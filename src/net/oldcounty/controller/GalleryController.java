@@ -156,7 +156,8 @@ public class GalleryController {
 	}
 
 	@RequestMapping("/upload")
-	protected void uploadImage(HttpServletRequest request,
+	protected void uploadImage(
+			HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
 		if (!ServletFileUpload.isMultipartContent(request)) {
@@ -169,6 +170,8 @@ public class GalleryController {
 		PrintWriter writer = response.getWriter();
 		response.setContentType("application/json");
 		JSONArray json = new JSONArray();
+		
+		System.out.println("getting file uploader");
 		try {
 			List<FileItem> items = uploadHandler.parseRequest(request);
 			for (FileItem item : items) {

@@ -15,7 +15,9 @@
 
 
 		<!--integration of basic image uploader-->
+		<!-- 
 		<script src="resources/upload/js/vendor/jquery.ui.widget.js"></script>
+		-->
 		<script src="resources/upload/js/jquery.iframe-transport.js"></script>
 		<script src="resources/upload/js/jquery.fileupload.js"></script>
 

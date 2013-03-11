@@ -2,6 +2,8 @@
 <!--include header-->
 
 <div id="colorboxWrapper" class="regular">
+		<div id="formType" data-form-type="registration"></div>
+		
 		<div class="registration">
 			<ul>
 				<li><a href="#step1">Step 1<br>identification</a></li>
@@ -177,84 +179,3 @@
 		<!--register.jsp-->
 		${message}
 		<!--register.jsp-->
-		
-    <script>
-    
-    $(function() { 
-  
-  
-    
-		$('#registerForm').submit(function(e) {
-			e.preventDefault();
-			console.log("clicked on reg - lets do an ajax post at some point");
-			
-			var postUrl = window.location;
-			var formResults = $(this).serializeArray();
-			console.log("formResults", formResults);
-					
-			$.post("register", formResults,
-				function(data) {
-			    	console.log("json response. " + data);
-			    	var obj = jQuery.parseJSON(data);
-			    	
-			    	console.log("obj " + obj);
-			    	
-			    	if(obj[0].response == "OK"){
-			    		console.log("user registered succeffully");
-			    		//close color box
-			    		
-			    		//refresh site
-			    		console.log("current page",window.location.href);
-			    		
-						window.setInterval(function(){
-							console.log("run a reload timer.");
-							//location.reload();							
-						},500);			    		
-			    		//location.reload();
-			    		//user has been registered succesfully
-			    	}else{
-			    		//there is an error with the registeration.
-			    		console.log("backend error with reg - likely the username or email already exists");
-			    		$('.error').html(obj[0].error);
-			    	}
-				}
-			);			
-						
-		});    
-	 
-	 	console.log("setting slider backbone.");
-		console.log("slider-controls-nav", $('[data-role="slider-controls-nav"]'));
-	
-	
-		$('[data-role="slider-controls-nav"]').each(function() {
-			new sliderControls({el: $(this)});
-		});
-	
-	 
-	    $( ".registration" ).tabs();
-    
-	 	$('[data-role="doughnut-knob"]').each(function() {
-			console.log("take on a new backbone view.");
-		  	var optionObj = {
-				"data":
-				{
-					"min": 0,
-					"max": 100,
-					"width": 150,
-					"height": 150,					
-					"displayPrevious": true,
-					"fgColor": $(this).data('color')
-				},
-				"fieldName": $(this).data('fieldname'),
-				"value": $(this).data('value'),
-				"type": "standard"
-			};
-			
-			console.log("optionObj", optionObj);
-			
-			$($(this)).doughnutKnob('init', optionObj);
-		}); 		  
-  
-        
-    });
-    </script>

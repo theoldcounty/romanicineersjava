@@ -6,6 +6,169 @@
 * All rights reserved.
 */
 
+$.rom = {
+		
+};
+
+$.rom.forms = {
+		
+		getRandom: function(){
+			var min = 0;
+			var max = 100;
+			// and the formula is:
+			var random = Math.floor(Math.random() * (max - min + 1)) + min;			
+			
+			return random;
+		},
+		
+		createChartFramework: function(obj, handlerCallback){
+			var that = this;
+	
+			
+			var holder = $('#holderCharts');
+			holder.empty();
+			
+			//getPlaceJson
+			//getSeekingJson
+			$.getJSON(obj.jsonPath, function(data) {
+				var items = [];
+				
+				var keyParent = data.type;				
+				
+				var j = 1;
+				$.each(data.options, function(key, val) {
+					
+					var initialPieVal = that.getRandom();
+					
+					holder.append('<fieldset id="'+key+'" class="doughnutWrap"/>');
+					
+					var wrapper = holder.find('#'+key);					
+					wrapper.append('<select name="'+keyParent+'"/>');
+					
+					var selectBox = wrapper.find('select');
+					$.each(val, function(key1, val2) {
+						selectBox.append('<option value='+val2+'">'+val2+'</option>');
+					});
+					
+					var doughnutPie = '<fieldset data-fieldname="'+keyParent+'knobs" id="knob'+j+'" class="knob" data-color="'+obj.pieColor+'" data-role="doughnut-knob" data-value="'+initialPieVal+'" data-pie-size="'+obj.pieSize+'"></fieldset>';
+					wrapper.append(doughnutPie);
+					
+					j++;
+				});
+				
+				handlerCallback();
+			});		
+			
+		},
+		setUpDoughnutCharts: function(chartType){
+			var that = this;
+			
+			//console.log("chartType", chartType);
+			
+			var obj = {
+					pieColor : "#E2B227",
+					pieSize : 85,
+					jsonPath: "getInterestJson"					
+			};
+			
+			switch(chartType)
+			{
+				case "interests":
+					obj.pieColor = "#E2B227";
+					obj.jsonPath = "getInterestJson";
+				  break;
+				case "seeking-relationship":
+					obj.pieColor = "#B23959";
+					obj.jsonPath = "getSeekingJson";
+				  break;
+				case "future-holiday":
+					obj.pieColor = "#5751e4";
+					obj.jsonPath = "getPlaceJson";
+				  break;				  
+			}			
+						
+			this.createChartFramework(obj, function(){
+				that.bindDoughnutKnob();
+			});
+			
+			
+		},
+		setUpRegistration: function(){
+			
+			 $( ".registration" ).tabs();
+			 this.bindSlideControllers();
+			 
+			 $('#registerForm').submit(function(e) {
+					e.preventDefault();
+					//console.log("clicked on reg - lets do an ajax post at some point");
+					
+					var postUrl = window.location;
+					var formResults = $(this).serializeArray();
+					//console.log("formResults", formResults);
+							
+					$.post("register", formResults,
+						function(data) {
+					    	console.log("json response. " + data);
+					    	var obj = jQuery.parseJSON(data);
+					    	
+					    	//console.log("obj " + obj);
+					    	
+					    	if(obj[0].response == "OK"){
+					    		console.log("user registered succeffully");
+					    		//close color box
+					    		
+					    		//refresh site
+					    		//console.log("current page",window.location.href);
+					    		
+								window.setInterval(function(){
+									console.log("run a reload timer.");
+									//location.reload();							
+								},500);			    		
+					    		//location.reload();
+					    		//user has been registered succesfully
+					    	}else{
+					    		//there is an error with the registeration.
+					    		console.log("backend error with reg - likely the username or email already exists");
+					    		$('.error').html(obj[0].error);
+					    	}
+						}
+					);
+				});			 
+		},
+		bindDoughnutKnob: function(){			
+		 	$('[data-role="doughnut-knob"]').each(function() {
+				//console.log("take on a new backbone view.");
+			  	var optionObj = {
+					"data":
+					{
+						"min": 0,
+						"max": 100,
+						"width": $(this).data('pie-size'),
+						"height": $(this).data('pie-size'),					
+						"displayPrevious": true,
+						"fgColor": $(this).data('color')
+					},
+					"fieldName": $(this).data('fieldname'),
+					"value": $(this).data('value'),
+					"type": "standard"
+				};
+				
+				//console.log("optionObj", optionObj);
+				
+				$($(this)).doughnutKnob('init', optionObj);
+			});		 	
+		},
+		bindSlideControllers: function(){
+			$('[data-role="slider-controls-nav"]').each(function() {
+				new sliderControls({el: $(this)});
+			});
+		},
+		init: function(){
+			//console.log("form complete");
+		}
+};
+
+
 var romController = {
 		global: function(){
 			//calls js that is used on all pages
@@ -20,6 +183,18 @@ var romController = {
 				},
 				onComplete:function(){
 					//alert('onComplete: colorbox has displayed the loaded content');
+					
+					var formType = $('#formType').data('form-type');
+					
+					//console.log("form complete", formType);
+					//is regsitration form
+					$.rom.forms.setUpRegistration();
+					
+					if(formType == "doughnutcharts"){
+						var chartType = $('#formType').data('chart-type');
+						//is chart edit
+						$.rom.forms.setUpDoughnutCharts(chartType);
+					}
 				},
 				onCleanup:function(){
 					//alert('onCleanup: colorbox has begun the close process');
@@ -39,11 +214,7 @@ var romController = {
 
 			// Initialize Backbone views.
 
-
-
 			//var getMembers= new fetchMembers();
-
-
 
 			var controllerUsers = {
 					init: function(){
@@ -110,7 +281,6 @@ var romController = {
 			};
 			
 			controllerUsers.init();
-
 		},
 		user: function(){
 
@@ -137,8 +307,7 @@ var romController = {
 					//alert('onClosed: colorbox has completely closed');
 				}
 			});
-			
-			
+					
 			//calls js that is used only on user page
 			$(".iframebox").colorbox({
 				//iframe:true,

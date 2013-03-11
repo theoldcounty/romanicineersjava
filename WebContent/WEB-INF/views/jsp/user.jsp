@@ -85,7 +85,7 @@
 							<div id="interestsPie"></div>
 							<div class="nodata">
 								<p>Show you are interesting, add a visual chart</p>
-								<a class="cboxElement" href="edit_chart">Add Chart</a>
+								<a class="form" href="edit_chart?type=interests">Add Chart</a>
 							</div>
 						</li>
 						<li>
@@ -93,7 +93,7 @@
 							<div id="seekingPie"></div>
 							<div class="nodata">
 								<p>Show what you want in a relationship, add a visual chart</p>
-								<a class="cboxElement" href="edit_chart">Add Chart</a>
+								<a class="form" href="edit_chart?type=seeking-relationship">Add Chart</a>
 							</div>
 						</li>
 						<li>
@@ -101,7 +101,7 @@
 							<div id="quizchart"></div>
 							<div class="nodata">
 								<p>Where do you want to visit?, add a visual chart</p>
-								<a class="cboxElement" href="edit_chart">Add Chart</a>
+								<a class="form" href="edit_chart?type=future-holiday">Add Chart</a>
 							</div>
 						</li>
 					</ul>
