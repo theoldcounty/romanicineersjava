@@ -52,14 +52,15 @@ public class ListenerController{
     @RequestMapping("/edit_chart")
     public ModelAndView editDisplay(
     		HttpServletRequest request,
+    		@RequestParam(value="userId", required=false) String userId,
     		@RequestParam(value="interests", required=false) String[] interests,
-    		@RequestParam(value="interestknobs", required=false) Integer[] interestknobs
+    		@RequestParam(value="interestsknobs", required=false) Integer[] interestsknobs
     		) throws UnknownHostException, MongoException
     {
     	
+    	/*
     	int[] anArray;
 
-        // allocates memory for 10 integers
         anArray = new int[10];
            
         anArray[0] = 10;
@@ -69,19 +70,20 @@ public class ListenerController{
         anArray[4] = 50;
         
         String[] interests2 = {"Robots", "Pie", "Animal", "Love", "Cheese"};
+        */
         
-    	System.out.println("interests ::  "+ interests2);
-    	System.out.println("interestknobs ::  "+ anArray);
+    	System.out.println("interests ::  "+ interests);
+    	System.out.println("interestsknobs ::  "+ interestsknobs);
     	
-		String userId = "513ca2a1d1efe3382ca67b99";//registerResponse.get(0).get("lastId").toString(); //get actual user id
+		//String userId = "513f8a35d1efd3e0a2e673c1";//registerResponse.get(0).get("lastId").toString(); //get actual user id
 		
     	/*_interests chart*/
 	    Map<String,Integer> interestData = new LinkedHashMap<String,Integer>();
     	if(interests!=null){
     		int index = 0;
-    		for(String interest : interests2)
+    		for(String interest : interests)
 	    	{
-    			interestData.put(interest,anArray[index]);
+    			interestData.put(interest,interestsknobs[index]);
 	    		index++;
 	    	}
     	}
@@ -243,7 +245,8 @@ public class ListenerController{
     	if(registerResponse.get(0).get("response") == "OK"){
     			String userId = registerResponse.get(0).get("lastId").toString(); //get actual user id
     			
-		    	/*_interests chart*/
+    		/*	
+		    	//_interests chart
 			    Map<String,Integer> interestData = new LinkedHashMap<String,Integer>();
 		    	if(interests!=null){
 		    		int index = 0;
@@ -264,11 +267,11 @@ public class ListenerController{
 		    		System.out.println("interests added ::  "+ userId);
 		    		//check if the chart has been added successfully.
 		    	}
-		    	/*_interests chart*/
+		    	//_interests chart
 		    	
 
 		    	
-		    	/*_seeking chart*/
+		    	//_seeking chart
 			    Map<String,Integer> seekingData = new LinkedHashMap<String,Integer>();
 		    	if(interests!=null){
 		    		int index = 0;
@@ -289,9 +292,9 @@ public class ListenerController{
 		    		System.out.println("seeking added ::  "+ userId);
 		    		//check if the chart has been added successfully.
 		    	}
-		    	/*_seeking chart*/	
+		    	//_seeking chart	
 
-		    	/*_visiting chart*/
+		    	//_visiting chart
 			    Map<String,Integer> visitingData = new LinkedHashMap<String,Integer>();
 		    	if(interests!=null){
 		    		int index = 0;
@@ -312,8 +315,8 @@ public class ListenerController{
 		    		System.out.println("visiting added ::  "+ userId);
 		    		//check if the chart has been added successfully.
 		    	}
-		    	/*_visiting chart*/	
-		    	
+		    	//_visiting chart	
+		    */
 		    	
     	}
     	//last id by registered user - dummy user id

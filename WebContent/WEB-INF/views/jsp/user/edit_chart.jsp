@@ -8,7 +8,7 @@
 			
 			<fieldset id="step4">
 
-
+				<input type="text" name="userId" value="<%=request.getParameter("userId")%>">
 				<label>Please indicate 5 of your interest and their importance from 0 to 100</label>
 				
 				<div id="holderCharts">
