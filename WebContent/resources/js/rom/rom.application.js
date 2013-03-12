@@ -90,8 +90,6 @@ $.rom.forms = {
 			this.createChartFramework(obj, function(){
 				that.bindDoughnutKnob();
 			});
-			
-			
 		},
 		setUpRegistration: function(){
 			
@@ -135,6 +133,47 @@ $.rom.forms = {
 					);
 				});			 
 		},
+		
+		setUpCharts: function(){
+			 
+			 $('#chartForm').submit(function(e) {
+					e.preventDefault();
+					//console.log("clicked on reg - lets do an ajax post at some point");
+					
+					var postUrl = window.location;
+					var formResults = $(this).serializeArray();
+					console.log("formResults", formResults);
+							
+					$.post("edit_chart", formResults,
+						function(data) {
+					    	console.log("json response. " + data);
+					    	var obj = jQuery.parseJSON(data);
+					    	
+					    	//console.log("obj " + obj);
+					    	
+					    	if(obj[0].response == "OK"){
+					    		console.log("user edit_chart succeffully");
+					    		//close color box
+					    		
+					    		//refresh site
+					    		//console.log("current page",window.location.href);
+					    		
+								window.setInterval(function(){
+									console.log("run a reload timer.");
+									//location.reload();							
+								},500);			    		
+					    		//location.reload();
+					    		//user has been registered succesfully
+					    	}else{
+					    		//there is an error with the registeration.
+					    		console.log("backend error with edit_chart - likely the username or email already exists");
+					    		$('.error').html(obj[0].error);
+					    	}
+						}
+					);
+				});			 
+		},		
+		
 		bindDoughnutKnob: function(){			
 		 	$('[data-role="doughnut-knob"]').each(function() {
 				//console.log("take on a new backbone view.");
@@ -186,7 +225,7 @@ var romController = {
 					
 					var formType = $('#formType').data('form-type');
 					
-					//console.log("form complete", formType);
+					console.log("form complete", formType);
 					//is regsitration form
 					$.rom.forms.setUpRegistration();
 					
@@ -194,6 +233,7 @@ var romController = {
 						var chartType = $('#formType').data('chart-type');
 						//is chart edit
 						$.rom.forms.setUpDoughnutCharts(chartType);
+						$.rom.forms.setUpCharts();
 					}
 				},
 				onCleanup:function(){

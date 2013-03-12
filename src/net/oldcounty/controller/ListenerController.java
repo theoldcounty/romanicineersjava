@@ -56,6 +56,53 @@ public class ListenerController{
     		@RequestParam(value="interestknobs", required=false) Integer[] interestknobs
     		) throws UnknownHostException, MongoException
     {
+    	
+    	int[] anArray;
+
+        // allocates memory for 10 integers
+        anArray = new int[10];
+           
+        anArray[0] = 10;
+        anArray[1] = 20;
+        anArray[2] = 30;
+        anArray[3] = 40;
+        anArray[4] = 50;
+        
+        String[] interests2 = {"Robots", "Pie", "Animal", "Love", "Cheese"};
+        
+    	System.out.println("interests ::  "+ interests2);
+    	System.out.println("interestknobs ::  "+ anArray);
+    	
+		String userId = "513ca2a1d1efe3382ca67b99";//registerResponse.get(0).get("lastId").toString(); //get actual user id
+		
+    	/*_interests chart*/
+	    Map<String,Integer> interestData = new LinkedHashMap<String,Integer>();
+    	if(interests!=null){
+    		int index = 0;
+    		for(String interest : interests2)
+	    	{
+    			interestData.put(interest,anArray[index]);
+	    		index++;
+	    	}
+    	}
+    	
+
+    	Interests interest = new Interests();
+	    	interest.setUserId(userId);
+	    	interest.setName("interests");
+	    	interest.setResults(interestData);
+	    	
+	    System.out.println("interestData ::  "+ interestData);	
+	    	
+    	List<DBObject> interestResponse = InterestDao.addInterest(interest);
+    	if(interestResponse.get(0).get("response") == "OK"){
+    		System.out.println("interests added ::  "+ userId);
+    		//check if the chart has been added successfully.
+    	}
+    	/*_interests chart*/  	
+    	
+    	
+    	/*
     	Boolean inSession = null;
        	//if the user has logged into the session
     	if(inSession != null){
@@ -68,8 +115,8 @@ public class ListenerController{
     		//the guest can register
     		String message = "Edit a chart test";
     		return new ModelAndView("jsp/user/edit_chart", "message", message);
-    	}  
-    	
+    	}*/  
+    	return new ModelAndView("jsp/user/edit_chart");
     }
     
     /**

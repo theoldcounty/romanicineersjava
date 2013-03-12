@@ -4,7 +4,7 @@
 <div id="colorboxWrapper" class="regular">
 		<div id="formType" data-form-type="doughnutcharts" data-chart-type="<%=request.getParameter("type")%>"></div>
 		
-		<form id="registerForm" action="edit_chart" enctype="multipart/form-data" method="post" action="">
+		<form id="chartForm" action="edit_chart" enctype="multipart/form-data" method="post" action="">
 			
 			<fieldset id="step4">
 
