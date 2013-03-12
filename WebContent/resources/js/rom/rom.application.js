@@ -47,7 +47,7 @@ $.rom.forms = {
 					
 					var selectBox = wrapper.find('select');
 					$.each(val, function(key1, val2) {
-						selectBox.append('<option value='+val2+'">'+val2+'</option>');
+						selectBox.append('<option value="'+val2+'">'+val2+'</option>');
 					});
 					
 					var doughnutPie = '<fieldset data-fieldname="'+keyParent+'knobs" id="knob'+j+'" class="knob" data-color="'+obj.pieColor+'" data-role="doughnut-knob" data-value="'+initialPieVal+'" data-pie-size="'+obj.pieSize+'"></fieldset>';
