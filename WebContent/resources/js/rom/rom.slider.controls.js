@@ -1,9 +1,10 @@
 /*
+*	Slider Controls
 *
-* Author: Rob Shan Lone
-* Copyright (c) 2012 The Old County Limited.
+*	Author: Rob Shan Lone
+*	Copyright (c) 2013 The Old County Limited.
 *
-* All rights reserved.
+*	All rights reserved.
 */
 
 /**
@@ -19,13 +20,9 @@ var sliderControls = Backbone.View.extend({
         // setup graphic EQ
 		var j = 0;
         sliders.each(function() {
-            // read initial values from markup and remove that
-            var value = parseInt($(this).text(), 10);
-            // var id = $(this).data('field')+'id';
-            //$(this).attr("id", id);
 
 			$(this).empty().slider({
-				value: value,
+				value: parseInt($(this).text(), 10),
 				orientation: "horizontal",
 				range: "min",
 				animate: true
@@ -39,25 +36,15 @@ var sliderControls = Backbone.View.extend({
 				clearTimeout(t);
 			},100);
 
-
 			var fieldName = $(this).data('field');
 			var input = '<input id="slider'+j+'" type="hidden" name="'+fieldName+'" value="">';
 			$(this).append(input);
-			
-			var negative = $(this).data('negative');
-			var positive = $(this).data('positive');
-			
-			
-			console.log("negative", negative);
-			console.log("positive", positive);
-			
-			$(this).append('<span class="negative">'+negative+'</span>');
-			$(this).append('<span class="positive">'+positive+'</span>');
-			
+
+			$(this).append('<span class="negative">'+$(this).data('negative')+'</span>');
+			$(this).append('<span class="positive">'+$(this).data('positive')+'</span>');
+
 			j++;
         });
-
-
 	},
 
 	changedEvent: function(event, ui){

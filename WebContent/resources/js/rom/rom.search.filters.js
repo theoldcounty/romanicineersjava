@@ -1,9 +1,10 @@
 /*
+*	Search Filters
 *
-* Author: Rob Shan Lone
-* Copyright (c) 2012 The Old County Limited.
+*	Author: Rob Shan Lone
+*	Copyright (c) 2013 The Old County Limited.
 *
-* All rights reserved.
+*	All rights reserved.
 */
 
 /**
@@ -13,9 +14,6 @@
 
 var searchFilters = Backbone.View.extend({
 
- 	/*
-	 * @description initialize
-	 */
 	initialize : function() {
 		console.log("init search filter");
 		this.bindEvent();
@@ -29,18 +27,10 @@ var searchFilters = Backbone.View.extend({
 
 	},
 
-
- 	/*
-	 * @description initialize
-	 */
 	runIsotope : function(obj) {
 		$('.users').isotope(obj);
 	},
 
-
- 	/*
-	 * @description initialize
-	 */
 	bindEvent : function() {
 		var that = this;
 		$('#query').submit(function(e) {
@@ -65,5 +55,4 @@ var searchFilters = Backbone.View.extend({
 		//var obj = { filter: $('.element:interest('+filterChoice+')') };
 		//that.runIsotope(obj);
 	}
-
 });

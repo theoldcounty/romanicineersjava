@@ -1,9 +1,10 @@
 /*
+*	Fetch Members
 *
-* Author: Rob Shan Lone
-* Copyright (c) 2012 The Old County Limited.
+*	Author: Rob Shan Lone
+*	Copyright (c) 2013 The Old County Limited.
 *
-* All rights reserved.
+*	All rights reserved.
 */
 
 /**
@@ -17,7 +18,7 @@ var fetchMembers = Backbone.View.extend({
 	 * @description initialize
 	 */
 	initialize : function() {
-		console.log("get feed members");
+		//console.log("get feed members");
 		/*get feed members*/
 		var that = this;
 		utils.getJsonData(utils.feedUsers, function(data){
@@ -25,10 +26,12 @@ var fetchMembers = Backbone.View.extend({
 		});
 	},
 
+  	/*
+	 * @description resolves the template for each member
+	 */
 	getTemplate: function(value){
-		console.log("value", value);
-
-		console.log("value.interestData", value.interestData);
+		//console.log("value", value);
+		//console.log("value.interestData", value.interestData);
 
 		var country = "United States";
 		var interests = "movies";
@@ -49,7 +52,7 @@ var fetchMembers = Backbone.View.extend({
 	},
 
 	populateHome: function(data){
-		//console.log("data", data);
+		////console.log("data", data);
 		console.log("populate home");
 
 		$('.users.isotope').empty();
@@ -58,16 +61,15 @@ var fetchMembers = Backbone.View.extend({
 		var that = this;
 		var itemList = '';
 		$.each(data, function(index, value) {
-			//console.log(value);
+			////console.log(value);
 			var userItem = that.getTemplate(value);
 			itemList += userItem;
-			console.log("index", index);
+			//console.log("index", index);
 
 		});
 		$('.users').append(itemList).isotope( 'addItems', $(itemList) );
 		//$('.users').isotope( 'reloadItems');
 
-		//var isoFilter= new isotopefilters();
+		//var isoFilter= new $.rom.isotope.filters();
 	}
-
  });

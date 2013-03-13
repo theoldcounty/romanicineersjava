@@ -370,8 +370,8 @@ public class ListenerController{
     	//get search ALL users
     	BasicDBObject searchQuery = new BasicDBObject();
     	//skip 0
-    	//limit 30
-    	List<DBObject> dataresponse = PersonDao.searchUsers(searchQuery, 0, 30, "myCollection");
+    	//limit 130
+    	List<DBObject> dataresponse = PersonDao.searchUsers(searchQuery, 0, 130, "myCollection");
     	 System.out.println(dataresponse);
     	 
     	request.setAttribute("page", "members");
