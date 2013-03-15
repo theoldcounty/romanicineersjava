@@ -8,6 +8,7 @@
 
 package net.oldcounty.controller;
 
+
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ import net.oldcounty.dao.PersonDao;
 import net.oldcounty.manager.PersonManager;
 import net.oldcounty.model.Interests;
 import net.oldcounty.model.Person;
+
 
 import org.bson.BasicBSONObject;
 import org.bson.types.ObjectId;
@@ -41,7 +43,7 @@ public class ListenerController{
 
 	private PersonManager personManager;
 
-
+	
 
     /**
      * Register
@@ -57,6 +59,9 @@ public class ListenerController{
     		@RequestParam(value="interestsknobs", required=false) Integer[] interestsknobs
     		) throws UnknownHostException, MongoException
     {
+    	
+    	
+    	
     	
     	/*
     	int[] anArray;
@@ -511,7 +516,33 @@ public class ListenerController{
     }
     
     
-    
+    /*
+     * getForgotPassword
+    */
+    @RequestMapping("/getForgotPassword")
+    public ModelAndView getForgotPassword(
+	    		HttpServletRequest request
+    		) throws UnknownHostException, MongoException
+    {
+    	//_recover password or set a new one
+    	
+    	//_ email it out
+    	
+    	//MailMail myObject = new MailMail();	
+    	//myObject.sendMail("robbsy", "bobby", "this is a test email", "here is the message");
+    	/**
+    	 * reference :: http://www.mkyong.com/spring/spring-sending-e-mail-via-gmail-smtp-server-with-mailsender/
+    	 * http://static.springsource.org/spring/docs/3.0.x/reference/mail.html
+    	 * http://www.codejava.net/frameworks/spring/sending-e-mail-with-spring-mvc
+    	 * http://static.springsource.org/spring/docs/2.0.x/reference/mail.html
+    	 * */
+       	
+    	
+    	//_respond with json response to provide success/fail
+    	
+    	String json = null;
+    	return new ModelAndView("jsp/json/interest", "response", json);
+    }   
     
     
     
