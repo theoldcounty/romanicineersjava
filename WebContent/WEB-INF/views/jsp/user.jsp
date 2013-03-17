@@ -2,21 +2,18 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="includes/header.jsp" />
 <!--include header-->
-	<div id="container"><!--container-->
+	<div id="container" class="user"><!--container-->
 			<div id="contents">
 				<div class="wrap">
 
 					<jsp:include page="includes/filters.jsp" />
 						${people[0]}
 						${people[1]}
+						
 					<div class="gendersign"></div>
 					<h2>
-						<c:if test="${people[0].whichscreenname == 'realname'}">
-							${people[0].realname}
-						</c:if>
-						<c:if test="${people[0].whichscreenname != 'realname'}">
-							${people[0].username}
-						</c:if>
+						<c:if test="${people[0].whichscreenname == 'realname'}">${people[0].realname}</c:if>
+						<c:if test="${people[0].whichscreenname != 'realname'}">${people[0].username}</c:if>
 					</h2>
 					<div class="details" data-uid="${people[0]._id}">
 						<c:forEach var="countryList" items="${countryList}">
@@ -74,7 +71,10 @@
 						</li>
 						<li>
 							<h2>About me</h2>
-							<div class="about"><p>${people[0].about}</p></div>
+							<div class="about">
+								<p>${people[0].about}</p>
+								<p>Lorem impsum dolor sit amet, consecteur adsdfsd. erlit. Maescenae aliaqul ipsum vehiaclsd anti test. Cos soc asd kasd aodsa.</p>
+							</div>
 						</li>
 						<li>
 							<h2>My identity</h2>

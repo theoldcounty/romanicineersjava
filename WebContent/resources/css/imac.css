@@ -1,0 +1,34 @@
+
+	/*imac*/
+	.imac .wrap{
+		width: 1100px;
+	}
+
+	.imac .alignheader{
+		width: 1100px;
+	}
+
+	.imac .wrapper{
+		width: 716px;
+	}
+
+	.imac .profilepics {
+		width: 833px;
+	}
+
+
+
+	.imac .alternative{
+		width: 500px;
+	}
+	.imac .matchingsearch li{
+		width: 250px;
+	}
+
+	.imac .matchingsearch li .results li{
+		width: 140px;
+	}
+
+	.imac .matchingsearch li .description {
+		width: 140px;
+	}

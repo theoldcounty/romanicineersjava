@@ -1,0 +1,74 @@
+
+	/*mobile*/
+	.mobile .wrap{
+		width: 400px;
+	}
+
+	.mobile #interactionpane {
+		height: auto;
+	}
+
+	.mobile .wrapper{
+		width: 240px;
+	}
+
+	.mobile .profilepics {
+		width: 400px;
+		padding-top: 20px;
+	}
+
+	.mobile .previous {
+		width: 70px;
+		height: 70px;
+		margin-top: 78px;
+		margin-right: 4px;
+		margin-left: 5px;
+	}
+	.mobile .next{
+		width: 70px;
+		height: 70px;
+		margin-top: 78px;
+	}
+
+	.mobile .featureimg{
+		width:auto;
+		height:auto;
+	}
+
+	.mobile .featureimg img{
+		width: 400px;
+	}
+
+	.mobile .collection li{
+		width: 400px;
+	}
+
+	.mobile #calltoaction ul li a{
+		width: 98px;
+	}
+
+
+	.mobile #tooltip{
+		display:none!important;
+	}
+
+	.mobile .alternative{
+		width:400px;
+	}
+
+	.mobile .matchingsearch li .results li {
+		width: 130px;
+	}
+
+	.mobile .matchingsearch li .description {
+		width: 290px;
+	}
+
+	.mobile .matchingsearch li{
+		width: 400px;
+	}
+
+	.mobile .results{
+		font-size:11px;
+	}
+

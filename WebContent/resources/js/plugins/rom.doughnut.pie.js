@@ -589,7 +589,7 @@ var goPie = {
 
 			var specs = {
 							color : colorCode,
-							w : 300,
+							w : 285,
 							h : 240,
 							r: 80,
 							ir: 45

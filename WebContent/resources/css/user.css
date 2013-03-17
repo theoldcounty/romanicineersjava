@@ -1,0 +1,193 @@
+
+	
+	/*_user*/
+	
+	.user{}
+	.user h2{
+		margin: 0;
+		padding: 0;
+		font-size: 30px;
+		color: #000000;
+		font-family: "Arial";
+	}
+	
+	.user .details{
+		font-size: 12px;
+		color: #000000;
+		font-family: "Arial";
+	}
+	
+	
+	.user .gallery{
+		overflow:hidden;
+		padding:10px;
+		border: 1px solid #000000;
+	}
+	
+	
+	.user .featureImg{
+		overflow:hidden;
+		width:260px;
+		height:260px;
+		float:left;
+		background: grey;
+	}
+	.user .featureImg img{
+		width:260px;
+	}	
+	
+	.user .collection{
+		overflow:hidden;
+		margin:0;
+		padding:0;
+	}
+	.user .collection li{
+		width:278px;
+		height:311px;
+		float:left;
+		border:1px solid black;
+		list-style-type:none;
+	}
+	
+	
+	.user .collection li h2{
+		font-size:16px;
+		margin:0;
+		padding:0;
+	}
+	
+	.user .collection li{
+		padding: 10px;
+	}
+	
+	.user .physical li{
+		padding:0;
+	}
+	
+	.user .indicators li{
+		padding:0;
+	}
+	
+	.total{
+		font-size: 18px;
+		font-weight: bold;	
+	}
+	
+	
+	
+	
+	
+	.user .indicators{
+		margin:0;
+		padding:0;
+	}
+	.user .indicators li{
+		overflow:hidden;
+		height: 21px;
+		font-size:12px;
+		color: #000000;
+		border: 0;
+		margin-bottom: 4px;
+	}
+
+	.user .indicators li .negative{
+		float: left;
+		width:70px;
+		padding-right: 8px;
+		text-align: right;	
+	}
+
+	.user .indicators li .holder{
+		width: 102px;
+		position: relative;
+		margin-right: 20px;
+		padding-top: 2px;
+		padding-right: 10px;
+	}
+
+	.user .indicators li .positive{
+		float:left;
+		width: 70px;
+		padding-left:8px;
+		text-align: left;
+	}
+
+	.user .indicators li .bar{
+		background: lightgrey;
+		float: left;
+		height: 15px;
+		width: 122px;
+	}
+	.user .indicate{
+		position: absolute;
+		left: 100%;
+		background: green;
+		height: 11px;
+		width: 9%;
+		border-radius: 2px;
+	}
+	
+	
+
+
+	.user .physical{
+		overflow:hidden;
+		margin:0;
+		padding:0;
+	}
+	.user .physical li{
+		float: none;
+		width: auto;
+		height: auto;
+		overflow: hidden;
+		border:none;
+	}
+	.user .physical li .title{
+		float:left;
+		width:97px;
+	}
+	.user .physical li .result{
+		float:left;
+		width:180px;
+		font-weight:bold;
+	}
+
+
+
+	.profilePics{
+		float:right;
+		width:600px;
+		height: 260px;
+		overflow: hidden;
+		background:green;
+	}
+	.profilePics ul{
+		margin:0;
+		padding:0;
+		overflow:hidden;
+	}
+	.profilePics ul li{
+		float:left;
+		width:110px;
+		height:110px;
+		overflow:hidden;
+		background:red;
+		margin-right: 10px;
+		margin-bottom: 10px;
+		display:block;
+	}
+
+
+	.profilePics ul li img{
+		width:125px;
+	}
+
+	.profilePics ul li img.portrait{
+		width:115px;
+		height:auto;
+	}
+
+	.profilePics ul li img.widescreen{
+		width:auto;
+		height:115px;
+	}

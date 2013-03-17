@@ -86,7 +86,7 @@
 		setup: function(obj, options){
 			this.currentData = options;
 
-			var r = 200,
+			var r = 270,
 				format = d3.format(",d"),
 				fill = d3.scale.category20c();
 
@@ -94,10 +94,13 @@
 				.sort(null)
 				.size([r, r]);
 
-			var vis = d3.select("#"+obj.id).append("svg")
+			var bubbleHolder = d3.select("#"+obj.id).append("svg")
 				.attr("width", r)
 				.attr("height", r)
 				.attr("class", "bubble");
+				
+			var vis = bubbleHolder.append("svg:g")
+				.attr("transform", "translate(15,15)");
 
 			var node = vis.selectAll("g.node")
 				.data(bubble.nodes(this.classes(this.currentData))

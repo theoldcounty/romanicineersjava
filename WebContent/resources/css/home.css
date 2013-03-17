@@ -1,0 +1,256 @@
+
+		.goals .head{
+			position: absolute;
+			top: 200px;
+			left: 21px;
+			padding: 2px;
+			display:none;
+		}
+
+		.goals .heart{
+			position: absolute;
+			top: 200px;
+			left: 21px;
+			padding: 2px;
+			display:none;
+		}
+
+		.goals .hand{
+			position: absolute;
+			top: 200px;
+			left: 21px;
+			padding: 2px;
+			display:none;
+		}
+
+		.hotspothead{
+			background:blue;
+			height:8px;
+			width:8px;
+			cursor:pointer;
+			position: absolute;
+			top: 124px;
+			left: 30px;
+			border-radius:35px;
+		}
+
+		.hotspotheart{
+			background:blue;
+			height:8px;
+			width:8px;
+			cursor:pointer;
+			position: absolute;
+			top: 139px;
+			left: 63px;
+			border-radius:35px;
+		}
+
+		.hotspothand{
+			background:blue;
+			height:8px;
+			width:8px;
+			cursor:pointer;
+			position: absolute;
+			top: 152px;
+			left: 82px;
+			border-radius:35px;
+		}
+
+		.fullprofile a{
+			color:red;
+		}
+
+     /*usertip*/
+
+
+		#tooltip{
+			background: #ffffff;
+			position: absolute;
+			display:none;
+			top:0;
+			left:0;
+			z-index:9;
+		}
+
+		#tooltip .fullprofile{
+			background: #333;
+			float: left;
+			width: 100%;
+			text-align: right;
+			color: green;
+		}
+
+		#tooltip .fullprofile .placement{
+			padding-left:10px;
+			padding-right:10px;
+		}
+
+		#tooltip .icons{
+			background:green;
+			float: left;
+			width: 100%;
+		}
+		#tooltip .icons ul{
+			overflow:hidden;
+			margin:0;
+			padding:5px;
+		}
+		#tooltip .icons ul li{
+			float:left;
+			list-style-type:none;
+			margin-right: 7px;
+			background: red;
+			width: 80px;
+			height: 50px;
+			position:relative;
+		}
+		
+		#tooltip .icons ul li span{
+			position: absolute;
+			background: orange;
+			bottom: 0;
+			left: 57px;		
+		}
+
+		#tooltip .icons ul li a{
+			height: 43px;
+			width: 58px;
+			display: block;
+			text-indent: -999px;
+		}
+
+
+		#tooltip .icons ul li.myphotos{
+			background: url('../images/bar_icon_photo.png') 0 0 no-repeat;
+		}
+		#tooltip .icons ul li.myphotos a{}
+
+		#tooltip .icons ul li.followers{
+			background: url('../images/bar_icon_followers.png') 0 0 no-repeat;
+		}
+		#tooltip .icons ul li.followers a{}
+		
+
+		#tooltip .icons ul li.followme{
+			background: url('../images/bar_icon_followme.png') 0 0 no-repeat;
+		}
+		#tooltip .icons ul li.followme a{}
+
+
+		#tooltip .icons ul li.talktome{
+			background: url('../images/bar_icon_talk.png') 0 0 no-repeat;
+		}
+		#tooltip .icons ul li.talktome a{}
+		
+
+
+
+		#tooltip .pointer{
+			background: red;
+			height: 20px;
+			width: 30px;
+			position: absolute;
+		}
+
+		#tooltip.pointerLeft .pointer{
+			left: -22px;
+			background: url('../images/pointerleft.png') 0 0 no-repeat;
+		}
+		#tooltip.pointerRight .pointer{
+			right: -22px;
+			background: url('../images/pointerright.png') 0 0 no-repeat;
+		}
+
+		.biodetails .wrapper{
+			padding:18px;
+			overflow: hidden;
+			position: relative;
+		}
+
+		.biodetails .bioimg{
+			float:left;
+			width: 120px;
+			margin-right:10px;
+		}
+
+		.biodetails .bioimg .avatar{
+			height: 100px;
+			width: 100px;
+			background: green;
+			overflow: hidden;
+		}
+
+		.biodetails .bioimg .goals{
+			background: url('../images/goals.jpg') 0 0 no-repeat;
+			height: 100px;
+			width: 100px;
+		}
+
+		.biodetails .biospec{
+			float:right;
+			position: relative;
+		}
+
+		.biodetails .biospec h2{
+			margin:0;
+			color:#000000;
+			text-transform: uppercase;
+		}
+
+		.biodetails .biospec .gender{
+			background:grey;
+			width: 39px;
+			height: 47px;
+			position:absolute;
+			bottom: 0;
+		}
+
+		.biodetails .biospec .gender.female{
+			background: url('../images/symbol_female.jpg') 0 0 no-repeat;
+		}
+
+		.biodetails .biospec .gender.male{
+			background: url('../images/symbol_male.jpg') 0 0 no-repeat;
+		}
+
+		.biodetails .biospec .piechart{
+			width: 263px;
+			height: 214px;
+		}
+
+		
+		
+		.users{
+			margin: 0;
+			padding: 0;
+		}
+		.users li{
+			float:left;
+			background: green;
+			width:100px;
+			height:100px;
+			overflow:hidden;
+		}
+		.users li.even{
+			background: #333333;
+		}
+		.users li.odd{
+			background: #999999;
+		}
+
+
+		.avatar{
+			width:100px;
+			height:100px;
+			overflow:hidden;
+			top:0;
+		}
+
+		.avatar img{
+			width:105px;
+		}
+		
+		
+		.nodata{
+			display:none;
+		}
