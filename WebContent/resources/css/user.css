@@ -191,3 +191,38 @@
 		width:auto;
 		height:115px;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	.user .collection{
+		width: 600px;
+		float: left;	
+	}
+	
+	#other-candidates{
+		width: 300px;
+		float: right;
+	}
+	
+	
+.progressbar{
+	right: 0;
+	width: 107px;
+	height: 15px;
+	background: grey;
+	position: relative;
+	padding: 2px;
+}
+
+.progressbar .bar{
+	background: green;
+	height: 15px;
+	z-index: 99999999999999999;
+	width: 37%;
+}
+	

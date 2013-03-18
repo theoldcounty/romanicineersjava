@@ -18,7 +18,8 @@ var fetchMembers = Backbone.View.extend({
 	 * @description initialize
 	 */
 	initialize : function() {
-		//console.log("get feed members");
+		
+		console.log("get feed members");
 		/*get feed members*/
 		var that = this;
 		utils.getJsonData(utils.feedUsers, function(data){
@@ -52,7 +53,7 @@ var fetchMembers = Backbone.View.extend({
 	},
 
 	populateHome: function(data){
-		////console.log("data", data);
+		console.log("data", data);
 		console.log("populate home");
 
 		$('.users.isotope').empty();
@@ -71,5 +72,9 @@ var fetchMembers = Backbone.View.extend({
 		//$('.users').isotope( 'reloadItems');
 
 		//var isoFilter= new $.rom.isotope.filters();
+	},
+	bindIsotopeEvents: function(){
+		
+		
 	}
  });

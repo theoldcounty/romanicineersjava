@@ -223,6 +223,7 @@
 		.users{
 			margin: 0;
 			padding: 0;
+			position:relative;
 		}
 		.users li{
 			float:left;
@@ -230,6 +231,7 @@
 			width:100px;
 			height:100px;
 			overflow:hidden;
+			position:relative;
 		}
 		.users li.even{
 			background: #333333;

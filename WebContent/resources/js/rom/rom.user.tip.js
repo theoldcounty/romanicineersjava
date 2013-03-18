@@ -142,6 +142,7 @@ var userTip = Backbone.View.extend({
 
 		$(".users li").on({
 			mouseenter: function(e){
+				console.log("user li on");
 				that.eventOnItem();
 
 				var y_offset = 35;

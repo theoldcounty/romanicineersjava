@@ -26,7 +26,11 @@
 
 		<!-- Javascript -->
 		<script type="text/javascript" src="resources/js/rom/rom.application.js"></script>
-		<script type="text/javascript" src="resources/js/rom/rom.controller.js"></script>
+		
+		
+		<script type="text/javascript" src="resources/js/rom/rom.controller.home.js"></script>
+		<script type="text/javascript" src="resources/js/rom/rom.controller.user.js"></script>
+		
 		<script type="text/javascript" src="resources/js/rom/rom.forms.js"></script>
 		<script type="text/javascript" src="resources/js/rom/rom.utils.js"></script>
 		<script type="text/javascript" src="resources/js/rom/rom.user.tip.js"></script>
@@ -36,5 +40,6 @@
 		<script type="text/javascript" src="resources/js/rom/rom.slider.controls.js"></script>
 		<script type="text/javascript" src="resources/js/rom/rom.google.maper.js"></script>
 		
+		<script type="text/javascript" src="resources/js/rom/rom.responsive.js"></script>
 		
 		
