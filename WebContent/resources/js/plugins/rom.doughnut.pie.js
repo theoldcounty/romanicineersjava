@@ -610,7 +610,7 @@ var goPie = {
 		});
 		
 	},
-	chosenUpdateChart: function(jsonUrl, holder){
+	chosenUpdateChart: function(jsonUrl, holder, callback){
 
 		$.getJSON(jsonUrl, function(data){
 			var dataPieJson = [];
@@ -630,11 +630,11 @@ var goPie = {
 
 			var datalength = dataPieJson.length;
 			if(datalength > 0){
-				$(holder).show();
 				$(holder).attr("data-response", "true");
+				callback(holder);
 			}else{
-				$(holder).hide();
 				$(holder).attr("data-response", "false");
+				callback(holder);
 			}
 		});
 	}

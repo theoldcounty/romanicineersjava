@@ -252,7 +252,23 @@ var userTip = Backbone.View.extend({
 		//contentsObj.userId = "509f43fad1ef48c2c49c7a09";
 		var jsonUrl = 'api?servicerequest=getInterests&id='+contentsObj.userId+'&chartname=interests';
 		var holder = '#biometricPie';
-		goPie.chosenUpdateChart(jsonUrl, holder);
+		goPie.chosenUpdateChart(jsonUrl, holder, function(hold){
+			//console.log("hold", hold);
+			
+			var hasData = $(hold).attr("data-response");
+			
+			//console.log("has data", hasData);
+			if(hasData == "true"){
+				//console.log("show piechart");
+				$(hold).show();
+				$(hold).parent().find('.nodata').hide();
+			}
+			else{
+				//console.log("hide piechart");
+				$(hold).hide();
+				$(hold).parent().find('.nodata').show();	
+			}
+		});
 		/*interest d3 pie chart*/
 	},
 	reposition:function(left, top){
