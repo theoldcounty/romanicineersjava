@@ -160,7 +160,7 @@
 })(jQuery);
 
 var goBubble = {
-	chosenChart: function(jsonUrl, colourBands, holder){
+	chosenChart: function(jsonUrl, colourBands, holder, callback){
 
 		$.getJSON(jsonUrl, function(data){
 			var dataBubbleJson = [];
@@ -197,9 +197,11 @@ var goBubble = {
 							]
 				};
 				$(holder).bubbleChart('init', visitJson);
+				callback(holder);
 			}else{
 				$(holder).hide();
 				$(holder).attr("data-response", "false");
+				callback(holder);
 			}
 
 		});

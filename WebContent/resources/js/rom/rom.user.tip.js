@@ -93,11 +93,10 @@ var userTip = Backbone.View.extend({
 		}, delaytime);
 	},
 
- 	/*
-	 * @description initialize
-	 */
-	initialize : function() {
-
+	establishPie: function(){
+		var holder = '#biometricPie';
+		
+		$(holder).empty();
 		//create the biometric pie chart
 		var specs = {
 						color : 'brightOrange',
@@ -109,7 +108,16 @@ var userTip = Backbone.View.extend({
 
 		goPie.initChart('#biometricPie', specs);
 		//create the biometric pie chart
+		
+		
+	},
+	
+ 	/*
+	 * @description initialize
+	 */
+	initialize : function() {
 
+		this.establishPie();
 		this.tooltipWidth = parseInt($('#tooltip').outerWidth(true), 10);
 		this.tooltipHeight = parseInt($('#tooltip').outerHeight(true), 10);
 

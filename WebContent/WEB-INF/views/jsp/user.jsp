@@ -28,10 +28,26 @@
 
 					<div class="gallery">
 						<div class="featureImg">
-							<img src="http://www.hdwallpapersdepot.com/wp-content/uploads/2012/07/4.jpg">
+							<img src="http://4.bp.blogspot.com/-GKSz-e2NS5A/Tk7MevN7CiI/AAAAAAAACXI/nBdBOhzfnoc/s1600/Jessica-Alba_bee-media.blogspot.com+%25281%2529">
 							<a class="iframebox" href="showUpload2">Add Picture</a>
 						</div>
 						<div class="profilePics">
+							<div id="galleryCarousel" data-carousel="true" data-count="4">
+								<div class="wrapper">
+									<ul>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									</ul>
+								</div>
+							</div>
 							<c:if test="${people[1].countGallery > 1}">
 								<div id="galleryCarousel" data-carousel="" data-count="${people[1].countGallery}">
 									<div class="wrapper">
@@ -116,7 +132,7 @@
 							<li class="element even" data-user-country="United States" data-user-interests="sex" data-user-gender="Female" data-user-name="Jeri Ryan" data-user-id="31"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://api.ning.com/files/yXVPvJ2tIpTs7Tq0fE2XprWLRMz5dWvfO3S-R8yP63kihM0ULCAEG8eXczUcnNhmzsqrpk*pjadPu9mhHw3zeyfQw1*LQRGc/JeriRyan_353.jpg"></a></div></li>
 							<li class="element odd" data-user-country="United Kingdom" data-user-interests="films, sex" data-user-gender="Male" data-user-name="Christian Bale" data-user-id="32"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://collider.com/wp-content/image-base/People/C/Chrisrian_Bale/Christian%20Bale%20image%20(1).jpg"></a></div></li>
 							<li class="element even" data-user-country="United Kingdom" data-user-interests="sex" data-user-gender="Female" data-user-name="Jamie Pressley" data-user-id="34"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://www.orble.com/images/meganfox1.jpg"></a></div></li>
-							<li class="element odd" data-user-country="United Kingdom" data-user-interests="robots, spaceflight, football, movies" data-user-gender="Male" data-user-name="Johnny Depp" data-user-id="34"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://images2.fanpop.com/image/photos/12100000/young-adorable-Johnny-johnny-depp-12183502-300-400.jpg"></a></div></li>
+							<li class="element odd" data-user-country="United Kingdom" data-user-interests="robots, spaceflight, football, movies" data-user-gender="Male" data-user-name="Johnny Depp" data-user-id="34"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://shechive.files.wordpress.com/2011/11/britney-spears-13.jpg?w=500&h=666"></a></div></li>
 							<li class="element even" data-user-country="United Kingdom" data-user-interests="spaceflight, football, movies" data-user-gender="Female" data-user-name="Jamie Pressley" data-user-id="34"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://www.maniacworld.com/angelina-jolie-cleavage.jpg"></a></div></li>
 							<li class="element odd" data-user-country="United Kingdom" data-user-interests="football, movies" data-user-online="1" data-user-gender="Female" data-user-name="Jamie Pressley" data-user-id="34"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://i144.photobucket.com/albums/r164/johnkb8/Babes/Hottie2-1-1.jpg"></a></div></li>
 							<li class="element even" data-user-country="United Kingdom" data-user-interests="sex" data-user-gender="Female" data-user-name="Jamie Pressley" data-user-id="34"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://blogs.sundaymercury.net/anorak-city/kelly-brook.jpg"></a></div></li>
@@ -128,7 +144,7 @@
 							<li class="element even" data-user-country="United Kingdom" data-user-interests="spaceflight, sex, football, movies" data-user-gender="Female" data-user-name="Jamie Pressley" data-user-id="34"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://www.cinemavoyage.com/images/juliavothbitchslapmaxim200805.jpg"></a></div></li>
 							<li class="element odd" data-user-country="United Kingdom" data-user-interests="sex, football, movies" data-user-gender="Female" data-user-name="Jamie Pressley" data-user-id="34"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://media.santabanta.com/newsite/cinemascope/feed/amrita-puri10.jpg"></a></div></li>
 							<li class="element even" data-user-country="France" data-user-interests="sex, football, movies" data-user-gender="Female" data-user-name="Jamie Pressley" data-user-id="34"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://img.ezinemark.com/imagemanager2/files/30004254/2011/10/2011-10-14-16-02-44-5-the-italian-actress-and-model-sara-tommasi-used-to.jpeg"></a></div></li>
-							<li class="element odd" data-user-country="Spain" data-user-interests="movies" data-user-gender="Female" data-user-name="Jamie Pressley" data-user-id="34"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="http://s1.moviefanfare.com/uploads/2010/09/scarlett-johansson1.jpg"></a></div></li>
+							<li class="element odd" data-user-country="Spain" data-user-interests="movies" data-user-gender="Female" data-user-name="Jamie Pressley" data-user-id="34"><div class="avatar"><a href="user?id=4fa6eddc0234964172522248"><img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRvGlbHG2p2zNW3NO5qkGFdTNqFAcao206fjbt21TvHxbeR-Tw0"></a></div></li>
 						</ul>					
 						
 					</div>

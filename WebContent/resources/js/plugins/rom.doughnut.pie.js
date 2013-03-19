@@ -570,7 +570,7 @@ var goPie = {
 	updateCharts: function(pieElement, dynamicData){
 		$(pieElement).doughnutPie('transitions', dynamicData); // Pass object "{}" to "init" as arguments
 	},
-	chosenChart: function(jsonUrl, colorCode, holder){
+	chosenChart: function(jsonUrl, colorCode, holder, callback){
 
 		$.getJSON(jsonUrl, function(data){
 			var dataPieJson = [];
@@ -582,7 +582,6 @@ var goPie = {
 								title: key,
 								octetTotalCount: val
 								};
-
 					dataPieJson.push(tempObj);
 				});
 			}
@@ -600,10 +599,16 @@ var goPie = {
 				goPie.initChart(holder, specs);
 				goPie.updateCharts(holder, dataPieJson);
 				$(holder).attr("data-response", "true");
+				callback(holder);
+				
 			}else{
 				$(holder).attr("data-response", "false");
+				callback(holder);
 			}
+			
+			
 		});
+		
 	},
 	chosenUpdateChart: function(jsonUrl, holder){
 
