@@ -10,6 +10,15 @@
 			</div>
 		</footer>
 
+	<div id="shazam-overlay"></div>
+	<div id="preloader"></div>
+	<div id="shazam-box">
+		<div class="shazam-content">
+			<div id="shazam-message"><div class="wraps"></div></div>
+			<a href="#" class="close">Close</a>
+		</div>
+	</div>
+
 	<jsp:include page="javascript.jsp" />
 	</body>
 </html>

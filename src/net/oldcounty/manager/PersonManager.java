@@ -66,32 +66,45 @@ public class PersonManager {
 					if(
 						CommonUtils.isEmpty(person.getUsername()) ||
 						CommonUtils.isEmpty(person.getEmailaddress()) ||
-						CommonUtils.isEmpty(person.getPassword())
+						CommonUtils.isEmpty(person.getPassword()) ||
+						CommonUtils.isEmpty(person.getBirthyear()) ||
+						CommonUtils.isEmpty(person.getBirthmonth()) ||
+						CommonUtils.isEmpty(person.getBirthday()) 
 					){
 						isValidInputs = false;
 						results.put("error", "At least one required field was blank");
 					}
 
+					
+					
+					System.out.println("person.getBirthyear() "+ person.getBirthyear());
+					System.out.println("person.getBirthmonth() "+ person.getBirthmonth());
+					System.out.println("person.getBirthday() "+ person.getBirthday());
+					
 					if(
 						!CommonUtils.isEmpty(person.getBirthyear()) && 
 						!CommonUtils.isEmpty(person.getBirthmonth()) && 
 						!CommonUtils.isEmpty(person.getBirthday())
 					){
+						System.out.println("checking birthday entry");   
 						if(
 							!CommonUtils.isValidDate(person.getBirthyear()+person.getBirthmonth()+person.getBirthday())
 						){
+							System.out.println("birthday is not valid"); 
 							isValidInputs = false;
 							results.put("error", "The birthdate is not valid");
+						}else{
+							if(
+									!CommonUtils.isOlderThan18(person.getBirthyear()+person.getBirthmonth()+person.getBirthday())
+							){
+								System.out.println("need to be over 18"); 
+								isValidInputs = false;
+								results.put("error", "You need to be over 18 to access this site");
+							}							
 						}
-						
-						if(
-							!CommonUtils.isOlderThan18(person.getBirthyear()+person.getBirthmonth()+person.getBirthday())
-						){
-							isValidInputs = false;
-							results.put("error", "You need to be over 18 to access this site");
-						}						
 					}
 					else{
+						System.out.println("birthday incomplete"); 	
 						results.put("error", "The birthdate is incomplete");
 					}
 

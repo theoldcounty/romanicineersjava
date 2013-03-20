@@ -677,46 +677,6 @@
 
 
 
-	#colorboxWrapper .photoWrap{
-		overflow:hidden;
-	}
-
-	#colorboxWrapper .innerWrap{
-		padding:5px;
-	}
-
-
-	#colorboxWrapper.regular{
-		height:560px;
-		width:780px;
-		display:block;
-	}
-
-	#colorboxWrapper.regular .photoWrap{
-		height: 480px;
-		width: 775px;
-		text-align: center;
-	}
-
-	#colorboxWrapper .photoWrap img{
-		height:100%;
-	}
-
-
-
-	#cboxprevious{
-		position: absolute;
-		right: auto!important;
-		top: 55%;
-		left: 0;
-	}
-
-	#cboxnext{
-		position: absolute;
-		right: 0;
-		top: 55%;
-		left: auto!important;
-	}
 
 	
 	

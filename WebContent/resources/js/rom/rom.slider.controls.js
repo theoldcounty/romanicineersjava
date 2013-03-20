@@ -30,11 +30,7 @@ var sliderControls = Backbone.View.extend({
 				that.changedEvent(event, ui);
 			});
 
-			var thatEl = this;
-			var t = window.setInterval(function(){
-				$(thatEl).slider( "option", "value", 50 );
-				clearTimeout(t);
-			},100);
+			$(this).slider( "option", "value", 50 );
 
 			var fieldName = $(this).data('field');
 			var input = '<input id="slider'+j+'" type="hidden" name="'+fieldName+'" value="">';

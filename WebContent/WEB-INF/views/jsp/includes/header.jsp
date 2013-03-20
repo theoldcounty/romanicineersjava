@@ -15,14 +15,14 @@
 						<c:choose>
 						  <c:when test="${inSession != null}">
 								<ul>
-								    <li><a class="form" href="logout">Logout</a></li>
-									<li><a class="form" href="edit">Edit</a></li>
+								    <li><a class="shazam form" href="logout">Logout</a></li>
+									<li><a class="shazam form" href="edit">Edit</a></li>
 								</ul>
 						  </c:when>
 						  <c:otherwise>
 								<ul>
-									<li><a class="form" href="register">Sign up</a></li>
-									<li><a class="form" href="login">Login</a></li>
+									<li><a class="shazam form" href="register">Sign up</a></li>
+									<li><a class="shazam form" href="login">Login</a></li>
 								</ul>
 						  </c:otherwise>
 						</c:choose>

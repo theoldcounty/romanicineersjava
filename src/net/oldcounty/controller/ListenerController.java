@@ -243,115 +243,25 @@ public class ListenerController{
     	}
     	person.setPersonality(personaltraits);
     	
-    	
-    	//_ register the user into the database
-    	List<DBObject> registerResponse = personManager.registerUser(person);
-    	
-    	if(registerResponse.get(0).get("response") == "OK"){
-    			String userId = registerResponse.get(0).get("lastId").toString(); //get actual user id
-    			
-    		/*	
-		    	//_interests chart
-			    Map<String,Integer> interestData = new LinkedHashMap<String,Integer>();
-		    	if(interests!=null){
-		    		int index = 0;
-		    		for(String interest : interests)
-			    	{
-		    			interestData.put(interest,interestknobs[index]);
-			    		index++;
-			    	}
-		    	}
-		    			    	
-		    	Interests interest = new Interests();
-			    	interest.setUserId(userId);
-			    	interest.setName("interests");
-			    	interest.setResults(interestData);
-			    	
-		    	List<DBObject> interestResponse = InterestDao.addInterest(interest);
-		    	if(interestResponse.get(0).get("response") == "OK"){
-		    		System.out.println("interests added ::  "+ userId);
-		    		//check if the chart has been added successfully.
-		    	}
-		    	//_interests chart
-		    	
-
-		    	
-		    	//_seeking chart
-			    Map<String,Integer> seekingData = new LinkedHashMap<String,Integer>();
-		    	if(interests!=null){
-		    		int index = 0;
-		    		for(String seeking : seekings)
-			    	{
-		    			seekingData.put(seeking,seekingknobs[index]);
-			    		index++;
-			    	}
-		    	}
-		    			    	
-		    	Interests seeking = new Interests();
-			    	seeking.setUserId(userId);
-			    	seeking.setName("seeking");
-			    	seeking.setResults(seekingData);
-			    	
-		    	List<DBObject> seekingResponse = InterestDao.addInterest(seeking);
-		    	if(seekingResponse.get(0).get("response") == "OK"){
-		    		System.out.println("seeking added ::  "+ userId);
-		    		//check if the chart has been added successfully.
-		    	}
-		    	//_seeking chart	
-
-		    	//_visiting chart
-			    Map<String,Integer> visitingData = new LinkedHashMap<String,Integer>();
-		    	if(interests!=null){
-		    		int index = 0;
-		    		for(String visiting : visitings)
-			    	{
-		    			visitingData.put(visiting,visitingknobs[index]);
-			    		index++;
-			    	}
-		    	}
-		    			    	
-		    	Interests visiting = new Interests();
-		    		visiting.setUserId(userId);
-			    	visiting.setName("visiting");
-			    	visiting.setResults(visitingData);
-			    	
-		    	List<DBObject> visitingResponse = InterestDao.addInterest(visiting);
-		    	if(visitingResponse.get(0).get("response") == "OK"){
-		    		System.out.println("visiting added ::  "+ userId);
-		    		//check if the chart has been added successfully.
-		    	}
-		    	//_visiting chart	
-		    */
-		    	
-    	}
-    	//last id by registered user - dummy user id
-
-    	Map<String,String> countryList = CommonUtils.getCountries();
-    	String countriesCommonKey = "GBR"; //United Kingdom
-
-    	Map<String,String> ethnicityList = CommonUtils.getEthnicity();
-    	String ethnicityCommonKey = "0"; //Caucasian
-
-    	request.setAttribute("countryCommonKey", countriesCommonKey);
-    	request.setAttribute("countryList", countryList);
-
-    	request.setAttribute("ethnicityCommonKey", ethnicityCommonKey);
-    	request.setAttribute("ethnicityList", ethnicityList);
-    	
-    	Boolean inSession = null;
-       	//if the user has logged into the session
-    	if(inSession != null){
-    		//they will need to logout in order to re-register a new account
-    		String message = "You have been automatically logged out";
-    		//PersonController.logoutUser(inSession, session);
-    		return new ModelAndView("jsp/user/register", "message", message);
-    	}
-    	else{
-    		//the guest can register
-    		String message = "Dear Guest please register";
-    		return new ModelAndView("jsp/user/register", "message", message);
+    	if(submitted == null){
+    		//__if not yet registered return html form
+	    	Map<String,String> countryList = CommonUtils.getCountries();
+	    	String countriesCommonKey = "GBR"; //United Kingdom
+	
+	    	Map<String,String> ethnicityList = CommonUtils.getEthnicity();
+	    	String ethnicityCommonKey = "0"; //Caucasian
+	
+	    	request.setAttribute("countryCommonKey", countriesCommonKey);
+	    	request.setAttribute("countryList", countryList);
+	
+	    	request.setAttribute("ethnicityCommonKey", ethnicityCommonKey);
+	    	request.setAttribute("ethnicityList", ethnicityList);
+	    	
+			return new ModelAndView("jsp/user/register");   	
+    	}else{
+    		//_ register the user into the database and return a json response
+        	return new ModelAndView("jsp/json/response", "json", personManager.registerUser(person));  	
     	}    	
-    	    	
     }
 
 

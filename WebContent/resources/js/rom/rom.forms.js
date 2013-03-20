@@ -8,6 +8,10 @@
 */
 
 var romForms = {
+		messages: [{
+		    "successRegistration" : "<p>Wow you have successfully registered on Romancineers. We are automatically logging you in now so you can find your perfect date.</p>",
+		    "failRegistration" : "<p>There is a problem with your entry, please ensure you have completed all of the required fields.</p>"
+		}],
 		getRandom: function(){
 			var min = 0;
 			var max = 100;
@@ -135,7 +139,7 @@ var romForms = {
 			});
 		},
 		setUpRegistration: function(){
-
+			var that = this;
 			 $( ".registration" ).tabs();
 			 this.bindSlideControllers();
 			 this.bindGoogleMapEvents();
@@ -150,22 +154,26 @@ var romForms = {
 
 					$.post("register", formResults,
 						function(data) {
-					    	console.log("json response. " + data);
+					    	//console.log("json response. " + data);
 					    	var obj = jQuery.parseJSON(data);
-
-					    	//console.log("obj " + obj);
 
 					    	if(obj[0].response == "OK"){
 					    		console.log("user registered succeffully");
-					    		//close color box
+					    		//__welcome the new user in the lightbox
+					    		shazamOverlay.morphBox(that.messages[0]["successRegistration"]);
+					    		
+					    		//__close the lightbox
+								var t = window.setInterval(function(){
+									console.log("close the overlay now");
+									shazamOverlay.hide();
+									
+									clearInterval(t);
+								},5500);					    		
+					    		
+					    		//__refresh the site to auto log the user in.
+					    			//console.log("current page",window.location.href);
+					    	
 
-					    		//refresh site
-					    		//console.log("current page",window.location.href);
-
-								window.setInterval(function(){
-									console.log("run a reload timer.");
-									//location.reload();
-								},500);
 					    		//location.reload();
 					    		//user has been registered succesfully
 					    	}else{

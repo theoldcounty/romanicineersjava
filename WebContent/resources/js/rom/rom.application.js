@@ -9,9 +9,32 @@
 
 romApplication = {
 	global: function(){
+
+		
+		// if user clicked on button, the overlay layer or the shazambox, close the shazam
+		$('#shazam-overlay').click(function () {
+			shazamOverlay.hide();
+			return false;
+		});
+
+		$('.close').click(function () {
+			shazamOverlay.hide();
+			return false;
+		});
+
+
+		$('.shazam').click(function () {
+			var link = $(this).attr("href");
+			console.log("shazam link", link);
+			shazamOverlay.show(link);
+
+			return false;
+		});
+
+
+	/*	
 		$(".form").colorbox({
-			width:"65%",/*
-			height:"75%",*/
+			width:"65%",
 			onOpen:function(){
 				//alert('onOpen: colorbox is about to open');
 			},
@@ -41,7 +64,8 @@ romApplication = {
 				//alert('onClosed: colorbox has completely closed');
 			}
 		});
-
+	*/
+		
 		//responsive development
 		romResponsive.init();
 		
@@ -82,5 +106,15 @@ $(document).ready(function() {
 });
 
 $(window).resize(function() {
+	
+
+
+	// if user resize the window, call the same function again
+	// to make sure the overlay fills the screen and shazambox aligned to center
+	//only do it if the shazam box is not hidden
+	if (!$('#shazam-box').is(':hidden')){
+		shazamOverlay.rePosition();
+	}
+		
 	romResponsive.resize();
 });
