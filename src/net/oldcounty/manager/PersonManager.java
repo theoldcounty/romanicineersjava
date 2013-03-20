@@ -34,22 +34,7 @@ public class PersonManager {
 				    Boolean isValidInputs = true;
 
 				    //_validate inputs
-				    //__check if email already exists in the database
-				    if(!CommonUtils.isEmpty(person.getEmailaddress())){
-						try {
-							if(!CommonUtils.isEmailUnique(person.getEmailaddress())){
-								isValidInputs = false;
-								results.put("error", "Email address was not unique");
-							}
-						} catch (UnknownHostException e) {
-							e.printStackTrace();
-						} catch (MongoException e) {
-							e.printStackTrace();
-						}
-				    }
-				    else{
-				    	results.put("error", "Email address was empty");				    	
-				    }
+				   
 				    
 					//__check if passwords match
 				    if(!CommonUtils.isEmpty(person.getPassword()) && !CommonUtils.isEmpty(person.getConfirmpassword())){
@@ -59,6 +44,7 @@ public class PersonManager {
 						}
 				    }
 				    else{
+				    	isValidInputs = false;
 				    	results.put("error", "One or both of the passwords were blank");
 				    }
 
@@ -75,11 +61,6 @@ public class PersonManager {
 						results.put("error", "At least one required field was blank");
 					}
 
-					
-					
-					System.out.println("person.getBirthyear() "+ person.getBirthyear());
-					System.out.println("person.getBirthmonth() "+ person.getBirthmonth());
-					System.out.println("person.getBirthday() "+ person.getBirthday());
 					
 					if(
 						!CommonUtils.isEmpty(person.getBirthyear()) && 
@@ -104,9 +85,29 @@ public class PersonManager {
 						}
 					}
 					else{
-						System.out.println("birthday incomplete"); 	
+						System.out.println("birthday incomplete");
+						isValidInputs = false;
 						results.put("error", "The birthdate is incomplete");
 					}
+					
+					 //__check if email already exists in the database
+				    if(!CommonUtils.isEmpty(person.getEmailaddress())){
+						try {
+							if(!CommonUtils.isEmailUnique(person.getEmailaddress())){
+								isValidInputs = false;
+								results.put("error", "Email address was not unique");
+							}
+						} catch (UnknownHostException e) {
+							e.printStackTrace();
+						} catch (MongoException e) {
+							e.printStackTrace();
+						}
+				    }
+				    else{
+				    	isValidInputs = false;	
+				    	results.put("error", "Email address was empty");				    	
+				    }					
+					
 
 				    if(isValidInputs){				    	
 				    	List<DBObject> latestUser = PersonDao.registerUser(person);

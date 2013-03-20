@@ -56,12 +56,10 @@ public class ListenerController{
     		HttpServletRequest request,
     		@RequestParam(value="userId", required=false) String userId,
     		@RequestParam(value="interests", required=false) String[] interests,
-    		@RequestParam(value="interestsknobs", required=false) Integer[] interestsknobs
+    		@RequestParam(value="interestsknobs", required=false) Integer[] interestsknobs,
+    		@RequestParam(value="submitted", required=false) String submitted
     		) throws UnknownHostException, MongoException
     {
-    	
-    	
-    	
     	
     	/*
     	int[] anArray;
@@ -93,37 +91,20 @@ public class ListenerController{
 	    	}
     	}
     	
-
     	Interests interest = new Interests();
 	    	interest.setUserId(userId);
 	    	interest.setName("interests");
 	    	interest.setResults(interestData);
 	    	
 	    System.out.println("interestData ::  "+ interestData);	
-	    	
-    	List<DBObject> interestResponse = InterestDao.addInterest(interest);
-    	if(interestResponse.get(0).get("response") == "OK"){
-    		System.out.println("interests added ::  "+ userId);
-    		//check if the chart has been added successfully.
-    	}
-    	/*_interests chart*/  	
     	
-    	
-    	/*
-    	Boolean inSession = null;
-       	//if the user has logged into the session
-    	if(inSession != null){
-    		//they will need to logout in order to re-register a new account
-    		String message = "You can not edit anything, you are not logged in";
-    		//PersonController.logoutUser(inSession, session);
-    		return new ModelAndView("jsp/user/edit_chart", "message", message);
-    	}
-    	else{
-    		//the guest can register
-    		String message = "Edit a chart test";
-    		return new ModelAndView("jsp/user/edit_chart", "message", message);
-    	}*/  
-    	return new ModelAndView("jsp/user/edit_chart");
+    	if(submitted == null){
+    		//__if not yet added a chart return html form	    	
+			return new ModelAndView("jsp/user/edit_chart");   	
+    	}else{
+    		//_ register the user into the database and return a json response
+        	return new ModelAndView("jsp/json/response", "json", InterestDao.addInterest(interest));  	
+    	}       	
     }
     
     /**

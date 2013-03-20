@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--include header-->
 
-<div id="colorboxWrapper" class="regular">
+<div id="shazam-wrapper" class="regular">
 		<div id="formType" data-form-type="doughnutcharts" data-chart-type="<%=request.getParameter("type")%>"></div>
 		
 		<form id="chartForm" action="edit_chart" enctype="multipart/form-data" method="post" action="">
@@ -52,17 +52,12 @@
 				</div>
 						
 				
-				<span class="error"></span>
 				<input type="hidden" value="submitted" name="submitted"/>
 				<input type="submit" value="submit" name="submit"/>				
 			
 			</fieldset>
 		</form>
 		
+		<div class="error"></div>
 		</div>
 </div>
-
-
-		<!--register.jsp-->
-		${message}
-		<!--register.jsp-->

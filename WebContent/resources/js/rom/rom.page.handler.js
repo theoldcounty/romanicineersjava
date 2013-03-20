@@ -9,11 +9,18 @@
 
 var pageHandler = {
 		reBindEvents: function(section){
+			console.log("section", section);
 			
-			if(section =="register"){
+			if(section.match(/register/gi)){
 				//is regsitration form
 				romForms.setUpRegistration();				
-			}		
+			}
+
+			if(section.match(/edit_chart/gi)){
+				console.log("found charts - set them up");
+				romForms.setUpDoughnutCharts();
+				romForms.setUpCharts();
+			}
 			
 		},
 		homeEvents: function(){

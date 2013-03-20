@@ -102,7 +102,7 @@
 							<div id="interestsPie"></div>
 							<div class="nodata">
 								<p>Show you are interesting, add a visual chart</p>
-								<a class="form" href="edit_chart?type=interests&userId=${people[0]._id}">Add Chart</a>
+								<a class="shazam form" href="edit_chart?type=interests&userId=${people[0]._id}">Add Chart</a>
 							</div>
 						</li>
 						<li>
@@ -110,7 +110,7 @@
 							<div id="seekingPie"></div>
 							<div class="nodata">
 								<p>Show what you want in a relationship, add a visual chart</p>
-								<a class="form" href="edit_chart?type=seeking-relationship&userId=${people[0]._id}">Add Chart</a>
+								<a class="shazam form" href="edit_chart?type=seeking-relationship&userId=${people[0]._id}">Add Chart</a>
 							</div>
 						</li>
 						<li>
@@ -118,7 +118,7 @@
 							<div id="quizchart"></div>
 							<div class="nodata">
 								<p>Where do you want to visit?, add a visual chart</p>
-								<a class="form" href="edit_chart?type=future-holiday&userId=${people[0]._id}">Add Chart</a>
+								<a class="shazam form" href="edit_chart?type=future-holiday&userId=${people[0]._id}">Add Chart</a>
 							</div>
 						</li>
 					</ul>

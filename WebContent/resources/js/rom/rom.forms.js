@@ -10,7 +10,9 @@
 var romForms = {
 		messages: [{
 		    "successRegistration" : "<p>Wow you have successfully registered on Romancineers. We are automatically logging you in now so you can find your perfect date.</p>",
-		    "failRegistration" : "<p>There is a problem with your entry, please ensure you have completed all of the required fields.</p>"
+		    "failRegistration" : "<p>There is a problem with your entry, please ensure you have completed all of the required fields.</p>",
+		    "successChart" : "<p>Congratulations, you have added a new interest chart to your profile, this will make it more visual</p>",
+		    "failChart" : "<p>Please bare with us, something went wrong when trying to add your interest chart</p>"
 		}],
 		getRandom: function(){
 			var min = 0;
@@ -178,6 +180,7 @@ var romForms = {
 					    		//user has been registered succesfully
 					    	}else{
 					    		//there is an error with the registeration.
+					    		//_that.messages[0]["failRegistration"]
 					    		console.log("backend error with reg - likely the username or email already exists");
 					    		$('.error').html(obj[0].error);
 					    	}
@@ -187,7 +190,8 @@ var romForms = {
 		},
 
 		setUpCharts: function(){
-
+			var that = this;
+			
 			 $('#chartForm').submit(function(e) {
 					e.preventDefault();
 					//console.log("clicked on reg - lets do an ajax post at some point");
@@ -205,20 +209,21 @@ var romForms = {
 
 					    	if(obj[0].response == "OK"){
 					    		console.log("user edit_chart succeffully");
-					    		//close color box
 
-					    		//refresh site
-					    		//console.log("current page",window.location.href);
-
-								window.setInterval(function(){
-									console.log("run a reload timer.");
-									//location.reload();
-								},500);
-					    		//location.reload();
-					    		//user has been registered succesfully
+					    		shazamOverlay.morphBox(that.messages[0]["successChart"]);
+					    		
+					    		//__close the lightbox
+								var t = window.setInterval(function(){
+									console.log("close the overlay now");
+									shazamOverlay.hide();
+									
+									clearInterval(t);
+								},5500);
+								
 					    	}else{
 					    		//there is an error with the registeration.
 					    		console.log("backend error with edit_chart - likely the username or email already exists");
+					    		//_that.messages[0]["failChart"]
 					    		$('.error').html(obj[0].error);
 					    	}
 						}
