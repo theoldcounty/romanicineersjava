@@ -12,9 +12,7 @@ var controllerHome = {
 			this.bindHomeEvents();
 			
 			this.emptyUserList();//clear out dummy holders
-			
 
-			
 			var isoFilter= new isotopeFilters();
 			this.getUsers(function(response){
 				console.log("response", response);

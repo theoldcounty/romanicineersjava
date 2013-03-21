@@ -12,14 +12,13 @@ var pageHandler = {
 			console.log("section", section);
 			
 			if(section.match(/register/gi)){
-				//is regsitration form
+				//_is registration form
 				romForms.setUpRegistration();				
 			}
 
 			if(section.match(/edit_chart/gi)){
-				console.log("found charts - set them up");
-				romForms.setUpDoughnutCharts();
-				romForms.setUpCharts();
+				//_edit charts
+				romForms.setUpDoughnutCharts(romUtils.getQueryVariable(section, "type"));
 			}
 			
 		},

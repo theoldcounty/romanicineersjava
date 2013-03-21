@@ -71,8 +71,8 @@
 			var knobElement = $(element +' .knob');
 
 			$.each(options.data, function(index, value) {
-				console.log("index", index);
-				console.log("value", value);
+				//console.log("index", index);
+				//console.log("value", value);
 				knobElement.attr('data-'+index,value);
 			});
 

@@ -18,7 +18,7 @@ var shazamOverlay = {
 	},
 	show: function(link){
 		var that = this;
-		$('body').addClass('preventScroll');
+		
 
 		this.showPreloader();
 
@@ -56,23 +56,31 @@ var shazamOverlay = {
 	rePosition: function(){
 
 		// get the screen height and width
+		var docHeight = $(document).height();
+		var docWidth = $(document).width();
+		
 		var maskHeight = $(window).height();
 		var maskWidth = $(window).width();
-
-		console.log("maskHeight", maskHeight);
-		console.log("maskWidth", maskWidth);
 
 		// calculate the values for center alignment
 		var shazamTop =  (maskHeight/2) - ($('#shazam-box').height()/2.2);
 		var shazamLeft = (maskWidth/2) - ($('#shazam-box').width()/2);
 
-
+		var scrollTop = $('html').offset().top;
+		console.log("scrollTop", scrollTop);
+		
 		console.log("shazamTop", shazamTop);
 		console.log("shazamLeft", shazamLeft);
-
+		
+		shazamTop = shazamTop + (Math.abs(scrollTop));//add current scroll to the overlay
+		console.log("shazamTop 2", shazamTop);
+		
 		// assign values to the overlay and shazam box
-		$('#shazam-overlay').css({height:maskHeight, width:maskWidth});
+		$('#shazam-overlay').css({height:docHeight, width:docWidth});
 		$('#shazam-box').css({top:shazamTop, left:shazamLeft});
+		
+
+		//$('body').addClass('preventScroll');
 	},
 	populate: function(contents){
 		// populate the shazam box
