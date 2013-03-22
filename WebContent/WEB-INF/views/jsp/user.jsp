@@ -9,7 +9,7 @@
 					<jsp:include page="includes/filters.jsp" />
 						${people[0]}
 						${people[1]}
-						
+
 					<div class="gendersign"></div>
 					<h2>
 						<c:if test="${people[0].whichscreenname == 'realname'}">${people[0].realname}</c:if>
@@ -29,7 +29,7 @@
 					<div class="gallery">
 						<div class="featureImg">
 							<img src="http://4.bp.blogspot.com/-GKSz-e2NS5A/Tk7MevN7CiI/AAAAAAAACXI/nBdBOhzfnoc/s1600/Jessica-Alba_bee-media.blogspot.com+%25281%2529">
-							<a class="iframebox" href="showUpload2">Add Picture</a>
+
 						</div>
 						<div class="profilePics">
 							<div id="galleryCarousel" data-carousel="true" data-count="4">
@@ -52,8 +52,8 @@
 								<div id="galleryCarousel" data-carousel="" data-count="${people[1].countGallery}">
 									<div class="wrapper">
 									<ul>
-										<c:set var="pictures" value="${people[1].gallery}"/>									
-										<c:forEach items="${pictures}" varStatus="loop"> 
+										<c:set var="pictures" value="${people[1].gallery}"/>
+										<c:forEach items="${pictures}" varStatus="loop">
 											<li><a class="group" href="${pictures[loop.index].full}"><img src="${pictures[loop.index].thumbnail}"></a></li>
 										</c:forEach>
 									</ul>
@@ -62,17 +62,18 @@
 							</c:if>
 						</div>
 					</div>
-					
+
 					<div class="calltoaction">
 						<ul>
+							<li><a class="shazam" href="showUpload2">Add Picture</a></li>
 							<li><a href="#">Schedule a date</a></li>
-							<li><a href="#">Private Message user</a></li>
+							<li><a class="shazam" href="#">Private Message user</a></li>
 						</ul>
 					</div>
-										
+
 					<!--scheduleDate-->
 					<div class="scheduleDate">
-					
+
 <div class="googlemaps">
 	<div class="page-container">
 		<div class="page-content">
@@ -140,12 +141,12 @@
 			<div id="map_canvas"></div>
 		</div>
 	</div>
-</div>					
+</div>
 					</div>
 					<!--scheduleDate-->
-										
+
 					<!--profileDetails-->
-					<div class="profileDetails">	
+					<div class="profileDetails">
 						<!--collection-->
 						<ul class="collection">
 							<li>
@@ -159,7 +160,7 @@
 												</c:when>
 											</c:choose>
 										</c:forEach>
-									</div></li>						
+									</div></li>
 									<li id="relationship"><div class="title">Relationship ></div><div class="result">${people[0].kindofrelationship}</div></li>
 									<li id="bodytype"><div class="title">Body Type ></div><div class="result">${people[0].bodytype}</div></li>
 									<li id="haircolour"><div class="title">Hair Colour ></div><div class="result">${people[0].haircolor}</div></li>
@@ -207,7 +208,7 @@
 							</li>
 						</ul>
 						<!--collection-->
-						
+
 						<!--other-candidates-->
 						<div id="other-candidates">
 							<ul class="users">
@@ -236,7 +237,7 @@
 						</div>
 						<!--other-candidates-->
 					</div>
-					<!--profileDetails-->	
+					<!--profileDetails-->
 				</div>
 			</div>
 			<div id="googlebelt">
@@ -244,6 +245,6 @@
 				<div class="location"><div id="canvasMap" data-lat="${people[0].latitude}" data-long="${people[0].longitude}"></div></div>
 			</div>
 	</div><!--container-->
-			
-<!--include footer-->    
+
+<!--include footer-->
 <jsp:include page="includes/footer.jsp" />
