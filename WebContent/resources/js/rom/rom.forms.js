@@ -194,7 +194,7 @@ var romForms = {
 			
 			 $('#chartForm').submit(function(e) {
 					e.preventDefault();
-					//console.log("clicked on reg - lets do an ajax post at some point");
+					console.log("clicked on reg - lets do an ajax post at some point");
 
 					var postUrl = window.location;
 					var formResults = $(this).serializeArray();

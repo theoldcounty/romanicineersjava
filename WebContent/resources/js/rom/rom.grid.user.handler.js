@@ -7,9 +7,9 @@
 *	All rights reserved.
 */
 
-var controllerHome = {
+var gridUserHandler = {
 		init: function(){
-			this.bindHomeEvents();
+			this.bindGridUserEvents();
 			
 			this.emptyUserList();//clear out dummy holders
 
@@ -98,7 +98,7 @@ var controllerHome = {
 				});
 			}
 		},
-		bindHomeEvents: function(){
+		bindGridUserEvents: function(){
 			
 			
 			var that = this;

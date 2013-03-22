@@ -87,14 +87,14 @@ romApplication = {
 		if(lastParameter == ""){
 			//home page
 			//console.log("home");
-			controllerHome.init();
+			gridUserHandler.init();
 		}
 
 		/*user controller*/
 		if(lastParameter.match(/user/i) == "user"){
 			//user page
 			//console.log("user");
-			controllerUser.init();
+			pageHandler.userEvents();
 		}
 
 		var searchFilter = new searchFilters();
