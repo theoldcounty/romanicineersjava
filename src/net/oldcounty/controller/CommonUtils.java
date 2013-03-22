@@ -14,6 +14,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.MissingResourceException;
+
 import org.bson.types.ObjectId;
 
 import com.mongo.app.MongoApp;
@@ -171,13 +173,18 @@ public class CommonUtils{
 		Map<String,String> country = new LinkedHashMap<String,String>();
 
 	    Locale[] locales = Locale.getAvailableLocales();
+	    
 	    for (Locale locale : locales) {
-	      String iso = locale.getISO3Country();
-	      String name = locale.getDisplayCountry();
-
-	      if (!"".equals(iso) && !"".equals(name)) {
-	        country.put(iso, name);
-	      }
+			try {
+				String iso = locale.getISO3Country();
+				String name = locale.getDisplayCountry();
+				if (!"".equals(iso) && !"".equals(name)) {
+					country.put(iso, name);
+				}
+			}
+			catch (MissingResourceException e){
+				//do nothing
+			}
 	    }
 
 		return country;
