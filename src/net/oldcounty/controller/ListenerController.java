@@ -43,8 +43,6 @@ public class ListenerController{
 
 	private PersonManager personManager;
 
-	
-
     /**
      * Register
      * @return 
@@ -63,9 +61,7 @@ public class ListenerController{
     	
     	/*
     	int[] anArray;
-
         anArray = new int[10];
-           
         anArray[0] = 10;
         anArray[1] = 20;
         anArray[2] = 30;
@@ -106,6 +102,61 @@ public class ListenerController{
         	return new ModelAndView("jsp/json/response", "json", InterestDao.addInterest(interest));  	
     	}       	
     }
+    
+    
+    
+
+    /**
+     * Forgot Password
+     * @return 
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/forgotpassword")
+    public ModelAndView forgotPasswordDisplay(
+	    		HttpServletRequest request,
+	    		@RequestParam(value="emailaddress", required=false) String emailaddress,    		
+	    		@RequestParam(value="submitted", required=false) String submitted
+    		) throws UnknownHostException, MongoException
+    {	
+    	if(submitted == null){
+    		//__if not yet loggedin return html form
+	    	
+			return new ModelAndView("jsp/user/forgotpassword");   	
+    	}else{
+    		//_ loggedin the user into the database and return a json response
+    		String json = null;
+        	return new ModelAndView("jsp/json/response", "json", json);  	
+    	}
+    }       
+    
+    
+    /**
+     * Login
+     * @return 
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/login")
+    public ModelAndView loginDisplay(
+	    		HttpServletRequest request,
+	    		@RequestParam(value="emailaddress", required=false) String emailaddress,
+	    		@RequestParam(value="password", required=false) String password,	    		
+	    		@RequestParam(value="submitted", required=false) String submitted
+    		) throws UnknownHostException, MongoException
+    {	
+    	if(submitted == null){
+    		//__if not yet loggedin return html form
+	    	
+	    	
+			return new ModelAndView("jsp/user/login");   	
+    	}else{
+    		//_ loggedin the user into the database and return a json response
+    		String json = null;
+        	return new ModelAndView("jsp/json/response", "json", json);  	
+    	}
+    }   
+          
     
     /**
      * Register
@@ -246,12 +297,9 @@ public class ListenerController{
     }
 
 
-
     public void setPersonManager(PersonManager personManager){
     	this.personManager = personManager;
     }
-    
-    
     
     /*
      * Member List
@@ -275,6 +323,21 @@ public class ListenerController{
     }
     
 
+    
+    /*
+     * Venue Form
+    */
+    @RequestMapping("/venueform")
+    public ModelAndView venueForm(
+	    		HttpServletRequest request
+    		) throws UnknownHostException, MongoException
+    {
+    	
+    	return new ModelAndView("jsp/venueform");
+    }    
+    
+    
+    
     /*
      * User
     */
@@ -330,6 +393,62 @@ public class ListenerController{
 		return new ModelAndView("jsp/user", "people", searchResponse);
     }
     
+    
+
+    /*
+     * Schedule a date
+    */
+    /*
+     * getInterestJson
+    */
+    @RequestMapping("/scheduledate")
+    public ModelAndView scheduleDateDisplay(
+	    		HttpServletRequest request
+    		) throws UnknownHostException, MongoException
+    {
+    	String json = null;
+    	return new ModelAndView("jsp/scheduledate", "response", json);
+    }
+    
+    /*
+    @RequestMapping(method=RequestMethod.GET, value={"/scheduledate","/scheduledate/{id}"})
+    public ModelAndView scheduleDateDisplay(
+    		HttpServletRequest request,
+    		@RequestParam(value="id", required=false) String id
+    ) throws UnknownHostException, MongoException {
+    	//ServiceSerlvet.appendSesssion(request);
+
+    	request.setAttribute("page", "user");
+
+    	//get search ALL users
+    	BasicDBObject searchQuery = new BasicDBObject();
+    		searchQuery.put("_id", new ObjectId(id));
+    	
+    	//skip 0
+    	//limit 1   		
+    	List<DBObject> searchResponse = PersonDao.searchUsers(searchQuery, 0, 1, "myCollection");
+
+    	//append actual age to the returned user object.
+    	DBObject newInformation = new BasicDBObject();
+
+    	String birthdate = (String) searchResponse.get(0).get("birthdate");
+
+    	Integer ageInYears = PersonDao.getAge(birthdate);
+    	newInformation.put("ageInYears", ageInYears);
+    	
+    	searchResponse.add(newInformation);
+
+    	Map<String,String> countryList = CommonUtils.getCountries();
+    	Map<String,String> genderList = CommonUtils.getGender();
+    	Map<String,String> ethnicityList = CommonUtils.getEthnicity();
+
+    	request.setAttribute("countryList", countryList);
+    	request.setAttribute("genderList", genderList);
+    	request.setAttribute("ethnicityList", ethnicityList);
+
+		return new ModelAndView("jsp/scheduledate", "people", searchResponse);
+    }    
+    */
     
 
     /*
@@ -434,6 +553,8 @@ public class ListenerController{
     	String json = null;
     	return new ModelAndView("jsp/json/interest", "response", json);
     }   
+    
+    
     
     
     

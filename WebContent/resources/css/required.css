@@ -2,12 +2,11 @@
 
 
 h1 {
-font-size: 60px;
-
-color: #fff;
-font-weight: normal;
-text-transform: uppercase;
-line-height: 44px;
+	font-size: 60px;
+	color: #fff;
+	font-weight: normal;
+	text-transform: uppercase;
+	line-height: 44px;
 }
 
 .header-wrapper h1{
@@ -20,14 +19,14 @@ line-height: 44px;
 	padding:0;
 }
 
-.page-content .maps-panel {
-background: red;
-position: absolute;
-top: 35%;
-left: 0;
-z-index: 221;
-margin-bottom: 0;
-width: 250px;
+.maps-panel {
+	background: red;
+	position: absolute;
+	top: 35%;
+	left: 0;
+	z-index: 221;
+	margin-bottom: 0;
+	width: 250px;
 }
 
 .info-list{
@@ -36,143 +35,140 @@ width: 250px;
 }
 
 .info-window .header-container p, .mobile-info-layer .header-container p {
-line-height: 19px;
-margin:0;
+	line-height: 19px;
+	margin:0;
 }
 
-.page-content .maps-panel .control-container li form .search-textfield-container .search-textfield {
--moz-border-radius: 16px;
--webkit-border-radius: 16px;
--o-border-radius: 16px;
--ms-border-radius: 16px;
--khtml-border-radius: 16px;
-border-radius: 16px;
-box-shadow: none;
-border: 1px solid #d7a704;
-color: #807c7c;
-width: 180px;
-padding: 0 28px 0 35px;
-height: 32px;
-line-height: 16px;
-font-size: 13px;
+.maps-panel .control-container li form .search-textfield-container .search-textfield {
+	-moz-border-radius: 16px;
+	-webkit-border-radius: 16px;
+	-o-border-radius: 16px;
+	-ms-border-radius: 16px;
+	-khtml-border-radius: 16px;
+	border-radius: 16px;
+	box-shadow: none;
+	border: 1px solid #d7a704;
+	color: #807c7c;
+	width: 180px;
+	padding: 0 28px 0 35px;
+	height: 32px;
+	line-height: 16px;
+	font-size: 13px;
 }
 
-.info-icon, .close-button {
-display: block;
-text-indent: -9000px;
-text-transform: capitalize;
-height: 30px;
-width: 30px;
-background: transparent url(../img/sprite-icons.png) -2800px 50% no-repeat;
+.info-icon, 
+.close-button {
+	display: block;
+	text-indent: -9000px;
+	text-transform: capitalize;
+	height: 30px;
+	width: 30px;
+	background: transparent url(../img/sprite-icons.png) -2800px 50% no-repeat;
 }
 
 .info-window .button-container .link-button.no-icon{
-	display:none;
+	/*display:none;*/
 }
 
 .link-button, .share-button {
--moz-border-radius: 5px;
--webkit-border-radius: 5px;
--o-border-radius: 5px;
--ms-border-radius: 5px;
--khtml-border-radius: 5px;
-border-radius: 5px;
-border: 1px solid rgba(0, 0, 0, 0);
-border: 1px solid #dad9d9;
-position: relative;
-overflow: hidden;
-display: block;
-padding: 11px 14px 11px 15px;
-background-color: white;
-cursor: pointer;
-max-width: 400px;
-text-align: left;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-o-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid rgba(0, 0, 0, 0);
+	border: 1px solid #dad9d9;
+	position: relative;
+	overflow: hidden;
+	display: block;
+	padding: 11px 14px 11px 15px;
+	background-color: white;
+	cursor: pointer;
+	max-width: 400px;
+	text-align: left;
 }
 
+
+
+
 .googlemaps {
-height: 100%;
-margin: 0;
+	height: 100%;
+	margin: 0;
 }
 
 .googlemaps .page-container {
-height: 100%;
+	height: 100%;
 }
 
-.googlemaps .page-container .page-content #map_canvas {
-height: 100%;
+.googlemaps .page-container #map_canvas {
+	height: 100%;
 }
 
-.page-content form select {
-width: 100%;
+form select {
+	width: 100%;
 }
 
 
 .page-container {
-margin: 0 auto;
-overflow: hidden;
-position: relative;
+	margin: 0 auto;
+	overflow: hidden;
+	position: relative;
 }
 
-.googlemaps .page-container .page-content {
-height: 100%!important;
-}
-.page-content {
--moz-transition-duration: 0.5s;
--webkit-transition-duration: 0.5s;
--o-transition-duration: 0.5s;
-transition-duration: 0.5s;
-overflow: hidden;
-position: relative;
-}
+
+
+
+
 
 
 
 
 .info-window, .mobile-info-layer {
--moz-border-radius: 8px;
--webkit-border-radius: 8px;
--o-border-radius: 8px;
--ms-border-radius: 8px;
--khtml-border-radius: 8px;
-border-radius: 8px;
-border: 1px solid #b8b3ad;
-padding: 0;
-overflow: visible;
-background: #fff;
-width: 270px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	border-radius: 8px;
+	border: 1px solid #b8b3ad;
+	padding: 0;
+	overflow: visible;
+	background: #fff;
+	width: 270px;
 }
 
 
 .info-window .tooltip-arrow, .mobile-info-layer .tooltip-arrow {
-background: transparent url("../img/sprite-tooltip.png") 0 0 no-repeat;
-position: absolute;
-width: 25px;
-height: 13px;
-bottom: -12px;
-left: 50%;
-margin-left: -12px;
+	background: transparent url("../img/sprite-tooltip.png") 0 0 no-repeat;
+	position: absolute;
+	width: 25px;
+	height: 13px;
+	bottom: -12px;
+	left: 50%;
+	margin-left: -12px;
 }
 
 .info-window .header-container, .mobile-info-layer .header-container {
-border-bottom: 1px solid #b8b3ad;
-padding: 1.1875em;
+	border-bottom: 1px solid #b8b3ad;
+	padding: 1.1875em;
 }
 
 
 .info-window .button-container, .mobile-info-layer .button-container {
-overflow: hidden;
+	overflow: hidden;
 }
 
 .info-window .header-container .close-button, .mobile-info-layer .header-container .close-button {
-position: absolute;
-top: 4px;
-right: 4px;
+	position: absolute;
+	top: 4px;
+	right: 4px;
 }
 
 .close-button {
-background: transparent url("../img/sprite-tooltip.png") -5px -40px no-repeat;
-height: 40px;
-width: 40px;
+	background: transparent url("../img/sprite-tooltip.png") -5px -40px no-repeat;
+	height: 40px;
+	width: 40px;
 }
 
 
@@ -182,36 +178,34 @@ list-style: none;
 
 
 .info-window .info-list .list-item, .mobile-info-layer .info-list .list-item {
-border-bottom: 1px solid #b8b3ad;
-overflow: hidden;
-padding-left: 1.1875em;
-cursor: pointer;
-
-padding-top: 10px;
-padding-bottom: 10px;
+	border-bottom: 1px solid #b8b3ad;
+	overflow: hidden;
+	padding-left: 1.1875em;
+	cursor: pointer;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 
 a, a:visited, button {
-
-font-size: 16px;
-line-height: 16px;
-color: #807c7c;
-text-decoration: none;
-outline: none;
+	font-size: 16px;
+	line-height: 16px;
+	color: #807c7c;
+	text-decoration: none;
+	outline: none;
 }
 
 
 .info-window .info-list .list-item .wrapper, .mobile-info-layer .info-list .list-item .wrapper {
-display: none;
-padding-bottom: 0.8125em;
+	display: none;
+	padding-bottom: 0.8125em;
 }
 
 .info-window .info-list .list-item .opening-hours, .mobile-info-layer .info-list .list-item .opening-hours {
-padding: 0 1.1875em;
-overflow: hidden;
+	padding: 0 1.1875em;
+	overflow: hidden;
 }
 
 .info-window .button-container .link-button, .mobile-info-layer .button-container .link-button, .info-window .button-container .share-button, .mobile-info-layer .button-container .share-button {
-margin: 1.1875em;
+	margin: 1.1875em;
 }

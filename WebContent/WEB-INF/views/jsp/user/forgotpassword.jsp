@@ -4,7 +4,7 @@
 <div id="colorboxWrapper" class="regular">
 		<h1>Visual Dating</h1>
 
-		<div class="login">
+		<div class="forgotpassword">
 						
 				${message}
 				
@@ -13,15 +13,10 @@
 					<input type="text" value="" name="emailaddress"/>
 					<br/>
 					
-					<label>Password</label>
-					<input type="password" value="" name="password"/>
-					<br/>
 					
 					<input type="submit" value="submit" name="submit"/>
 				</form>
 				<!--login.jsp-->
-				
-				<a class="shazam" href="forgotpassword">Forgot password</a>  
 		
 		</div>
 </div>

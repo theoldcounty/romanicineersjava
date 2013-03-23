@@ -18,7 +18,6 @@ var shazamOverlay = {
 	},
 	show: function(link){
 		var that = this;
-		
 
 		this.showPreloader();
 

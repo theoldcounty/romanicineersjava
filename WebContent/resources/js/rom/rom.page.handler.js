@@ -9,8 +9,7 @@
 
 var pageHandler = {
 		reBindEvents: function(section){
-			console.log("section", section);
-			
+			console.log("section", section);			
 			if(section.match(/register/gi)){
 				//_is registration form
 				romForms.setUpRegistration();				
@@ -21,7 +20,6 @@ var pageHandler = {
 				romForms.setUpDoughnutCharts(romUtils.getQueryVariable(section, "type"));
 				romForms.setUpCharts();
 			}
-			
 		},
 		homeEvents: function(){
 			

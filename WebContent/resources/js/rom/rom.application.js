@@ -96,6 +96,12 @@ romApplication = {
 			//console.log("user");
 			pageHandler.userEvents();
 		}
+		
+		/*schedule date controller*/
+		if(lastParameter.match(/scheduledate/i) == "scheduledate"){
+			console.log("schedule date");
+			pageHandler.scheduleDate();
+		}		
 
 		var searchFilter = new searchFilters();
 	}

@@ -46,6 +46,8 @@ var VenueOverlay = Backbone.View.extend({
 		if(!this.infoBox) {
 			this.infoBox = new InfoBox({latlng: this.getLatLng(), map: this.map, infoLayer: $(this.getInfoLayer())});
 			$(this.infoBox).bind(InfoBox.ClickCloseButton, _.bind(this.onCloseButtonInfoBox, this));
+			
+			console.log("created info box");
 			$(this.infoBox).bind(InfoBox.ClickMoreInfoButton, _.bind(this.onClickMoreInfoButton, this));
 		}
 	},
@@ -64,11 +66,14 @@ var VenueOverlay = Backbone.View.extend({
 
 	onClickMoreInfoButton: function(event) {
 		event.preventDefault();
+		
+		console.log("clicked on more info", this.venueInfoVO);
+		shazamOverlay.show("venueform?fid=22jsjkfljsdlkf");
 		//if mobile info layer already exist set layer null
 		if(this.mobileInfoLayer != null) {
 			this.mobileInfoLayer = null;
 		}
-		this.mobileInfoLayer = new MobileInfoLayer({venueInfoVO: this.venueInfoVO});
+		//this.mobileInfoLayer = new MobileInfoLayer({venueInfoVO: this.venueInfoVO});
 	},
 
 	clearVenueOverLayer: function() {
