@@ -49,11 +49,7 @@ public class InterestDao {
 	    	document.put("uid", interest.getUserId());
 	    	document.put("chartType", interest.getName());
 	    	document.put("dataResults", dataResults);
-	    	//document.put("dataResults", interest.getResults());
 	    	
-	    	System.out.println("interest.getResults() "+interest.getResults());	    	
-	    	System.out.println("dataResults "+ dataResults);
-
 	    collection.insert(document);
 	    ObjectId lastid = (ObjectId)document.get( "_id" );
 	    
@@ -109,6 +105,4 @@ public class InterestDao {
 
 		return response;
 	}
-
-
 }

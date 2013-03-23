@@ -60,12 +60,6 @@ public class ListenerController{
     		) throws UnknownHostException, MongoException
     {
     	
-        
-    	System.out.println("interests ::  "+ interests);
-    	System.out.println("interestsknobs ::  "+ interestsknobs);
-    	
-		//String userId = "513f8a35d1efd3e0a2e673c1";//registerResponse.get(0).get("lastId").toString(); //get actual user id
-		
     	/*_interests chart*/
 	    Map<String,Integer> interestData = new LinkedHashMap<String,Integer>();
     	if(interests!=null){
@@ -81,8 +75,6 @@ public class ListenerController{
 	    	interest.setUserId(userId);
 	    	interest.setName(chart);//type of chart/name of chart
 	    	interest.setResults(interestData);
-	    	
-	    System.out.println("interestData ::  "+ interestData);	
     	
     	if(submitted == null){
     		//__if not yet added a chart return html form	    	
@@ -91,6 +83,87 @@ public class ListenerController{
     		//_ register the user into the database and return a json response
         	return new ModelAndView("jsp/json/response", "json", InterestDao.addInterest(interest));  	
     	}       	
+    }
+    
+    
+    /**
+     * get Followers
+     * @return 
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/getFollowers")
+    public ModelAndView getFollowers(
+	    		HttpServletRequest request
+    		) throws UnknownHostException, MongoException
+    {	
+	 	//_ get followers the user into the database and return a json response
+		String json = null;
+    	return new ModelAndView("jsp/json/response", "json", json);	
+    } 
+    
+    /**
+     * add Followers
+     * @return 
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/addFollowers")
+    public ModelAndView addFollowers(
+	    		HttpServletRequest request,
+	    		@RequestParam(value="submitted", required=false) String submitted
+    		) throws UnknownHostException, MongoException
+    {	
+    	if(submitted == null){
+    		//__show add follower form    	
+			return new ModelAndView("jsp/user/add_followers");   	
+    	}else{
+    		//_ json response add follower
+    		String json = null;
+        	return new ModelAndView("jsp/json/response", "json", json);  	
+    	}	
+    }     
+    
+    
+    /**
+     * get private messages
+     * @return 
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/getPrivateMessages")
+    public ModelAndView getPrivateMessages(
+	    		HttpServletRequest request
+    		) throws UnknownHostException, MongoException
+    {	
+	 	//_ get followers the user into the database and return a json response
+		String json = null;
+    	return new ModelAndView("jsp/json/response", "json", json);	
+    }
+    
+    
+    
+    /**
+     * send private messages
+     * @return 
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/sendPrivateMessages")
+    public ModelAndView sendPrivateMessages(
+	    		HttpServletRequest request,	    		
+	    		@RequestParam(value="privatemessage", required=false) String privatemessage,
+	    		@RequestParam(value="submitted", required=false) String submitted
+    		) throws UnknownHostException, MongoException
+    {	
+    	if(submitted == null){
+    		//__show private message form    	
+			return new ModelAndView("jsp/user/send_private_message");   	
+    	}else{
+    		//_ json response from sending a private message
+    		String json = null;
+        	return new ModelAndView("jsp/json/response", "json", json);  	
+    	} 
     }
     
     
