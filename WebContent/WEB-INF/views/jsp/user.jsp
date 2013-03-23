@@ -64,18 +64,15 @@
 					</div>
 
 					<div class="calltoaction">
-						<ul>
-						
-						<li><a class="shazam" href="#">(unlogged) Followers - shows users following (overlay)</a></li>
-						<li><a class="shazam" href="#">(unlogged)Private Message user (overlay)</a></li>
-						<li><a class="shazam" href="#">(unlogged) Follow me - action to follow the user (overlay)</a></li>
-						<li><a href="scheduledate">(unlogged) Schedule a date  <!-- &userId=${people[0]._id}--></a></li>
-						
-						<li><a class="shazam" href="showUpload2">(Logged In)My Photos/Add Picture (overlay)</a></li>
-						<li><a class="shazam" href="#">(Logged In)My Inbox view messages (overlay)</a></li>
-							
+						<ul>						
+							<li><a class="shazam" href="#">(unlogged) Followers - shows users following (overlay)</a></li>
+							<li><a class="shazam" href="#">(unlogged)Private Message user (overlay)</a></li>
+							<li><a class="shazam" href="#">(unlogged) Follow me - action to follow the user (overlay)</a></li>
+							<li><a href="scheduledate">(unlogged) Schedule a date  <!-- &userId=${people[0]._id}--></a></li>							
+							<li><a class="shazam" href="showUpload2">(Logged In)My Photos/Add Picture (overlay)</a></li>
+							<li><a class="shazam" href="#">(Logged In)My Inbox view messages (overlay)</a></li>							
 						</ul>
-					</div>
+					</div>	
 
 					<!--profileDetails-->
 					<div class="profileDetails">
@@ -101,7 +98,7 @@
 									<li id="education"><div class="title">Education ></div><div class="result">${people[0].education}</div></li>
 									<li id="occupation"><div class="title">Occupation ></div><div class="result">${people[0].occupation}</div></li>
 									<li id="languages"><div class="title">Spoken Languages ></div><div class="result"><c:forEach var="language" items="${people[0].languages}">${language} </c:forEach></div></li>
-								</ul>
+								</ul>								
 							</li>
 							<li>
 								<h2>About me</h2>
@@ -127,7 +124,7 @@
 								<div id="seekingPie"></div>
 								<div class="nodata">
 									<p>Show what you want in a relationship, add a visual chart</p>
-									<a class="shazam form" href="edit_chart?type=seeking-relationship&userId=${people[0]._id}">Add Chart</a>
+									<a class="shazam form" href="edit_chart?type=seeking&userId=${people[0]._id}">Add Chart</a>
 								</div>
 							</li>
 							<li>
@@ -135,7 +132,7 @@
 								<div id="quizchart"></div>
 								<div class="nodata">
 									<p>Where do you want to visit?, add a visual chart</p>
-									<a class="shazam form" href="edit_chart?type=future-holiday&userId=${people[0]._id}">Add Chart</a>
+									<a class="shazam form" href="edit_chart?type=visiting&userId=${people[0]._id}">Add Chart</a>
 								</div>
 							</li>
 						</ul>

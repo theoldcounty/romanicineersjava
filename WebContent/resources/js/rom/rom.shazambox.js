@@ -20,7 +20,7 @@ var shazamOverlay = {
 		var that = this;
 
 		this.showPreloader();
-
+		this.reSizeOverlay();
 		$('#shazam-overlay').fadeIn(300, function(){
 			that.getContents(link, function(section){
 				pageHandler.reBindEvents(section);
@@ -52,12 +52,16 @@ var shazamOverlay = {
 			callback(source);
 		});
 	},
-	rePosition: function(){
-
-		// get the screen height and width
+	reSizeOverlay: function(){
+		// get the doc height and width
 		var docHeight = $(document).height();
 		var docWidth = $(document).width();
 		
+		// assign values to the overlay
+		$('#shazam-overlay').css({height:docHeight, width:docWidth});
+	},
+	rePosition: function(){
+		// get the screen height and width		
 		var maskHeight = $(window).height();
 		var maskWidth = $(window).width();
 
@@ -66,18 +70,10 @@ var shazamOverlay = {
 		var shazamLeft = (maskWidth/2) - ($('#shazam-box').width()/2);
 
 		var scrollTop = $('html').offset().top;
-		console.log("scrollTop", scrollTop);
-		
-		console.log("shazamTop", shazamTop);
-		console.log("shazamLeft", shazamLeft);
-		
 		shazamTop = shazamTop + (Math.abs(scrollTop));//add current scroll to the overlay
-		console.log("shazamTop 2", shazamTop);
-		
-		// assign values to the overlay and shazam box
-		$('#shazam-overlay').css({height:docHeight, width:docWidth});
+
+		// assign values to the shazam box
 		$('#shazam-box').css({top:shazamTop, left:shazamLeft});
-		
 
 		//$('body').addClass('preventScroll');
 	},

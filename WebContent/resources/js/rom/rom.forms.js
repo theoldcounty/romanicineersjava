@@ -34,7 +34,7 @@ var romForms = {
 			$.getJSON(obj.jsonPath, function(data) {
 				var items = [];
 
-				var keyParent = data.type;
+				var keyParent = "interests";//data.type;
 
 				var j = 1;
 				$.each(data.options, function(key, val) {
@@ -78,11 +78,11 @@ var romForms = {
 					obj.pieColor = "#E2B227";
 					obj.jsonPath = "getInterestJson";
 				  break;
-				case "seeking-relationship":
+				case "seeking":
 					obj.pieColor = "#B23959";
 					obj.jsonPath = "getSeekingJson";
 				  break;
-				case "future-holiday":
+				case "visiting":
 					obj.pieColor = "#5751e4";
 					obj.jsonPath = "getPlaceJson";
 				  break;

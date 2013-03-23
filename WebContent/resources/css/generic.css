@@ -676,7 +676,11 @@
 	}
 
 
+.scheduledate {}
 
+.scheduledate #interactionpane{
+	display:none;	
+}
 
 	
 	

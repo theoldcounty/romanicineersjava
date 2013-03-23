@@ -52,6 +52,7 @@
 				</div>
 						
 				
+				<input type="hidden" value="<%=request.getParameter("type")%>" name="chart"/>
 				<input type="hidden" value="submitted" name="submitted"/>
 				<input type="submit" value="submit" name="submit"/>				
 			

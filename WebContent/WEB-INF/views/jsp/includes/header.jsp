@@ -5,12 +5,11 @@
 		<jsp:include page="styles.jsp" />
 		<title>Romaninceers</title>
 	</head>
-	${message}
 	<body class="${page}">
 		<header>
 			<div class="wrap">
 				<div class="alignheader">
-					<a href="/" title="Home" rel="home" id="logo"><img src="resources/images/logo.png" alt="Home"></a>
+					<a href="/springApp21/" title="Home" rel="home" id="logo"><img src="resources/images/logo.png" alt="Home"></a>
 					<nav id="loginmenu">
 						<c:choose>
 						  <c:when test="${inSession != null}">
@@ -34,7 +33,7 @@
 			<div class="wrap">
 				<nav id="returnhome">
 					<ul>
-						<li class="home"><a href="/romancineers/template-home.php">Home</a></li>
+						<li class="home"><a href="/springApp21">Home</a></li>
 					</ul>
 				</nav>
 				<nav id="calltoaction">

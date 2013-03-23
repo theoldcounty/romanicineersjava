@@ -49,6 +49,10 @@ public class InterestDao {
 	    	document.put("uid", interest.getUserId());
 	    	document.put("chartType", interest.getName());
 	    	document.put("dataResults", dataResults);
+	    	//document.put("dataResults", interest.getResults());
+	    	
+	    	System.out.println("interest.getResults() "+interest.getResults());	    	
+	    	System.out.println("dataResults "+ dataResults);
 
 	    collection.insert(document);
 	    ObjectId lastid = (ObjectId)document.get( "_id" );
@@ -80,9 +84,6 @@ public class InterestDao {
 	    BasicDBObject searchQuery = new BasicDBObject();
 	    	searchQuery.put("uid", interest.getUserId());
 	    	searchQuery.put("chartType", interest.getName());
-
-	    System.out.println(interest.getUserId());
-	    System.out.println(interest.getName());	
 	    	
 	    List<DBObject> uniqueInterests = null;
 		try {
@@ -93,11 +94,10 @@ public class InterestDao {
 			e.printStackTrace();
 		}
 		
-		System.out.print(uniqueInterests);
-		
 		if(uniqueInterests.size()>0 ){
 			results.put("response", "OK");
 			results.put("description", "The specific user has been found");
+			results.put("chartType", uniqueInterests.get(0).get("chartType"));
 			results.put("dataResults", uniqueInterests.get(0).get("dataResults"));
 		}
 		else

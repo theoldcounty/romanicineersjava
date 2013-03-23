@@ -55,21 +55,11 @@ public class ListenerController{
     		@RequestParam(value="userId", required=false) String userId,
     		@RequestParam(value="interests", required=false) String[] interests,
     		@RequestParam(value="interestsknobs", required=false) Integer[] interestsknobs,
+    		@RequestParam(value="chart", required=false) String chart,
     		@RequestParam(value="submitted", required=false) String submitted
     		) throws UnknownHostException, MongoException
     {
     	
-    	/*
-    	int[] anArray;
-        anArray = new int[10];
-        anArray[0] = 10;
-        anArray[1] = 20;
-        anArray[2] = 30;
-        anArray[3] = 40;
-        anArray[4] = 50;
-        
-        String[] interests2 = {"Robots", "Pie", "Animal", "Love", "Cheese"};
-        */
         
     	System.out.println("interests ::  "+ interests);
     	System.out.println("interestsknobs ::  "+ interestsknobs);
@@ -89,7 +79,7 @@ public class ListenerController{
     	
     	Interests interest = new Interests();
 	    	interest.setUserId(userId);
-	    	interest.setName("interests");
+	    	interest.setName(chart);//type of chart/name of chart
 	    	interest.setResults(interestData);
 	    	
 	    System.out.println("interestData ::  "+ interestData);	
@@ -406,50 +396,12 @@ public class ListenerController{
 	    		HttpServletRequest request
     		) throws UnknownHostException, MongoException
     {
+    	request.setAttribute("page", "scheduledate");
+    	
     	String json = null;
     	return new ModelAndView("jsp/scheduledate", "response", json);
     }
-    
-    /*
-    @RequestMapping(method=RequestMethod.GET, value={"/scheduledate","/scheduledate/{id}"})
-    public ModelAndView scheduleDateDisplay(
-    		HttpServletRequest request,
-    		@RequestParam(value="id", required=false) String id
-    ) throws UnknownHostException, MongoException {
-    	//ServiceSerlvet.appendSesssion(request);
-
-    	request.setAttribute("page", "user");
-
-    	//get search ALL users
-    	BasicDBObject searchQuery = new BasicDBObject();
-    		searchQuery.put("_id", new ObjectId(id));
-    	
-    	//skip 0
-    	//limit 1   		
-    	List<DBObject> searchResponse = PersonDao.searchUsers(searchQuery, 0, 1, "myCollection");
-
-    	//append actual age to the returned user object.
-    	DBObject newInformation = new BasicDBObject();
-
-    	String birthdate = (String) searchResponse.get(0).get("birthdate");
-
-    	Integer ageInYears = PersonDao.getAge(birthdate);
-    	newInformation.put("ageInYears", ageInYears);
-    	
-    	searchResponse.add(newInformation);
-
-    	Map<String,String> countryList = CommonUtils.getCountries();
-    	Map<String,String> genderList = CommonUtils.getGender();
-    	Map<String,String> ethnicityList = CommonUtils.getEthnicity();
-
-    	request.setAttribute("countryList", countryList);
-    	request.setAttribute("genderList", genderList);
-    	request.setAttribute("ethnicityList", ethnicityList);
-
-		return new ModelAndView("jsp/scheduledate", "people", searchResponse);
-    }    
-    */
-    
+  
 
     /*
      * Api

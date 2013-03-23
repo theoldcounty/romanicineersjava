@@ -40,7 +40,7 @@
 	}
 
 	.mobile .collection li{
-		width: 400px;
+		width: 378px;
 	}
 
 	.mobile #calltoaction ul li a{
@@ -70,5 +70,9 @@
 
 	.mobile .results{
 		font-size:11px;
+	}
+	
+	.mobile .profilePics{
+		width:378px;
 	}
 
