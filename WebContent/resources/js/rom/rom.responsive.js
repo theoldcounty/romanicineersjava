@@ -13,7 +13,7 @@ var romResponsive = {
 			this.resize();
 		},
 		lastMode: "",
-		getMode: function(screenWidth){
+		getMode: function(screenWidth, screenHeight){
 			var mode = "regular";
 
 			var mobileThreshold = 600;
@@ -35,11 +35,42 @@ var romResponsive = {
 
 			return mode;
 		},
+		userPieWidth: 375,
+		userPieHeight: 280,
+		userPieRadius: 70,
+		userPieRadius: 35,
+		setUserPieSizes: function(mode){
+			
+			switch(mode)
+			{
+				case "mobile":
+					this.userPieWidth = 265;
+					this.userPieHeight = 220;
+					this.userPieRadius = 60;
+					this.userPieInnerRadius = 25;
+				  break;			
+				case "regular":
+					this.userPieWidth = 285;
+					this.userPieHeight = 240;
+					this.userPieRadius = 45;
+					this.userPieInnerRadius = 20;
+				  break;
+				case "imac":
+					this.userPieWidth = 375;
+					this.userPieHeight = 280;
+					this.userPieRadius = 80;
+					this.userPieInnerRadius = 40;
+				  break;
+			}		
+			
+		},
 		resize: function(){
 			var screenWidth = $(window).width();
 			var screenHeight = $(window).height();
 
-			var mode = this.getMode(screenWidth);
+			var mode = this.getMode(screenWidth, screenHeight);
+			this.setUserPieSizes(mode);
+			
 			$('html').removeClass().addClass(mode);
 		}		
-}
+};

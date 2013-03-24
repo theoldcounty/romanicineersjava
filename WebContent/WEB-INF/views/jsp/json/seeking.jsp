@@ -6,17 +6,16 @@
             "Any Intent"
         ],
         "companionship": [
-            "Wants to find someone to marry"
+            "For Marriage"
         ],
         "experimentation": [
             "Intermitant Encounter",
             "Fetish"
         ],
         "find-new-partner": [
-            "Wants a relationship",
+            "A relationship",
             "Casual dating",
             "Long Term",
-            "Is Putting in serious effort to find someone",
             "Nothing serious"
         ],
         "friendship": [

@@ -103,26 +103,31 @@ var romForms = {
 			// initialize geocoder
 			//
 			var geocoder = new google.maps.Geocoder();
-
-			geocoder.geocode(
-			{
-			address: countryName
-			}, function(results, status) {
-				if (status == google.maps.GeocoderStatus.OK) {
-					var result = results[0];
-
-					var newLat = result.geometry.location.mb;
-					var newLong = result.geometry.location.nb;
-
-					$('input[name="latitude"]').val(newLat);
-					$('input[name="longitude"]').val(newLong);
-
-				} else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
-					alert("Sorry, the geocoder failed to locate the specified address.");
-				} else {
-					alert("Sorry, the geocoder failed with an internal error.");
+			console.log("geocoder", geocoder);
+			
+			geocoder.geocode({
+				address: countryName}, function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+						var result = results[0];
+	
+						console.log("result", result);
+						
+						var newLat = result.geometry.location.lat();
+						var newLong = result.geometry.location.lng();
+						
+						console.log("newLat", newLat);
+						console.log("newLong", newLong);
+	
+						$('input[name="latitude"]').val(newLat);
+						$('input[name="longitude"]').val(newLong);
+	
+					} else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
+						alert("Sorry, the geocoder failed to locate the specified address.");
+					} else {
+						alert("Sorry, the geocoder failed with an internal error.");
+					}
 				}
-			});
+			);
 
 
 

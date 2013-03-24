@@ -684,6 +684,11 @@
 
 	
 	
-	
-	
-	
+.privateMessages{}
+.privateMessages ul{
+	margin:0;
+}
+.privateMessages ul li{
+	list-style-type:none;
+}
+

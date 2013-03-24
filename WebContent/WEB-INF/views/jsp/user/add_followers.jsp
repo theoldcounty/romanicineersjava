@@ -5,7 +5,7 @@
 		
 		<form id="addFollower" action="add_followers" enctype="multipart/form-data" method="post" action="">
 			
-			<fieldset id="step4">
+			<fieldset id="step1">
 
 				//are you sure you want to follow this user.
 

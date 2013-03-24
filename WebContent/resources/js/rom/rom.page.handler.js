@@ -92,11 +92,25 @@ var pageHandler = {
 			/*personality sliders*/
 
 
+			
+			var userPieWidth = romResponsive.userPieWidth;
+			var userPieHeight = romResponsive.userPieHeight;
+			var userPieRadius = romResponsive.userPieRadius;
+			var userPieInnerRadius = romResponsive.userPieInnerRadius;
+			
 			/*interest d3 pie chart*/
 			var jsonUrl = 'api?servicerequest=getInterests&id='+userId+'&chartname=interests';
 			var holder = '#interestsPie';
-			var colorCode = 'spectral';
-			goPie.chosenChart(jsonUrl, colorCode, holder, function(hold){
+			
+			var specs = {
+					color : 'spectral',
+					w : userPieWidth,
+					h : userPieHeight,
+					r: userPieRadius,
+					ir: userPieInnerRadius
+				};
+			
+			goPie.chosenChart(jsonUrl, specs, holder, function(hold){
 				if(!$(hold).data("response")){
 					$(hold).parent().find('.nodata').show();
 				}				
@@ -107,8 +121,16 @@ var pageHandler = {
 			/*seeking d3 pie chart*/
 			var jsonUrl = 'api?servicerequest=getInterests&id='+userId+'&chartname=seeking';
 			var holder = '#seekingPie';
-			var colorCode = 'brightOrange';
-			goPie.chosenChart(jsonUrl, colorCode, holder, function(hold){
+
+			var specs = {
+					color : 'brightOrange',
+					w : userPieWidth,
+					h : userPieHeight,
+					r: userPieRadius,
+					ir: userPieInnerRadius
+				};
+			
+			goPie.chosenChart(jsonUrl, specs, holder, function(hold){
 				if(!$(hold).data("response")){
 					$(hold).parent().find('.nodata').show();
 				}
@@ -132,7 +154,6 @@ var pageHandler = {
 			googleMaper.setup(lat, long);
 			googleMaper.setUserMarker(lat, long);				
 			
-			this.scheduleDate();
 		},
 		scheduleDate: function(){
 			//_enable the google map/foursquare dating app

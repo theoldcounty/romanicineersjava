@@ -32,3 +32,16 @@
 	.imac .matchingsearch li .description {
 		width: 140px;
 	}
+	
+	
+	.imac .user .collection{
+		width: 800px;
+	}
+	.imac .user .collection li{
+		width: 378px;
+	}
+	
+	
+	.imac .biodetails .wrapper{
+		width: 480px;
+	}

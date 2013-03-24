@@ -92,14 +92,13 @@ public class ListenerController{
      * @throws MongoException
      * @throws UnknownHostException
     */
-    @RequestMapping("/getFollowers")
-    public ModelAndView getFollowers(
+    @RequestMapping("/viewFollowers")
+    public ModelAndView viewFollowers(
 	    		HttpServletRequest request
     		) throws UnknownHostException, MongoException
     {	
 	 	//_ get followers the user into the database and return a json response
-		String json = null;
-    	return new ModelAndView("jsp/json/response", "json", json);	
+		return new ModelAndView("jsp/user/view_followers");
     } 
     
     /**
@@ -140,6 +139,25 @@ public class ListenerController{
 		String json = null;
     	return new ModelAndView("jsp/json/response", "json", json);	
     }
+    
+    
+    
+    
+    /**
+     * view private messages
+     * @return 
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/viewPrivateMessages")
+    public ModelAndView viewPrivateMessages(
+	    		HttpServletRequest request
+    		) throws UnknownHostException, MongoException
+    {	
+	 	//_ get private messages for this user
+		return new ModelAndView("jsp/user/view_private_message");
+    }
+        
     
     
     
@@ -399,6 +417,55 @@ public class ListenerController{
     	return new ModelAndView("jsp/venueform");
     }    
     
+    
+    
+    
+    /**
+     * privacy
+     * @return 
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/privacy")
+    public ModelAndView privacy(
+	    		HttpServletRequest request
+    		) throws UnknownHostException, MongoException
+    {	
+	 	//_ privacy page
+		return new ModelAndView("jsp/privacy");
+    }
+   
+    /**
+     * who we are
+     * @return 
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/whoWeAre")
+    public ModelAndView whoWeAre(
+	    		HttpServletRequest request
+    		) throws UnknownHostException, MongoException
+    {	
+	 	//_ privacy page
+		return new ModelAndView("jsp/who_we_are");
+    }
+    
+
+    /**
+     * instructions
+     * @return 
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/instructions")
+    public ModelAndView instructions(
+	    		HttpServletRequest request
+    		) throws UnknownHostException, MongoException
+    {	
+	 	//_ privacy page
+		return new ModelAndView("jsp/instructions");
+    }
+        
     
     
     /*

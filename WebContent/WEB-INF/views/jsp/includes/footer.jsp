@@ -2,9 +2,9 @@
 			<div class="wrap">
 				<nav class="footer">
 					<ul>
-						<li><a href="#">Who we are</a></li>
-						<li><a href="#">Privacy</a></li>
-						<li><a href="#">Instruction</a></li>
+						<li><a href="whoWeAre">Who we are</a></li>
+						<li><a href="privacy">Privacy</a></li>
+						<li><a href="instructions">Instruction</a></li>
 					</ul>
 				</nav>
 			</div>
