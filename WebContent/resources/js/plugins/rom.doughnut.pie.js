@@ -513,26 +513,171 @@ var goPie = {
 					var r = specs.r;
 					var ir = specs.ir;
 
+
+
+
+
+
 					switch(colorPalette)
 					{
-						case "spectral":
+						case "YlGn":
 							var colors = [
 											{
-												name:"Spectral",
+												name:"YlGn",
 												col: 8,
 												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
 											}
 										];
 						  break;
-						case "greys":
+
+						case "YlGnBu":
 							var colors = [
 											{
-												name:"Greys",
+												name:"YlGnBu",
 												col: 8,
 												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
 											}
 										];
 						  break;
+
+						case "GnBu":
+							var colors = [
+											{
+												name:"GnBu",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+						case "BuGn":
+							var colors = [
+											{
+												name:"BuGn",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+
+						case "PuBuGn":
+							var colors = [
+											{
+												name:"PuBuGn",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+
+						case "PuBu":
+							var colors = [
+											{
+												name:"PuBu",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+
+						case "BuPu":
+							var colors = [
+											{
+												name:"BuPu",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+
+						case "RdPu":
+							var colors = [
+											{
+												name:"RdPu",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+
+
+						case "PuRd":
+							var colors = [
+											{
+												name:"PuRd",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+
+
+						case "OrRd":
+							var colors = [
+											{
+												name:"OrRd",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+						case "YlOrRd":
+							var colors = [
+											{
+												name:"YlOrRd",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+						case "YlOrBr":
+							var colors = [
+											{
+												name:"YlOrBr",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+						case "Purples":
+							var colors = [
+											{
+												name:"Purples",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+						case "Blues":
+							var colors = [
+											{
+												name:"Blues",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+						case "Greens":
+							var colors = [
+											{
+												name:"Greens",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
 						case "brightOrange":
 							var colors = [
 											{
@@ -542,6 +687,122 @@ var goPie = {
 											}
 										];
 						  break;
+
+						case "Reds":
+							var colors = [
+											{
+												name:"Reds",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+						case "greys":
+							var colors = [
+											{
+												name:"Greys",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+						case "PuOr":
+							var colors = [
+											{
+												name:"PuOr",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+						case "BrBG":
+							var colors = [
+											{
+												name:"BrBG",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+						case "PRGn":
+							var colors = [
+											{
+												name:"PRGn",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+						case "PiYG":
+							var colors = [
+											{
+												name:"PiYG",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+
+						case "RdBu":
+							var colors = [
+											{
+												name:"RdBu",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+						case "RdGy":
+							var colors = [
+											{
+												name:"RdGy",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+						case "RdYlBu":
+							var colors = [
+											{
+												name:"RdYlBu",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+
+						case "spectral":
+							var colors = [
+											{
+												name:"Spectral",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
+
+
+
+						case "RdYlGn":
+							var colors = [
+											{
+												name:"RdYlGn",
+												col: 8,
+												domain: ["foo", "bar", "baz", "gaz", "bar", "baz", "gaz"]
+											}
+										];
+						  break;
+
 						default:
 							var colors = [
 											{
@@ -592,15 +853,15 @@ var goPie = {
 				goPie.updateCharts(holder, dataPieJson);
 				$(holder).attr("data-response", "true");
 				callback(holder);
-				
+
 			}else{
 				$(holder).attr("data-response", "false");
 				callback(holder);
 			}
-			
-			
+
+
 		});
-		
+
 	},
 	chosenUpdateChart: function(jsonUrl, holder, callback){
 
