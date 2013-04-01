@@ -107,23 +107,14 @@
 				}
 			});
 		},
-
 		currentPieData: null,
-
 		newPieData: null,
-
 		oldPieData: null,
-
 		futurePieData: null,
-
 		r: 80,
-
 		ir: 45,
-
 		textOffset: 14,
-
 		donut: null,
-
 		createPie: function(w, h, setColors, pieCreatedCallback){
 
 			//objects to be populated
@@ -133,7 +124,6 @@
 			this.donut = d3.layout.pie().value(function(d){
 				return d.octetTotalCount;
 			});
-
 
 			//create colors from an ordinal scale
 			//https://github.com/mbostock/d3/blob/master/lib/colorbrewer/colorbrewer.js
@@ -201,16 +191,7 @@
 
 		bindEvent: function(){
 			var that = this;
-
 			//binding any events
-
-			/*$(window).on("click", function() {
-
-				//update json
-
-				that.update();
-
-			});*/
 		},
 
 		totalOctets:0,
@@ -218,7 +199,6 @@
 		tweenDuration:250,
 
 		update: function(obj, options){
-			//console.log("going for pie");
 			this.futurePieData = options;
 			this.newPieData = this.getNewData();
 			this.currentPieData = this.newPieData;
@@ -233,9 +213,7 @@
 		streakerDataAdded: "",
 
 		getNewData: function(){
-
 			return this.futurePieData;
-
 		},
 
 		removePieTween: function(d, i) {
@@ -505,18 +483,11 @@ var goPie = {
 							}
 						];
 
-					//console.log("specs", specs);
-
 					var colorPalette = specs.color;
 					var w = specs.w;
 					var h = specs.h;
 					var r = specs.r;
 					var ir = specs.ir;
-
-
-
-
-
 
 					switch(colorPalette)
 					{
@@ -560,7 +531,6 @@ var goPie = {
 										];
 						  break;
 
-
 						case "PuBuGn":
 							var colors = [
 											{
@@ -570,7 +540,6 @@ var goPie = {
 											}
 										];
 						  break;
-
 
 						case "PuBu":
 							var colors = [
@@ -582,7 +551,6 @@ var goPie = {
 										];
 						  break;
 
-
 						case "BuPu":
 							var colors = [
 											{
@@ -592,7 +560,6 @@ var goPie = {
 											}
 										];
 						  break;
-
 
 						case "RdPu":
 							var colors = [
@@ -604,8 +571,6 @@ var goPie = {
 										];
 						  break;
 
-
-
 						case "PuRd":
 							var colors = [
 											{
@@ -615,8 +580,6 @@ var goPie = {
 											}
 										];
 						  break;
-
-
 
 						case "OrRd":
 							var colors = [
@@ -779,7 +742,6 @@ var goPie = {
 										];
 						  break;
 
-
 						case "spectral":
 							var colors = [
 											{
@@ -789,9 +751,6 @@ var goPie = {
 											}
 										];
 						  break;
-
-
-
 
 						case "RdYlGn":
 							var colors = [
@@ -858,10 +817,7 @@ var goPie = {
 				$(holder).attr("data-response", "false");
 				callback(holder);
 			}
-
-
 		});
-
 	},
 	chosenUpdateChart: function(jsonUrl, holder, callback){
 

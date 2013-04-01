@@ -23,7 +23,7 @@
 					url += "&response_type=code";
 					url += "&redirect_uri="+this.redirectUrl;
 					this.getJson(url, function(data){
-						console.log("code",data);
+						//console.log("code",data);
 					})
 
 			},
@@ -80,7 +80,6 @@
 
 				var url = "https://api.foursquare.com/v2/venues/search?ll="+location+"&query="+query+"&limit="+limit+"&oauth_token="+this.oauth_token;
 				this.getJson(url, function(data){
-					console.log("getting data ", data);
 					var setOfVenues = data.response.groups[0].items;
 
 					callback(setOfVenues);
@@ -134,14 +133,11 @@
 
 				var url = "https://api.foursquare.com/v2/venues/trending?ll="+location+"&oauth_token="+this.oauth_token;
 				this.getJson(url, function(data){
-					console.log("getting trends", data);
-
 					var setOfVenues = data.response.venues;
 					var template = '<ul id="trendResults"></ul>';
 					$('body').append(template);
 
 					$.each(setOfVenues, function(index, value) {
-						console.log(value);
 						var innterListItem = '<li><a class="trendlist" data-venueid="'+value.id+'" href="#">'+value.name+' - '+value.id+'</a></i>';
 						$('#trendResults').append(innterListItem);
 					});
@@ -160,7 +156,6 @@
 					//$('body').append(template);
 
 					$.each(setOfEvents, function(index, value) {
-						console.log(value);
 						//var innterListItem = '<li><a class="trendlist" data-venueid="'+value.id+'" href="#">'+value.name+' - '+value.id+'</a></i>';
 						//$('#eventResults').append(innterListItem);
 					});
@@ -175,12 +170,8 @@
 				this.getJson(url, function(data){
 
 					var theVenue = data.response.venue;
-					console.log("theVenue",theVenue);
-
 					var theTips = theVenue.tips.groups;
-
 					var thePhotos = theVenue.photos.groups;
-
 
 					//var venue = data.response.venue;
 					//console.log("venue",venue);
@@ -223,7 +214,6 @@
 				});
 			},
 			markToDo: function(venueId){
-				console.log("mark venue id", venueId);
 				//https://api.foursquare.com/v2/venues/4d825176bede5481abdd0fd1/marktodo
 			},
 			myFoursquareReplaceSave: function(foursquareObj) {

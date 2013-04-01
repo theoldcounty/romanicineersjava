@@ -15,7 +15,6 @@
 	var methods = {
 		init: function(options) {
 			// Repeat over each element in selector
-			//console.log("init");
 
 			return this.each(function() {
 				var $this = $(this);
@@ -51,8 +50,6 @@
 			// Repeat over each element in selector
 			return $(this).each(function() {
 				var $this = $(this);
-
-				// run code here
 				// Remove settings data when deallocating our plugin
 				$this.removeData('bubbleChart');
 			});
@@ -71,16 +68,7 @@
 
 		bindEvent: function(){
 			var that = this;
-
 			//binding any events
-
-			/*$(window).on("click", function() {
-
-				//update json
-
-				that.update();
-
-			});*/
 		},
 		currentData: null,
 		setup: function(obj, options){
@@ -98,7 +86,7 @@
 				.attr("width", r)
 				.attr("height", r)
 				.attr("class", "bubble");
-				
+
 			var vis = bubbleHolder.append("svg:g")
 				.attr("transform", "translate(15,15)");
 
@@ -203,7 +191,6 @@ var goBubble = {
 				$(holder).attr("data-response", "false");
 				callback(holder);
 			}
-
 		});
 	}
 };

@@ -3,13 +3,12 @@ var shazamOverlay = {
 	morphBox: function(newMessage){
 		var that = this;
 		//_fade out innerwrapped
-		
+
 		$('#shazam-overlay').fadeOut(350,function(){
 			that.populate(that.addWrap(newMessage, "mobile"));
 			that.rePosition();
-			$('#shazam-overlay').fadeIn(350);		
+			$('#shazam-overlay').fadeIn(350);
 		});
-		
 	},
 	addWrap: function(contents, type){
 		if(type == "mobile"){
@@ -56,12 +55,12 @@ var shazamOverlay = {
 		// get the doc height and width
 		var docHeight = $(document).height();
 		var docWidth = $(document).width();
-		
+
 		// assign values to the overlay
 		$('#shazam-overlay').css({height:docHeight, width:docWidth});
 	},
 	rePosition: function(){
-		// get the screen height and width		
+		// get the screen height and width
 		var maskHeight = $(window).height();
 		var maskWidth = $(window).width();
 
@@ -98,7 +97,6 @@ $(document).ready(function () {
 		return false;
 	});
 
-
 	$('.shazam').click(function () {
 		var link = $(this).attr("href");
 		shazamOverlay.show(link);
@@ -106,17 +104,12 @@ $(document).ready(function () {
 		return false;
 	});
 
-
-
 	// if user resize the window, call the same function again
 	// to make sure the overlay fills the screen and shazambox aligned to center
 	$(window).resize(function () {
-
 		//only do it if the shazam box is not hidden
 		if (!$('#shazam-box').is(':hidden')){
 			shazamOverlay.rePosition();
 		}
 	});
-
-
 });

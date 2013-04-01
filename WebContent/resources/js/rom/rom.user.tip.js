@@ -35,8 +35,6 @@ var userTip = Backbone.View.extend({
 			var userFollows = json[0].users[0].followers;
 			var userPictureCount = json[0].users[0].pictureCount;
 
-			//var featureImageThumbnail = value.pictureFeature;
-
 			var contentsObj = {
 							userId: userId,
 							name: userName,
@@ -95,7 +93,7 @@ var userTip = Backbone.View.extend({
 
 	establishPie: function(){
 		var holder = '#biometricPie';
-		
+
 		$(holder).empty();
 		//create the biometric pie chart
 		var specs = {
@@ -108,10 +106,8 @@ var userTip = Backbone.View.extend({
 
 		goPie.initChart('#biometricPie', specs);
 		//create the biometric pie chart
-		
-		
 	},
-	
+
  	/*
 	 * @description initialize
 	 */
@@ -147,10 +143,8 @@ var userTip = Backbone.View.extend({
 			$('.hand').fadeOut(200);
 		});
 
-
 		$(".users li").on({
 			mouseenter: function(e){
-				console.log("user li on");
 				that.eventOnItem();
 
 				var y_offset = 35;
@@ -183,7 +177,6 @@ var userTip = Backbone.View.extend({
 					that.populate(contentsObj); //show the tip
 					that.show(0); //show the tip
 				});
-
 
 			},
 			mousemove: function(e){
@@ -253,20 +246,15 @@ var userTip = Backbone.View.extend({
 		var jsonUrl = 'api?servicerequest=getInterests&id='+contentsObj.userId+'&chartname=interests';
 		var holder = '#biometricPie';
 		goPie.chosenUpdateChart(jsonUrl, holder, function(hold){
-			//console.log("hold", hold);
-			
 			var hasData = $(hold).attr("data-response");
-			
-			//console.log("has data", hasData);
+
 			if(hasData == "true"){
-				//console.log("show piechart");
 				$(hold).show();
 				$(hold).parent().find('.nodata').hide();
 			}
 			else{
-				//console.log("hide piechart");
 				$(hold).hide();
-				$(hold).parent().find('.nodata').show();	
+				$(hold).parent().find('.nodata').show();
 			}
 		});
 		/*interest d3 pie chart*/

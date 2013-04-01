@@ -9,10 +9,10 @@
 
 var pageHandler = {
 		reBindEvents: function(section){
-			console.log("section", section);			
+			console.log("section", section);
 			if(section.match(/register/gi)){
 				//_is registration form
-				romForms.setUpRegistration();				
+				romForms.setUpRegistration();
 			}
 
 			if(section.match(/edit_chart/gi)){
@@ -22,21 +22,15 @@ var pageHandler = {
 			}
 		},
 		homeEvents: function(){
-			
-			
+
 		},
 		userEvents: function(){
-
-			
 			var userId = $('.details').data('uid');
-
-
 			//get data id of user
 
 			//initialize home grown carousel
 			$('#galleryCarousel').homegrowncarousel();
 
-			//console.log("userId", userId);
 			/*personality sliders*/
 			var personalityUrl = 'api?servicerequest=getPersonality&id='+userId;
 			$.getJSON(personalityUrl, function(data){
@@ -91,17 +85,15 @@ var pageHandler = {
 			});
 			/*personality sliders*/
 
-
-			
 			var userPieWidth = romResponsive.userPieWidth;
 			var userPieHeight = romResponsive.userPieHeight;
 			var userPieRadius = romResponsive.userPieRadius;
 			var userPieInnerRadius = romResponsive.userPieInnerRadius;
-			
+
 			/*interest d3 pie chart*/
 			var jsonUrl = 'api?servicerequest=getInterests&id='+userId+'&chartname=interests';
 			var holder = '#interestsPie';
-			
+
 			var specs = {
 					color : 'spectral',
 					w : userPieWidth,
@@ -109,13 +101,12 @@ var pageHandler = {
 					r: userPieRadius,
 					ir: userPieInnerRadius
 				};
-			
+
 			goPie.chosenChart(jsonUrl, specs, holder, function(hold){
 				if(!$(hold).data("response")){
 					$(hold).parent().find('.nodata').show();
-				}				
+				}
 			});
-
 			/*interest d3 pie chart*/
 
 			/*seeking d3 pie chart*/
@@ -129,12 +120,12 @@ var pageHandler = {
 					r: userPieRadius,
 					ir: userPieInnerRadius
 				};
-			
+
 			goPie.chosenChart(jsonUrl, specs, holder, function(hold){
 				if(!$(hold).data("response")){
 					$(hold).parent().find('.nodata').show();
 				}
-			});	
+			});
 			/*seeking d3 pie chart*/
 
 			/*visiting d3 bubble chart*/
@@ -145,18 +136,18 @@ var pageHandler = {
 				if(!$(hold).data("response")){
 					$(hold).parent().find('.nodata').show();
 				}
-			});				
+			});
 			/*visiting d3 bubble chart*/
 
 			//set user google map
 			var lat = $('#canvasMap').data('lat');
 			var long = $('#canvasMap').data('long');
 			googleMaper.setup(lat, long);
-			googleMaper.setUserMarker(lat, long);				
-			
+			googleMaper.setUserMarker(lat, long);
+
 		},
 		scheduleDate: function(){
 			//_enable the google map/foursquare dating app
 			new GoogleMaps({el: $(document)});
-		}		
+		}
 };

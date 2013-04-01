@@ -15,7 +15,6 @@
 	var methods = {
 		init: function(options) {
 			// Repeat over each element in selector
-			console.log("init");
 
 			return this.each(function() {
 				var $this = $(this);
@@ -51,8 +50,6 @@
 			// Repeat over each element in selector
 			return $(this).each(function() {
 				var $this = $(this);
-
-				// run code here
 				// Remove settings data when deallocating our plugin
 				$this.removeData('sliderPreviews');
 			});
@@ -60,17 +57,9 @@
 
 		bindEvent: function(){
 			var that = this;
-
 			//binding any events
-
-			/*$(window).on("click", function() {
-				//update json
-				that.update();
-			});*/
 		},
 		getTemplate: function(){
-
-
 			return template;
 		},
 		currentData: null,
@@ -110,5 +99,4 @@
 
 		return method.apply(this, arguments);
 	}
-
 })(jQuery);

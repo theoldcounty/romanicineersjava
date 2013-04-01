@@ -94,33 +94,24 @@ var romForms = {
 		},
 		setLatLng: function(countryName){
 			//search for it on google map and obtain its lat and long
-			console.log("countryName", countryName);
-
 			//set the lat and long in the reg map
-
 
 			//
 			// initialize geocoder
 			//
 			var geocoder = new google.maps.Geocoder();
-			console.log("geocoder", geocoder);
-			
+
 			geocoder.geocode({
 				address: countryName}, function(results, status) {
 					if (status == google.maps.GeocoderStatus.OK) {
 						var result = results[0];
-	
-						console.log("result", result);
-						
+
 						var newLat = result.geometry.location.lat();
 						var newLong = result.geometry.location.lng();
-						
-						console.log("newLat", newLat);
-						console.log("newLong", newLong);
-	
+
 						$('input[name="latitude"]').val(newLat);
 						$('input[name="longitude"]').val(newLong);
-	
+
 					} else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
 						alert("Sorry, the geocoder failed to locate the specified address.");
 					} else {
@@ -128,15 +119,11 @@ var romForms = {
 					}
 				}
 			);
-
-
-
 		},
 		bindGoogleMapEvents: function(){
 			var that = this;
 
 			//listen to current selected country
-
 			var selectboxCountry = $('select[name="country"]');
 
 			that.setLatLng(selectboxCountry.find(":selected").text());
@@ -153,11 +140,8 @@ var romForms = {
 
 			 $('#registerForm').submit(function(e) {
 					e.preventDefault();
-					//console.log("clicked on reg - lets do an ajax post at some point");
-
 					var postUrl = window.location;
 					var formResults = $(this).serializeArray();
-					//console.log("formResults", formResults);
 
 					$.post("register", formResults,
 						function(data) {
@@ -165,28 +149,24 @@ var romForms = {
 					    	var obj = jQuery.parseJSON(data);
 
 					    	if(obj[0].response == "OK"){
-					    		console.log("user registered succeffully");
 					    		//__welcome the new user in the lightbox
 					    		shazamOverlay.morphBox(that.messages[0]["successRegistration"]);
-					    		
+
 					    		//__close the lightbox
 								var t = window.setInterval(function(){
-									console.log("close the overlay now");
 									shazamOverlay.hide();
-									
 									clearInterval(t);
-								},5500);					    		
-					    		
+								},5500);
+
 					    		//__refresh the site to auto log the user in.
-					    			//console.log("current page",window.location.href);
-					    	
+
 
 					    		//location.reload();
 					    		//user has been registered succesfully
 					    	}else{
 					    		//there is an error with the registeration.
 					    		//_that.messages[0]["failRegistration"]
-					    		console.log("backend error with reg - likely the username or email already exists");
+					    		//console.log("backend error with reg - likely the username or email already exists");
 					    		$('.error').html(obj[0].error);
 					    	}
 						}
@@ -196,38 +176,28 @@ var romForms = {
 
 		setUpCharts: function(){
 			var that = this;
-			
+
 			 $('#chartForm').submit(function(e) {
 					e.preventDefault();
-					console.log("clicked on reg - lets do an ajax post at some point");
 
 					var postUrl = window.location;
 					var formResults = $(this).serializeArray();
-					console.log("formResults", formResults);
 
 					$.post("edit_chart", formResults,
 						function(data) {
-					    	console.log("json response. " + data);
 					    	var obj = jQuery.parseJSON(data);
 
-					    	//console.log("obj " + obj);
-
 					    	if(obj[0].response == "OK"){
-					    		console.log("user edit_chart succeffully");
-
 					    		shazamOverlay.morphBox(that.messages[0]["successChart"]);
-					    		
+
 					    		//__close the lightbox
 								var t = window.setInterval(function(){
-									console.log("close the overlay now");
 									shazamOverlay.hide();
-									
 									clearInterval(t);
 								},5500);
-								
+
 					    	}else{
 					    		//there is an error with the registeration.
-					    		console.log("backend error with edit_chart - likely the username or email already exists");
 					    		//_that.messages[0]["failChart"]
 					    		$('.error').html(obj[0].error);
 					    	}
@@ -253,8 +223,6 @@ var romForms = {
 					"value": $(this).data('value'),
 					"type": "standard"
 				};
-
-				//console.log("optionObj", optionObj);
 
 				$($(this)).doughnutKnob('init', optionObj);
 			});

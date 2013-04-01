@@ -49,17 +49,11 @@
 			// Repeat over each element in selector
 			return $(this).each(function() {
 				var $this = $(this);
-
-				// run code here
 				// Remove settings data when deallocating our plugin
 			});
 		},
 
 		setup: function(obj, options){
-			//setColors
-
-			//options.fieldName
-
 			var element = '#'+obj.id;
 
 			//create element on the fly
@@ -71,8 +65,6 @@
 			var knobElement = $(element +' .knob');
 
 			$.each(options.data, function(index, value) {
-				//console.log("index", index);
-				//console.log("value", value);
 				knobElement.attr('data-'+index,value);
 			});
 

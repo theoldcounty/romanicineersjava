@@ -44,8 +44,6 @@ var sliderControls = Backbone.View.extend({
 	},
 
 	changedEvent: function(event, ui){
-		//console.log("event", event);
-		//console.log("ui", ui);
 		var element = $(ui.handle);
 		var value = ui.value;
 

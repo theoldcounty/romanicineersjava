@@ -45,14 +45,9 @@ $.fn.homegrowncarousel = function(params) {
 
 				var combWidth = params.totalComb * params.itemsPerRow;
 				params.maxBatchPossible = Math.ceil(totalWidth/combWidth);
-
-				console.log("combWidth", combWidth);
-
-				console.log("params.maxBatchPossible", params.maxBatchPossible);
 			},
 			setDimensions: function(){
 				//loop through images and snap modes to ensure the image ratios fix.
-
 				$('#'+params.homegrownparent + ' li').each(function(index) {
 					var thisImages = $(this).find('img');
 
@@ -70,8 +65,6 @@ $.fn.homegrowncarousel = function(params) {
 			},
 			init:function(homegrownparent){
 				params.homegrownparent = homegrownparent.id;
-
-				console.log("home grown parents");
 				//add wrappers
 				var previousTemplate = '<div class="previous"><a href="#">Prev</a></div>';
 				var nextTemplate = '<div class="next"><a href="#">Next</a></div>';
@@ -84,9 +77,6 @@ $.fn.homegrowncarousel = function(params) {
 				//this.itemsPerRow
 
 				var limits = Math.ceil(params.numItems/2);
-				console.log("limits", limits);
-
-				console.log("this.itemsPerRow", this.itemsPerRow);
 
 				params.disableLeft = false;
 				params.hidenshowControl("previous", 0);
@@ -95,7 +85,6 @@ $.fn.homegrowncarousel = function(params) {
 				params.hidenshowControl("next", 1);
 
 				if(limits <= this.itemsPerRow){
-					console.log("hide the next");
 					//not enough items?
 					//hide next arrow
 					params.hidenshowControl("next", 0);
@@ -104,18 +93,12 @@ $.fn.homegrowncarousel = function(params) {
 				$('#'+params.homegrownparent + ' .wrapper ul').fadeIn(1500);
 			},
 			shift:function(direction){
-				//console.log("shift", direction);
-
-
 				globalDisable = false;
 
 				var theCarousel = $('#'+params.homegrownparent + ' .wrapper');
 				var totalWidth = theCarousel.outerWidth(true);
 
-				//console.log("totalWidth", totalWidth);
-
 				if(params.inMotion == true){
-					//console.log("caroseul already in motion");
 					globalDisable = true;
 				}
 
@@ -176,7 +159,6 @@ $.fn.homegrowncarousel = function(params) {
 					params.hidenshowControl("next", 0);
 				}else{
 					//show the right
-					console.log("show the right arrow");
 					params.disableRight = false;
 					params.hidenshowControl("next", 1);
 				}
