@@ -53,72 +53,52 @@
 			width: 900px;
 		}
 
-		#returnhome{
+		
+		ul#returnhome{
 			float:left;
-		}
-		#returnhome ul{
 			margin:0;
 			padding: 0;
 			overflow:hidden;
 		}
-		#returnhome ul li{
-			float:left;
-		}
-		#returnhome ul li a{
-			height: 102px;
-			width: 100px;
-			display: block;
-			border: 1px solid black;
-			border-bottom: 0;
-			border-top: 0;
-		}
 
-		#returnhome ul li.home a{
-			background: url('../images/icon_home.png');
-			text-indent: 160px;
-		}
-
-
-		#calltoaction{
+		ul#calltoaction{
 			float:right;
-		}
-		#calltoaction ul{
 			margin:0;
 			padding: 0;
 			overflow:hidden;
 		}
-		#calltoaction ul li{
+		
+		ul#returnhome li,
+		ul#calltoaction li{
 			float:left;
+			text-align: center;
 		}
-		#calltoaction ul li a{
+		
+		ul#returnhome li a,
+		ul#calltoaction li a{
 			height: 102px;
 			width: 100px;
 			display: block;
 			border: 1px solid black;
 			overflow: hidden;
-			text-indent: -999px;
 			border-bottom: 0;
 			border-top: 0;
 		}
 
-		#calltoaction ul li a.selected{
-			background: red;
+		ul#returnhome li a:hover,
+		ul#returnhome li a.selected,
+		ul#calltoaction li a:hover,
+		ul#calltoaction li a.selected{
+			background: lightgrey;
+			color: #ffffff;
 		}
-
-		#calltoaction ul li.filters a{
-			background: url('../images/icon_filters.png');
-		}
-
-		#calltoaction ul li.diagrams a{
-			background: url('../images/icon_morediagrams.png');
-		}
-
-		#calltoaction ul li.quiz a{
-			background: url('../images/icon_quiz.png');
-		}
-
-		#calltoaction ul li.search a{
-			background: url('../images/icon_search.png');
+		
+		.icon {
+			width: 60px;
+			height: 50px;
+			margin-left: auto;
+			padding-top: 25px;
+			margin-right: auto;
 		}
 
 		#query{
@@ -160,36 +140,20 @@
 			overflow:hidden;
 		}
 		#filters ul li a{
-			background: orange;
 			height: 100px;
 			width: 100px;
 			display: block;
 			border:1px solid #000000;
 			cursor:pointer;
+			text-align: center;
 		}
 
-		#filters ul li.location a{
-			background: url('../images/icon_location.png');
-			text-indent: 160px;
+		#filters ul li a.selected,
+		#filters ul li a:hover{
+			background: lightgrey;
+			color: #ffffff;
 		}
-		#filters ul li.interest a{
-			background: url('../images/icon_interest.png');
-			text-indent: 160px;
-		}
-		#filters ul li.female a{
-			background: url('../images/icon_female.png');
-			text-indent: 160px;
-		}
-		#filters ul li.male a{
-			background: url('../images/icon_male.png');
-			text-indent: 160px;
-		}
-
-		#filters ul li.shuffle a{
-			background: url('../images/icon_shuffle.png');
-			text-indent: 160px;
-		}
-
+		
 
 		#filters .optional{
 			display:none;
@@ -210,6 +174,9 @@
 
 		#filters .optional .wrappers{}
 
+		#filters .optional .wrappers form{
+			overflow:hidden;
+		}
 
 		#filters .optional .badge{
 			background: blue;
@@ -219,19 +186,20 @@
 		}
 
 		#filters .optional .close{
-			background: green;
-			width: 29px;
-			height: 29px;
+			background: lightgrey;
+			width: 17px;
+			height: 20px;
 			position: absolute;
 			top: 0;
 			right: 0;
 		}
 
 		#filters .optional input[type="submit"]{
-			background: green;
+			background: #999999;
+			color: #ffffff;
 			border: none;
-			padding: 22px;
-			margin-top: 20px;
+			padding: 6px;
+			margin-top: 22px;
 		}
 
 		#filters .optional input[type="text"]{
@@ -692,3 +660,39 @@
 	list-style-type:none;
 }
 
+
+
+.interactivePane{
+	background: lightgrey;	
+	overflow:hidden;
+}
+
+.finetuneOptions{
+	background: red;	
+	overflow:hidden;
+}
+
+.resultspane{
+	background: green;
+}
+
+.chosenInterestsPieCharts{
+	float: left;
+}
+.selectedUserDetails{
+	float: right;
+	border-left: 1px solid black;
+}
+
+.resultspane ul{
+	margin:0;
+	padding: 0;
+	overflow:hidden;
+}
+
+.resultspane ul li{
+	float:left;
+	margin-right:10px;
+	background: blue;
+	width:100px;
+}

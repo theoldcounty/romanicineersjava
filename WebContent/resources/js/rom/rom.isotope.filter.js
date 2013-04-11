@@ -11,6 +11,7 @@
 	* @class Romance Isotope
 	* @description Isotope filtering and sorting
 */
+var hasFiltered = false;
 
 var isotopeFilters = Backbone.View.extend({
 	initialize : function() {
@@ -112,7 +113,7 @@ var isotopeFilters = Backbone.View.extend({
 		.trigger('hashchange');// trigger hashchange to capture any hash data on init
 	},
 	generateFilters: function(){
-
+		var that = this;
 		var filter = {
 			lastFilter:"",
 			isotopeTime: function(obj){
@@ -177,8 +178,13 @@ var isotopeFilters = Backbone.View.extend({
 		});
 
 		$("#filters li a").click(function() {
+			$("#filters li a").removeClass("selected");
+			$(this).addClass("selected");
+			
 			var type = $(this).parent().attr("class");
-
+			
+			hasFiltered = true;
+			
 			switch(type)
 			{
 				case "location":
@@ -196,6 +202,9 @@ var isotopeFilters = Backbone.View.extend({
 				case "male":
 						filter.isotopeTime({ filter: $('.element:gender(Male)') });
 					break;
+				case "original":
+					filter.isotopeTime({ sortBy : 'original-order' });
+				break;					
 				case "shuffle":
 						filter.isotopeTime('shuffle');
 					break;

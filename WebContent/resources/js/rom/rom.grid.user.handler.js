@@ -80,11 +80,15 @@ var gridUserHandler = {
 
 			$("a#getMore").click(function(e) {
 				e.preventDefault();
-
+				
 				var nextBatch = 10;
 				that.start = that.end;
 				that.end +=nextBatch;
-				that.getUsers(function(response){});
+				that.getUsers(function(response){
+					if(hasFiltered){
+						$("#filters li.showall a").click();
+					}
+				});
 			});
 		}
 };

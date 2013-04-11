@@ -31,19 +31,16 @@
 		</header>
 		<div id="interactionpane">
 			<div class="wrap">
-				<nav id="returnhome">
-					<ul>
-						<li class="home"><a href="/springApp21">Home</a></li>
-					</ul>
-				</nav>
-				<nav id="calltoaction">
-					<ul>
-						<li class="quiz"><a>Quiz</a></li>
-						<li class="diagrams"><a>More Diagrams</a></li>
-						<li class="filters"><a>Filters</a></li>
-						<li class="search"><a>Search</a></li>
-					</ul>
-				</nav>
+				<ul id="returnhome">
+					<li class="home"><a href="/springApp21"><div class="icon"><img src="resources/images/icon_home.png"></div>Home</a></li>
+				</ul>
+				<ul id="calltoaction"><!-- 
+					<li class="quiz"><a>Quiz</a></li>
+					<li class="diagrams"><a>More Diagrams</a></li>-->
+					<li class="filters"><a><div class="icon"><img src="resources/images/icon_filters.png"></div>Filters</a></li>
+					<li class="search"><a><div class="icon"><img src="resources/images/icon_search.png"></div>Search</a></li>
+					<li class="advanced_search"><a><div class="icon"><img src="resources/images/icon_search.png"></div>Advanced Search</a></li>
+				</ul>
 			</div>
 		</div>		
 <!-- ${inSession}-->

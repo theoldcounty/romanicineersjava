@@ -9,7 +9,7 @@
             "For Marriage"
         ],
         "experimentation": [
-            "Intermitant Encounter",
+            "Intermittency",
             "Fetish"
         ],
         "find-new-partner": [

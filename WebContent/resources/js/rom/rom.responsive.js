@@ -17,6 +17,7 @@ var romResponsive = {
 			var mode = "regular";
 
 			var mobileThreshold = 600;
+			var ipadThreshold = 900;
 			var regularThreshold = 1280;
 			var imacThreshold = 1500;
 
@@ -24,7 +25,11 @@ var romResponsive = {
 				//mobile mode
 				mode = "mobile";
 			}
-			if(screenWidth > mobileThreshold && screenWidth < regularThreshold){
+			if(screenWidth > mobileThreshold && screenWidth < ipadThreshold){
+				//regular mode
+				mode = "ipad";
+			}			
+			if(screenWidth > ipadThreshold && screenWidth < regularThreshold){
 				//regular mode
 				mode = "regular";
 			}
@@ -50,10 +55,16 @@ var romResponsive = {
 					this.userPieInnerRadius = 25;
 				  break;			
 				case "regular":
+					this.userPieWidth = 280;
+					this.userPieHeight = 280;
+					this.userPieRadius = 65;
+					this.userPieInnerRadius = 35;					
+					/*
 					this.userPieWidth = 285;
 					this.userPieHeight = 240;
 					this.userPieRadius = 45;
 					this.userPieInnerRadius = 20;
+					*/
 				  break;
 				case "imac":
 					this.userPieWidth = 375;

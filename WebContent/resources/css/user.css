@@ -3,6 +3,11 @@
 	/*_user*/
 	
 	.user{}
+	
+	.user ul#calltoaction li.filters{
+		display:none;
+	}
+	
 	.user h2{
 		margin: 0;
 		padding: 0;
