@@ -89,31 +89,25 @@ public class PersonDao {
 		return response;
 	}
 	
-	
 	/*Edit Methods*/	
 	public static void editUser(Person person){
 		
-		
-	}	
-	
+	}
 	
 	/*Login Methods*/
 	public static void loginUser(Person person){
 		
-		
 	}
 	
+	/*Logout Methods*/
 	public static void logoutUser(Person person){
 		
-		
 	}
 	
-	
+	/*Ban Methods*/
 	public static void banUser(Person person){
 		
-		
 	}
-	
 	
 	
 	/**

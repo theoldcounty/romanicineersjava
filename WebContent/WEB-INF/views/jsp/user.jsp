@@ -114,6 +114,9 @@
 							<li>
 								<h2>My main interests</h2>
 								<div id="interestsPie"></div>
+								<div class="editdata">
+									<a class="shazam form" href="edit_chart?type=interests&userId=${people[0]._id}">Edit Chart</a>
+								</div>								
 								<div class="nodata">
 									<p>Show you are interesting, add a visual chart</p>
 									<a class="shazam form" href="edit_chart?type=interests&userId=${people[0]._id}">Add Chart</a>
@@ -122,6 +125,9 @@
 							<li>
 								<h2>I'm Seeking for</h2>
 								<div id="seekingPie"></div>
+								<div class="editdata">
+									<a class="shazam form" href="edit_chart?type=seeking&userId=${people[0]._id}">Edit Chart</a>
+								</div>
 								<div class="nodata">
 									<p>Show what you want in a relationship, add a visual chart</p>
 									<a class="shazam form" href="edit_chart?type=seeking&userId=${people[0]._id}">Add Chart</a>
@@ -130,6 +136,9 @@
 							<li>
 								<h2>Quiz</h2>
 								<div id="quizchart"></div>
+								<div class="editdata">
+									<a class="shazam form" href="edit_chart?type=visiting&userId=${people[0]._id}">Edit Chart</a>
+								</div>								
 								<div class="nodata">
 									<p>Where do you want to visit?, add a visual chart</p>
 									<a class="shazam form" href="edit_chart?type=visiting&userId=${people[0]._id}">Add Chart</a>

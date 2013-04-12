@@ -50,8 +50,8 @@
 						<fieldset data-fieldname="interestknobs" id="knob5" class="knob" data-color="#E2B227" data-role="doughnut-knob" data-value="35" data-pie-size="85"></fieldset>		
 					</fieldset>
 				</div>
-						
-				
+					
+				<input type="hidden" value="<%=request.getParameter("chartId")%>" name="chartId"/>
 				<input type="hidden" value="<%=request.getParameter("type")%>" name="chart"/>
 				<input type="hidden" value="submitted" name="submitted"/>
 				<input type="submit" value="submit" name="submit"/>				

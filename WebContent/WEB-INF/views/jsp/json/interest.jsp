@@ -26,7 +26,6 @@
             "Tarot card reading",
             "Board games",
             "Watching movies",
-            "Cubing",
             "Chess",
             "Bowling",
             "Billiards",

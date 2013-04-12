@@ -795,7 +795,7 @@ var goPie = {
 		$.getJSON(jsonUrl, function(data){
 			var dataPieJson = [];
 			var dataArray = data[0].dataResults;
-
+			
 			if(dataArray != undefined){
 				$.each(dataArray, function(key, val) {
 					var tempObj = {
@@ -808,10 +808,11 @@ var goPie = {
 
 			var datalength = dataPieJson.length;
 			if(datalength > 0){
+				var chartId = data[0].chardId.$oid;		
 				goPie.initChart(holder, specs);
 				goPie.updateCharts(holder, dataPieJson);
 				$(holder).attr("data-response", "true");
-				callback(holder);
+				callback(holder, chartId);
 
 			}else{
 				$(holder).attr("data-response", "false");

@@ -56,6 +56,7 @@ public class ListenerController{
     		@RequestParam(value="interests", required=false) String[] interests,
     		@RequestParam(value="interestsknobs", required=false) Integer[] interestsknobs,
     		@RequestParam(value="chart", required=false) String chart,
+    		@RequestParam(value="chartId", required=false) String chartId,
     		@RequestParam(value="submitted", required=false) String submitted
     		) throws UnknownHostException, MongoException
     {
@@ -78,10 +79,9 @@ public class ListenerController{
     	
     	if(submitted == null){
     		//__if not yet added a chart return html form	    	
-			return new ModelAndView("jsp/user/edit_chart");   	
+			return new ModelAndView("jsp/user/chart_handler");   	
     	}else{
-    		//_ register the user into the database and return a json response
-        	return new ModelAndView("jsp/json/response", "json", InterestDao.addInterest(interest));  	
+    		return new ModelAndView("jsp/json/response", "json", InterestDao.updateInterest(interest, chartId));  	
     	}       	
     }
     

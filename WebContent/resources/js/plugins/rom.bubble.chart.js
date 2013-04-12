@@ -173,6 +173,7 @@ var goBubble = {
 
 			var datalength = dataBubbleJson.length;
 			if(datalength > 0){
+				var chartId = data[0].chardId.$oid;	
 				$(holder).show();
 				$(holder).attr("data-response", "true");
 				var visitJson= {
@@ -185,7 +186,7 @@ var goBubble = {
 							]
 				};
 				$(holder).bubbleChart('init', visitJson);
-				callback(holder);
+				callback(holder, chartId);
 			}else{
 				$(holder).hide();
 				$(holder).attr("data-response", "false");

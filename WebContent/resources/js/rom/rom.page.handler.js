@@ -102,9 +102,13 @@ var pageHandler = {
 					ir: userPieInnerRadius
 				};
 
-			goPie.chosenChart(jsonUrl, specs, holder, function(hold){
+			goPie.chosenChart(jsonUrl, specs, holder, function(hold, chartId){
 				if(!$(hold).data("response")){
 					$(hold).parent().find('.nodata').show();
+				}
+				else{
+					$(hold).parent().find('.editdata').show();
+					$(hold).parent().find('.editdata a').attr('href', $(hold).parent().find('.editdata a').attr('href')+'&chartId='+chartId);
 				}
 			});
 			/*interest d3 pie chart*/
@@ -121,9 +125,13 @@ var pageHandler = {
 					ir: userPieInnerRadius
 				};
 
-			goPie.chosenChart(jsonUrl, specs, holder, function(hold){
+			goPie.chosenChart(jsonUrl, specs, holder, function(hold, chartId){
 				if(!$(hold).data("response")){
 					$(hold).parent().find('.nodata').show();
+				}
+				else{
+					$(hold).parent().find('.editdata').show();
+					$(hold).parent().find('.editdata a').attr('href', $(hold).parent().find('.editdata a').attr('href')+'&chartId='+chartId);
 				}
 			});
 			/*seeking d3 pie chart*/
@@ -132,9 +140,13 @@ var pageHandler = {
 			var jsonUrl = 'api?servicerequest=getInterests&id='+userId+'&chartname=visiting';
 			var holder = '#quizchart';
 			var colourBands = ["rgba(0,0,0,0.2)", "rgba(230,0,0,0.2)", "rgba(212, 222, 22, 0.2)"];
-			goBubble.chosenChart(jsonUrl, colourBands, holder, function(hold){
+			goBubble.chosenChart(jsonUrl, colourBands, holder, function(hold, chartId){
 				if(!$(hold).data("response")){
 					$(hold).parent().find('.nodata').show();
+				}
+				else{
+					$(hold).parent().find('.editdata').show();
+					$(hold).parent().find('.editdata a').attr('href', $(hold).parent().find('.editdata a').attr('href')+'&chartId='+chartId);
 				}
 			});
 			/*visiting d3 bubble chart*/

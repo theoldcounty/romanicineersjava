@@ -24,7 +24,13 @@ public class InterestDao {
 
 	static String collectionName = "interestCollection";
 	
-	public static List<DBObject> addInterest(Interests interest){
+	/**
+	 * Add User Interests
+	 * @param interest
+	 * @throws MongoException
+	 * @throws UnknownHostException
+	 **/
+	public static List<DBObject> updateInterest(Interests interest, String id){
 		
 		List<DBObject> response = new ArrayList<DBObject>();
 		    	
@@ -49,9 +55,17 @@ public class InterestDao {
 	    	document.put("uid", interest.getUserId());
 	    	document.put("chartType", interest.getName());
 	    	document.put("dataResults", dataResults);
-	    	
-	    collection.insert(document);
-	    ObjectId lastid = (ObjectId)document.get( "_id" );
+	   
+	    //_if chart already exists update it, else insert
+	   if(id != null){
+		   document.put("_id", ObjectId.massageToObjectId(id));
+		   collection.save(document);
+	   }
+	   else{
+	    	collection.insert(document);
+	   }
+	    
+	    ObjectId lastid = (ObjectId)document.get("_id");
 	    
 		BasicDBObject results = new BasicDBObject();
 		
@@ -62,10 +76,10 @@ public class InterestDao {
 		return response;
 	}
 	
-	
+
 	/**
-	 * Get UserInterests
-	 * @param id
+	 * Get User Interests
+	 * @param interest
 	 * @throws MongoException
 	 * @throws UnknownHostException
 	 **/
@@ -90,9 +104,10 @@ public class InterestDao {
 			e.printStackTrace();
 		}
 		
-		if(uniqueInterests.size()>0 ){
+		if(uniqueInterests.size()>0 ){			
 			results.put("response", "OK");
 			results.put("description", "The specific user has been found");
+			results.put("chardId", uniqueInterests.get(0).get("_id"));
 			results.put("chartType", uniqueInterests.get(0).get("chartType"));
 			results.put("dataResults", uniqueInterests.get(0).get("dataResults"));
 		}

@@ -1,3 +1,10 @@
+/*
+* Romanineers
+* Author: Rob Shan Lone
+* Copyright (c) 2012 The Old County Limited.
+*
+* All rights reserved.
+*/
 
 		.goals .head{
 			position: absolute;
@@ -253,7 +260,3 @@
 			width:105px;
 		}
 		
-		
-		.nodata{
-			display:none;
-		}
