@@ -30,7 +30,7 @@ public class InterestDao {
 	 * @throws MongoException
 	 * @throws UnknownHostException
 	 **/
-	public static List<DBObject> updateInterest(Interests interest, String id){
+	public static List<DBObject> updateInterest(Interests interest){
 		
 		List<DBObject> response = new ArrayList<DBObject>();
 		    	
@@ -57,8 +57,8 @@ public class InterestDao {
 	    	document.put("dataResults", dataResults);
 	   
 	    //_if chart already exists update it, else insert
-	   if(id != null){
-		   document.put("_id", ObjectId.massageToObjectId(id));
+	   if(interest.getCid() != null){
+		   document.put("_id", ObjectId.massageToObjectId(interest.getCid()));
 		   collection.save(document);
 	   }
 	   else{

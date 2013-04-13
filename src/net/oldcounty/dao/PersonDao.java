@@ -90,9 +90,83 @@ public class PersonDao {
 	}
 	
 	/*Edit Methods*/	
-	public static void editUser(Person person){
+	public static List<DBObject> editUser(Person person, String section){
 		
-	}
+		List<DBObject> response = new ArrayList<DBObject>();
+		    	
+		//_getCollection
+		DBCollection collection = null;
+		try {
+			collection = MongoApp.getCollection("myCollection");
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (MongoException e) {
+			e.printStackTrace();
+		}
+		
+		Date now = new Date();
+		BasicDBObject time = new BasicDBObject("ts", now);
+		
+	    // create a document to store attributes
+	    BasicDBObject document = new BasicDBObject();
+
+	    
+	    System.out.println("section <<< "+section);
+	    
+	    //_about
+	    if(section.equals("about")){
+	    	document.put("about", person.getAbout());
+	    	 System.out.println("about about section <<< "+section);
+	    }
+	    
+	    //_personality
+	    if(section.equals("personality")){
+	    	document.put("personality", person.getPersonality());	    	
+	    }
+	    
+	    //_physical
+	    if(section.equals("physical")){
+	    	document.put("bodytype", person.getBodytype());
+	    	document.put("haircolor", person.getHaircolor());
+	    	document.put("eyecolor", person.getEyecolor());
+	    	document.put("children", person.getChildren());
+	    	document.put("languages", person.getLanguages());
+	    	document.put("education", person.getEducation());
+	    	document.put("occupation", person.getOccupation());
+	    	document.put("ethnicity", person.getEthnicity());
+	    	document.put("country", person.getCountry());
+	    	document.put("kindofrelationship", person.getKindofrelationship());
+	    	document.put("languages", person.getLanguages());
+	    }	    
+	    
+	    System.out.println("document <<<<<< "+ document);
+	    
+	    // save it into collection named "myCollection"
+	    
+	   //document.put("_id", ObjectId.massageToObjectId(person.getUid()));
+	    
+	    ObjectId objId = ObjectId.massageToObjectId(person.getUid());
+	    BasicDBObject obj = new BasicDBObject();
+    		obj.put("_id", objId);
+    	
+    		BasicDBObject set = new BasicDBObject();
+    			set.put("$set", document);
+    		
+	    collection.update(obj, set);
+	    
+	    ObjectId lastid = (ObjectId)document.get( "_id" );
+		
+		BasicDBObject results = new BasicDBObject();
+		
+		results.put("response", "OK");
+		results.put("lastId", lastid);
+		response.add(results);	    
+	    
+		
+		System.out.println("response <<<<<< "+ response);
+		
+		return response;
+	}	
 	
 	/*Login Methods*/
 	public static void loginUser(Person person){

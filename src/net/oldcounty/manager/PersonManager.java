@@ -131,4 +131,33 @@ public class PersonManager {
 	public void setPersonDao(PersonDao personDao){
 		this.personDao = personDao;
 	}
+
+	public List<DBObject> editUser(Person person, String section){
+		//__Prepare response
+		
+		System.out.println("edit user using person control<<<<<<<<<<< "+section);    			
+		List<DBObject> response = new ArrayList<DBObject>();
+
+		    BasicDBObject results = new BasicDBObject();
+		    Boolean isValidInputs = true;
+
+		    //_validate inputs 
+
+		    if(isValidInputs){				    	
+		    	List<DBObject> latestUser = PersonDao.editUser(person, section);
+		    	
+				results.put("response", "OK");
+				results.put("description", "User has been registered");
+		    	results.put("user", latestUser.get(0));
+		    	results.put("lastId", latestUser.get(0).get("lastId"));
+		    }
+		    else
+		    {
+				results.put("response", "FAIL");
+				results.put("description", "Failed to register user");
+		    }
+
+		    response.add(results);
+		return response;
+	}
 }

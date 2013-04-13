@@ -80,36 +80,72 @@
 						<ul class="collection">
 							<li>
 								<ul class="physical">
-									<li id="gender"><div class="title">*Gender ></div><div class="result">${people[0].gender}</div></li>
-									<li id="ethnicity"><div class="title">*Ethnicity ></div><div class="result">
-										<c:forEach var="ethnic" items="${ethnicityList}">
-											<c:choose>
-												<c:when test="${people[0].ethnicity == ethnic.key}">
-													${ethnic.value}
-												</c:when>
-											</c:choose>
-										</c:forEach>
-									</div></li>
-									<li id="relationship"><div class="title">Relationship ></div><div class="result">${people[0].kindofrelationship}</div></li>
-									<li id="bodytype"><div class="title">Body Type ></div><div class="result">${people[0].bodytype}</div></li>
-									<li id="haircolour"><div class="title">Hair Colour ></div><div class="result">${people[0].haircolor}</div></li>
-									<li id="eyecolour"><div class="title">Eye Colour ></div><div class="result">${people[0].eyecolor}</div></li>
-									<li id="children"><div class="title">Children ></div><div class="result">${people[0].children}</div></li>
-									<li id="education"><div class="title">Education ></div><div class="result">${people[0].education}</div></li>
-									<li id="occupation"><div class="title">Occupation ></div><div class="result">${people[0].occupation}</div></li>
-									<li id="languages"><div class="title">Spoken Languages ></div><div class="result"><c:forEach var="language" items="${people[0].languages}">${language} </c:forEach></div></li>
-								</ul>								
+									<li id="gender">
+										<div class="title">*Gender ></div>
+										<div class="result">${people[0].gender}</div>
+									</li>
+									<li id="ethnicity">
+										<div class="title">*Ethnicity ></div>
+										<div class="result">
+											<c:forEach var="ethnic" items="${ethnicityList}">
+												<c:choose>
+													<c:when test="${people[0].ethnicity == ethnic.key}">
+														${ethnic.value}
+													</c:when>
+												</c:choose>
+											</c:forEach>
+										</div>
+									</li>
+									<li id="relationship">
+										<div class="title">Relationship ></div>
+										<div class="result">${people[0].kindofrelationship}</div>
+									</li>
+									<li id="bodytype">
+										<div class="title">Body Type ></div>
+										<div class="result">${people[0].bodytype}</div>
+									</li>
+									<li id="haircolour">
+										<div class="title">Hair Colour ></div>
+										<div class="result">${people[0].haircolor}</div>
+									</li>
+									<li id="eyecolour">
+										<div class="title">Eye Colour ></div>
+										<div class="result">${people[0].eyecolor}</div>
+									</li>
+									<li id="children">
+										<div class="title">Children ></div>
+										<div class="result">${people[0].children}</div>
+									</li>
+									<li id="education">
+										<div class="title">Education ></div>
+										<div class="result">${people[0].education}</div>
+									</li>
+									<li id="occupation">
+										<div class="title">Occupation ></div>
+										<div class="result">${people[0].occupation}</div>
+									</li>
+									<li id="languages">
+										<div class="title">Spoken Languages ></div>
+										<div class="result">
+											<c:forEach var="language" items="${people[0].languages}">
+												${language}
+											</c:forEach>
+										</div>
+									</li>
+								</ul>
+								<a class="shazam form" href="edit_user?section=physical&userId=${people[0]._id}">Edit Physical Section</a>								
 							</li>
 							<li>
 								<h2>About me</h2>
 								<div class="about">
 									<p>${people[0].about}</p>
-									<p>Lorem impsum dolor sit amet, consecteur adsdfsd. erlit. Maescenae aliaqul ipsum vehiaclsd anti test. Cos soc asd kasd aodsa.</p>
+									<a class="shazam form" href="edit_user?section=about&userId=${people[0]._id}">Edit About Section</a>
 								</div>
 							</li>
 							<li>
 								<h2>My identity</h2>
 								<ul id="sliderResults" class="indicators"></ul>
+								<a class="shazam form" href="edit_user?section=personality&userId=${people[0]._id}">Edit Personality Section</a>
 							</li>
 							<li>
 								<h2>My main interests</h2>

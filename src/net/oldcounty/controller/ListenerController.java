@@ -44,7 +44,7 @@ public class ListenerController{
 	private PersonManager personManager;
 
     /**
-     * Register
+     * Edit Chart
      * @return 
      * @throws MongoException
      * @throws UnknownHostException
@@ -73,6 +73,7 @@ public class ListenerController{
     	}
     	
     	Interests interest = new Interests();
+    		interest.setCid(chartId);
 	    	interest.setUserId(userId);
 	    	interest.setName(chart);//type of chart/name of chart
 	    	interest.setResults(interestData);
@@ -81,9 +82,122 @@ public class ListenerController{
     		//__if not yet added a chart return html form	    	
 			return new ModelAndView("jsp/user/chart_handler");   	
     	}else{
-    		return new ModelAndView("jsp/json/response", "json", InterestDao.updateInterest(interest, chartId));  	
+    		return new ModelAndView("jsp/json/response", "json", InterestDao.updateInterest(interest));  	
     	}       	
     }
+    
+    
+    
+    /**
+     * Edit User
+     * @return 
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/edit_user")
+    public ModelAndView editUser(
+    		HttpServletRequest request,
+    		@RequestParam(value="userId", required=false) String userId,
+    		
+    		@RequestParam(value="section", required=false) String section,
+    		
+    		@RequestParam(value="about", required=false) String about,
+    		
+    		@RequestParam(value="ethnicity", required=false) String ethnicity,
+    		@RequestParam(value="country", required=false) String country,
+    		@RequestParam(value="lookingfor", required=false) String lookingfor,
+    		@RequestParam(value="kindofrelationship", required=false) String kindofrelationship,
+    		@RequestParam(value="languages", required=false) String[] languages,
+    		@RequestParam(value="bodytype", required=false) String bodytype,
+    		@RequestParam(value="haircolor", required=false) String haircolor,
+    		@RequestParam(value="eyecolor", required=false) String eyecolor,
+    		@RequestParam(value="children", required=false) String children,
+    		@RequestParam(value="occupation", required=false) String occupation,
+    		@RequestParam(value="education", required=false) String education,
+    		@RequestParam(value="gender", required=false) String gender,
+    		@RequestParam(value="seeking", required=false) String seeking,
+    		 		
+    		@RequestParam(value="personality", required=false) Integer[] personality,
+    		
+    		@RequestParam(value="submitted", required=false) String submitted
+    		) throws UnknownHostException, MongoException
+    {
+    	
+    	//_new person
+    	Person person = new Person();
+    	/*
+    	person.setRealname(realname);
+    	person.setUsername(username);
+    	person.setEmailaddress(emailaddress);
+    	person.setConfirmemailaddress(confirmemailaddress);
+    	person.setPassword(password);
+    	person.setConfirmpassword(confirmpassword);
+    	person.setWhichscreenname(whichscreenname);
+    	person.setBirthyear(birthyear);
+    	person.setBirthmonth(birthmonth);
+    	person.setBirthday(birthday);
+    	*/
+    	person.setUid(userId);
+    	person.setAbout(about);
+    	
+    	
+    	person.setEthnicity(ethnicity);
+    	person.setCountry(country);
+    	person.setKindofrelationship(kindofrelationship);
+    	person.setLanguages(languages);
+    	person.setBodytype(bodytype);
+    	person.setHaircolor(haircolor);
+    	person.setEyecolor(eyecolor);
+    	person.setChildren(children);
+    	person.setEducation(education);
+    	person.setOccupation(occupation);
+    	
+    	
+    	BasicDBObject personaltraits = new BasicDBObject();
+
+    	if(personality != null){
+		    /*add to new collection personality*/
+			String[] personalTypes ={"confidence","reasoning","emotion","daring","attachment","sensitivity","comedy"};
+			Integer j = 0;
+			for(Integer traits : personality)
+	    	{
+	    		//System.out.println("traits "+traits);
+	    		personaltraits.put(personalTypes[j], traits);
+	    		j++;
+	    	}	
+    	}
+    	person.setPersonality(personaltraits);
+    	
+    	/*    	
+    	person.setGender(gender);    	
+
+    	person.setLongitude(longitude);
+    	person.setLatitude(latitude);
+    	
+    	person.setInterests(interests);
+    	person.setInterestknobs(interestknobs);
+    	person.setSeekings(seekings);
+    	person.setSeekingknobs(seekingknobs);
+    	person.setVisitings(visitings);
+    	person.setVisitingknobs(visitingknobs);
+    	person.setGoal1(goal1);
+    	person.setGoal2(goal2);
+    	person.setGoal3(goal3);
+    	*/
+    	
+    	if(submitted == null){
+    		//__if not yet added a chart return html form	    	
+			return new ModelAndView("jsp/user/user_handler");   	
+    	}else{
+    		//_ register the user into the database and return a json response
+        	return new ModelAndView("jsp/json/response", "json", personManager.editUser(person, section));
+        	
+    		//return new ModelAndView("jsp/json/response", "json", InterestDao.updateInterest(interest, chartId));  	
+    	}       	
+    }
+        
+    
+    
     
     
     /**

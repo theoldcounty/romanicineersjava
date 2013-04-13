@@ -20,6 +20,11 @@ var pageHandler = {
 				romForms.setUpDoughnutCharts(romUtils.getQueryVariable(section, "type"));
 				romForms.setUpCharts();
 			}
+			
+			if(section.match(/edit_user/gi)){
+				//_is edit form
+				romForms.setUpEdit();
+			}
 		},
 		homeEvents: function(){
 

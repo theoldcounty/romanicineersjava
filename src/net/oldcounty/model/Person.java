@@ -3,6 +3,7 @@ package net.oldcounty.model;
 import com.mongodb.BasicDBObject;
 
 public class Person {
+	String uid;
 	String realname;
 	String username;
 	String emailaddress;
@@ -37,7 +38,13 @@ public class Person {
 	String goal2;
 	String goal3;
 	BasicDBObject personality;
-	
+
+	public String getUid() {
+		return uid;
+	}
+	public void setUid(String uid) {
+		this.uid = uid;
+	}	
 	public String getRealname() {
 		return realname;
 	}

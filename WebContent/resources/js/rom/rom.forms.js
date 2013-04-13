@@ -12,7 +12,9 @@ var romForms = {
 		    "successRegistration" : "<p>Wow you have successfully registered on Romancineers. We are automatically logging you in now so you can find your perfect date.</p>",
 		    "failRegistration" : "<p>There is a problem with your entry, please ensure you have completed all of the required fields.</p>",
 		    "successChart" : "<p>Congratulations, you have added a new interest chart to your profile, this will make it more visual</p>",
-		    "failChart" : "<p>Please bare with us, something went wrong when trying to add your interest chart</p>"
+		    "failChart" : "<p>Please bare with us, something went wrong when trying to add your interest chart</p>",
+		    "successEdit" : "<p>Congratulations, you have updated a part of your portfolio, this will make it more visual</p>",
+		    "failEdit" : "<p>Please bare with us, something went wrong when trying to update your portfolio</p>"
 		}],
 		getRandom: function(){
 			var min = 0;
@@ -205,6 +207,41 @@ var romForms = {
 					);
 				});
 		},
+		
+
+		setUpEdit: function(){
+			var that = this;
+			this.bindSlideControllers();
+
+			 $('#editForm').submit(function(e) {
+					e.preventDefault();
+
+					var postUrl = window.location;
+					var formResults = $(this).serializeArray();
+
+					$.post("edit_user", formResults,
+						function(data) {
+					    	var obj = jQuery.parseJSON(data);
+
+					    	if(obj[0].response == "OK"){
+					    		shazamOverlay.morphBox(that.messages[0]["successEdit"]);
+
+					    		//__close the lightbox
+								var t = window.setInterval(function(){
+									shazamOverlay.hide();
+									clearInterval(t);
+								},5500);
+
+					    	}else{
+					    		//there is an error with the registeration.
+					    		//_that.messages[0]["failEdit"]
+					    		$('.error').html(obj[0].error);
+					    	}
+						}
+					);
+				});
+		},
+		
 
 		bindDoughnutKnob: function(){
 		 	$('[data-role="doughnut-knob"]').each(function() {

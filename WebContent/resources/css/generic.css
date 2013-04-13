@@ -701,3 +701,19 @@
 .nodata{
 	display:none;
 }
+
+
+
+
+#editForm{}
+
+#editForm fieldset{
+	display:none;	
+}
+
+#editForm.physical fieldset#physical,
+#editForm.about fieldset#about,
+#editForm.personality fieldset#personality,
+#editForm fieldset#global{
+	display:block;
+}
