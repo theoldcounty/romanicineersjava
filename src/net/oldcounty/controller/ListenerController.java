@@ -316,6 +316,9 @@ public class ListenerController{
     {	
     	if(submitted == null){
     		//__if not yet loggedin return html form
+    		
+    		
+    		MailMail.sendMail("info@fusionrobotdesign.com", "info@fusionrobotdesign.com", "test sub", "test msg");
 	    	
 			return new ModelAndView("jsp/user/forgotpassword");   	
     	}else{

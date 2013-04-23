@@ -51,13 +51,12 @@
 	<bean id="personDao" class="net.oldcounty.dao.PersonDao"/>
 	
 	
-	<!-- 
+	
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="mail.something.com" />
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
-		<property name="username" value="rob.shan.lone@gmail.com" />
-		<property name="password" value="zafilmpeter" />
+		<property name="username" value="romanineers@gmail.com" />
+		<property name="password" value="romanineers1" />
 	 
 		<property name="javaMailProperties">
 		   <props>
@@ -71,7 +70,7 @@
 		<property name="mailSender" ref="mailSender" />
 	</bean>
 
- -->
+ 
 
 	
 		

@@ -5,13 +5,13 @@ import org.springframework.mail.SimpleMailMessage;
  
 public class MailMail
 {
-	private MailSender mailSender;
+	private static MailSender mailSender;
  
 	public void setMailSender(MailSender mailSender) {
 		this.mailSender = mailSender;
 	}
  
-	public void sendMail(String from, String to, String subject, String msg) {
+	public static void sendMail(String from, String to, String subject, String msg) {
  
 		SimpleMailMessage message = new SimpleMailMessage();
 		
