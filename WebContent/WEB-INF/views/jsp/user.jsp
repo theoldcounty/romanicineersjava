@@ -134,6 +134,10 @@
 									</li>
 								</ul>
 								<a class="shazam form" href="edit_user?section=physical&userId=${people[0]._id}">Edit Physical Section</a>								
+							
+								<a class="shazam form" href="edit_user?section=account&userId=${people[0]._id}">Edit Account Section</a>								
+							
+								
 							</li>
 							<li>
 								<h2>About me</h2>

@@ -23,6 +23,7 @@ import net.oldcounty.manager.PersonManager;
 import net.oldcounty.model.Interests;
 import net.oldcounty.model.Person;
 
+import net.oldcounty.controller.RegistrationService;
 
 import org.bson.BasicBSONObject;
 import org.bson.types.ObjectId;
@@ -100,6 +101,18 @@ public class ListenerController{
     		@RequestParam(value="userId", required=false) String userId,
     		
     		@RequestParam(value="section", required=false) String section,
+ 
+    		@RequestParam(value="realname", required=false) String realname,
+    		@RequestParam(value="username", required=false) String username,
+    		@RequestParam(value="emailaddress", required=false) String emailaddress,
+    		@RequestParam(value="confirmemailaddress", required=false) String confirmemailaddress,
+    		@RequestParam(value="password", required=false) String password,
+    		@RequestParam(value="confirmpassword", required=false) String confirmpassword,
+    		@RequestParam(value="whichscreenname", required=false) String whichscreenname,    
+    		@RequestParam(value="birthyear", required=false) String birthyear,
+    		@RequestParam(value="birthmonth", required=false) String birthmonth,
+    		@RequestParam(value="birthday", required=false) String birthday,		
+    		
     		
     		@RequestParam(value="about", required=false) String about,
     		
@@ -125,7 +138,7 @@ public class ListenerController{
     	
     	//_new person
     	Person person = new Person();
-    	/*
+    	
     	person.setRealname(realname);
     	person.setUsername(username);
     	person.setEmailaddress(emailaddress);
@@ -136,7 +149,8 @@ public class ListenerController{
     	person.setBirthyear(birthyear);
     	person.setBirthmonth(birthmonth);
     	person.setBirthday(birthday);
-    	*/
+    	
+    	
     	person.setUid(userId);
     	person.setAbout(about);
     	
@@ -317,8 +331,9 @@ public class ListenerController{
     	if(submitted == null){
     		//__if not yet loggedin return html form
     		
-    		
-    		MailMail.sendMail("info@fusionrobotdesign.com", "info@fusionrobotdesign.com", "test sub", "test msg");
+    		//VelocityEmailSender.send();
+    		SimpleRegistrationService.sendConfirmationEmail();
+    		//MailMail.sendMail("info@fusionrobotdesign.com", "info@fusionrobotdesign.com", "test sub", "test msg");
 	    	
 			return new ModelAndView("jsp/user/forgotpassword");   	
     	}else{

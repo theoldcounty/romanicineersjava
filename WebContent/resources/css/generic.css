@@ -711,6 +711,13 @@
 	display:none;	
 }
 
+#editForm fieldset.fifty-fifty,
+#editForm fieldset.dob,
+#editForm fieldset.gender{
+	display:block;
+}
+
+#editForm.account fieldset#account,
 #editForm.physical fieldset#physical,
 #editForm.about fieldset#about,
 #editForm.personality fieldset#personality,

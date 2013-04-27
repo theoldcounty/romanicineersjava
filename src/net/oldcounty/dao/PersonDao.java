@@ -112,16 +112,41 @@ public class PersonDao {
 
 	    
 	    System.out.println("section <<< "+section);
+
+	    //_account
+	    if(section.equals("account")){
+	    	
+
+		    document.put("realname", person.getRealname());
+		    document.put("username", person.getUsername());
+		    document.put("emailaddress", person.getEmailaddress());
+		    document.put("password", person.getPassword());
+		    document.put("whichscreenname", person.getWhichscreenname());
+		   
+		    document.put("birthdate", person.getBirthyear()+person.getBirthmonth()+person.getBirthday());
+		    
+
+		    System.out.println("account section <<< "+section);
+	    }
+	    
 	    
 	    //_about
 	    if(section.equals("about")){
 	    	document.put("about", person.getAbout());
-	    	 System.out.println("about about section <<< "+section);
+
+		    /*
+		    document.put("goal1", person.getGoal1());
+		    document.put("goal2", person.getGoal2());
+		    document.put("goal3", person.getGoal3());
+		    */
+	    	
+	    	System.out.println("about section <<< "+section);
 	    }
 	    
 	    //_personality
 	    if(section.equals("personality")){
-	    	document.put("personality", person.getPersonality());	    	
+	    	document.put("personality", person.getPersonality());
+	    	System.out.println("personality section <<< "+section);
 	    }
 	    
 	    //_physical
@@ -133,10 +158,16 @@ public class PersonDao {
 	    	document.put("languages", person.getLanguages());
 	    	document.put("education", person.getEducation());
 	    	document.put("occupation", person.getOccupation());
-	    	document.put("ethnicity", person.getEthnicity());
+	    	document.put("ethnicity", person.getEthnicity());	    	
 	    	document.put("country", person.getCountry());
 	    	document.put("kindofrelationship", person.getKindofrelationship());
 	    	document.put("languages", person.getLanguages());
+
+	    	document.put("gender", person.getGender());
+		    	
+		    document.put("latitude", person.getLatitude());
+		    document.put("longitude", person.getLongitude());
+	    	System.out.println("physical section <<< "+section);
 	    }	    
 	    
 	    System.out.println("document <<<<<< "+ document);

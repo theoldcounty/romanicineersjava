@@ -65,13 +65,41 @@
 	       	   </props>
 		</property>
 	</bean>
-	
+
+<!-- 	
 	<bean id="mailMail" class="net.oldcounty.controller.MailMail">
 		<property name="mailSender" ref="mailSender" />
 	</bean>
+ -->
 
- 
 
+   <bean id="RegistrationService" class="net.oldcounty.controller.SimpleRegistrationService">
+      <property name="mailSender" ref="mailSender"/>
+      <property name="velocityEngine" ref="velocityEngine"/>
+   </bean>
+	
+	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+	  <property name="velocityProperties">
+	    <props>
+	      <prop key="resource.loader">file</prop>
+	      <prop key="file.resource.loader.class">
+	        org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+	      </prop>
+	  
+	    </props>
+	  </property>
+	</bean>
+
+<!--    
+   <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+      <property name="velocityProperties">
+         <value>
+            resource.loader=class
+            class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+         </value>
+      </property>
+   </bean>
+-->
 	
 		
 </beans>
