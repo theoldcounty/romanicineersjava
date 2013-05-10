@@ -1,6 +1,5 @@
 package net.oldcounty.controller;
 
-
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -17,8 +16,7 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SimpleRegistrationService {
-
+public class SimpleEmailService {
    private static JavaMailSender mailSender;
    private static VelocityEngine velocityEngine;
 
@@ -29,20 +27,22 @@ public class SimpleRegistrationService {
    public void setVelocityEngine(VelocityEngine velocityEngine) {
       this.velocityEngine = velocityEngine;
    }
-
-   /*
-   public void sendMail() {
-	   sendConfirmationEmail();
-   }*/
    
-   public static void sendConfirmationEmail() {
+   public static void generateEmail(final String templateType, final BasicDBObject user) {
       MimeMessagePreparator preparator = new MimeMessagePreparator() {
          public void prepare(MimeMessage mimeMessage) throws Exception {
-            
-        	 BasicDBObject user = new BasicDBObject();
-        	 	user.put("emailAddress", "info@fusionrobotdesign.com");
-        	 	user.put("userName", "Robbys");
-        	 	user.put("imgPath", "C:/Documents and Settings/Fusion/Workspaces/MyEclipse 10/romanicineersjava/WebContent/WEB-INF/velocity");
+        	 System.out.println("EMAIL TIME");
+        	 String velocityTemplateName = null;
+        	 
+        	if(templateType.equals("forgotPasswordTemplate")){
+        		 velocityTemplateName = "forgot_password";
+        	}
+        	
+        	if(templateType.equals("registerTemplate")){
+        		velocityTemplateName = "registration-confirmation";
+        	}
+        	
+        	 //user.put("imgPath", "C:/Documents and Settings/Fusion/Workspaces/MyEclipse 10/romanicineersjava/WebContent/WEB-INF/velocity");
         	 
         	MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
             	message.setTo("info@fusionrobotdesign.com");
@@ -51,19 +51,17 @@ public class SimpleRegistrationService {
             VelocityContext model = new VelocityContext();
             	model.put("user", user);            
             
-            String text = applyTemplate(model,"registration-confirmation.vm");
+            String text = applyTemplate(model, velocityTemplateName+".vm");
             	message.setText(text, true);
          }
       };
       mailSender.send(preparator);
    }
-   public static String applyTemplate(VelocityContext data, String templateName){
-                  
+   
+   public static String applyTemplate(VelocityContext data, String templateName){                  
        StringWriter sw= new StringWriter();        
-       Template t = velocityEngine.getTemplate( "net/oldcounty/velocity/templates/"+templateName );
+       Template t = velocityEngine.getTemplate("net/oldcounty/velocity/templates/"+templateName);
        t.merge(data, sw);
        return sw.toString();                        
    }
-   
-   
 }

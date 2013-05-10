@@ -10,6 +10,28 @@ var shazamOverlay = {
 			$('#shazam-overlay').fadeIn(350);
 		});
 	},
+	bindEvents: function(){		
+		$('#shazam-overlay').unbind('click');
+		$('.close').unbind('click');
+		$('.shazam').unbind('click');
+		
+		// if user clicked on button, the overlay layer or the shazambox, close the shazam
+		$('#shazam-overlay').click(function () {
+			shazamOverlay.hide();
+			return false;
+		});
+
+		$('.close').click(function () {
+			shazamOverlay.hide();
+			return false;
+		});
+
+		$('.shazam').click(function () {
+			var link = $(this).attr("href");
+			shazamOverlay.show(link);
+			return false;
+		});		
+	},
 	addWrap: function(contents, type){
 		if(type == "mobile"){
 			return '<div id="shazam-wrapper" class="mobile">'+contents+'</div>';
@@ -25,6 +47,7 @@ var shazamOverlay = {
 				pageHandler.reBindEvents(section);
 				that.hidePreloader();
 				that.rePosition();
+				that.bindEvents();
 				$('#shazam-box').fadeIn(400);
 			});
 		});
@@ -86,23 +109,7 @@ var shazamOverlay = {
 
 $(document).ready(function () {
 
-	// if user clicked on button, the overlay layer or the shazambox, close the shazam
-	$('#shazam-overlay').click(function () {
-		shazamOverlay.hide();
-		return false;
-	});
-
-	$('.close').click(function () {
-		shazamOverlay.hide();
-		return false;
-	});
-
-	$('.shazam').click(function () {
-		var link = $(this).attr("href");
-		shazamOverlay.show(link);
-
-		return false;
-	});
+	shazamOverlay.bindEvents();
 
 	// if user resize the window, call the same function again
 	// to make sure the overlay fills the screen and shazambox aligned to center

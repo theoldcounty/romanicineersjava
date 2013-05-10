@@ -14,7 +14,9 @@ var romForms = {
 		    "successChart" : "<p>Congratulations, you have added a new interest chart to your profile, this will make it more visual</p>",
 		    "failChart" : "<p>Please bare with us, something went wrong when trying to add your interest chart</p>",
 		    "successEdit" : "<p>Congratulations, you have updated a part of your portfolio, this will make it more visual</p>",
-		    "failEdit" : "<p>Please bare with us, something went wrong when trying to update your portfolio</p>"
+		    "failEdit" : "<p>Please bare with us, something went wrong when trying to update your portfolio</p>",
+		    "successForgotPassword" : "<p>We have found your profile and have sent you a new password.</p>",
+		    "failForgotPassword" : "<p>Something went wrong, we were not able to find your profile.</p>"
 		}],
 		getRandom: function(){
 			var min = 0;
@@ -208,6 +210,42 @@ var romForms = {
 				});
 		},
 		
+		setUpForgotPassword: function(){
+			
+			var that = this;
+			this.bindSlideControllers();
+
+			 $('#forgotPasswordForm').submit(function(e) {
+					e.preventDefault();
+
+					var postUrl = window.location;
+					var formResults = $(this).serializeArray();
+					
+					$.post("forgotpassword", formResults,
+						function(data) {
+							
+						console.log("data", data);
+						
+					    	var obj = jQuery.parseJSON(data);
+
+					    	if(obj[0].response == "OK"){
+					    		shazamOverlay.morphBox(that.messages[0]["successForgotPassword"]);
+
+					    		//__close the lightbox
+								var t = window.setInterval(function(){
+									shazamOverlay.hide();
+									clearInterval(t);
+								},5500);
+
+					    	}else{
+					    		//there is an error with the registeration.
+					    		//_that.messages[0]["failEdit"]
+					    		$('.error').html(obj[0].error);
+					    	}
+						}
+					);
+				});			
+		},
 
 		setUpEdit: function(){
 			var that = this;

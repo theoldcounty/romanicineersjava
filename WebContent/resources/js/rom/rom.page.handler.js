@@ -25,6 +25,11 @@ var pageHandler = {
 				//_is edit form
 				romForms.setUpEdit();
 			}
+			
+			if(section.match(/forgotpassword/gi)){
+				//_is edit form
+				romForms.setUpForgotPassword();
+			}			
 		},
 		homeEvents: function(){
 

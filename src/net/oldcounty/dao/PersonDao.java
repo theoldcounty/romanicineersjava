@@ -199,20 +199,7 @@ public class PersonDao {
 		return response;
 	}	
 	
-	/*Login Methods*/
-	public static void loginUser(Person person){
-		
-	}
 	
-	/*Logout Methods*/
-	public static void logoutUser(Person person){
-		
-	}
-	
-	/*Ban Methods*/
-	public static void banUser(Person person){
-		
-	}
 	
 	
 	/**
@@ -246,17 +233,13 @@ public class PersonDao {
 	 * @throws MongoException
 	 * @throws UnknownHostException
 	 **/
-	public static List<DBObject> getUniqueUser(String objId) throws UnknownHostException, MongoException{
+	public static List<DBObject> getUniqueUser(BasicDBObject searchQuery) throws UnknownHostException, MongoException{
 		System.out.println("running usercontrol get unique user details");
 
 		//__Prepare response
 		List<DBObject> response = new ArrayList<DBObject>();
 
 		BasicDBObject results = new BasicDBObject();
-
-	    // search query
-	    BasicDBObject searchQuery = new BasicDBObject();
-	    	searchQuery.put("_id", new ObjectId(objId));
 
 	    List<DBObject> uniqueUser = MongoApp.searchCollections(searchQuery, "myCollection");
 
@@ -432,9 +415,142 @@ public class PersonDao {
 	    }
 
 	    return results;
-	}	
+	}
 
+	public static List<DBObject> setForgotPassword(Person person) {
+		
+		List<DBObject> response = new ArrayList<DBObject>();
+		    	
+		//_getCollection
+		DBCollection collection = null;
+		try {
+			collection = MongoApp.getCollection("myCollection");
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (MongoException e) {
+			e.printStackTrace();
+		}
+		
+		Date now = new Date();
+		BasicDBObject time = new BasicDBObject("ts", now);
+		
+	    // create a document to store attributes
+	    BasicDBObject document = new BasicDBObject();
+	    	document.put("password", person.getPassword());
+	    
+	    ObjectId objId = ObjectId.massageToObjectId(person.getUid());
+	    BasicDBObject obj = new BasicDBObject();
+    		obj.put("_id", objId);
+    	
+    		BasicDBObject set = new BasicDBObject();
+    			set.put("$set", document);
+    		
+	    collection.update(obj, set);
+	    
+	    ObjectId lastid = (ObjectId)document.get( "_id" );
+		
+		BasicDBObject results = new BasicDBObject();
+		
+		results.put("response", "OK");
+		results.put("lastId", lastid);
+		response.add(results);	    
+	    
+		return response;
+	}
+
+	/*Login Methods*/
+	public static List<DBObject> loginUser(Person person) {
+		
+		List<DBObject> response = new ArrayList<DBObject>();
+		    	
+		//_getCollection
+		DBCollection collection = null;
+		try {
+			collection = MongoApp.getCollection("myCollection");
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (MongoException e) {
+			e.printStackTrace();
+		}
+		
+		Date now = new Date();
+		BasicDBObject time = new BasicDBObject("ts", now);
+		
+	    // create a document to store attributes
+	    BasicDBObject document = new BasicDBObject();
+		    document.put("lastloggedon", time);
+		    document.put("isloggedon", 1);
+	    	
+	    ObjectId objId = ObjectId.massageToObjectId(person.getUid());
+	    BasicDBObject obj = new BasicDBObject();
+    		obj.put("_id", objId);
+    	
+    		BasicDBObject set = new BasicDBObject();
+    			set.put("$set", document);
+    		
+	    collection.update(obj, set);
+	    
+	    ObjectId lastid = (ObjectId)document.get( "_id" );
+		
+		BasicDBObject results = new BasicDBObject();
+		
+		results.put("response", "OK");
+		results.put("lastId", lastid);
+		response.add(results);	    
+	    
+		return response;
+	}
 	
+	
+	
+	
+	
+	
+	/*Logout Methods*/
+	public static List<DBObject> logoutUser(Person person){
+		
+		List<DBObject> response = new ArrayList<DBObject>();
+		    	
+		//_getCollection
+		DBCollection collection = null;
+		try {
+			collection = MongoApp.getCollection("myCollection");
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (MongoException e) {
+			e.printStackTrace();
+		}
+		
+		Date now = new Date();
+		BasicDBObject time = new BasicDBObject("ts", now);
+		
+	    // create a document to store attributes
+	    BasicDBObject document = new BasicDBObject();
+		    document.put("lastloggedon", time);
+		    document.put("isloggedon", 0);
+	    	
+	    ObjectId objId = ObjectId.massageToObjectId(person.getUid());
+	    BasicDBObject obj = new BasicDBObject();
+    		obj.put("_id", objId);
+    	
+    		BasicDBObject set = new BasicDBObject();
+    			set.put("$set", document);
+    		
+	    collection.update(obj, set);
+	    
+	    ObjectId lastid = (ObjectId)document.get( "_id" );
+		
+		BasicDBObject results = new BasicDBObject();
+		
+		results.put("response", "OK");
+		results.put("lastId", lastid);
+		response.add(results);	    
+	    
+		return response;		
+	}
+	
+	/*Ban Methods*/
+	public static void banUser(Person person){
+		
+	}
 }
-
-

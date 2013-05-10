@@ -8,7 +8,6 @@
 
 package net.oldcounty.controller;
 
-
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +22,7 @@ import net.oldcounty.manager.PersonManager;
 import net.oldcounty.model.Interests;
 import net.oldcounty.model.Person;
 
-import net.oldcounty.controller.RegistrationService;
+import net.oldcounty.controller.SimpleEmailService;
 
 import org.bson.BasicBSONObject;
 import org.bson.types.ObjectId;
@@ -44,6 +43,10 @@ public class ListenerController{
 
 	private PersonManager personManager;
 
+    public void setPersonManager(PersonManager personManager){
+    	this.personManager = personManager;
+    }
+    
     /**
      * Edit Chart
      * @return 
@@ -112,7 +115,6 @@ public class ListenerController{
     		@RequestParam(value="birthyear", required=false) String birthyear,
     		@RequestParam(value="birthmonth", required=false) String birthmonth,
     		@RequestParam(value="birthday", required=false) String birthday,		
-    		
     		
     		@RequestParam(value="about", required=false) String about,
     		
@@ -328,18 +330,12 @@ public class ListenerController{
 	    		@RequestParam(value="submitted", required=false) String submitted
     		) throws UnknownHostException, MongoException
     {	
+    	
     	if(submitted == null){
-    		//__if not yet loggedin return html form
-    		
-    		//VelocityEmailSender.send();
-    		SimpleRegistrationService.sendConfirmationEmail();
-    		//MailMail.sendMail("info@fusionrobotdesign.com", "info@fusionrobotdesign.com", "test sub", "test msg");
-	    	
+     		//__if not yet added a chart return html form	    	
 			return new ModelAndView("jsp/user/forgotpassword");   	
     	}else{
-    		//_ loggedin the user into the database and return a json response
-    		String json = null;
-        	return new ModelAndView("jsp/json/response", "json", json);  	
+    		return new ModelAndView("jsp/json/response", "json", personManager.forgotPassword(emailaddress));  	
     	}
     }       
     
@@ -359,14 +355,11 @@ public class ListenerController{
     		) throws UnknownHostException, MongoException
     {	
     	if(submitted == null){
-    		//__if not yet loggedin return html form
-	    	
-	    	
+    		//__if not yet loggedin return html form	    	
 			return new ModelAndView("jsp/user/login");   	
     	}else{
     		//_ loggedin the user into the database and return a json response
-    		String json = null;
-        	return new ModelAndView("jsp/json/response", "json", json);  	
+    		return new ModelAndView("jsp/json/response", "json", personManager.login(emailaddress, password));
     	}
     }   
           
@@ -510,9 +503,6 @@ public class ListenerController{
     }
 
 
-    public void setPersonManager(PersonManager personManager){
-    	this.personManager = personManager;
-    }
     
     /*
      * Member List
@@ -749,39 +739,7 @@ public class ListenerController{
 		return new ModelAndView("jsp/json/response", "json", json);
     }
     
-    
-    /*
-     * getForgotPassword
-    */
-    @RequestMapping("/getForgotPassword")
-    public ModelAndView getForgotPassword(
-	    		HttpServletRequest request
-    		) throws UnknownHostException, MongoException
-    {
-    	//_recover password or set a new one
-    	
-    	//_ email it out
-    	
-    	//MailMail myObject = new MailMail();	
-    	//myObject.sendMail("robbsy", "bobby", "this is a test email", "here is the message");
-    	/**
-    	 * reference :: http://www.mkyong.com/spring/spring-sending-e-mail-via-gmail-smtp-server-with-mailsender/
-    	 * http://static.springsource.org/spring/docs/3.0.x/reference/mail.html
-    	 * http://www.codejava.net/frameworks/spring/sending-e-mail-with-spring-mvc
-    	 * http://static.springsource.org/spring/docs/2.0.x/reference/mail.html
-    	 * */
-       	
-    	
-    	//_respond with json response to provide success/fail
-    	
-    	String json = null;
-    	return new ModelAndView("jsp/json/interest", "response", json);
-    }   
-    
-    
-    
-    
-    
+   
     /*
      * getInterestJson
     */
@@ -796,8 +754,6 @@ public class ListenerController{
     
     
     
-    
-    
     /*
      * getPlaceJson
     */
@@ -808,8 +764,7 @@ public class ListenerController{
     {
     	String json = null;
     	return new ModelAndView("jsp/json/places", "response", json);
-    }    
-    
+    }
 
     /*
      * getSeekingJson
@@ -821,7 +776,5 @@ public class ListenerController{
     {
     	String json = null;
     	return new ModelAndView("jsp/json/seeking", "response", json);
-    }    
-            
-    
+    }
 }

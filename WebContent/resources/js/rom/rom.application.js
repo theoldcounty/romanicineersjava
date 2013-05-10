@@ -21,12 +21,10 @@ romApplication = {
 			return false;
 		});
 
-
 		$('.shazam').click(function () {
 			var link = $(this).attr("href");
 			console.log("shazam link", link);
 			shazamOverlay.show(link);
-
 			return false;
 		});
 
