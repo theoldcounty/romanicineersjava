@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import net.oldcounty.controller.CommonUtils;
+import net.oldcounty.controller.SessionController;
 import net.oldcounty.controller.SimpleEmailService;
 import net.oldcounty.dao.PersonDao;
 import net.oldcounty.dao.InterestDao;
@@ -25,6 +26,9 @@ import com.mongodb.MongoException;
 
 import java.security.SecureRandom;
 import java.math.BigInteger;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class PersonManager {
 
@@ -273,7 +277,7 @@ public class PersonManager {
 		
 	
 	@SuppressWarnings("unchecked")
-	public List<DBObject> login(String emailaddress, String password) throws UnknownHostException, MongoException{
+	public List<DBObject> login(String emailaddress, String password, HttpServletRequest request) throws UnknownHostException, MongoException{
 		//__Prepare response
 		
 		List<DBObject> response = new ArrayList<DBObject>();
@@ -284,6 +288,7 @@ public class PersonManager {
 		    //check if email exists
     		//_new person
         	Person person = new Person();
+        	
         	
         	if(!CommonUtils.isEmailUnique(emailaddress)){
         	    // search query
@@ -300,15 +305,24 @@ public class PersonManager {
         	else{
         		isValidInputs = false;
         	}
-		    
-		    
-		    if(isValidInputs){		    	
+        	
+		    if(isValidInputs){
+		    	
+		    	System.out.println("logme in");
 			    
 		    	List<DBObject> latestUser = PersonDao.loginUser(person);
 
+		    	//HttpServletResponse httpResponse = null;
+				//HttpServletRequest httpRequest = null;
+				//SessionController.processRequest(httpRequest, httpResponse);		    	
+		    	
+		    	DBObject userLogged = latestUser.get(0);
+		    	
+		    	SessionController.logUser(userLogged.get("objId"), request);
+		    	
 				results.put("response", "OK");
 				results.put("description", "User Logged In");
-		    	results.put("user", latestUser.get(0));
+		    	results.put("user", userLogged);
 		    	results.put("lastId", latestUser.get(0).get("lastId"));
 		    }
 		    else
@@ -324,7 +338,7 @@ public class PersonManager {
 	
 	
 	@SuppressWarnings("unchecked")
-	public List<DBObject> logout(Person person) throws UnknownHostException, MongoException{
+	public List<DBObject> logout(HttpServletRequest request) throws UnknownHostException, MongoException{
 		//__Prepare response
 		
 		List<DBObject> response = new ArrayList<DBObject>();
@@ -333,10 +347,16 @@ public class PersonManager {
 		    Boolean isValidInputs = true;
 
     		//_new person
-        	//Person person = new Person();        	
-        	//person.setUid(userId);
+		   	Object loggedUser = SessionController.getLoggedUser(request);
+		   	String userId = ((BasicBSONObject) loggedUser).get("objId").toString();        		
+		    
+		   Person person = new Person();
+		   	person.setUid(userId);
         	
-        	
+		    
+	    	System.out.println("logged user >>> " + loggedUser);
+		    
+		    
 		    if(isValidInputs){		    	
 			    
 		    	List<DBObject> latestUser = PersonDao.logoutUser(person);
@@ -354,5 +374,5 @@ public class PersonManager {
 
 		    response.add(results);
 		return response;
-	}	
+	}
 }

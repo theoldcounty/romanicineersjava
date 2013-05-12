@@ -29,7 +29,13 @@ var pageHandler = {
 			if(section.match(/forgotpassword/gi)){
 				//_is edit form
 				romForms.setUpForgotPassword();
-			}			
+			}	
+
+			if(section.match(/login/gi)){
+				//_is login form
+				romForms.setUpLogin();
+			}				
+			
 		},
 		homeEvents: function(){
 

@@ -8,7 +8,7 @@
 						
 				${message}
 				
-				<form action="login" method="post" action="">
+				<form id="loginForm" action="login" method="post" action="">
 					<label>Email</label>
 					<input type="text" value="" name="emailaddress"/>
 					<br/>
@@ -17,6 +17,7 @@
 					<input type="password" value="" name="password"/>
 					<br/>
 					
+					<input type="hidden" value="submitted" name="submitted"/>
 					<input type="submit" value="submit" name="submit"/>
 				</form>
 				<!--login.jsp-->

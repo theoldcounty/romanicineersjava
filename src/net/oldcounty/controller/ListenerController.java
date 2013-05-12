@@ -359,10 +359,31 @@ public class ListenerController{
 			return new ModelAndView("jsp/user/login");   	
     	}else{
     		//_ loggedin the user into the database and return a json response
-    		return new ModelAndView("jsp/json/response", "json", personManager.login(emailaddress, password));
+    		return new ModelAndView("jsp/json/response", "json", personManager.login(emailaddress, password, request));
     	}
     }   
           
+    
+    @RequestMapping("/logout")
+    public ModelAndView logoutDisplay(
+	    		HttpServletRequest request
+    		) throws UnknownHostException, MongoException
+    {	
+    	
+    	
+    	List<DBObject> result = personManager.logout(request);
+    	System.out.println("result from logging out" + result);
+    	
+    	String loggedUser = "Marky boy";
+    	
+    	return new ModelAndView("jsp/user/logout", "person", loggedUser);   	
+    	
+    }      
+    
+    
+
+    
+    
     
     /**
      * Register

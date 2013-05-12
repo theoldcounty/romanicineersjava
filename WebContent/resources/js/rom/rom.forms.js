@@ -16,7 +16,9 @@ var romForms = {
 		    "successEdit" : "<p>Congratulations, you have updated a part of your portfolio, this will make it more visual</p>",
 		    "failEdit" : "<p>Please bare with us, something went wrong when trying to update your portfolio</p>",
 		    "successForgotPassword" : "<p>We have found your profile and have sent you a new password.</p>",
-		    "failForgotPassword" : "<p>Something went wrong, we were not able to find your profile.</p>"
+		    "failForgotPassword" : "<p>Something went wrong, we were not able to find your profile.</p>",
+		    "successLogin" : "<p>We have logged you in.</p>",
+		    "failLogin" : "<p>Something went wrong, we were not able to login.</p>"		    
 		}],
 		getRandom: function(){
 			var min = 0;
@@ -246,7 +248,45 @@ var romForms = {
 					);
 				});			
 		},
+		setUpLogin: function(){
+			var that = this;
+			
 
+			 $('#loginForm').submit(function(e) {
+					e.preventDefault();
+					var postUrl = window.location;
+					var formResults = $(this).serializeArray();
+
+					$.post("login", formResults,
+						function(data) {
+					    	//console.log("json response. " + data);
+					    	var obj = jQuery.parseJSON(data);
+
+					    	if(obj[0].response == "OK"){
+					    		//__welcome the new user in the lightbox
+					    		shazamOverlay.morphBox(that.messages[0]["successLogin"]);
+
+					    		//__close the lightbox
+								var t = window.setInterval(function(){
+									shazamOverlay.hide();
+									clearInterval(t);
+								},5500);
+
+					    		//__refresh the site to auto log the user in.
+
+
+					    		//location.reload();
+					    		//user has been registered succesfully
+					    	}else{
+					    		//there is an error with the registeration.
+					    		//_that.messages[0]["failRegistration"]
+					    		//console.log("backend error with reg - likely the username or email already exists");
+					    		$('.error').html(obj[0].error);
+					    	}
+						}
+					);
+				});
+		},
 		setUpEdit: function(){
 			var that = this;
 			this.bindSlideControllers();

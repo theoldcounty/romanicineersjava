@@ -4,7 +4,7 @@
 		
 		<!--logout.jsp-->
 		<h2>Logout</h2>
-		
+		${person}
 		Dear User you have been logged out.
 		
 		

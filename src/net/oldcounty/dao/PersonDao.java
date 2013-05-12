@@ -490,12 +490,10 @@ public class PersonDao {
     		
 	    collection.update(obj, set);
 	    
-	    ObjectId lastid = (ObjectId)document.get( "_id" );
-		
 		BasicDBObject results = new BasicDBObject();
 		
 		results.put("response", "OK");
-		results.put("lastId", lastid);
+		results.put("objId", objId);
 		response.add(results);	    
 	    
 		return response;
