@@ -558,7 +558,18 @@ public class ListenerController{
     
     
     //common site pages
-    
+  
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView home(
+    		HttpServletRequest request
+		) throws UnknownHostException, MongoException
+{
+	System.out.println("HOME PAGE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
+	SessionController.isSession(request);//_check if in session and append isSession boolean flag
+	
+	return new ModelAndView("welcome");
+}    
+
     
     /**
      * privacy
