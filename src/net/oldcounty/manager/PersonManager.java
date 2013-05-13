@@ -290,7 +290,7 @@ public class PersonManager {
         	Person person = new Person();
         	
         	
-        	if(!CommonUtils.isEmailUnique(emailaddress)){
+        	if(!CommonUtils.isEmailUnique(emailaddress)){		    	
         	    // search query
         	    BasicDBObject searchQuery = new BasicDBObject();
         	    	searchQuery.put("emailaddress", emailaddress);
@@ -300,31 +300,17 @@ public class PersonManager {
         	    	String userId = (String) user.get(0).get("_id").toString();      		
         		
             	person.setUid(userId);
-            	person.setEmailaddress(emailaddress);
-            }
-        	else{
-        		isValidInputs = false;
-        	}
-        	
-		    if(isValidInputs){
+            	person.setEmailaddress(emailaddress);		    	
 		    	
-		    	System.out.println("logme in");
-			    
-		    	List<DBObject> latestUser = PersonDao.loginUser(person);
-
-		    	//HttpServletResponse httpResponse = null;
-				//HttpServletRequest httpRequest = null;
-				//SessionController.processRequest(httpRequest, httpResponse);		    	
-		    	
-		    	DBObject userLogged = latestUser.get(0);
-		    	
-		    	SessionController.logUser(userLogged.get("objId"), request);
+            	List<DBObject> latestUser = PersonDao.loginUser(person);
 		    	
 				results.put("response", "OK");
 				results.put("description", "User Logged In");
-		    	results.put("user", userLogged);
+		    	results.put("user", latestUser.get(0));
 		    	results.put("lastId", latestUser.get(0).get("lastId"));
-		    }
+		    
+		    	SessionController.logUser(user, request);//store user in session
+        	}
 		    else
 		    {
 				results.put("response", "FAIL");
@@ -335,9 +321,6 @@ public class PersonManager {
 		return response;
 	}	
 	
-	
-	
-	@SuppressWarnings("unchecked")
 	public List<DBObject> logout(HttpServletRequest request) throws UnknownHostException, MongoException{
 		//__Prepare response
 		
@@ -347,24 +330,22 @@ public class PersonManager {
 		    Boolean isValidInputs = true;
 
     		//_new person
-		   	Object loggedUser = SessionController.getLoggedUser(request);
-		   	String userId = ((BasicBSONObject) loggedUser).get("objId").toString();        		
-		    
-		   Person person = new Person();
-		   	person.setUid(userId);
+		    List<DBObject> oldLoggedUser = SessionController.getLoggedUser(request);		   	
+		   		String userId = (String) oldLoggedUser.get(0).get("_id").toString();
+		   	
+		   	Person person = new Person();
+		   		person.setUid(userId);
         	
-		    
-	    	System.out.println("logged user >>> " + loggedUser);
-		    
-		    
 		    if(isValidInputs){		    	
-			    
-		    	List<DBObject> latestUser = PersonDao.logoutUser(person);
+			    List<DBObject> latestUser = PersonDao.logoutUser(person);
 
-				results.put("response", "OK");
+			    results.put("response", "OK");
 				results.put("description", "User Logged Out");
-		    	results.put("user", latestUser.get(0));
 		    	results.put("lastId", latestUser.get(0).get("lastId"));
+		    	results.put("oldLoggedUser", oldLoggedUser);
+		    	
+		    	SessionController.logOutUser(request);
+		    	
 		    }
 		    else
 		    {

@@ -491,17 +491,13 @@ public class PersonDao {
 	    collection.update(obj, set);
 	    
 		BasicDBObject results = new BasicDBObject();
+			results.put("response", "OK");
+			results.put("objId", person.getUid());
 		
-		results.put("response", "OK");
-		results.put("objId", objId);
 		response.add(results);	    
 	    
 		return response;
 	}
-	
-	
-	
-	
 	
 	
 	/*Logout Methods*/
@@ -536,12 +532,10 @@ public class PersonDao {
     		
 	    collection.update(obj, set);
 	    
-	    ObjectId lastid = (ObjectId)document.get( "_id" );
-		
 		BasicDBObject results = new BasicDBObject();
+			results.put("response", "OK");
+			results.put("lastId", person.getUid());
 		
-		results.put("response", "OK");
-		results.put("lastId", lastid);
 		response.add(results);	    
 	    
 		return response;		

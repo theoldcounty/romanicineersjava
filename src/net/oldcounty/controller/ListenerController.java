@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.MongoException;
@@ -46,6 +47,10 @@ public class ListenerController{
     public void setPersonManager(PersonManager personManager){
     	this.personManager = personManager;
     }
+    
+ 
+    
+    //getLoggedUser
     
     /**
      * Edit Chart
@@ -152,10 +157,8 @@ public class ListenerController{
     	person.setBirthmonth(birthmonth);
     	person.setBirthday(birthday);
     	
-    	
     	person.setUid(userId);
     	person.setAbout(about);
-    	
     	
     	person.setEthnicity(ethnicity);
     	person.setCountry(country);
@@ -363,26 +366,18 @@ public class ListenerController{
     	}
     }   
           
-    
-    @RequestMapping("/logout")
+    @SuppressWarnings("unchecked")
+	@RequestMapping("/logout")
     public ModelAndView logoutDisplay(
 	    		HttpServletRequest request
     		) throws UnknownHostException, MongoException
     {	
-    	
-    	
-    	List<DBObject> result = personManager.logout(request);
-    	System.out.println("result from logging out" + result);
-    	
-    	String loggedUser = "Marky boy";
-    	
-    	return new ModelAndView("jsp/user/logout", "person", loggedUser);   	
-    	
-    }      
-    
-    
+    	List<DBObject> result = personManager.logout(request);//logged out user result    	
+    	List<DBObject> oldLoggedUser = (List<DBObject>) result.get(0).get("oldLoggedUser");//old user object    	
+    	String oldLoggedUserName = (String) oldLoggedUser.get(0).get("username").toString();//old user name
 
-    
+    	return new ModelAndView("jsp/user/logout", "personName", oldLoggedUserName);
+    }
     
     
     /**
@@ -562,6 +557,8 @@ public class ListenerController{
     
     
     
+    //common site pages
+    
     
     /**
      * privacy
@@ -575,6 +572,8 @@ public class ListenerController{
     		) throws UnknownHostException, MongoException
     {	
 	 	//_ privacy page
+    	SessionController.isSession(request);//_check if in session and append isSession boolean flag
+    	
 		return new ModelAndView("jsp/privacy");
     }
    
@@ -590,6 +589,8 @@ public class ListenerController{
     		) throws UnknownHostException, MongoException
     {	
 	 	//_ privacy page
+    	SessionController.isSession(request);//_check if in session and append isSession boolean flag
+    	
 		return new ModelAndView("jsp/who_we_are");
     }
     
@@ -606,7 +607,9 @@ public class ListenerController{
     		) throws UnknownHostException, MongoException
     {	
 	 	//_ privacy page
-		return new ModelAndView("jsp/instructions");
+    	SessionController.isSession(request);//_check if in session and append isSession boolean flag
+    	
+    	return new ModelAndView("jsp/instructions");
     }
         
     
@@ -619,10 +622,10 @@ public class ListenerController{
     		HttpServletRequest request,
     		@RequestParam(value="id", required=false) String id
     ) throws UnknownHostException, MongoException {
-    	//ServiceSerlvet.appendSesssion(request);
-
+    	SessionController.isSession(request);//_check if in session and append isSession boolean flag
+    	
     	request.setAttribute("page", "user");
-
+    	
     	//get search ALL users
     	BasicDBObject searchQuery = new BasicDBObject();
     		searchQuery.put("_id", new ObjectId(id));

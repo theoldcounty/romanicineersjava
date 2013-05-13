@@ -1,5 +1,7 @@
 package net.oldcounty.controller;
 
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
@@ -62,15 +64,15 @@ public class SessionController extends HttpServlet{
 		
 	}
 	
-	public static Object getLoggedUser(HttpServletRequest request) {
+	@SuppressWarnings("unchecked")
+	public static List<DBObject> getLoggedUser(HttpServletRequest request) {
 		HttpSession session = request.getSession(true);
-		Object user= (Object) session.getAttribute("user");
-		System.out.println("logged user"+ user);
+		List<DBObject> user= (List<DBObject>) session.getAttribute("user");
 		
 		return user;
 	}	
 
-	public static void logUser(Object object, HttpServletRequest request) {
+	public static void logUser(List<DBObject> object, HttpServletRequest request) {
 		HttpSession session = request.getSession(true);
 		session.setAttribute("user", object);
 	}
@@ -78,5 +80,20 @@ public class SessionController extends HttpServlet{
 	public static void logOutUser(HttpServletRequest request) {
 		HttpSession session = request.getSession(true);
 		session.removeAttribute("user");
-	}	
+	}
+	
+	public static void isSession(HttpServletRequest request){
+    	List<DBObject> user = SessionController.getLoggedUser(request);
+    	
+    	if(user != null){
+    		request.setAttribute("inSession", true);
+    		
+    		String personName = (String) user.get(0).get("username").toString();    		
+    		request.setAttribute("personName", personName);    		
+    	}
+    	else{
+    		request.setAttribute("inSession", false);    		
+    	}
+	}
+	
 }

@@ -4,10 +4,9 @@
 		
 		<!--logout.jsp-->
 		<h2>Logout</h2>
-		${person}
-		Dear User you have been logged out.
 		
-		
+		Hello ${personName} we have logged you out.
+
 		<h2>View Users</h2>
 		<ul>
 			<li><a href="members">List Users</a></li>

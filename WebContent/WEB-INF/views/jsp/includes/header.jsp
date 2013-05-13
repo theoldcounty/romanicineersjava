@@ -12,16 +12,16 @@
 					<a href="/springApp21/" title="Home" rel="home" id="logo"><img src="resources/images/logo.png" alt="Home"></a>
 					<nav id="loginmenu">
 						<c:choose>
-						  <c:when test="${inSession != null}">
-								<ul>
-								    <li><a class="shazam form" href="logout">Logout</a></li>
+						  <c:when test="${inSession}">
+								<ul>								    
 									<li><a class="shazam form" href="edit">Edit</a></li>
+									<li><a class="" href="logout">Logout (${personName})</a></li>
 								</ul>
 						  </c:when>
 						  <c:otherwise>
 								<ul>
 									<li><a class="shazam form" href="register">Sign up</a></li>
-									<li><a class="shazam form" href="login">Login</a></li>
+									<li><a class="shazam form" href="login">Login</a></li>									
 								</ul>
 						  </c:otherwise>
 						</c:choose>
