@@ -110,43 +110,29 @@ public class PersonDao {
 	    // create a document to store attributes
 	    BasicDBObject document = new BasicDBObject();
 
-	    
-	    System.out.println("section <<< "+section);
-
 	    //_account
 	    if(section.equals("account")){
-	    	
-
 		    document.put("realname", person.getRealname());
 		    document.put("username", person.getUsername());
 		    document.put("emailaddress", person.getEmailaddress());
 		    document.put("password", person.getPassword());
 		    document.put("whichscreenname", person.getWhichscreenname());
-		   
 		    document.put("birthdate", person.getBirthyear()+person.getBirthmonth()+person.getBirthday());
-		    
-
-		    System.out.println("account section <<< "+section);
 	    }
-	    
 	    
 	    //_about
 	    if(section.equals("about")){
 	    	document.put("about", person.getAbout());
-
 		    /*
 		    document.put("goal1", person.getGoal1());
 		    document.put("goal2", person.getGoal2());
 		    document.put("goal3", person.getGoal3());
 		    */
-	    	
-	    	System.out.println("about section <<< "+section);
 	    }
 	    
 	    //_personality
 	    if(section.equals("personality")){
 	    	document.put("personality", person.getPersonality());
-	    	System.out.println("personality section <<< "+section);
 	    }
 	    
 	    //_physical
@@ -162,19 +148,10 @@ public class PersonDao {
 	    	document.put("country", person.getCountry());
 	    	document.put("kindofrelationship", person.getKindofrelationship());
 	    	document.put("languages", person.getLanguages());
-
-	    	document.put("gender", person.getGender());
-		    	
+	    	document.put("gender", person.getGender());		    	
 		    document.put("latitude", person.getLatitude());
 		    document.put("longitude", person.getLongitude());
-	    	System.out.println("physical section <<< "+section);
-	    }	    
-	    
-	    System.out.println("document <<<<<< "+ document);
-	    
-	    // save it into collection named "myCollection"
-	    
-	   //document.put("_id", ObjectId.massageToObjectId(person.getUid()));
+	    }
 	    
 	    ObjectId objId = ObjectId.massageToObjectId(person.getUid());
 	    BasicDBObject obj = new BasicDBObject();
@@ -193,14 +170,8 @@ public class PersonDao {
 		results.put("lastId", lastid);
 		response.add(results);	    
 	    
-		
-		System.out.println("response <<<<<< "+ response);
-		
 		return response;
 	}	
-	
-	
-	
 	
 	/**
 	 * Delete User
@@ -209,7 +180,6 @@ public class PersonDao {
 	 * @throws UnknownHostException
 	 **/
 	public static BasicDBObject deleteUser(String objId) throws UnknownHostException, MongoException{
-
 		//__Prepare result
 		BasicDBObject results = new BasicDBObject();
 
@@ -225,8 +195,6 @@ public class PersonDao {
 		return results;
 	}
 	
-	
-
 	/**
 	 * Get User
 	 * @param id
@@ -234,18 +202,13 @@ public class PersonDao {
 	 * @throws UnknownHostException
 	 **/
 	public static List<DBObject> getUniqueUser(BasicDBObject searchQuery) throws UnknownHostException, MongoException{
-		System.out.println("running usercontrol get unique user details");
-
 		//__Prepare response
 		List<DBObject> response = new ArrayList<DBObject>();
-
 		BasicDBObject results = new BasicDBObject();
 
 	    List<DBObject> uniqueUser = MongoApp.searchCollections(searchQuery, "myCollection");
 
-	    System.out.println(uniqueUser);
-
-			if(uniqueUser.size()>0 ){
+	    	if(uniqueUser.size()>0 ){
 				results.put("response", "OK");
 				results.put("description", "The specific user has been found");
 				results.put("user", uniqueUser);
@@ -259,16 +222,12 @@ public class PersonDao {
 
 		return response;
 	}
-	
-	
-	
 
 	/**
 	 * Get User Age
 	 * @param birthdate
 	 **/
 	public static Integer getAge(String birthdate) {
-		System.out.println("get age of the user.");
 
 		int yearDOB = Integer.parseInt(birthdate.substring(0, 4));
 		int monthDOB = Integer.parseInt(birthdate.substring(4, 6));
@@ -298,8 +257,6 @@ public class PersonDao {
 
 	    return age;
 	}
-
-
 	
 	
 	/**
@@ -309,11 +266,8 @@ public class PersonDao {
 	 * @throws UnknownHostException
 	 **/
 	public static List<DBObject> getPersonality(String objId) throws UnknownHostException, MongoException{
-		System.out.println("get personality"+objId);
-
 		//__Prepare response
 		List<DBObject> response = new ArrayList<DBObject>();
-
 		BasicDBObject results = new BasicDBObject();
 
 	    // search query
@@ -323,7 +277,6 @@ public class PersonDao {
     	//skip 0
     	//limit 1
 	    List<DBObject> uniquePersonality = searchUsers(searchQuery, 0, 1, "myCollection");
-	    System.out.println(uniquePersonality);
 		if(uniquePersonality.size()>0 ){
 			results.put("response", "OK");
 			results.put("description", "The specific user has been found");
@@ -338,8 +291,6 @@ public class PersonDao {
 
 		return response;
 	}	
-
-
 	
 	/**
 	 * Get Members
@@ -355,7 +306,6 @@ public class PersonDao {
 		
 		//__Prepare response
 		List<DBObject> response = new ArrayList<DBObject>();
-
 		BasicDBObject results = new BasicDBObject();
 
 	    // search query
@@ -363,13 +313,11 @@ public class PersonDao {
 	    //BasicDBObject searchQuery = new BasicDBObject();
 	    	//filter online
 	    	//filter ethnicity
-
 	    	
     	//skip 0
     	//limit 1
 	    List<DBObject> users = searchUsers(filter, skips, limits, "myCollection");
-	    System.out.println(users);
-		if(users.size()>0 ){
+		if(users.size() > 0){
 			results.put("response", "OK");
 			results.put("description", "Found list of users");
 			results.put("users", users);
@@ -384,8 +332,6 @@ public class PersonDao {
 		return response;
 	}	
 	
-	
-
 	
 	/**
 	 * Get User List
@@ -407,7 +353,6 @@ public class PersonDao {
 		DBCollection collection = MongoApp.getCollection(collectionName);
 		//1000-1100th elements
 	    DBCursor cursor = collection.find(searchQuery).skip(skips).limit(limits);
-	    
 
         // loop over the cursor and display the result
     	while (cursor.hasNext()) {
@@ -498,7 +443,6 @@ public class PersonDao {
 	    
 		return response;
 	}
-	
 	
 	/*Logout Methods*/
 	public static List<DBObject> logoutUser(Person person){

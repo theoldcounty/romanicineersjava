@@ -9,9 +9,6 @@
 package net.oldcounty.controller;
 
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,9 +19,6 @@ import net.oldcounty.manager.PersonManager;
 import net.oldcounty.model.Interests;
 import net.oldcounty.model.Person;
 
-import net.oldcounty.controller.SimpleEmailService;
-
-import org.bson.BasicBSONObject;
 import org.bson.types.ObjectId;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -34,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.MongoException;
@@ -47,11 +40,7 @@ public class ListenerController{
     public void setPersonManager(PersonManager personManager){
     	this.personManager = personManager;
     }
-    
- 
-    
-    //getLoggedUser
-    
+        
     /**
      * Edit Chart
      * @return 
@@ -68,8 +57,7 @@ public class ListenerController{
     		@RequestParam(value="chartId", required=false) String chartId,
     		@RequestParam(value="submitted", required=false) String submitted
     		) throws UnknownHostException, MongoException
-    {
-    	
+    {    	
     	/*_interests chart*/
 	    Map<String,Integer> interestData = new LinkedHashMap<String,Integer>();
     	if(interests!=null){
@@ -96,7 +84,6 @@ public class ListenerController{
     }
     
     
-    
     /**
      * Edit User
      * @return 
@@ -107,9 +94,7 @@ public class ListenerController{
     public ModelAndView editUser(
     		HttpServletRequest request,
     		@RequestParam(value="userId", required=false) String userId,
-    		
-    		@RequestParam(value="section", required=false) String section,
- 
+    		@RequestParam(value="section", required=false) String section, 
     		@RequestParam(value="realname", required=false) String realname,
     		@RequestParam(value="username", required=false) String username,
     		@RequestParam(value="emailaddress", required=false) String emailaddress,
@@ -119,10 +104,8 @@ public class ListenerController{
     		@RequestParam(value="whichscreenname", required=false) String whichscreenname,    
     		@RequestParam(value="birthyear", required=false) String birthyear,
     		@RequestParam(value="birthmonth", required=false) String birthmonth,
-    		@RequestParam(value="birthday", required=false) String birthday,		
-    		
+    		@RequestParam(value="birthday", required=false) String birthday,
     		@RequestParam(value="about", required=false) String about,
-    		
     		@RequestParam(value="ethnicity", required=false) String ethnicity,
     		@RequestParam(value="country", required=false) String country,
     		@RequestParam(value="lookingfor", required=false) String lookingfor,
@@ -135,14 +118,11 @@ public class ListenerController{
     		@RequestParam(value="occupation", required=false) String occupation,
     		@RequestParam(value="education", required=false) String education,
     		@RequestParam(value="gender", required=false) String gender,
-    		@RequestParam(value="seeking", required=false) String seeking,
-    		 		
+    		@RequestParam(value="seeking", required=false) String seeking,    		 		
     		@RequestParam(value="personality", required=false) Integer[] personality,
-    		
     		@RequestParam(value="submitted", required=false) String submitted
     		) throws UnknownHostException, MongoException
-    {
-    	
+    {    	
     	//_new person
     	Person person = new Person();
     	
@@ -169,8 +149,7 @@ public class ListenerController{
     	person.setEyecolor(eyecolor);
     	person.setChildren(children);
     	person.setEducation(education);
-    	person.setOccupation(occupation);
-    	
+    	person.setOccupation(occupation);    	
     	
     	BasicDBObject personaltraits = new BasicDBObject();
 
@@ -214,10 +193,6 @@ public class ListenerController{
     		//return new ModelAndView("jsp/json/response", "json", InterestDao.updateInterest(interest, chartId));  	
     	}       	
     }
-        
-    
-    
-    
     
     /**
      * get Followers
@@ -254,8 +229,7 @@ public class ListenerController{
     		String json = null;
         	return new ModelAndView("jsp/json/response", "json", json);  	
     	}	
-    }     
-    
+    }
     
     /**
      * get private messages
@@ -273,9 +247,6 @@ public class ListenerController{
     	return new ModelAndView("jsp/json/response", "json", json);	
     }
     
-    
-    
-    
     /**
      * view private messages
      * @return 
@@ -290,9 +261,6 @@ public class ListenerController{
 	 	//_ get private messages for this user
 		return new ModelAndView("jsp/user/view_private_message");
     }
-        
-    
-    
     
     /**
      * send private messages
@@ -316,9 +284,6 @@ public class ListenerController{
         	return new ModelAndView("jsp/json/response", "json", json);  	
     	} 
     }
-    
-    
-    
 
     /**
      * Forgot Password
@@ -333,7 +298,6 @@ public class ListenerController{
 	    		@RequestParam(value="submitted", required=false) String submitted
     		) throws UnknownHostException, MongoException
     {	
-    	
     	if(submitted == null){
      		//__if not yet added a chart return html form	    	
 			return new ModelAndView("jsp/user/forgotpassword");   	
@@ -341,7 +305,6 @@ public class ListenerController{
     		return new ModelAndView("jsp/json/response", "json", personManager.forgotPassword(emailaddress));  	
     	}
     }       
-    
     
     /**
      * Login
@@ -372,13 +335,13 @@ public class ListenerController{
 	    		HttpServletRequest request
     		) throws UnknownHostException, MongoException
     {	
-    	List<DBObject> result = personManager.logout(request);//logged out user result    	
+    	List<DBObject> result = personManager.logout(request);//logged out user result
+    		
     	List<DBObject> oldLoggedUser = (List<DBObject>) result.get(0).get("oldLoggedUser");//old user object    	
     	String oldLoggedUserName = (String) oldLoggedUser.get(0).get("username").toString();//old user name
 
     	return new ModelAndView("jsp/user/logout", "personName", oldLoggedUserName);
     }
-    
     
     /**
      * Register
@@ -440,11 +403,7 @@ public class ListenerController{
 
     		@RequestParam(value="submitted", required=false) String submitted
     		) throws UnknownHostException, MongoException
-    {
-    	//HttpSession session = serlvetService(request);
-    	//String inSession = PersonController.inSession(session);
-    	//ServiceSerlvet.appendSesssion(request);
-    	
+    {	
     	//_new person
     	Person person = new Person();
 
@@ -490,7 +449,6 @@ public class ListenerController{
 			Integer j = 0;
 			for(Integer traits : personality)
 	    	{
-	    		//System.out.println("traits "+traits);
 	    		personaltraits.put(personalTypes[j], traits);
 	    		j++;
 	    	}	
@@ -517,8 +475,6 @@ public class ListenerController{
         	return new ModelAndView("jsp/json/response", "json", personManager.registerUser(person));  	
     	}    	
     }
-
-
     
     /*
      * Member List
@@ -535,13 +491,10 @@ public class ListenerController{
     	//skip 0
     	//limit 130
     	List<DBObject> dataresponse = PersonDao.searchUsers(searchQuery, 0, 130, "myCollection");
-    	 System.out.println(dataresponse);
-    	 
+    	
     	request.setAttribute("page", "members");
     	return new ModelAndView("jsp/memberlist", "response", dataresponse);
     }
-    
-
     
     /*
      * Venue Form
@@ -551,28 +504,28 @@ public class ListenerController{
 	    		HttpServletRequest request
     		) throws UnknownHostException, MongoException
     {
-    	
     	return new ModelAndView("jsp/venueform");
     }    
     
-    
-    
     //common site pages
-  
+ 
+    /**
+     * Home
+     * @return 
+     * @throws MongoException
+     * @throws UnknownHostException
+    */  
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView home(
     		HttpServletRequest request
 		) throws UnknownHostException, MongoException
-{
-	System.out.println("HOME PAGE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
-	SessionController.isSession(request);//_check if in session and append isSession boolean flag
-	
-	return new ModelAndView("welcome");
-}    
-
+	{
+		SessionController.isSession(request);//_check if in session and append isSession boolean flag
+		return new ModelAndView("welcome");
+	}
     
     /**
-     * privacy
+     * Privacy
      * @return 
      * @throws MongoException
      * @throws UnknownHostException
@@ -580,16 +533,15 @@ public class ListenerController{
     @RequestMapping("/privacy")
     public ModelAndView privacy(
 	    		HttpServletRequest request
-    		) throws UnknownHostException, MongoException
+    	) throws UnknownHostException, MongoException
     {	
-	 	//_ privacy page
     	SessionController.isSession(request);//_check if in session and append isSession boolean flag
     	
 		return new ModelAndView("jsp/privacy");
     }
    
     /**
-     * who we are
+     * Who We Are
      * @return 
      * @throws MongoException
      * @throws UnknownHostException
@@ -599,15 +551,13 @@ public class ListenerController{
 	    		HttpServletRequest request
     		) throws UnknownHostException, MongoException
     {	
-	 	//_ privacy page
     	SessionController.isSession(request);//_check if in session and append isSession boolean flag
     	
 		return new ModelAndView("jsp/who_we_are");
     }
-    
 
     /**
-     * instructions
+     * Instructions
      * @return 
      * @throws MongoException
      * @throws UnknownHostException
@@ -615,18 +565,18 @@ public class ListenerController{
     @RequestMapping("/instructions")
     public ModelAndView instructions(
 	    		HttpServletRequest request
-    		) throws UnknownHostException, MongoException
+    	) throws UnknownHostException, MongoException
     {	
-	 	//_ privacy page
     	SessionController.isSession(request);//_check if in session and append isSession boolean flag
     	
     	return new ModelAndView("jsp/instructions");
     }
-        
     
-    
-    /*
+    /**
      * User
+     * @return 
+     * @throws MongoException
+     * @throws UnknownHostException
     */
     @RequestMapping(method=RequestMethod.GET, value={"/user","/user/{id}"})
     public ModelAndView profileDisplay(
@@ -675,18 +625,11 @@ public class ListenerController{
     	request.setAttribute("genderList", genderList);
     	request.setAttribute("ethnicityList", ethnicityList);
 
-    	//ServiceSerlvet.appendSesssion(request);
-
 		return new ModelAndView("jsp/user", "people", searchResponse);
     }
     
-    
-
     /*
      * Schedule a date
-    */
-    /*
-     * getInterestJson
     */
     @RequestMapping("/scheduledate")
     public ModelAndView scheduleDateDisplay(
@@ -719,7 +662,6 @@ public class ListenerController{
     ) throws UnknownHostException, MongoException {
     	//ServiceSerlvet.appendSesssion(request);
        	
-  	
     	List<DBObject> json = null;
     	
     	if(servicerequest.equals("getMembers")){
@@ -727,7 +669,6 @@ public class ListenerController{
     		//id
     		//Integer skips = 0;
     		//Integer limits = 20;
-    		System.out.println(id);
     		BasicDBObject filter = new BasicDBObject();  		
     			//filter.put("isloggedon", "1");
     		

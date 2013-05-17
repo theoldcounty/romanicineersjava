@@ -26,7 +26,6 @@ import com.mongodb.MongoException;
  */
 public class MongoApp {
 
-
 	/**
 	 * get database
 	 * @throws MongoException
@@ -39,19 +38,16 @@ public class MongoApp {
 		String host = "127.0.0.1";
 		Integer port = 27017;
 
-	    // connect to mongoDB
+		//connect to mongoDB
 	    Mongo mongo = new Mongo(host, port);
 
-	    // if database doesn't exists, mongoDB will create it
+	    //if database doesn't exists, mongoDB will create it
 	    String dbName = "mydb";
 	    DB db = mongo.getDB(dbName);
 
 	    return db;
 	}
-
-
-
-
+	
 	/**
 	 * delete collection entry
 	 **/
@@ -77,15 +73,12 @@ public class MongoApp {
 		// if database doesn't exists, mongoDB will create it
 	    DB db = getDatabase();
 
-	    //String collectionName = "myCollection";
-
 	    // Get collection from MongoDB, database named "mydb"
 	    // if collection doesn't exists, mongoDB will create it
 	    DBCollection collection = db.getCollection(collectionName);
 
 	    return collection;
 	}
-
 	
 	public static List<DBObject> searchCollections(
 			BasicDBObject searchQuery,
@@ -106,17 +99,5 @@ public class MongoApp {
 	    }
 
 	    return results;
-	}	
-	/*
-    public static void main(String[] args) {
-
-		try {
-			getCollection("myCollection");
-			//cleanCollection();
-		} catch (UnknownHostException e) {
-		    e.printStackTrace();
-		} catch (MongoException e) {
-		    e.printStackTrace();
-		}
-    }*/
+	}
 }

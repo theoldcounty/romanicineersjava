@@ -6,15 +6,12 @@ import org.apache.velocity.app.VelocityEngine;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
-import org.springframework.ui.velocity.VelocityEngineUtils;
 
 import com.mongodb.BasicDBObject;
 
 import javax.mail.internet.MimeMessage;
 
 import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 public class SimpleEmailService {
    private static JavaMailSender mailSender;
@@ -33,21 +30,33 @@ public class SimpleEmailService {
          public void prepare(MimeMessage mimeMessage) throws Exception {
         	 System.out.println("EMAIL TIME");
         	 String velocityTemplateName = null;
+        	 String subject = null;
         	 
         	if(templateType.equals("forgotPasswordTemplate")){
         		 velocityTemplateName = "forgot_password";
+        		 subject = "Forgot Password";
+        		 user.put("imgPath", "http://robot-oi772f3re:8080/springApp21/resources/images/emails/forgot_password/");
+        	}
+        	
+        	if(templateType.equals("perfectMatchTemplate")){
+        		velocityTemplateName = "perfect_match";
+        		subject = "Perfect Match";
+        		user.put("imgPath", "http://robot-oi772f3re:8080/springApp21/resources/images/emails/perfect_match/");
         	}
         	
         	if(templateType.equals("registerTemplate")){
-        		velocityTemplateName = "registration-confirmation";
-        	}
+        		velocityTemplateName = "registration_confirmation";
+        		subject = "Registration";
+        		user.put("imgPath", "http://robot-oi772f3re:8080/springApp21/resources/images/emails/registration_confirmation/");
+        	}        	
         	
-        	 //user.put("imgPath", "C:/Documents and Settings/Fusion/Workspaces/MyEclipse 10/romanicineersjava/WebContent/WEB-INF/velocity");
-        	 
         	MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
             	message.setTo("info@fusionrobotdesign.com");
             	message.setFrom("hello@romanicneers.com"); // could be parameterized...
             
+            	
+				message.setSubject(subject);
+            	
             VelocityContext model = new VelocityContext();
             	model.put("user", user);            
             

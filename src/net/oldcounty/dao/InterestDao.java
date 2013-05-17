@@ -57,13 +57,13 @@ public class InterestDao {
 	    	document.put("dataResults", dataResults);
 	   
 	    //_if chart already exists update it, else insert
-	   if(interest.getCid() != null){
-		   document.put("_id", ObjectId.massageToObjectId(interest.getCid()));
-		   collection.save(document);
-	   }
-	   else{
+	    if(interest.getCid() != null){
+	    	document.put("_id", ObjectId.massageToObjectId(interest.getCid()));
+	    	collection.save(document);
+	    }
+	    else{
 	    	collection.insert(document);
-	   }
+	    }
 	    
 	    ObjectId lastid = (ObjectId)document.get("_id");
 	    
@@ -86,8 +86,7 @@ public class InterestDao {
 	public static List<DBObject> getInterest(Interests interest){
 		
 		//__Prepare response
-		List<DBObject> response = new ArrayList<DBObject>();
-		
+		List<DBObject> response = new ArrayList<DBObject>();		
 		BasicDBObject results = new BasicDBObject();
 
 	    // search query
@@ -111,8 +110,7 @@ public class InterestDao {
 			results.put("chartType", uniqueInterests.get(0).get("chartType"));
 			results.put("dataResults", uniqueInterests.get(0).get("dataResults"));
 		}
-		else
-		{
+		else{
 			results.put("response", "FAIL");
 			results.put("description", "Failed to get interest list");
 		}

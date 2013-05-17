@@ -3,46 +3,45 @@ package net.oldcounty.manager;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import net.oldcounty.controller.CommonUtils;
 import net.oldcounty.controller.SessionController;
 import net.oldcounty.controller.SimpleEmailService;
 import net.oldcounty.dao.PersonDao;
-import net.oldcounty.dao.InterestDao;
-import net.oldcounty.model.Interests;
 import net.oldcounty.model.Person;
 
-import org.bson.BasicBSONObject;
-import org.bson.types.ObjectId;
-
-import com.mongo.app.MongoApp;
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.MongoException;
-
 
 import java.security.SecureRandom;
 import java.math.BigInteger;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public class PersonManager {
 
 	PersonDao personDao;
 
+	/**
+	 * setPersonDao
+	 * set person Dao object
+	 **/		
 	public void setPersonDao(PersonDao personDao){
 		this.personDao = personDao;
 	}
 	
+	/**
+	 * Generate new password
+	 * */
 	 public String generatePassword(){
 		 SecureRandom random = new SecureRandom();		 
 		 return new BigInteger(130, random).toString(32);
 	 }
 	 
+	/**
+	 * Validate the person, check if the passwords match, that the relevant fields are not blank
+	 * */	 
 	 private BasicDBObject validateUser(Person person){
 		
 		BasicDBObject response = new BasicDBObject();
@@ -50,7 +49,6 @@ public class PersonManager {
 	    BasicDBObject results = new BasicDBObject();
 		
 	    //_validate inputs
-	   
 	    
 		//__check if passwords match
 	    if(!CommonUtils.isEmpty(person.getPassword()) && !CommonUtils.isEmpty(person.getConfirmpassword())){
@@ -77,31 +75,30 @@ public class PersonManager {
 			results.put("error", "At least one required field was blank");
 		}
 		
-		
+		//__check if the date details are not empty
 		if(
 			!CommonUtils.isEmpty(person.getBirthyear()) && 
 			!CommonUtils.isEmpty(person.getBirthmonth()) && 
 			!CommonUtils.isEmpty(person.getBirthday())
 		){
-			System.out.println("checking birthday entry");   
+
+			//__validate date
 			if(
 				!CommonUtils.isValidDate(person.getBirthyear()+person.getBirthmonth()+person.getBirthday())
 			){
-				System.out.println("birthday is not valid"); 
 				isValidInputs = false;
 				results.put("error", "The birthdate is not valid");
 			}else{
+				//__validate if birth date is older than 18
 				if(
-						!CommonUtils.isOlderThan18(person.getBirthyear()+person.getBirthmonth()+person.getBirthday())
-				){
-					System.out.println("need to be over 18"); 
+					!CommonUtils.isOlderThan18(person.getBirthyear()+person.getBirthmonth()+person.getBirthday())
+				){ 
 					isValidInputs = false;
 					results.put("error", "You need to be over 18 to access this site");
 				}							
 			}
 		}
 		else{
-			System.out.println("birthday incomplete");
 			isValidInputs = false;
 			results.put("error", "The birthdate is incomplete");
 		}
@@ -124,31 +121,24 @@ public class PersonManager {
 	    	results.put("error", "Email address was empty");				    	
 	    }
 	    
-	    
 	    response.put("isValidInputs", isValidInputs);
 	    response.put("results", results);
 	    
 	    return response;
 	}
-	
 	 
-
-	 
+	/**
+	 * Register the person
+	 * */	 
 	public List<DBObject> registerUser(Person person){
-		//__Prepare response
-		
-		System.out.println("register user using person control");    			
-		List<DBObject> response = new ArrayList<DBObject>();
-
+			//__Prepare response					
+			List<DBObject> response = new ArrayList<DBObject>();
 		    BasicDBObject results = new BasicDBObject();
-		    Boolean isValidInputs = true;
 		    
-		    BasicDBObject valdidationResponse = validateUser(person);
-		    isValidInputs = (Boolean) valdidationResponse.get("isValidInputs");	
-		    results = (BasicDBObject) valdidationResponse.get("results");
+			BasicDBObject valdidationResponse = validateUser(person);
+				results = (BasicDBObject) valdidationResponse.get("results");
 		    
-		    if(isValidInputs){
-		    	
+		    if((Boolean) valdidationResponse.get("isValidInputs")){		    	
 			    BasicDBObject data = new BasicDBObject();
 					data.put("emailAddress", person.getEmailaddress());
 					data.put("userName", person.getUsername());
@@ -175,12 +165,12 @@ public class PersonManager {
 		return response;
 	}
 	
-	
+	/**
+	 * Edit the person
+	 * */		
 	public List<DBObject> editUser(Person person, String section){
-		//__Prepare response
-		
-		System.out.println("edit user using person control<<<<<<<<<<< "+section);    			
-		List<DBObject> response = new ArrayList<DBObject>();
+			//__Prepare response		
+			List<DBObject> response = new ArrayList<DBObject>();
 
 		    BasicDBObject results = new BasicDBObject();
 		    Boolean isValidInputs = true;
@@ -190,8 +180,8 @@ public class PersonManager {
 			    isValidInputs = (Boolean) valdidationResponse.get("isValidInputs");	
 			    results = (BasicDBObject) valdidationResponse.get("results");		    	
 		    }
+		    
 		    //_validate inputs 
-
 		    if(isValidInputs){				    	
 		    	List<DBObject> latestUser = PersonDao.editUser(person, section);
 		    	
@@ -210,11 +200,13 @@ public class PersonManager {
 		return response;
 	}
 
+	/**
+	 * Send the person a new password
+	 * */	
 	@SuppressWarnings("unchecked")
 	public List<DBObject> forgotPassword(String emailaddress) throws UnknownHostException, MongoException{
-		//__Prepare response
-		
-		List<DBObject> response = new ArrayList<DBObject>();
+			//__Prepare response		
+			List<DBObject> response = new ArrayList<DBObject>();
 
 		    BasicDBObject results = new BasicDBObject();
 		    Boolean isValidInputs = true;
@@ -239,7 +231,6 @@ public class PersonManager {
         		isValidInputs = false;
         	}
 		    
-		    
 		    if(isValidInputs){		    	
 			    String password = person.getPassword();
 			    String email = person.getEmailaddress();
@@ -253,11 +244,6 @@ public class PersonManager {
 		    	SimpleEmailService.generateEmail("forgotPasswordTemplate", data);
 		    	
 		    	List<DBObject> latestUser = PersonDao.setForgotPassword(person);
-
-				/*
-				>>>>>>> reset password
-				>>>>>>> recover password
-				*/    		
 
 				results.put("response", "OK");
 				results.put("description", "User password reset");
@@ -274,21 +260,19 @@ public class PersonManager {
 		return response;
 	}
 
-		
-	
+	/**
+	 * Log the person in 
+	 * */		
 	@SuppressWarnings("unchecked")
 	public List<DBObject> login(String emailaddress, String password, HttpServletRequest request) throws UnknownHostException, MongoException{
-		//__Prepare response
-		
-		List<DBObject> response = new ArrayList<DBObject>();
+			//__Prepare response		
+			List<DBObject> response = new ArrayList<DBObject>();
 
 		    BasicDBObject results = new BasicDBObject();
-		    Boolean isValidInputs = true;
 
 		    //check if email exists
     		//_new person
         	Person person = new Person();
-        	
         	
         	if(!CommonUtils.isEmailUnique(emailaddress)){		    	
         	    // search query
@@ -321,13 +305,13 @@ public class PersonManager {
 		return response;
 	}	
 	
+	/**
+	 * Log the person out
+	 * */		
 	public List<DBObject> logout(HttpServletRequest request) throws UnknownHostException, MongoException{
-		//__Prepare response
-		
-		List<DBObject> response = new ArrayList<DBObject>();
-
+			//__Prepare response		
+			List<DBObject> response = new ArrayList<DBObject>();
 		    BasicDBObject results = new BasicDBObject();
-		    Boolean isValidInputs = true;
 
     		//_new person
 		    List<DBObject> oldLoggedUser = SessionController.getLoggedUser(request);		   	
@@ -335,25 +319,17 @@ public class PersonManager {
 		   	
 		   	Person person = new Person();
 		   		person.setUid(userId);
-        	
-		    if(isValidInputs){		    	
-			    List<DBObject> latestUser = PersonDao.logoutUser(person);
+		   		
+	        List<DBObject> latestUser = PersonDao.logoutUser(person);
 
-			    results.put("response", "OK");
-				results.put("description", "User Logged Out");
-		    	results.put("lastId", latestUser.get(0).get("lastId"));
-		    	results.put("oldLoggedUser", oldLoggedUser);
-		    	
-		    	SessionController.logOutUser(request);
-		    	
-		    }
-		    else
-		    {
-				results.put("response", "FAIL");
-				results.put("description", "Failed to log user out");
-		    }
+		    results.put("response", "OK");
+			results.put("description", "User Logged Out");
+	    	results.put("lastId", latestUser.get(0).get("lastId"));
+	    	results.put("oldLoggedUser", oldLoggedUser);
+	    	
+	    	SessionController.logOutUser(request);//remove from session		    	
 
-		    response.add(results);
+	    	response.add(results);
 		return response;
 	}
 }
