@@ -34,7 +34,13 @@ var pageHandler = {
 			if(section.match(/login/gi)){
 				//_is login form
 				romForms.setUpLogin();
+			}	
+			
+			if(section.match(/imageUpload/gi)){
+				//_is login form
+				romForms.setUpUploadImageForm();
 			}				
+			
 			
 		},
 		homeEvents: function(){

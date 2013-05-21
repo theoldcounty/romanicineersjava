@@ -18,7 +18,9 @@ var romForms = {
 		    "successForgotPassword" : "<p>We have found your profile and have sent you a new password.</p>",
 		    "failForgotPassword" : "<p>Something went wrong, we were not able to find your profile.</p>",
 		    "successLogin" : "<p>We have logged you in.</p>",
-		    "failLogin" : "<p>Something went wrong, we were not able to login.</p>"		    
+		    "failLogin" : "<p>Something went wrong, we were not able to login.</p>",		 
+		    "successImage" : "<p>Image uploaded.</p>",
+		    "failImage" : "<p>Image Failed.</p>"
 		}],
 		getRandom: function(){
 			var min = 0;
@@ -248,6 +250,46 @@ var romForms = {
 					);
 				});			
 		},
+		
+		
+		
+		setUpUploadImageForm: function(){
+			
+			var that = this;
+			this.bindSlideControllers();
+
+			 $('#imageForm').submit(function(e) {
+					e.preventDefault();
+
+					var postUrl = window.location;
+					var formResults = $(this).serializeArray();
+					
+					$.post("ImageStoreServlet", formResults,
+						function(data) {
+							
+						console.log("data", data);
+						
+					    	var obj = jQuery.parseJSON(data);
+
+					    	if(obj[0].response == "OK"){
+					    		shazamOverlay.morphBox(that.messages[0]["successImage"]);
+
+					    		//__close the lightbox
+								var t = window.setInterval(function(){
+									shazamOverlay.hide();
+									clearInterval(t);
+								},5500);
+
+					    	}else{
+					    		//there is an error with the registeration.
+					    		//_that.messages[0]["failEdit"]
+					    		$('.error').html(obj[0].error);
+					    	}
+						}
+					);
+				});			
+		},		
+		
 		setUpLogin: function(){
 			var that = this;
 			

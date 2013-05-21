@@ -1,4 +1,4 @@
-		
+
 		<!-- Libraries  -->
 		<script src="resources/js/libs/modernizr-2.5.3-respond-1.1.0.min.js"></script>
 		<script type="text/javascript" src="resources/js/libs/d3.js"></script>
@@ -19,10 +19,12 @@
 		<script type="text/javascript" src="resources/js/rom/googlemaps/infoBox.js"></script>
 		<script type="text/javascript" src="resources/js/rom/googlemaps/googlemaps.js"></script>
 		<script type="text/javascript" src="resources/js/rom/rom.foursquare.js"></script>
-	
+
 		<!--integration of basic image uploader-->
+
+		<!--
 		<script type="text/javascript" src="resources/upload/js/jquery.iframe-transport.js"></script>
-		<script type="text/javascript" src="resources/upload/js/jquery.fileupload.js"></script>
+		<script type="text/javascript" src="resources/upload/js/jquery.fileupload.js"></script>-->
 
 		<!-- Plugins  -->
 		<script type="text/javascript" src="resources/js/plugins/rom.doughnut.knob.js"></script>
@@ -44,5 +46,4 @@
 		<script type="text/javascript" src="resources/js/rom/rom.slider.controls.js"></script>
 		<script type="text/javascript" src="resources/js/rom/rom.google.maper.js"></script>
 		<script type="text/javascript" src="resources/js/rom/rom.responsive.js"></script>
-		
-		
+

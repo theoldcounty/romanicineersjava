@@ -8,19 +8,31 @@
 
 package net.oldcounty.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.oldcounty.controller.ImageStoreServlet;
+
+import net.oldcounty.dao.ImageDao;
 import net.oldcounty.dao.InterestDao;
 import net.oldcounty.dao.PersonDao;
 import net.oldcounty.manager.PersonManager;
 import net.oldcounty.model.Interests;
 import net.oldcounty.model.Person;
+import net.oldcounty.model.Image;
 
 import org.bson.types.ObjectId;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -82,6 +94,39 @@ public class ListenerController{
     		return new ModelAndView("jsp/json/response", "json", InterestDao.updateInterest(interest));  	
     	}       	
     }
+    
+    
+    @RequestMapping("/ImageStoreServlet2")
+    public ModelAndView imageUpload(
+    		HttpServletRequest request,
+    		//@RequestParam(value="image", required=false) byte[] image,
+    		//@RequestParam(value="userId", required=false) String userId,    		
+    		@RequestParam(value="submitted", required=false) String submitted
+    		) throws MongoException, IOException, ServletException
+    {    	
+    	//if(submitted == null){
+    		//__if not yet added a chart return html form	 
+    	
+    	
+			return new ModelAndView("jsp/gallery/imagestore");   	
+    	
+    	/*
+    	}else{
+    		Part filePart = request.getPart("image"); // Retrieves <input type="file" name="file">
+   		 
+        	Image userImage = new Image();
+        		userImage.setUserId(userId);
+        		userImage.setName("fileName");
+        		//userImage.setImage(image);
+        		
+        		System.out.println(filePart);
+        	 
+    		return new ModelAndView("jsp/json/response", "json", ImageDao.saveUserImage(userImage));  	
+    		
+    	}  
+    	*/     	
+    }
+       
     
     
     /**
