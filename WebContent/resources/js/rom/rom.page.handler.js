@@ -26,6 +26,12 @@ var pageHandler = {
 				romForms.setUpEdit();
 			}
 			
+			if(section.match(/sendPrivateMessages/gi)){
+				//_is edit form
+				romForms.setUpPrivateMessage();
+			}			
+			
+			
 			if(section.match(/forgotpassword/gi)){
 				//_is edit form
 				romForms.setUpForgotPassword();

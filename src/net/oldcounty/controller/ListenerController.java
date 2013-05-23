@@ -20,10 +20,12 @@ import net.oldcounty.controller.ImageStoreServlet;
 import net.oldcounty.dao.ImageDao;
 import net.oldcounty.dao.InterestDao;
 import net.oldcounty.dao.PersonDao;
+import net.oldcounty.dao.PrivateMessageDao;
 import net.oldcounty.manager.PersonManager;
 import net.oldcounty.model.Interests;
 import net.oldcounty.model.Person;
 import net.oldcounty.model.Image;
+import net.oldcounty.model.PrivateMessage;
 
 import org.bson.types.ObjectId;
 
@@ -276,59 +278,7 @@ public class ListenerController{
     	}	
     }
     
-    /**
-     * get private messages
-     * @return 
-     * @throws MongoException
-     * @throws UnknownHostException
-    */
-    @RequestMapping("/getPrivateMessages")
-    public ModelAndView getPrivateMessages(
-	    		HttpServletRequest request
-    		) throws UnknownHostException, MongoException
-    {	
-	 	//_ get followers the user into the database and return a json response
-		String json = null;
-    	return new ModelAndView("jsp/json/response", "json", json);	
-    }
     
-    /**
-     * view private messages
-     * @return 
-     * @throws MongoException
-     * @throws UnknownHostException
-    */
-    @RequestMapping("/viewPrivateMessages")
-    public ModelAndView viewPrivateMessages(
-	    		HttpServletRequest request
-    		) throws UnknownHostException, MongoException
-    {	
-	 	//_ get private messages for this user
-		return new ModelAndView("jsp/user/view_private_message");
-    }
-    
-    /**
-     * send private messages
-     * @return 
-     * @throws MongoException
-     * @throws UnknownHostException
-    */
-    @RequestMapping("/sendPrivateMessages")
-    public ModelAndView sendPrivateMessages(
-	    		HttpServletRequest request,	    		
-	    		@RequestParam(value="privatemessage", required=false) String privatemessage,
-	    		@RequestParam(value="submitted", required=false) String submitted
-    		) throws UnknownHostException, MongoException
-    {	
-    	if(submitted == null){
-    		//__show private message form    	
-			return new ModelAndView("jsp/user/send_private_message");   	
-    	}else{
-    		//_ json response from sending a private message
-    		String json = null;
-        	return new ModelAndView("jsp/json/response", "json", json);  	
-    	} 
-    }
 
     /**
      * Forgot Password
@@ -520,6 +470,78 @@ public class ListenerController{
         	return new ModelAndView("jsp/json/response", "json", personManager.registerUser(person));  	
     	}    	
     }
+    
+    
+    /**
+     * Send Private Message
+     * @return 
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/sendPrivateMessages")
+    public ModelAndView sendPrivateMessages(
+    		HttpServletRequest request,
+    		@RequestParam(value="senderUid", required=false) String senderUid,
+    		@RequestParam(value="recepientUid", required=false) String recepientUid,
+    		@RequestParam(value="message", required=false) String message,
+    		@RequestParam(value="submitted", required=false) String submitted
+    		) throws UnknownHostException, MongoException
+    {    	
+    	
+    	PrivateMessage privatemessage = new PrivateMessage();
+			privatemessage.setRecepientUserId(recepientUid);
+			privatemessage.setSenderUserId(senderUid);
+			privatemessage.setMessage(message);	
+			
+    	if(submitted == null){
+    		//__if not yet added a chart return html form	    	
+			return new ModelAndView("jsp/user/send_private_message");   	
+    	}else{
+    		return new ModelAndView("jsp/json/response", "json", PrivateMessageDao.sendPrivateMessage(privatemessage));  	
+    	}       	
+    }
+    
+    /**
+     * View Private Message
+     * @return 
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/viewPrivateMessages")
+    public ModelAndView viewPrivateMessages(
+    		HttpServletRequest request
+    		) throws UnknownHostException, MongoException
+    {    	
+    	String recepientUid = "1";//logged in user
+    	
+		PrivateMessage privatemessage = new PrivateMessage();		
+			privatemessage.setRecepientUserId(recepientUid);
+		
+		List<DBObject> privatemessages = PrivateMessageDao.getPrivateMessage(privatemessage);
+    	
+    	return new ModelAndView("jsp/user/view_private_message", "privatemessages", privatemessages.get(0).get("results"));      	
+    }
+    
+	/**
+	 * getPrivateMessages
+	 * @return 
+	 * @throws MongoException
+	 * @throws UnknownHostException
+	*/
+	@RequestMapping("/getPrivateMessages")
+	public ModelAndView getPrivateMessages(
+			HttpServletRequest request,
+			@RequestParam(value="recepientUid", required=false) String recepientUid
+			) throws UnknownHostException, MongoException
+	{    	
+		PrivateMessage privatemessage = new PrivateMessage();
+			privatemessage.setRecepientUserId(recepientUid);
+		
+		return new ModelAndView("jsp/json/response", "json", PrivateMessageDao.getPrivateMessage(privatemessage));  	
+		      	
+	}
+    
+        
     
     /*
      * Member List

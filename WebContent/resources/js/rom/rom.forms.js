@@ -20,7 +20,9 @@ var romForms = {
 		    "successLogin" : "<p>We have logged you in.</p>",
 		    "failLogin" : "<p>Something went wrong, we were not able to login.</p>",		 
 		    "successImage" : "<p>Image uploaded.</p>",
-		    "failImage" : "<p>Image Failed.</p>"
+		    "failImage" : "<p>Image Failed.</p>",
+		    "successPrivateMessage" : "<p>We have sent the private message.</p>",
+		    "failPrivateMessage" : "<p>An error occured and failed the private message.</p>"
 		}],
 		getRandom: function(){
 			var min = 0;
@@ -139,6 +141,46 @@ var romForms = {
 			selectboxCountry.change(function() {
 				that.setLatLng($(this).find(":selected").text());
 			});
+		},
+		setUpPrivateMessage: function(){
+			
+			var that = this;
+			 
+
+			 $('#sendPrivateMessage').submit(function(e) {
+					e.preventDefault();
+					var postUrl = window.location;
+					var formResults = $(this).serializeArray();
+
+					$.post("sendPrivateMessages", formResults,
+						function(data) {
+					    	//console.log("json response. " + data);
+					    	var obj = jQuery.parseJSON(data);
+
+					    	if(obj[0].response == "OK"){
+					    		//__welcome the new user in the lightbox
+					    		shazamOverlay.morphBox(that.messages[0]["successPrivateMessage"]);
+
+					    		//__close the lightbox
+								var t = window.setInterval(function(){
+									shazamOverlay.hide();
+									clearInterval(t);
+								},5500);
+
+					    		//__refresh the site to auto log the user in.
+
+
+					    		//location.reload();
+					    		//user has been registered succesfully
+					    	}else{
+					    		//there is an error with the registeration.
+					    		//_that.messages[0]["failRegistration"]
+					    		//console.log("backend error with reg - likely the username or email already exists");
+					    		$('.error').html(obj[0].error);
+					    	}
+						}
+					);
+				});			
 		},
 		setUpRegistration: function(){
 			var that = this;

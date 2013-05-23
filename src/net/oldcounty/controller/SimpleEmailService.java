@@ -48,7 +48,14 @@ public class SimpleEmailService {
         		velocityTemplateName = "registration_confirmation";
         		subject = "Registration";
         		user.put("imgPath", "http://robot-oi772f3re:8080/springApp21/resources/images/emails/registration_confirmation/");
-        	}        	
+        	}
+        	
+        	if(templateType.equals("privateMessageNotificationTemplate")){
+        		velocityTemplateName = "private_notification";
+        		subject = "Private Notification";
+        		user.put("imgPath", "http://robot-oi772f3re:8080/springApp21/resources/images/emails/private_notification/");
+        	}       	
+        	
         	
         	MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
             	message.setTo("info@fusionrobotdesign.com");

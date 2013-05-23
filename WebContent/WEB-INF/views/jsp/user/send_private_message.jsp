@@ -3,12 +3,12 @@
 
 <div id="shazam-wrapper" class="regular">
 		
-		<form id="sendPrivateMessage" action="send_private_message" enctype="multipart/form-data" method="post" action="">
+		<form id="sendPrivateMessage" action="sendPrivateMessages" enctype="multipart/form-data" method="post" action="">
 			
-			<fieldset id="step1">
-
-				
-				<textarea name="privatemessage" rows="4" cols="50"></textarea>
+			<fieldset id="step1">				
+				<textarea name="message" rows="4" cols="50"></textarea>
+				<input type="text" value="" name="recepientUid"/>
+				<input type="text" value="" name="senderUid"/>
 
 				<input type="hidden" value="submitted" name="submitted"/>
 				<input type="submit" value="submit" name="submit"/>				
