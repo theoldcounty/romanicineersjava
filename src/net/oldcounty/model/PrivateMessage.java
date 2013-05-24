@@ -24,6 +24,7 @@ public class PrivateMessage {
 	String senderUserId; //the user id who this message is for
 	String recepientUserId; //the user id who this message is for
 	String message; //the message
+	String subject; //the subject
 	String date; //the date
 	
 
@@ -48,5 +49,11 @@ public class PrivateMessage {
 	public String getMessage() {
 		return message;
 	}	
-	
+
+	public void setSubject(String message) {
+		this.subject = subject;
+	}	
+	public String getSubject() {
+		return subject;
+	}	
 }

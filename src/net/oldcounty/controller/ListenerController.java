@@ -512,14 +512,21 @@ public class ListenerController{
     		HttpServletRequest request
     		) throws UnknownHostException, MongoException
     {    	
-    	String recepientUid = "1";//logged in user
+    	String loggedUser = "1";//logged in user
     	
 		PrivateMessage privatemessage = new PrivateMessage();		
-			privatemessage.setRecepientUserId(recepientUid);
-		
-		List<DBObject> privatemessages = PrivateMessageDao.getPrivateMessage(privatemessage);
-    	
-    	return new ModelAndView("jsp/user/view_private_message", "privatemessages", privatemessages.get(0).get("results"));      	
+			
+			privatemessage.setRecepientUserId(loggedUser);
+		List<DBObject> inboxMessages = PrivateMessageDao.getInboxPrivateMessage(privatemessage);
+			
+			privatemessage.setSenderUserId(loggedUser);
+		List<DBObject> sentMessages = PrivateMessageDao.getSentPrivateMessage(privatemessage);
+
+	    BasicDBObject privates = new BasicDBObject();
+			privates.put("inbox", inboxMessages.get(0).get("results"));
+			privates.put("sent", sentMessages.get(0).get("results"));
+	    	
+    	return new ModelAndView("jsp/user/view_private_message", "privatemessages", privates);      	
     }
     
 	/**
@@ -528,6 +535,7 @@ public class ListenerController{
 	 * @throws MongoException
 	 * @throws UnknownHostException
 	*/
+    /*
 	@RequestMapping("/getPrivateMessages")
 	public ModelAndView getPrivateMessages(
 			HttpServletRequest request,
@@ -538,9 +546,8 @@ public class ListenerController{
 			privatemessage.setRecepientUserId(recepientUid);
 		
 		return new ModelAndView("jsp/json/response", "json", PrivateMessageDao.getPrivateMessage(privatemessage));  	
-		      	
 	}
-    
+    */
         
     
     /*

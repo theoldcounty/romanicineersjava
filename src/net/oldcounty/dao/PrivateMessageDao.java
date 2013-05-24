@@ -79,6 +79,7 @@ public class PrivateMessageDao {
 
 	    	document.put("senderUid", privatemessage.getSenderUserId());
 	    	document.put("recepientUid", privatemessage.getRecepientUserId());
+	    	document.put("subject", privatemessage.getSubject());
 	    	document.put("message", privatemessage.getMessage());
 	    	document.put("date", time);	    	
 	    	
@@ -114,31 +115,34 @@ public class PrivateMessageDao {
     	
 		return response;
 	}
-	
 
+	public static List<DBObject> getInboxPrivateMessage(PrivateMessage privatemessage){
+		// search query
+	    BasicDBObject searchQuery = new BasicDBObject();
+	    	searchQuery.put("recepientUid", privatemessage.getRecepientUserId());
+	    	
+	    return getPrivateMessage(privatemessage, searchQuery);
+	}
+	
+	public static List<DBObject> getSentPrivateMessage(PrivateMessage privatemessage){
+		// search query
+	    BasicDBObject searchQuery = new BasicDBObject();
+	    	searchQuery.put("senderUid", privatemessage.getSenderUserId());	    	
+	    
+	    return getPrivateMessage(privatemessage, searchQuery);
+	}
+	
 	/**
 	 * Get Private Message
 	 * @param interest
 	 * @throws MongoException
 	 * @throws UnknownHostException
 	 **/
-	public static List<DBObject> getPrivateMessage(PrivateMessage privatemessage){
+	public static List<DBObject> getPrivateMessage(PrivateMessage privatemessage, BasicDBObject searchQuery){
 		
 		//__Prepare response
 		List<DBObject> response = new ArrayList<DBObject>();		
 		BasicDBObject results = new BasicDBObject();
-
-	    // search query
-	    BasicDBObject searchQuery = new BasicDBObject();
-	    	//searchQuery.put("uid", interest.getUserId());
-	    	//searchQuery.put("chartType", interest.getName());
-	    	
-	    //get messages that the user sent
-	    	//searchQuery.put("senderUid", privatemessage.getSenderUserId());
-		    
-	    //get messages that the user receieved
-	    	searchQuery.put("recepientUid", privatemessage.getRecepientUserId());
-	    	
 	    
 	    List<DBObject> uniquePrivateMessages = null;
 		try {
