@@ -28,7 +28,7 @@ public class ImageDAOMongo{
 	private ImageDAOMongo() {
 		try {
 			mongoClient = new MongoClient("localhost");
-			db = mongoClient.getDB("images");
+			db = mongoClient.getDB("mydb");
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -39,12 +39,16 @@ public class ImageDAOMongo{
 	public UserImage getUserImage(String id) {
 		DBCollection coll = db.getCollection("images");
 		BasicDBObject query = new BasicDBObject();
-		query.put("_id",id);
-		DBObject dbObject=coll.findOne();
+		DBObject searchById = new BasicDBObject("_id", new ObjectId(id));
+		DBObject dbObject = coll.findOne(searchById);				
 		UserImage userImage=new UserImage();
-		userImage.setId(Integer.parseInt(((ObjectId) dbObject.get("_id")).toString()));
+		userImage.setId(id);
+		userImage.setName( (String) dbObject.get("name"));
+		
+		
 		userImage.setFormat( (String) dbObject.get("format"));
 		userImage.setImage( (byte[]) dbObject.get("image"));
+		System.out.println("file name:"+userImage.getName());
 		coll.findOne();
 		return userImage;
 	}

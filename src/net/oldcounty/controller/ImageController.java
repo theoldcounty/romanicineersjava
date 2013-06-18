@@ -46,6 +46,14 @@ public class ImageController {
 			}
 			buffer.flush();
 			byte[] image = buffer.toByteArray();
+			UserImage userImage=new UserImage();
+			
+			userImage.setFormat(format);
+			userImage.setName(filename);
+			userImage.setImage(image);
+			userImage.setUserId(null);
+			ImageDAOMongo.getInstance().saveUserImage(userImage);
+			
 			System.out.println("file name:" + filename);
 			System.out.println("format:" + format);
 			System.out.println("image:" + image);

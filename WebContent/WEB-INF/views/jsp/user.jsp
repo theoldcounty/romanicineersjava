@@ -68,7 +68,7 @@
 							<li><a class="shazam" href="viewFollowers">*(unlogged) Followers - shows users following (overlay)</a></li>
 							<li><a class="shazam" href="addFollowers">*(unlogged) Follow me - action to follow the user (overlay)</a></li>
 							<li><a href="scheduledate">*(unlogged) Schedule a date  <!-- &userId=${people[0]._id}--></a></li>							
-							<li><a class="shazam" href="ImageStoreServlet">*(Logged In)My Photos/Add Picture (overlay)</a></li>
+							<li><a class="shazam" href="imageform">*(Logged In)My Photos/Add Picture (overlay)</a></li>
 							
 							
 							<li><a class="shazam" href="sendPrivateMessages">*(unlogged)Private Message user (overlay)</a></li>

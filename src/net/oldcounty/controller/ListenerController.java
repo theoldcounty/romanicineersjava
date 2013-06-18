@@ -8,32 +8,26 @@
 
 package net.oldcounty.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.oldcounty.controller.ImageStoreServlet;
-
-import net.oldcounty.dao.ImageDao;
 import net.oldcounty.dao.InterestDao;
 import net.oldcounty.dao.PersonDao;
 import net.oldcounty.dao.PrivateMessageDao;
 import net.oldcounty.manager.PersonManager;
 import net.oldcounty.model.Interests;
 import net.oldcounty.model.Person;
-import net.oldcounty.model.Image;
+
 import net.oldcounty.model.PrivateMessage;
 
 import org.bson.types.ObjectId;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Part;
+
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

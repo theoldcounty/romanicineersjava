@@ -1,17 +1,17 @@
 package net.oldcounty.model;
 
 public class UserImage {
-	private Integer id;
+	private String id;
 	private Integer userId;
 	private String name;
 	private String format;
 	private byte[] image;
 	
 	
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public Integer getUserId() {
