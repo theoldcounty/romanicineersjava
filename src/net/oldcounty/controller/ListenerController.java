@@ -106,6 +106,7 @@ public class ListenerController{
     		@RequestParam(value="submitted", required=false) String submitted
     		) throws MongoException, IOException, ServletException
     {    	
+    	System.out.println("hola");
     	//if(submitted == null){
     		//__if not yet added a chart return html form	 
     	

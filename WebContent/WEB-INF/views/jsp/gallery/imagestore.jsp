@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!--include header-->
 
 <div id="colorboxWrapper" class="regular">
@@ -6,7 +7,7 @@
 
 	<div class="imageForm">						
 		${message}				
-		<form id="imageForm" action="ImageStoreServlet" method="post" enctype="multipart/form-data">
+		<form id="imageForm" action="uploadimage" method="post" enctype="multipart/form-data">
 			<label>userId</label>
 		    <input type="text" name="userId" />
 		   <br/>

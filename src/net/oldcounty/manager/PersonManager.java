@@ -296,7 +296,7 @@ public class PersonManager {
 		    	SessionController.logUser(user, request);//store user in session
         	}
 		    else
-		    {
+		    {		    	
 				results.put("response", "FAIL");
 				results.put("description", "Failed to login user");
 		    }
