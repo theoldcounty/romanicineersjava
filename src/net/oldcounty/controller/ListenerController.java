@@ -92,37 +92,6 @@ public class ListenerController{
     }
     
     
-    @RequestMapping("/ImageStoreServlet2")
-    public ModelAndView imageUpload(
-    		HttpServletRequest request,
-    		//@RequestParam(value="image", required=false) byte[] image,
-    		//@RequestParam(value="userId", required=false) String userId,    		
-    		@RequestParam(value="submitted", required=false) String submitted
-    		) throws MongoException, IOException, ServletException
-    {    	
-    	System.out.println("hola");
-    	//if(submitted == null){
-    		//__if not yet added a chart return html form	 
-    	
-    	
-			return new ModelAndView("jsp/gallery/imagestore");   	
-    	
-    	/*
-    	}else{
-    		Part filePart = request.getPart("image"); // Retrieves <input type="file" name="file">
-   		 
-        	Image userImage = new Image();
-        		userImage.setUserId(userId);
-        		userImage.setName("fileName");
-        		//userImage.setImage(image);
-        		
-        		System.out.println(filePart);
-        	 
-    		return new ModelAndView("jsp/json/response", "json", ImageDao.saveUserImage(userImage));  	
-    		
-    	}  
-    	*/     	
-    }
        
     
     
