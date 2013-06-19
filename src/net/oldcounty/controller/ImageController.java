@@ -71,12 +71,11 @@ public class ImageController {
 	@RequestMapping("/retrieveimage")
 	protected ResponseEntity<byte[]> retrieveImage(
 			@RequestParam(value = "image_id", required = false) String imageId,
-			@RequestParam(value = "width", required = false) String width,
-			@RequestParam(value = "height", required = false) String height) {
+			@RequestParam(value = "width", required = false) Integer width,
+			@RequestParam(value = "height", required = false) Integer height) {
 
 		try {
-			UserImage userImage = ImageDAOMongo.getInstance().getUserImage(
-					imageId);
+			UserImage userImage = ImageDAOMongo.getInstance().getUserImage(imageId);
 			final HttpHeaders headers = new HttpHeaders();
 
 			if (userImage.getFormat().equals("png")) {
@@ -88,18 +87,39 @@ public class ImageController {
 			if (userImage.getFormat().equals("gif")) {
 				headers.setContentType(MediaType.IMAGE_GIF);
 			}
-			if (width != null) {
-				BufferedImage bufferedImage = ImageIO
-						.read(new ByteArrayInputStream(userImage.getImage()));
-				BufferedImage scaledImage = getScaledImage(bufferedImage,
-						Integer.parseInt(width), Integer.parseInt(height));
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				ImageIO.write(scaledImage, userImage.getFormat(), baos);
-				baos.flush();
-				byte[] imageInByte = baos.toByteArray();
-				userImage.setImage(imageInByte);
-				baos.close();
+			
+			BufferedImage bufferedImage = ImageIO
+					.read(new ByteArrayInputStream(userImage.getImage()));
+		
+			int originalHeight = bufferedImage.getHeight();
+			int originalWidth = bufferedImage.getWidth();
+						
+			//if width is not null but height is null - get percentage height	
+			if (width != null && height == null) {
+				double ratio = ((double) width) / originalWidth;
+				height = new Double(originalHeight * ratio).intValue();		
 			}
+			
+			//if height is not null but width is null - get percentage width
+			if (width == null && height != null) {
+				double ratio = ((double) height) / originalHeight;
+				width = new Double(originalWidth * ratio).intValue();						
+			}
+			
+			//if width is not null and width not null
+			if (width == null && height == null) {				
+				height = originalHeight;
+				width = originalWidth;		
+			}			
+								
+			BufferedImage scaledImage = getScaledImage(bufferedImage, width, height);
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ImageIO.write(scaledImage, userImage.getFormat(), baos);
+			baos.flush();
+			byte[] imageInByte = baos.toByteArray();
+			userImage.setImage(imageInByte);
+			baos.close();
+			
 			return new ResponseEntity<byte[]>(userImage.getImage(), headers,
 					HttpStatus.CREATED);
 		} catch (IOException e) {
