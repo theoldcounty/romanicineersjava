@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.oldcounty.dao.ImageDAOMongo;
+import net.oldcounty.dao.ImageDao;
 import net.oldcounty.model.UserImage;
 
 import org.springframework.http.HttpHeaders;
@@ -51,8 +51,8 @@ public class ImageController {
 			userImage.setFormat(format);
 			userImage.setName(filename);
 			userImage.setImage(image);
-			userImage.setUserId(null);
-			ImageDAOMongo.getInstance().saveUserImage(userImage);
+			userImage.setUserId(userId);
+			ImageDao.getInstance().saveUserImage(userImage);
 			
 			System.out.println("file name:" + filename);
 			System.out.println("format:" + format);
@@ -60,7 +60,8 @@ public class ImageController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return new ModelAndView("");
+		//return new ModelAndView("");
+		return new ModelAndView("jsp/gallery/imagestore");
 	}
 
 	@RequestMapping("/imageform")
@@ -69,13 +70,13 @@ public class ImageController {
 	}
 
 	@RequestMapping("/retrieveimage")
-	protected ResponseEntity<byte[]> retrieveImage(
+	protected static ResponseEntity<byte[]> retrieveImage(
 			@RequestParam(value = "image_id", required = false) String imageId,
 			@RequestParam(value = "width", required = false) Integer width,
 			@RequestParam(value = "height", required = false) Integer height) {
 
 		try {
-			UserImage userImage = ImageDAOMongo.getInstance().getUserImage(imageId);
+			UserImage userImage = ImageDao.getInstance().getImage(imageId);
 			final HttpHeaders headers = new HttpHeaders();
 
 			if (userImage.getFormat().equals("png")) {

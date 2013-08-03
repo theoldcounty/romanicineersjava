@@ -28,15 +28,23 @@
 
 					<div class="gallery">
 						<div class="featureImg">
-							<a class="group" href="#"><img src="retrieveimage?image_id=${people[1].galleryResponse[0].imgId}&height=480"></a>
+							<img src="http://4.bp.blogspot.com/-GKSz-e2NS5A/Tk7MevN7CiI/AAAAAAAACXI/nBdBOhzfnoc/s1600/Jessica-Alba_bee-media.blogspot.com+%25281%2529">
+
 						</div>
 						<div class="profilePics">
 							<div id="galleryCarousel" data-carousel="true" data-count="4">
 								<div class="wrapper">
 									<ul>
-										<c:forEach var="gImages" items="${people[1].galleryResponse}">
-											<li><a class="group" href="#"><img src="retrieveimage?image_id=${gImages.imgId}&height=250"></a></li>
-										</c:forEach>									
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
+									<li><a class="group" href="#"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></li>
 									</ul>
 								</div>
 							</div>
@@ -60,7 +68,7 @@
 							<li><a class="shazam" href="viewFollowers">*(unlogged) Followers - shows users following (overlay)</a></li>
 							<li><a class="shazam" href="addFollowers">*(unlogged) Follow me - action to follow the user (overlay)</a></li>
 							<li><a href="scheduledate">*(unlogged) Schedule a date  <!-- &userId=${people[0]._id}--></a></li>							
-							<li><a class="shazam" href="imageform?id=${people[0]._id}">*(Logged In)My Photos/Add Picture (overlay)</a></li>
+							<li><a class="shazam" href="imageform">*(Logged In)My Photos/Add Picture (overlay)</a></li>
 							
 							
 							<li><a class="shazam" href="sendPrivateMessages">*(unlogged)Private Message user (overlay)</a></li>

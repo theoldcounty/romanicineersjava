@@ -2,7 +2,7 @@ package net.oldcounty.model;
 
 public class UserImage {
 	private String id;
-	private Integer userId;
+	private String userId;
 	private String name;
 	private String format;
 	private byte[] image;
@@ -14,10 +14,10 @@ public class UserImage {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Integer getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public String getName() {
@@ -39,7 +39,4 @@ public class UserImage {
 		this.format = format;
 	}
 	
-	
-	
-
 }

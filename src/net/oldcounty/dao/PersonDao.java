@@ -317,6 +317,8 @@ public class PersonDao {
     	//skip 0
     	//limit 1
 	    List<DBObject> users = searchUsers(filter, skips, limits, "myCollection");
+	    
+	    //users.put("gallery",galleryResponse);
 		if(users.size() > 0){
 			results.put("response", "OK");
 			results.put("description", "Found list of users");
@@ -356,7 +358,16 @@ public class PersonDao {
 
         // loop over the cursor and display the result
     	while (cursor.hasNext()) {
-	    	results.add(cursor.next());
+	    	//results.add(cursor.next());
+    		
+
+    		DBObject personData = cursor.next();
+    		String userId = personData.get("_id").toString();
+    		
+    		Object[] galleryResponse = ImageDao.getUsersImages(userId).toArray();
+    		personData.put("gallery", galleryResponse);
+    		
+	    	results.add(personData); 		
 	    }
 
 	    return results;

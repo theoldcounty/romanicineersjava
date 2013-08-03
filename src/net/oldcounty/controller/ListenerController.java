@@ -14,6 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.oldcounty.dao.ImageDao;
 import net.oldcounty.dao.InterestDao;
 import net.oldcounty.dao.PersonDao;
 import net.oldcounty.dao.PrivateMessageDao;
@@ -652,6 +653,9 @@ public class ListenerController{
     	Integer countGallery = gallery.size();
     	newInformation.put("countGallery", countGallery);
 		*/
+
+    	List<DBObject> galleryResponse = ImageDao.getUsersImages(id);
+	   	newInformation.put("galleryResponse", galleryResponse); 	
     	
     	searchResponse.add(newInformation);
 

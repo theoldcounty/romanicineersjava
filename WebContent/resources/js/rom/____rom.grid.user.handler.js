@@ -55,20 +55,7 @@ var gridUserHandler = {
 							var isOnline = value.isloggedon;
 
 							var url = "user?id="+id;
-
 							var featureAvatarThumbnail = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTL5GtjP3j0_EYZBejnEs-Wx9CQu_bIlNmDJNG-6rfwa55cEi-";//value.pictureAvatar;
-
-							if(gender == "Male"){
-								featureAvatarThumbnail = "http://zenahora.com/home/.gina/gregorytkac/zenahora.com/wp-content/uploads/2013/02/male.gif";
-							}
-							else{
-								featureAvatarThumbnail = "http://zedequalszee.files.wordpress.com/2008/05/female.gif";
-							}
-							
-							/*
-							if(value.gallery[0] != undefined){
-								featureAvatarThumbnail = "retrieveimage?image_id="+value.gallery[0].imgId+"&width=480";
-							}*/
 
 							//populate person
 							var template = '<li class="element odd" data-user-country="'+country+'" data-user-interests="" data-user-online="'+isOnline+'" data-user-gender="'+gender+'" data-user-name="'+title+'" data-user-id="'+id+'"><div class="avatar"><a href="'+url+'"><img src="'+featureAvatarThumbnail+'"></a></div></li>';

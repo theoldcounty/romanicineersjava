@@ -44,9 +44,7 @@
 				<div class="biodetails">
 					<div class="wrapper">
 						<div class="bioimg">
-							<div class="avatar">
-								<img src="http://3.bp.blogspot.com/-nPkfVayQelQ/TlVBikw7SpI/AAAAAAAABFU/xii61syZwP8/s400/Jessica+Alba+iPhone+Wallpaper-11.jpg">
-							</div>
+							<div class="avatar"><img src="http://3.bp.blogspot.com/-nPkfVayQelQ/TlVBikw7SpI/AAAAAAAABFU/xii61syZwP8/s400/Jessica+Alba+iPhone+Wallpaper-11.jpg"></div>
 							<div class="goals">
 								<div class="head"></div>
 								<div class="heart"></div>
