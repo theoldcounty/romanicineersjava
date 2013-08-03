@@ -65,10 +65,10 @@ var gridUserHandler = {
 								featureAvatarThumbnail = "http://zedequalszee.files.wordpress.com/2008/05/female.gif";
 							}
 							
-							/*
+							
 							if(value.gallery[0] != undefined){
 								featureAvatarThumbnail = "retrieveimage?image_id="+value.gallery[0].imgId+"&width=480";
-							}*/
+							}
 
 							//populate person
 							var template = '<li class="element odd" data-user-country="'+country+'" data-user-interests="" data-user-online="'+isOnline+'" data-user-gender="'+gender+'" data-user-name="'+title+'" data-user-id="'+id+'"><div class="avatar"><a href="'+url+'"><img src="'+featureAvatarThumbnail+'"></a></div></li>';

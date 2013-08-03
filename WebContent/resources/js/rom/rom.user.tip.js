@@ -31,12 +31,12 @@ var userTip = Backbone.View.extend({
 			
 			var userAvatar = "http://forums.pragprog.com/assets/generic-user-large-9d8f6d3c01cc167de1af1ad3878d5a44.png";
 			
-			/*
+			
 			var galleryCount = json[0].users[0].gallery.length;
 			if(galleryCount>1){
 				userAvatarId = json[0].users[0].gallery[1].imgId;
 				userAvatar = 'retrieveimage?image_id='+userAvatarId+'&height=250';				
-			}*/
+			}
 			
 			//var userAvatar = json[0].users[0].avatar;
 			var goal1 = json[0].users[0].goal1;
