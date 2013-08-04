@@ -4,6 +4,7 @@
 	<head>
 		<jsp:include page="styles.jsp" />
 		<title>Romaninceers</title>
+
 	</head>
 	<body class="${page}">
 		<header>
@@ -13,15 +14,15 @@
 					<nav id="loginmenu">
 						<c:choose>
 						  <c:when test="${inSession}">
-								<ul>								    
-									<li><a class="shazam form" href="edit">Edit</a></li>
+								<ul>
+									<li><a class="fancyboxtrigger fancybox.ajax form" href="edit">Edit</a></li>
 									<li><a class="" href="logout">Logout (${personName})</a></li>
 								</ul>
 						  </c:when>
 						  <c:otherwise>
 								<ul>
-									<li><a class="shazam form" href="register">Sign up</a></li>
-									<li><a class="shazam form" href="login">Login</a></li>									
+									<li><a class="fancyboxtrigger fancybox.ajax form" href="register">Sign up</a></li>
+									<li><a class="fancyboxtrigger fancybox.ajax form" href="login">Login</a></li>
 								</ul>
 						  </c:otherwise>
 						</c:choose>
@@ -34,10 +35,10 @@
 				<ul id="returnhome">
 					<li class="home"><a href="/springApp21"><div class="icon"><img src="resources/images/icon_home.png"></div>Home</a></li>
 				</ul>
-				<ul id="calltoaction"> 
+				<ul id="calltoaction">
 					<li class="quiz"><a>Quiz</a></li>
 					<li class="filters"><a><div class="icon"><img src="resources/images/icon_filters.png"></div>Filters</a></li>
 				</ul>
 			</div>
-		</div>		
+		</div>
 <!-- ${inSession}-->

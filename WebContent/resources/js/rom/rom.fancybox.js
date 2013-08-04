@@ -1,4 +1,4 @@
-
+/*
 var shazamOverlay = {
 	morphBox: function(newMessage){
 		var that = this;
@@ -10,11 +10,11 @@ var shazamOverlay = {
 			$('#shazam-overlay').fadeIn(350);
 		});
 	},
-	bindEvents: function(){		
+	bindEvents: function(){
 		$('#shazam-overlay').unbind('click');
 		$('.close').unbind('click');
 		$('.shazam').unbind('click');
-		
+
 		// if user clicked on button, the overlay layer or the shazambox, close the shazam
 		$('#shazam-overlay').click(function () {
 			shazamOverlay.hide();
@@ -30,7 +30,7 @@ var shazamOverlay = {
 			var link = $(this).attr("href");
 			shazamOverlay.show(link);
 			return false;
-		});		
+		});
 	},
 	addWrap: function(contents, type){
 		if(type == "mobile"){
@@ -105,18 +105,38 @@ var shazamOverlay = {
 	}
 
 };
-
+*/
 
 $(document).ready(function () {
 
-	shazamOverlay.bindEvents();
+		$(".fancyboxtrigger").fancybox({
+			maxWidth	: 800,
+			maxHeight	: 600,
+			fitToView	: false,
+			width		: '70%',
+			height		: '70%',
+			autoSize	: false,
+			closeClick	: false,
+			openEffect	: 'none',
+			closeEffect	: 'none'
+		});
+		
+		$(".fancyboximage").fancybox({
+			openEffect	: 'none',
+			closeEffect	: 'none'
+		});		
+
+
+	//shazamOverlay.bindEvents();
 
 	// if user resize the window, call the same function again
 	// to make sure the overlay fills the screen and shazambox aligned to center
+
+	/*
 	$(window).resize(function () {
 		//only do it if the shazam box is not hidden
 		if (!$('#shazam-box').is(':hidden')){
 			shazamOverlay.rePosition();
 		}
-	});
+	});*/
 });

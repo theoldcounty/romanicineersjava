@@ -28,45 +28,40 @@
 
 					<div class="gallery">
 						<div class="featureImg">
-							<a class="group" href="#"><img src="retrieveimage?image_id=${people[1].galleryResponse[0].imgId}&height=480"></a>
+							<a class="fancyboximage fancybox.image" rel="gallery1" href="retrieveimage?image_id=${people[1].galleryResponse[0].imgId}&height=750" title="Hot Girl">
+								<img src="retrieveimage?image_id=${people[1].galleryResponse[0].imgId}&height=480">
+							</a>
 						</div>
 						<div class="profilePics">
 							<div id="galleryCarousel" data-carousel="true" data-count="4">
 								<div class="wrapper">
 									<ul>
 										<c:forEach var="gImages" items="${people[1].galleryResponse}">
-											<li><a class="group" href="#"><img src="retrieveimage?image_id=${gImages.imgId}&height=250"></a></li>
-										</c:forEach>									
+											<li>
+												<a class="fancyboximage fancybox.image" rel="gallery1" href="retrieveimage?image_id=${gImages.imgId}&height=750" title="Hot Girl">
+													<img src="retrieveimage?image_id=${gImages.imgId}&height=250">
+												</a>
+											</li>
+										</c:forEach>
 									</ul>
 								</div>
 							</div>
-							<c:if test="${people[1].countGallery > 1}">
-								<div id="galleryCarousel" data-carousel="" data-count="${people[1].countGallery}">
-									<div class="wrapper">
-									<ul>
-										<c:set var="pictures" value="${people[1].gallery}"/>
-										<c:forEach items="${pictures}" varStatus="loop">
-											<li><a class="group" href="${pictures[loop.index].full}"><img src="${pictures[loop.index].thumbnail}"></a></li>
-										</c:forEach>
-									</ul>
-									</div>
-								</div>
-							</c:if>
 						</div>
 					</div>
 
 					<div class="calltoaction">
-						<ul>						
-							<li><a class="shazam" href="viewFollowers">*(unlogged) Followers - shows users following (overlay)</a></li>
-							<li><a class="shazam" href="addFollowers">*(unlogged) Follow me - action to follow the user (overlay)</a></li>
-							<li><a href="scheduledate">*(unlogged) Schedule a date  <!-- &userId=${people[0]._id}--></a></li>							
-							<li><a class="shazam" href="imageform?id=${people[0]._id}">*(Logged In)My Photos/Add Picture (overlay)</a></li>
-							
-							
-							<li><a class="shazam" href="sendPrivateMessages">*(unlogged)Private Message user (overlay)</a></li>
-							<li><a class="shazam" href="viewPrivateMessages">*(Logged In)My Inbox view messages (overlay)</a></li>							
+						<ul>
+							<li><a class="fancyboxtrigger fancybox.ajax" href="viewFollowers">*(unlogged) Followers - shows users following (overlay)</a></li>
+							<li><a class="fancyboxtrigger fancybox.ajax" href="addFollowers">*(unlogged) Follow me - action to follow the user (overlay)</a></li>
+							<li><a href="scheduledate">*(unlogged) Schedule a date  <!-- &userId=${people[0]._id}--></a></li>
+							<!--<li><a class="shazam" href="imageform?id=${people[0]._id}">*(Logged In)My Photos/Add Picture (overlay)</a></li>-->
+
+							<li><a class="fancyboxtrigger fancybox.ajax" href="imageform?id=${people[0]._id}">*(Logged In)My Photos/Add Picture (overlay)</a></li>
+
+							<li><a class="fancyboxtrigger fancybox.ajax" href="sendPrivateMessages">*(unlogged)Private Message user (overlay)</a></li>
+							<li><a class="fancyboxtrigger fancybox.ajax" href="viewPrivateMessages">*(Logged In)My Inbox view messages (overlay)</a></li>
 						</ul>
-					</div>	
+					</div>
 
 					<!--profileDetails-->
 					<div class="profileDetails">
@@ -127,11 +122,11 @@
 										</div>
 									</li>
 								</ul>
-								<a class="shazam form" href="edit_user?section=physical&userId=${people[0]._id}">Edit Physical Section</a>								
-							
-								<a class="shazam form" href="edit_user?section=account&userId=${people[0]._id}">Edit Account Section</a>								
-							
-								
+								<a class="shazam form" href="edit_user?section=physical&userId=${people[0]._id}">Edit Physical Section</a>
+
+								<a class="shazam form" href="edit_user?section=account&userId=${people[0]._id}">Edit Account Section</a>
+
+
 							</li>
 							<li>
 								<h2>About me</h2>
@@ -150,7 +145,7 @@
 								<div id="interestsPie"></div>
 								<div class="editdata">
 									<a class="shazam form" href="edit_chart?type=interests&userId=${people[0]._id}">Edit Chart</a>
-								</div>								
+								</div>
 								<div class="nodata">
 									<p>Show you are interesting, add a visual chart</p>
 									<a class="shazam form" href="edit_chart?type=interests&userId=${people[0]._id}">Add Chart</a>
@@ -172,7 +167,7 @@
 								<div id="quizchart"></div>
 								<div class="editdata">
 									<a class="shazam form" href="edit_chart?type=visiting&userId=${people[0]._id}">Edit Chart</a>
-								</div>								
+								</div>
 								<div class="nodata">
 									<p>Where do you want to visit?, add a visual chart</p>
 									<a class="shazam form" href="edit_chart?type=visiting&userId=${people[0]._id}">Add Chart</a>
