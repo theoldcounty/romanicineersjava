@@ -1,0 +1,114 @@
+
+
+
+
+		#filters{
+			display:none;
+		}
+
+		#filters ul{
+			margin:0;
+			padding: 0;
+			overflow:hidden;
+		}
+		#filters ul li{
+			float:left;
+			overflow:hidden;
+		}
+		#filters ul li a{
+			height: 100px;
+			width: 100px;
+			display: block;
+			border:1px solid #000000;
+			cursor:pointer;
+			text-align: center;
+		}
+
+		#filters ul li a.selected,
+		#filters ul li a:hover{
+			background: lightgrey;
+			color: #ffffff;
+		}
+		
+
+		#filters .optional{
+			display:none;
+			background: gold;
+			height:102px;
+			position:relative;
+		}
+
+		
+		
+		#filters .optional .wrappers{}
+
+		#filters .optional .wrappers form{
+			overflow:hidden;
+		}
+
+		#filters .optional .badge{
+			background: blue;
+			width: 91px;
+			height: 80px;
+			float: left;
+		}
+
+		#filters .optional .close{
+			background: lightgrey;
+			width: 17px;
+			height: 20px;
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
+
+		#filters .optional input[type="submit"]{
+			background: #999999;
+			color: #ffffff;
+			border: none;
+			padding: 6px;
+			margin-top: 22px;
+		}
+
+		#filters .optional input[type="text"]{
+			border: 0;
+			padding: 10px;
+			height: 60px;
+			font-size: 24px;
+			float:left;
+			width:100%;
+		}
+		
+		
+		
+.grid{
+		overflow:hidden;
+	}
+	
+	.fifty{
+		width:50%;
+	}
+	
+	.hundred{
+		width: 100%;
+	}
+	
+	.left{
+		float:left;
+	}
+	
+	#filters{
+		background: orange;
+	}
+	
+	.pruneoptions{
+		background: green;
+		padding:20px;
+	}
+	
+	.submitoptions{
+		width: 16%;
+		background: red;
+		float: right!important;
+		text-align: right;	
+	}

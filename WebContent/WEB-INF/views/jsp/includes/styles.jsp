@@ -1,4 +1,6 @@
 		<link href="resources/css/generic.css" type="text/css" rel="stylesheet" />
+		<link href="resources/css/filters.css" type="text/css" rel="stylesheet" />
+		
 		<link href="resources/css/isotope.css" type="text/css" rel="stylesheet" />
 		
 		<link href="resources/css/shazambox.css" type="text/css" rel="stylesheet" />
