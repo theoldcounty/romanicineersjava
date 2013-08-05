@@ -170,8 +170,8 @@
 		width:600px;
 		height: 260px;
 		overflow: hidden;
-		background:green;
 	}
+	/*
 	.profilePics ul{
 		margin:0;
 		padding:0;
@@ -187,7 +187,7 @@
 		margin-bottom: 10px;
 		display:block;
 	}
-
+	
 
 	.profilePics ul li img{
 		width:125px;
@@ -203,6 +203,24 @@
 		height:115px;
 	}
 	
+	
+	*/
+	
+	.profilePics .swiper-slide{
+		overflow:hidden;
+	}
+
+	.profilePics .imageholder{
+		width: 100px;
+		height: 100px;
+		float: left;
+		overflow: hidden;
+		margin-right: 7px;
+		margin-bottom: 7px;
+	}
+	.profilePics .imageholder a{
+		display:block;
+	}
 	
 	
 	.scheduleDate{

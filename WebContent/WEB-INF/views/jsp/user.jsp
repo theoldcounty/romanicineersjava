@@ -33,6 +33,57 @@
 							</a>
 						</div>
 						<div class="profilePics">
+						
+							<div class="swiper-holder">
+								<div data-swiper="true" data-loop="true" data-mode="horizontal" data-speed="500" class="swiper-container">
+										<div class="swiper-wrapper">
+	
+											<c:forEach var="gImages" items="${people[1].galleryResponse}" varStatus="counter">
+													<c:choose>
+														<c:when test="${counter.count % 9 == 0}">
+																<!-- group start-->	
+																<div class="swiper-slide">
+														</c:when>
+														<c:otherwise>
+															<c:if test="${counter.count == 1}">
+																<!-- group start-->	
+																<div class="swiper-slide">
+															</c:if>  				
+														</c:otherwise>   												
+													</c:choose>																					
+												
+														<div class="imageholder">
+															<a class="fancyboximage fancybox.image" rel="gallery1" href="retrieveimage?image_id=${gImages.imgId}&height=750" title="Hot Girl">
+																<img src="retrieveimage?image_id=${gImages.imgId}&width=125">
+															</a>
+														</div>
+												
+												
+													<c:choose>
+														<c:when test="${counter.count % 8 == 0}">
+																</div>
+																<!-- group end-->
+														</c:when>
+														<c:otherwise>
+															<c:if test="${counter.last}">
+																</div>
+																<!-- group end-->	
+															</c:if>  				
+														</c:otherwise>   												
+													</c:choose>											
+											</c:forEach>
+										
+									</div>
+									
+														
+								</div>
+							
+							
+									<a class="arrowhandler arrow-left"></a>
+									<a class="arrowhandler arrow-right"></a>
+							</div>		
+													
+							<!-- 
 							<div id="galleryCarousel" data-carousel="true" data-count="4">
 								<div class="wrapper">
 									<ul>
@@ -45,7 +96,7 @@
 										</c:forEach>
 									</ul>
 								</div>
-							</div>
+							</div>-->
 						</div>
 					</div>
 

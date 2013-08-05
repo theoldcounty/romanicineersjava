@@ -57,7 +57,7 @@ var pageHandler = {
 			//get data id of user
 
 			//initialize home grown carousel
-			$('#galleryCarousel').homegrowncarousel();
+			//$('#galleryCarousel').homegrowncarousel();
 
 			/*personality sliders*/
 			var personalityUrl = 'api?servicerequest=getPersonality&id='+userId;
