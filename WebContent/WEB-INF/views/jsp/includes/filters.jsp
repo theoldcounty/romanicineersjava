@@ -15,6 +15,9 @@
 						
 						
 						<label>Age</label>
+						<input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
+						<div class="ageslider" id="slider-range"></div>
+						
 					</div>
 					<div class="left fifty">
 						

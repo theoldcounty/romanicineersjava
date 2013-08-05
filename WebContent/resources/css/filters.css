@@ -79,24 +79,16 @@
 			width:100%;
 		}
 		
+	
+	.ageslider{
+		margin:9px;
+	}
+	
+	.ageslider a{
+		height: 21px!important;
+		width: 13px!important;
+	}	
 		
-		
-.grid{
-		overflow:hidden;
-	}
-	
-	.fifty{
-		width:50%;
-	}
-	
-	.hundred{
-		width: 100%;
-	}
-	
-	.left{
-		float:left;
-	}
-	
 	#filters{
 		background: orange;
 	}
@@ -104,6 +96,7 @@
 	.pruneoptions{
 		background: green;
 		padding:20px;
+		width: 54%;
 	}
 	
 	.submitoptions{

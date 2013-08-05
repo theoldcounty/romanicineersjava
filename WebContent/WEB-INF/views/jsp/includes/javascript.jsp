@@ -41,6 +41,9 @@
 		<script type="text/javascript" src="resources/js/rom/rom.application.js"></script>
 		
 		<script type="text/javascript" src="resources/js/rom/rom.idangerous.swiper.handler.js"></script>
+
+
+
 		
 		<script type="text/javascript" src="resources/js/rom/rom.fancybox.js"></script>
 		<script type="text/javascript" src="resources/js/rom/rom.page.handler.js"></script>
@@ -52,5 +55,8 @@
 		<script type="text/javascript" src="resources/js/rom/rom.search.filters.js"></script>
 		<script type="text/javascript" src="resources/js/rom/rom.slider.controls.js"></script>
 		<script type="text/javascript" src="resources/js/rom/rom.google.maper.js"></script>
+		
+		<script type="text/javascript" src="resources/js/rom/rom.filters.js"></script>
 		<script type="text/javascript" src="resources/js/rom/rom.responsive.js"></script>
+
 
