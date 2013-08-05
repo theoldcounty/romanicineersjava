@@ -118,7 +118,12 @@ $(document).ready(function () {
 			autoSize	: false,
 			closeClick	: false,
 			openEffect	: 'none',
-			closeEffect	: 'none'
+			closeEffect	: 'none',
+			beforeShow: function(){
+				
+				var section = $(this).attr("href");
+				pageHandler.reBindEvents(section);
+			}
 		});
 		
 		$(".fancyboximage").fancybox({

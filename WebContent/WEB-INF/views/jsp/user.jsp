@@ -54,7 +54,7 @@
 												
 														<div class="imageholder">
 															<a class="fancyboximage fancybox.image" rel="gallery1" href="retrieveimage?image_id=${gImages.imgId}&height=750" title="Hot Girl">
-																<img src="retrieveimage?image_id=${gImages.imgId}&width=125">
+																<img src="retrieveimage?image_id=${gImages.imgId}&width=105">
 															</a>
 														</div>
 												
@@ -107,7 +107,7 @@
 							<li><a href="scheduledate">*(unlogged) Schedule a date  <!-- &userId=${people[0]._id}--></a></li>
 							<!--<li><a class="shazam" href="imageform?id=${people[0]._id}">*(Logged In)My Photos/Add Picture (overlay)</a></li>-->
 
-							<li><a class="fancyboxtrigger fancybox.ajax" href="imageform?id=${people[0]._id}">*(Logged In)My Photos/Add Picture (overlay)</a></li>
+							<li><a class="fancyboxtrigger fancybox.ajax" href="imageform?userId=${people[0]._id}">*(Logged In)My Photos/Add Picture (overlay)</a></li>
 
 							<li><a class="fancyboxtrigger fancybox.ajax" href="sendPrivateMessages">*(unlogged)Private Message user (overlay)</a></li>
 							<li><a class="fancyboxtrigger fancybox.ajax" href="viewPrivateMessages">*(Logged In)My Inbox view messages (overlay)</a></li>
@@ -173,9 +173,9 @@
 										</div>
 									</li>
 								</ul>
-								<a class="shazam form" href="edit_user?section=physical&userId=${people[0]._id}">Edit Physical Section</a>
+								<a class="fancyboxtrigger fancybox.ajax form" href="edit_user?section=physical&userId=${people[0]._id}">Edit Physical Section</a>
 
-								<a class="shazam form" href="edit_user?section=account&userId=${people[0]._id}">Edit Account Section</a>
+								<a class="fancyboxtrigger fancybox.ajax form" href="edit_user?section=account&userId=${people[0]._id}">Edit Account Section</a>
 
 
 							</li>
@@ -183,45 +183,45 @@
 								<h2>About me</h2>
 								<div class="about">
 									<p>${people[0].about}</p>
-									<a class="shazam form" href="edit_user?section=about&userId=${people[0]._id}">Edit About Section</a>
+									<a class="fancyboxtrigger fancybox.ajax form" href="edit_user?section=about&userId=${people[0]._id}">Edit About Section</a>
 								</div>
 							</li>
 							<li>
 								<h2>My identity</h2>
 								<ul id="sliderResults" class="indicators"></ul>
-								<a class="shazam form" href="edit_user?section=personality&userId=${people[0]._id}">Edit Personality Section</a>
+								<a class="fancyboxtrigger fancybox.ajax form" href="edit_user?section=personality&userId=${people[0]._id}">Edit Personality Section</a>
 							</li>
 							<li>
 								<h2>My main interests</h2>
 								<div id="interestsPie"></div>
 								<div class="editdata">
-									<a class="shazam form" href="edit_chart?type=interests&userId=${people[0]._id}">Edit Chart</a>
+									<a class="fancyboxtrigger fancybox.ajax form" href="edit_chart?type=interests&userId=${people[0]._id}">Edit Chart</a>
 								</div>
 								<div class="nodata">
 									<p>Show you are interesting, add a visual chart</p>
-									<a class="shazam form" href="edit_chart?type=interests&userId=${people[0]._id}">Add Chart</a>
+									<a class="fancyboxtrigger fancybox.ajax form" href="edit_chart?type=interests&userId=${people[0]._id}">Add Chart</a>
 								</div>
 							</li>
 							<li>
 								<h2>I'm Seeking for</h2>
 								<div id="seekingPie"></div>
 								<div class="editdata">
-									<a class="shazam form" href="edit_chart?type=seeking&userId=${people[0]._id}">Edit Chart</a>
+									<a class="fancyboxtrigger fancybox.ajax form" href="edit_chart?type=seeking&userId=${people[0]._id}">Edit Chart</a>
 								</div>
 								<div class="nodata">
 									<p>Show what you want in a relationship, add a visual chart</p>
-									<a class="shazam form" href="edit_chart?type=seeking&userId=${people[0]._id}">Add Chart</a>
+									<a class="fancyboxtrigger fancybox.ajax form" href="edit_chart?type=seeking&userId=${people[0]._id}">Add Chart</a>
 								</div>
 							</li>
 							<li>
 								<h2>Quiz</h2>
 								<div id="quizchart"></div>
 								<div class="editdata">
-									<a class="shazam form" href="edit_chart?type=visiting&userId=${people[0]._id}">Edit Chart</a>
+									<a class="fancyboxtrigger fancybox.ajax form" href="edit_chart?type=visiting&userId=${people[0]._id}">Edit Chart</a>
 								</div>
 								<div class="nodata">
 									<p>Where do you want to visit?, add a visual chart</p>
-									<a class="shazam form" href="edit_chart?type=visiting&userId=${people[0]._id}">Add Chart</a>
+									<a class="fancyboxtrigger fancybox.ajax form" href="edit_chart?type=visiting&userId=${people[0]._id}">Add Chart</a>
 								</div>
 							</li>
 						</ul>

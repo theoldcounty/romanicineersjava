@@ -65,7 +65,9 @@ public class ImageController {
 	}
 
 	@RequestMapping("/imageform")
-	public ModelAndView imageform(HttpServletRequest request) {
+	public ModelAndView imageform(
+			HttpServletRequest request
+		) {
 		return new ModelAndView("jsp/gallery/imagestore");
 	}
 

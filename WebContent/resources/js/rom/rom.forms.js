@@ -159,13 +159,8 @@ var romForms = {
 
 					    	if(obj[0].response == "OK"){
 					    		//__welcome the new user in the lightbox
-					    		shazamOverlay.morphBox(that.messages[0]["successPrivateMessage"]);
-
-					    		//__close the lightbox
-								var t = window.setInterval(function(){
-									shazamOverlay.hide();
-									clearInterval(t);
-								},5500);
+					    		
+					    		that.showMessageAndClose(that.messages[0]["successPrivateMessage"]);
 
 					    		//__refresh the site to auto log the user in.
 
@@ -200,13 +195,9 @@ var romForms = {
 
 					    	if(obj[0].response == "OK"){
 					    		//__welcome the new user in the lightbox
-					    		shazamOverlay.morphBox(that.messages[0]["successRegistration"]);
+					    		
+					    		that.showMessageAndClose(that.messages[0]["successRegistration"]);
 
-					    		//__close the lightbox
-								var t = window.setInterval(function(){
-									shazamOverlay.hide();
-									clearInterval(t);
-								},5500);
 
 					    		//__refresh the site to auto log the user in.
 
@@ -224,6 +215,17 @@ var romForms = {
 				});
 		},
 
+		showMessageAndClose: function(message){
+			
+			$.fancybox(message);
+    		
+    		//__close the lightbox
+			var t = window.setInterval(function(){
+				$.fancybox.close(true);
+				clearInterval(t);
+			},5500);			
+		},
+		
 		setUpCharts: function(){
 			var that = this;
 
@@ -238,13 +240,10 @@ var romForms = {
 					    	var obj = jQuery.parseJSON(data);
 
 					    	if(obj[0].response == "OK"){
-					    		shazamOverlay.morphBox(that.messages[0]["successChart"]);
-
-					    		//__close the lightbox
-								var t = window.setInterval(function(){
-									shazamOverlay.hide();
-									clearInterval(t);
-								},5500);
+					    		//shazamOverlay.morphBox(that.messages[0]["successChart"]);
+					    		
+					    		that.showMessageAndClose(that.messages[0]["successChart"]);
+					    		
 
 					    	}else{
 					    		//there is an error with the registeration.
@@ -275,13 +274,9 @@ var romForms = {
 					    	var obj = jQuery.parseJSON(data);
 
 					    	if(obj[0].response == "OK"){
-					    		shazamOverlay.morphBox(that.messages[0]["successForgotPassword"]);
-
-					    		//__close the lightbox
-								var t = window.setInterval(function(){
-									shazamOverlay.hide();
-									clearInterval(t);
-								},5500);
+					    		
+					    		that.showMessageAndClose(that.messages[0]["successForgotPassword"]);
+					    		
 
 					    	}else{
 					    		//there is an error with the registeration.
@@ -314,13 +309,8 @@ var romForms = {
 					    	var obj = jQuery.parseJSON(data);
 
 					    	if(obj[0].response == "OK"){
-					    		shazamOverlay.morphBox(that.messages[0]["successImage"]);
-
-					    		//__close the lightbox
-								var t = window.setInterval(function(){
-									shazamOverlay.hide();
-									clearInterval(t);
-								},5500);
+					    		
+					    		that.showMessageAndClose(that.messages[0]["successImage"]);
 
 					    	}else{
 					    		//there is an error with the registeration.
@@ -348,13 +338,9 @@ var romForms = {
 
 					    	if(obj[0].response == "OK"){
 					    		//__welcome the new user in the lightbox
-					    		shazamOverlay.morphBox(that.messages[0]["successLogin"]);
+					    		
+					    		that.showMessageAndClose(that.messages[0]["successLogin"]);
 
-					    		//__close the lightbox
-								var t = window.setInterval(function(){
-									shazamOverlay.hide();
-									clearInterval(t);
-								},5500);
 
 					    		//__refresh the site to auto log the user in.
 
@@ -386,13 +372,10 @@ var romForms = {
 					    	var obj = jQuery.parseJSON(data);
 
 					    	if(obj[0].response == "OK"){
-					    		shazamOverlay.morphBox(that.messages[0]["successEdit"]);
+					    		
+					    		that.showMessageAndClose(that.messages[0]["successEdit"]);
 
-					    		//__close the lightbox
-								var t = window.setInterval(function(){
-									shazamOverlay.hide();
-									clearInterval(t);
-								},5500);
+					    		
 
 					    	}else{
 					    		//there is an error with the registeration.

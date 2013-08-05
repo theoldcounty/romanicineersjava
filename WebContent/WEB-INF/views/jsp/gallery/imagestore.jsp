@@ -9,7 +9,7 @@
 		${message}				
 		<form id="imageForm" action="uploadimage" method="post" enctype="multipart/form-data">
 			<label>userId</label>
-		    <input type="text" name="userId" value=""/>
+		    <input type="text" name="userId" value="<%=request.getParameter("userId")%>"/>
 		   <br/>
 		    <label>image</label>			
 		    <input type="file" name="image" />
