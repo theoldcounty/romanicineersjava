@@ -7,6 +7,10 @@
 				<div class="wrap">
 
 					<jsp:include page="includes/filters.jsp" />
+					
+					<ul class="users" data-filter-users="true"></ul>
+					
+					
 						${people[0]}
 						${people[1]}
 
@@ -81,22 +85,7 @@
 							
 									<a class="arrowhandler arrow-left"></a>
 									<a class="arrowhandler arrow-right"></a>
-							</div>		
-													
-							<!-- 
-							<div id="galleryCarousel" data-carousel="true" data-count="4">
-								<div class="wrapper">
-									<ul>
-										<c:forEach var="gImages" items="${people[1].galleryResponse}">
-											<li>
-												<a class="fancyboximage fancybox.image" rel="gallery1" href="retrieveimage?image_id=${gImages.imgId}&height=750" title="Hot Girl">
-													<img src="retrieveimage?image_id=${gImages.imgId}&height=250">
-												</a>
-											</li>
-										</c:forEach>
-									</ul>
-								</div>
-							</div>-->
+							</div>
 						</div>
 					</div>
 
@@ -105,7 +94,6 @@
 							<li><a class="fancyboxtrigger fancybox.ajax" href="viewFollowers">*(unlogged) Followers - shows users following (overlay)</a></li>
 							<li><a class="fancyboxtrigger fancybox.ajax" href="addFollowers">*(unlogged) Follow me - action to follow the user (overlay)</a></li>
 							<li><a href="scheduledate">*(unlogged) Schedule a date  <!-- &userId=${people[0]._id}--></a></li>
-							<!--<li><a class="shazam" href="imageform?id=${people[0]._id}">*(Logged In)My Photos/Add Picture (overlay)</a></li>-->
 
 							<li><a class="fancyboxtrigger fancybox.ajax" href="imageform?userId=${people[0]._id}">*(Logged In)My Photos/Add Picture (overlay)</a></li>
 

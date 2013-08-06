@@ -18,7 +18,7 @@ var isotopeFilters = Backbone.View.extend({
 		this.bindNav();
 		this.generateFilters();
 
-		var $container = $('.users'),
+		var $container = $('[data-filter-users="true"]'),
 			// object that will keep track of options
 			isotopeOptions = {},
 			// defaults, used if not explicitly set in hash
@@ -112,99 +112,107 @@ var isotopeFilters = Backbone.View.extend({
 		})
 		.trigger('hashchange');// trigger hashchange to capture any hash data on init
 	},
+	trimVariable: function(variable){
+		return variable.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,'').replace(/\s+/g,' ');
+	},
 	generateFilters: function(){
 		var that = this;
 		var filter = {
-			lastFilter:"",
 			isotopeTime: function(obj){
-				$('.users').isotope(obj);
-			},
-			populate: function(filtertype){
-
-				switch(filtertype)
-				{
-					case "location":
-							var data = ["United Kingdom", "Japan", "Spain", "France"];
-
-						break;
-					case "interest":
-							var data = ["Cinema", "Sex", "Movies", "Football", "Robots", "Spaceflight"];
-						break;
-				}
-
-				var html = "";
-				$.each(data, function(i, item) {
-					html+='<option value="'+data[i]+'">'+data[i]+'</option>';
-				});
-
-				var inputType = '<select name="options">'+html+'</select>';
-
-				var data = '<div class="'+filtertype+' badge"></div><div class="attributes"><label>'+filtertype+'</label>'+inputType+'</div>';
-				$('#filters .optional .wrappers').html('<form id="optional">'+data+'<input type="submit" name="submit" value="Apply" /></form>');
-			},
-			fadeInOptionalPane: function(filtertype){
-				filter.lastFilter = filtertype;
-				filter.populate(filtertype);
-				$('#filters ul.initial').fadeOut(300, function(){
-						$('#filters .optional').fadeIn(300);
-				});
-			},
-			fadeOutOptionalPane: function(){
-				$('#filters .optional').fadeOut(300, function(){
-						$('#filters ul.initial').fadeIn(300);
-				});
+				$('[data-filter-users="true"]').isotope(obj);
 			}
 		};
 
-		$(document).on("submit", "form#optional", function(event){
-			event.preventDefault();
-			var results = $(this).serializeArray();
-			var filterChoice = results[0].value;
+		$('#filterisotope').submit(function(e) {
+			e.preventDefault();
 
-			switch(filter.lastFilter){
-				case "location":
-						filter.isotopeTime({ filter: $('.element:country('+filterChoice+')') });
+			var combinedFilterObj = '.element';
 
-					break;
-				case "interest":
-						filter.isotopeTime({ filter: $('.element:interest('+filterChoice+')') });
-					break;
+
+			//interest selection
+
+			var interests = $('[name=interest]').val();
+			if(interests.length > 0){
+				combinedFilterObj+= ':interest('+interests+')';
 			}
+
+
+			//age range combo
+			var agerange = $('#amount').val().split("-");
+			combinedFilterObj+= ':agerange('+that.trimVariable(agerange[0])+','+that.trimVariable(agerange[1])+')';
+
+
+
+			//country selection
+			var location = $('[name=location]').val();
+			if(location.length > 0){
+				combinedFilterObj+= ':country('+location+')';
+			}
+
+
+			//ethnicity
+			var ethnicity = $('[name=ethnicity]').val();
+			if(ethnicity.length > 0){
+				combinedFilterObj+= ':ethnicity('+ethnicity+')';
+			}
+
+
+			//haspictures
+			var haspictures = $('[name=withpics]:checked').val();
+			if(haspictures != undefined){
+				combinedFilterObj+= ':haspictures('+haspictures+')';
+			}
+
+
+			//isonline
+			var isonline = $('[name=isonline]:checked').val();
+			if(isonline != undefined){
+				combinedFilterObj+= ':isonline('+isonline+')';
+			}
+
+
+			var genderCount = $('[name=gender]:checked').length;
+
+			if(genderCount == 1){
+				//if just one gender selected
+
+				combinedFilterObj+= ':gender('+$('[name=gender]:checked').val()+')';
+			}
+			else{
+				//if more than one gender selected
+
+				var combinedString = '';
+
+				$('[name=gender]:checked').each(function( index ) {
+					var copyOfFilter = combinedFilterObj;
+					copyOfFilter+= ':gender('+$(this).val()+')';
+
+					combinedString+= copyOfFilter+',';
+				});
+
+				combinedFilterObj = combinedString.substring(0, combinedString.length - 1);
+
+			}
+
+			//console.log("combinedFilterObj:: ", combinedFilterObj);
+
+			filter.isotopeTime({ filter: $(combinedFilterObj) });
 		});
 
-		$("#filters .optional .close a").click(function(event) {
-			event.preventDefault();
-			filter.fadeOutOptionalPane();
-		});
 
-		$("#filters li a").click(function() {
+
+		$("a.directisotope").click(function() {
 			$("#filters li a").removeClass("selected");
 			$(this).addClass("selected");
-			
+
 			var type = $(this).parent().attr("class");
-			
-			hasFiltered = true;
-			
+
 			switch(type)
 			{
-				case "location":
-						filter.fadeInOptionalPane('location');
-					break;
-				case "interest":
-						filter.fadeInOptionalPane('interest');
-					break;
-				case "showall":
+				case "reset":
 						filter.isotopeTime({ filter: $('.element*') });
+						filter.isotopeTime({ sortBy : 'original-order' });
 					break;
-				case "female":
-						filter.isotopeTime({ filter: $('.element:gender(Female)') });
-					break;
-				case "male":
-						filter.isotopeTime({ filter: $('.element:gender(Male)') });
-					break;
-				case "original":
-					filter.isotopeTime({ sortBy : 'original-order' });
-				break;					
 				case "shuffle":
 						filter.isotopeTime('shuffle');
 					break;
@@ -241,35 +249,10 @@ var isotopeFilters = Backbone.View.extend({
 		$("#calltoaction li a").click(function() {
 			nav.selectedPane = $(this).parent().attr("class");
 
-			/*choose selected tab*/
 			$("#calltoaction li a").removeClass();
 			$(this).addClass("selected");
 
-			/*if navigation selected - slide down
-			- if the pane is open - and another filter chosen - fade out and fade in replacement.*/
-
-			if(nav.selectedPane == "filters" || nav.selectedPane == "search"){
-				var toFade = false;
-				if(nav.lastPane != nav.selectedPane){
-					toFade = true;
-				}
-
-				if(nav.lastPane == ""){
-					toFade = false;
-				}
-
-				if(toFade){
-					//fade in pane
-					console.log("fade in panel");
-					nav.fadePanel(nav.lastPane, nav.selectedPane);
-				}else{
-					//toggle pane
-					console.log("toggle in panel");
-					nav.togglePanel(nav.selectedPane);
-				}
-
-				nav.lastPane = nav.selectedPane;
-			}
+			nav.togglePanel(nav.selectedPane);
 		});
 	}
 });
@@ -280,6 +263,9 @@ $.extend($.expr[':'], {
 	},
 	country: function(elm, i, match) {
 		return $(elm).data("user-country").toLowerCase() == match[3].toLowerCase();
+	},
+	ethnicity: function(elm, i, match) {
+		return $(elm).data("user-ethnicity") == match[3];
 	},
 	interest: function(elm, i, match) {
 		var response = false;
@@ -292,7 +278,21 @@ $.extend($.expr[':'], {
 
 		return response;
 	},
-	online: function(elm, i, match){
+	agerange: function(elm, i, match) {
+		var userAge = $(elm).data("user-age");
+		var ranges = match[3].split(",");
+		var valid = false;
+
+		if(userAge >= ranges[0] && userAge <= ranges[1]){
+			valid = true;
+		}
+
+		return valid;
+	},
+	haspictures: function(elm, i, match){
+		return true == $(elm).data("user-pictures");
+	},
+	isonline: function(elm, i, match){
 		return true == $(elm).data("user-online");
 	}
 });

@@ -7,13 +7,14 @@
 */
 
 	/*_user*/
-	
+
 	.user{}
-	
+
+	/*
 	.user ul#calltoaction li.filters{
 		display:none;
-	}
-	
+	}*/
+
 	.user h2{
 		margin: 0;
 		padding: 0;
@@ -21,21 +22,21 @@
 		color: #000000;
 		font-family: "Arial";
 	}
-	
+
 	.user .details{
 		font-size: 12px;
 		color: #000000;
 		font-family: "Arial";
 	}
-	
-	
+
+
 	.user .gallery{
 		overflow:hidden;
 		padding:10px;
 		border: 1px solid #000000;
 	}
-	
-	
+
+
 	.user .featureImg{
 		overflow:hidden;
 		width:260px;
@@ -45,8 +46,8 @@
 	}
 	.user .featureImg img{
 		width:260px;
-	}	
-	
+	}
+
 	.user .collection{
 		overflow:hidden;
 		margin:0;
@@ -59,35 +60,35 @@
 		border:1px solid black;
 		list-style-type:none;
 	}
-	
-	
+
+
 	.user .collection li h2{
 		font-size:16px;
 		margin:0;
 		padding:0;
 	}
-	
+
 	.user .collection li{
 		padding: 10px;
 	}
-	
+
 	.user .physical li{
 		padding:0;
 	}
-	
+
 	.user .indicators li{
 		padding:0;
 	}
-	
+
 	.total{
 		font-size: 18px;
-		font-weight: bold;	
+		font-weight: bold;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	.user .indicators{
 		margin:0;
 		padding:0;
@@ -105,7 +106,7 @@
 		float: left;
 		width:70px;
 		padding-right: 8px;
-		text-align: right;	
+		text-align: right;
 	}
 
 	.user .indicators li .holder{
@@ -137,8 +138,8 @@
 		width: 9%;
 		border-radius: 2px;
 	}
-	
-	
+
+
 
 
 	.user .physical{
@@ -187,7 +188,7 @@
 		margin-bottom: 10px;
 		display:block;
 	}
-	
+
 
 	.profilePics ul li img{
 		width:125px;
@@ -202,10 +203,10 @@
 		width:auto;
 		height:115px;
 	}
-	
-	
+
+
 	*/
-	
+
 	.profilePics .swiper-slide{
 		overflow:hidden;
 	}
@@ -221,27 +222,27 @@
 	.profilePics .imageholder a{
 		display:block;
 	}
-	
-	
+
+
 	.scheduleDate{
 		height:730px;
 		background:red;
 	}
-	
-	
-	
-	
+
+
+
+
 	.user .collection{
 		width: 600px;
-		float: left;	
+		float: left;
 	}
-	
+
 	#other-candidates{
 		width: 300px;
 		float: right;
 	}
-	
-	
+
+
 .progressbar{
 	right: 0;
 	width: 107px;
@@ -257,16 +258,16 @@
 	z-index: 99999999999999999;
 	width: 37%;
 }
-	
-	
 
 
-.calltoaction{	
+
+
+.calltoaction{
 }
 
 .calltoaction li{
 	border: 0!important;
 	height: auto!important;
-	float: none!important;	
+	float: none!important;
 }
-	
+

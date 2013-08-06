@@ -32,7 +32,22 @@ var gridUserHandler = {
 			});
 		},
 		emptyUserList: function(){
-			$('.users').empty();
+			$('[data-filter-users="true"]').empty();
+		},
+		calculateAge: function(dob){
+
+			//var dob='19800810';
+			var year=Number(dob.substr(0,4));
+			var month=Number(dob.substr(4,2))-1;
+			var day=Number(dob.substr(6,2));
+			var today=new Date();
+			var age=today.getFullYear()-year;
+			if(today.getMonth()<month || (today.getMonth()==month && today.getDate()<day)){
+				age--;
+			}
+
+			return age;
+
 		},
 		getUsers: function(callback){
 			var that = this;
@@ -53,6 +68,18 @@ var gridUserHandler = {
 							var gender = value.gender;
 							var title = value.username;
 							var isOnline = value.isloggedon;
+							var ethnicity = value.ethnicity;//"Asian";
+
+							var age = that.calculateAge(value.birthdate);
+
+
+							var haspictures = false;
+							if(value.gallery.length > 0){
+								haspictures = true;
+							}
+
+							console.log("value", value);
+
 
 							var url = "user?id="+id;
 
@@ -64,18 +91,18 @@ var gridUserHandler = {
 							else{
 								featureAvatarThumbnail = "http://zedequalszee.files.wordpress.com/2008/05/female.gif";
 							}
-							
-							
+
+
 							if(value.gallery[0] != undefined){
 								featureAvatarThumbnail = "retrieveimage?image_id="+value.gallery[0].imgId+"&width=480";
 							}
 
 							//populate person
-							var template = '<li class="element odd" data-user-country="'+country+'" data-user-interests="" data-user-online="'+isOnline+'" data-user-gender="'+gender+'" data-user-name="'+title+'" data-user-id="'+id+'"><div class="avatar"><a href="'+url+'"><img src="'+featureAvatarThumbnail+'"></a></div></li>';
-							$('.users').isotope( 'insert',  $(template) );
+							var template = '<li class="element odd" data-user-country="'+country+'" data-user-interests="" data-user-ethnicity="'+ethnicity+'" data-user-age="'+age+'" data-user-pictures="'+haspictures+'" data-user-online="'+isOnline+'" data-user-gender="'+gender+'" data-user-name="'+title+'" data-user-id="'+id+'"><div class="avatar"><a href="'+url+'"><img src="'+featureAvatarThumbnail+'"></a></div></li>';
+							$('[data-filter-users="true"]').isotope( 'insert',  $(template) );
 
 							that.getInterests(id, function(interests){
-								$('.users').find('li[data-user-id='+id+']').attr('data-user-interests', interests);
+								$('[data-filter-users="true"]').find('li[data-user-id='+id+']').attr('data-user-interests', interests);
 							});
 
 							j++
@@ -93,7 +120,7 @@ var gridUserHandler = {
 
 			$("a#getMore").click(function(e) {
 				e.preventDefault();
-				
+
 				var nextBatch = 10;
 				that.start = that.end;
 				that.end +=nextBatch;

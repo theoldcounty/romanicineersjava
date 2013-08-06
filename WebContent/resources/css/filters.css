@@ -90,18 +90,31 @@
 	}	
 		
 	#filters{
-		background: orange;
+		background: #eeeeee;
 	}
 	
 	.pruneoptions{
-		background: green;
 		padding:20px;
 		width: 54%;
 	}
 	
 	.submitoptions{
 		width: 16%;
-		background: red;
 		float: right!important;
-		text-align: right;	
+		text-align: right;
+		margin-top:26px;
+		padding-right: 15px;
+	}
+	
+	#filters label{
+		font-size: 12px;
+		colour: #eeeeee;
+	}
+	
+	#filters input[type="submit"]{
+		background: grey;
+		border: 0;
+		padding: 4px;
+		text-shadow: 1px 1px 1px #ffffff;
+		cursor:pointer;
 	}

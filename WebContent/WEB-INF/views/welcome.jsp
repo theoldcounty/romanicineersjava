@@ -103,7 +103,7 @@
 </section>  -->
 
 
-					<ul class="users">
+					<ul class="users" data-filter-users="true">
 						<!--
 						<c:forEach var="person" items="${people}">
 							<li class="element odd" data-user-country="${person.country}" data-user-interests="movies" data-user-online="${person.isloggedon}" data-user-gender="${person.gender}" data-user-name="${person.username}" data-user-id="${person._id}"><div class="avatar"><a href="user?id=${person._id}"><img src="http://www.thevintagedane.com/wp-content/uploads/2012/01/brad-pitt-wired-magazine-04-250x250.jpg"></a></div></li>

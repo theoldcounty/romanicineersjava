@@ -11,9 +11,9 @@ romApplication = {
 	global: function(){
 
 		// if user clicked on button, the overlay layer or the shazambox, close the shazam
-		
+
 		/*
-		
+
 		$('#shazam-overlay').click(function () {
 			shazamOverlay.hide();
 			return false;
@@ -23,8 +23,8 @@ romApplication = {
 			shazamOverlay.hide();
 			return false;
 		});
-		
-		
+
+
 		$('.shazam').click(function () {
 			var link = $(this).attr("href");
 			console.log("shazam link", link);
@@ -47,10 +47,12 @@ romApplication = {
 
 		this.global();
 
+		gridUserHandler.init();
+
 		/*home controller*/
 		if(lastParameter == ""){
 			//home page
-			gridUserHandler.init();
+			//gridUserHandler.init();
 		}
 
 		/*user controller*/
