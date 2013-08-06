@@ -246,6 +246,7 @@ var isotopeFilters = Backbone.View.extend({
 			}
 		};
 
+
 		$("#calltoaction li a").click(function() {
 			nav.selectedPane = $(this).parent().attr("class");
 

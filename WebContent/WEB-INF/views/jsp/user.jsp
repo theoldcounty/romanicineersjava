@@ -9,6 +9,7 @@
 					<jsp:include page="includes/filters.jsp" />
 					
 					<ul class="users" data-filter-users="true"></ul>
+					<a id="getMore" href="#">More Members</a>
 					
 					
 						${people[0]}
