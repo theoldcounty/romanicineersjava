@@ -1,15 +1,15 @@
-	
+
 	.arrow-left {
 		background: url(http://www.idangero.us/sliders/swiper/demos/main-demos/img/arrows.png) no-repeat left top #333333;
 		left: 10px;
 	}
-	
-	
+
+
 	.arrow-right {
 		background: url(http://www.idangero.us/sliders/swiper/demos/main-demos/img/arrows.png) no-repeat left bottom  #333333;
 		right: 10px;
 	}
-	
+
 	.arrowhandler{
 		top: 50%;
 		margin-top: -15px;
@@ -19,21 +19,30 @@
 		cursor: pointer;
 		z-index: 1;
 	}
-	
-	.swiper-container{
+
+	.swiper-container, .swiper-slide{
 		width: 430px;
-		height: 200px;
-	}
-	   
-	.swiper-slide {
-		width: 430px;
-		height: 200px;
+		height: 210px;
+		padding-top: 8px;
 	}
 	.swiper-holder{
 		position:relative;
 		padding:30px;
 	}
-	
+
 	 .swiper-wrapper{
 	 	width:9999px;
 	 }
+
+
+
+	.avatargroup .swiper-container{
+		width: 830px;
+		height: 200px;
+	}
+
+	.avatargroup .swiper-slide {
+		width: 105px;
+		height: 200px;
+		background:red;
+	}

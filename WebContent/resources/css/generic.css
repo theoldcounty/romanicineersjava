@@ -28,6 +28,14 @@
 		a:active {color:#353430;}  /* selected link */
 
 
+		::selection {
+			background: #ffb7b7; /* Safari */
+		}
+		::-moz-selection {
+			background: #ffb7b7; /* Firefox */
+		}
+
+
 	/*Header*/
 		header{
 			background: #48484A;
@@ -53,7 +61,7 @@
 			width: 900px;
 		}
 
-		
+
 		ul#returnhome{
 			float:left;
 			margin:0;
@@ -67,13 +75,13 @@
 			padding: 0;
 			overflow:hidden;
 		}
-		
+
 		ul#returnhome li,
 		ul#calltoaction li{
 			float:left;
 			text-align: center;
 		}
-		
+
 		ul#returnhome li a,
 		ul#calltoaction li a{
 			height: 102px;
@@ -92,7 +100,7 @@
 			background: lightgrey;
 			color: #ffffff;
 		}
-		
+
 		.icon {
 			width: 60px;
 			height: 50px;
@@ -573,11 +581,11 @@
 .scheduledate {}
 
 .scheduledate #interactionpane{
-	display:none;	
+	display:none;
 }
 
-	
-	
+
+
 .privateMessages{}
 .privateMessages ul{
 	margin:0;
@@ -589,12 +597,12 @@
 
 
 .interactivePane{
-	background: lightgrey;	
+	background: lightgrey;
 	overflow:hidden;
 }
 
 .finetuneOptions{
-	background: red;	
+	background: red;
 	overflow:hidden;
 }
 
@@ -632,25 +640,25 @@
 	.grid{
 		overflow:hidden;
 	}
-	
+
 	.fifty{
 		width:50%;
 	}
-	
+
 	.hundred{
 		width: 100%;
 	}
-	
+
 	.left{
 		float:left;
 	}
-	
+
 
 
 #editForm{}
 
 #editForm fieldset{
-	display:none;	
+	display:none;
 }
 
 #editForm fieldset.fifty-fifty,
@@ -665,4 +673,11 @@
 #editForm.personality fieldset#personality,
 #editForm fieldset#global{
 	display:block;
+}
+
+
+
+.user_container{
+	width:3000px;
+	overflow:hidden;
 }

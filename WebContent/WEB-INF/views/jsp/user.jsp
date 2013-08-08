@@ -8,10 +8,6 @@
 
 					<jsp:include page="includes/filters.jsp" />
 					
-					<ul class="users" data-filter-users="true"></ul>
-					<a id="getMore" href="#">More Members</a>
-					
-					
 						${people[0]}
 						${people[1]}
 
@@ -40,7 +36,7 @@
 						<div class="profilePics">
 						
 							<div class="swiper-holder">
-								<div data-swiper="true" data-loop="true" data-mode="horizontal" data-speed="500" class="swiper-container">
+								<div data-swiper="true" data-loop="true" data-mode="horizontal" data-scrollcontainer="false" data-freemode="false" data-freemodefluid="false" data-slidesperview="1" data-slidespergroup="1" data-speed="500" class="swiper-container">
 										<div class="swiper-wrapper">
 	
 											<c:forEach var="gImages" items="${people[1].galleryResponse}" varStatus="counter">
@@ -59,7 +55,7 @@
 												
 														<div class="imageholder">
 															<a class="fancyboximage fancybox.image" rel="gallery1" href="retrieveimage?image_id=${gImages.imgId}&height=750" title="Hot Girl">
-																<img src="retrieveimage?image_id=${gImages.imgId}&width=105">
+																<img src="retrieveimage?image_id=${gImages.imgId}&width=115">
 															</a>
 														</div>
 												

@@ -1,25 +1,30 @@
 
 var swipers = {
 	init: function(){
-		
+
 		var localArray = new Array();
-		
+
 		$('[data-swiper="true"]').each(function(index) {
 			var options = {
-					mode: $(this).data("mode"),
-					loop: $(this).data("loop"),
-					speed: $(this).data("speed")
+				mode: $(this).data("mode"),
+				loop: $(this).data("loop"),
+				speed: $(this).data("speed"),
+				slidesPerGroup: $(this).data("slidespergroup"),
+				slidesPerView: $(this).data("slidesperview"),
+				freeMode: $(this).data("freemode"),
+				scrollContainer: $(this).data("scrollcontainer"),
+				freeModeFluid: $(this).data("freemodefluid")
 			};
-			
+
 			var id = "swipes"+index;
 			$(this).attr("id", id);
-			
+
 			var mySwiper = $(this).swiper(options);
-			localArray[id] = mySwiper;			
+			localArray[id] = mySwiper;
 		});
-		
+
 		this.objSwipers = localArray;
-		
+
 		this.bindEvents();
 	},
 	getSwiper: function(id){
@@ -43,11 +48,11 @@ var swipers = {
 	},
 	setSwiperSize: function(id){
 		this.getSwiper(id).resizeFix();
-	},	
+	},
 	bindEvents: function(){
 		var that = this;
-		
-		$(".arrow-left").click(function(e) {			
+
+		$(".arrow-left").click(function(e) {
 			var swiperId = $(this).parent().find('.swiper-container').attr("id");
 			that.getSwiper(swiperId).swipePrev();// run transition to previous slide
 		});
@@ -56,12 +61,9 @@ var swipers = {
 			var swiperId = $(this).parent().find('.swiper-container').attr("id");
 			that.getSwiper(swiperId).swipeNext();//run transition to next slide
 		});
-		
-				
+
+
 	},
 	objSwipers: new Array()
 };
 
-$(document).ready(function () {
-	swipers.init();
-});

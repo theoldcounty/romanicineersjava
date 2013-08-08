@@ -11,6 +11,8 @@
 		<script type="text/javascript" src="resources/js/libs/jquery.fancybox.js"></script>
 		
 		<script type="text/javascript" src="resources/js/libs/idangerous.swiper-2.0.min.js"></script>
+		<script type="text/javascript" src="resources/js/libs/jquery.mCustomScrollbar.concat.min.js"></script>
+		
 				
 		
 		<script type="text/javascript" src="resources/js/libs/underscore-min.js"></script>
@@ -25,12 +27,6 @@
 		<script type="text/javascript" src="resources/js/rom/googlemaps/googlemaps.js"></script>
 		<script type="text/javascript" src="resources/js/rom/rom.foursquare.js"></script>
 
-		<!--integration of basic image uploader-->
-
-		<!--
-		<script type="text/javascript" src="resources/upload/js/jquery.iframe-transport.js"></script>
-		<script type="text/javascript" src="resources/upload/js/jquery.fileupload.js"></script>-->
-
 		<!-- Plugins  -->
 		<script type="text/javascript" src="resources/js/plugins/rom.doughnut.knob.js"></script>
 		<script type="text/javascript" src="resources/js/plugins/rom.doughnut.pie.js"></script>
@@ -39,12 +35,8 @@
 
 		<!-- Javascript -->
 		<script type="text/javascript" src="resources/js/rom/rom.application.js"></script>
-		
+		<script type="text/javascript" src="resources/js/rom/rom.mcustom.scrollbar.js"></script>		
 		<script type="text/javascript" src="resources/js/rom/rom.idangerous.swiper.handler.js"></script>
-
-
-
-		
 		<script type="text/javascript" src="resources/js/rom/rom.fancybox.js"></script>
 		<script type="text/javascript" src="resources/js/rom/rom.page.handler.js"></script>
 		<script type="text/javascript" src="resources/js/rom/rom.grid.user.handler.js"></script>
