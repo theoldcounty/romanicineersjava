@@ -677,7 +677,12 @@
 
 
 
+#user_handler_filter{
+	display:none;
+}
+
 .user_container{
 	width:3000px;
+	height: 100px;
 	overflow:hidden;
 }

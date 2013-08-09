@@ -26,18 +26,18 @@ var userTip = Backbone.View.extend({
 		var jsonUrl = 'api?servicerequest=getMembers&skips=0&limits=1&id='+userId;
 
 		$.getJSON(jsonUrl, function(json) {
-				
+
 			//console.log("json", json[0].users[0].gallery[1]);
-			
+
 			var userAvatar = "http://forums.pragprog.com/assets/generic-user-large-9d8f6d3c01cc167de1af1ad3878d5a44.png";
-			
-			
+
+
 			var galleryCount = json[0].users[0].gallery.length;
 			if(galleryCount>1){
 				userAvatarId = json[0].users[0].gallery[1].imgId;
-				userAvatar = 'retrieveimage?image_id='+userAvatarId+'&height=250';				
+				userAvatar = 'retrieveimage?image_id='+userAvatarId+'&width=250';
 			}
-			
+
 			//var userAvatar = json[0].users[0].avatar;
 			var goal1 = json[0].users[0].goal1;
 			var goal2 = json[0].users[0].goal2;
@@ -186,6 +186,7 @@ var userTip = Backbone.View.extend({
 				var listEl = this;
 				that.getObj(listEl, function(contentsObj){
 					that.populate(contentsObj); //show the tip
+					galleryFix.triggerRatioCheckAfterLoad(".bioimg .avatar img");
 					that.show(0); //show the tip
 				});
 
@@ -215,11 +216,14 @@ var userTip = Backbone.View.extend({
 	getPointerDirection: function(e){
 		var mouseLeft = e.pageX;
 
-		var selectedElement = $('.users');
+		var selectedElement = $('.users:visible');
 		var widthOfElement = selectedElement.outerWidth(true);
 		var offset = selectedElement.offset();
 		var edgeLeft = offset.left;
 		var difference = (widthOfElement+edgeLeft) - mouseLeft;
+
+		console.log("difference", difference);
+		console.log("this.tooltipWidth", this.tooltipWidth);
 
 		//get near end of container
 		if(difference > this.tooltipWidth){

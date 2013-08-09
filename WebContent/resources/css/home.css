@@ -6,6 +6,12 @@
 * All rights reserved.
 */
 
+		.home #user_handler_filter{
+			display:none!important;
+			/*always hide the extra pane on home*/
+		}
+
+
 		.goals .head{
 			position: absolute;
 			top: 200px;
@@ -111,12 +117,12 @@
 			height: 50px;
 			position:relative;
 		}
-		
+
 		#tooltip .icons ul li span{
 			position: absolute;
 			background: orange;
 			bottom: 0;
-			left: 57px;		
+			left: 57px;
 		}
 
 		#tooltip .icons ul li a{
@@ -136,7 +142,7 @@
 			background: url('../images/bar_icon_followers.png') 0 0 no-repeat;
 		}
 		#tooltip .icons ul li.followers a{}
-		
+
 
 		#tooltip .icons ul li.followme{
 			background: url('../images/bar_icon_followme.png') 0 0 no-repeat;
@@ -148,7 +154,7 @@
 			background: url('../images/bar_icon_talk.png') 0 0 no-repeat;
 		}
 		#tooltip .icons ul li.talktome a{}
-		
+
 
 
 
@@ -220,14 +226,21 @@
 			background: url('../images/symbol_male.jpg') 0 0 no-repeat;
 		}
 
+		.piechart .nodata{
+			height: 210px;
+			text-align: center;
+			vertical-align: middle;
+			width: 263px;
+		}
+
 		/*
 		.biodetails .biospec .piechart{
 			width: 263px;
 			height: 214px;
 		}*/
 
-		
-		
+
+
 		.users{
 			margin: 0;
 			padding: 0;
@@ -256,7 +269,10 @@
 			top:0;
 		}
 
-		.avatar img{
+		.avatar img.portrait{
 			width:105px;
 		}
-		
+
+		.avatar img.landscape{
+			height:105px;
+		}

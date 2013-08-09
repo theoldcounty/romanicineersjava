@@ -221,28 +221,44 @@ var isotopeFilters = Backbone.View.extend({
 	},
 	bindNav: function(){
 		var nav = {
-			lastPane: "",
+			//lastPane: "",
 			selectedPane: "",
 			isOpen: false,
 			toggleDuration: 550,
 			fadeDuration: 150,
 			togglePanel: function(paneToToggle){
 				if(!nav.isOpen){
+					//$('.user_container').css("opacity", 0);
 					$('#'+paneToToggle).slideDown(nav.toggleDuration, function(){
 						console.log("slide down filters");
+						$("#filters li.reset a").click();
+
+						$('#user_handler_filter').slideDown(nav.toggleDuration, function(){
+							//show pane
+
+							gridUserHandler.filteruserscrollenhance();
+						});
+
+						//window.setTimeout(function(){
+							//$('.user_container').css("opacity", 1);
+						//},1000);
+
 						nav.isOpen = true;
 					});
 				}else{
-					$('#'+paneToToggle).slideUp(nav.toggleDuration, function(){
-						console.log("slide up filters");
-						nav.isOpen = false;
-					});
+					//$('.user_container').css("opacity", 0);
+
+						$('#user_handler_filter').slideUp(nav.toggleDuration, function(){
+							//hide pane
+
+
+							$('#'+paneToToggle).slideUp(nav.toggleDuration, function(){
+								console.log("slide up filters");
+								nav.isOpen = false;
+							});
+						});
+
 				}
-			},
-			fadePanel: function(lastPanel, newPanel){
-				$('#'+lastPanel).fadeOut(nav.fadeDuration, function(){
-						$('#'+newPanel).fadeIn(nav.fadeDuration);
-				});
 			}
 		};
 
@@ -253,7 +269,10 @@ var isotopeFilters = Backbone.View.extend({
 			$("#calltoaction li a").removeClass();
 			$(this).addClass("selected");
 
-			nav.togglePanel(nav.selectedPane);
+
+			if(nav.selectedPane == "filters"){
+				nav.togglePanel("filterspane");
+			}
 		});
 	}
 });

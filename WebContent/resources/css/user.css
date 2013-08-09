@@ -44,9 +44,22 @@
 		float:left;
 		background: grey;
 	}
-	.user .featureImg img{
-		width:260px;
+	.user .featureImg img.landscape{
+		height:260px;
 	}
+	.user .featureImg img.portrait{
+		width: 260px;
+	}
+
+
+
+	.profilePics .imageholder img.portrait{
+		width: 100px;
+	}
+	.profilePics .imageholder img.landscape{
+		height: 100px;
+	}
+
 
 	.user .collection{
 		overflow:hidden;

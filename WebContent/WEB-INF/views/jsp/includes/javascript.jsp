@@ -37,6 +37,12 @@
 		<script type="text/javascript" src="resources/js/rom/rom.application.js"></script>
 		<script type="text/javascript" src="resources/js/rom/rom.mcustom.scrollbar.js"></script>		
 		<script type="text/javascript" src="resources/js/rom/rom.idangerous.swiper.handler.js"></script>
+		
+		
+		
+		<script type="text/javascript" src="resources/js/rom/rom.gallery.fix.js"></script>
+		
+		
 		<script type="text/javascript" src="resources/js/rom/rom.fancybox.js"></script>
 		<script type="text/javascript" src="resources/js/rom/rom.page.handler.js"></script>
 		<script type="text/javascript" src="resources/js/rom/rom.grid.user.handler.js"></script>

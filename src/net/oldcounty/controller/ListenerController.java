@@ -560,6 +560,7 @@ public class ListenerController{
 		) throws UnknownHostException, MongoException
 	{
 		SessionController.isSession(request);//_check if in session and append isSession boolean flag
+		request.setAttribute("page", "home");
 		return new ModelAndView("welcome");
 	}
     

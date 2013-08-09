@@ -9,14 +9,17 @@
 
 var gridUserHandler = {
 		init: function(){
+			var that = this;
 			this.bindGridUserEvents();
 			this.emptyUserList();//clear out dummy holders
 
 			var isoFilter= new isotopeFilters();
-			this.getUsers(function(response){});
+			this.getUsers(function(response){
+				that.filteruserscrollenhance();
+			});
 		},
 		start: 0,
-		end: 5,
+		end: 35,
 		getInterests: function(id, callback){
 			var interests = "";
 			var interestUrl = 'api?servicerequest=getInterests&id='+id+'&chartname=interests';
@@ -47,7 +50,23 @@ var gridUserHandler = {
 			}
 
 			return age;
+		},
+		setFilterWidth: function(){
+			var elementWidth = $('[data-filter-users="true"]').find("li").outerWidth(true);
+			var count = $('[data-filter-users="true"]').find("li:not(.isotope-hidden)").length;
 
+			var newWidth = count*elementWidth;
+
+			$(".user_container").css("width", newWidth);
+			console.log("newWidth", newWidth);
+		},
+		filteruserscrollenhance: function(){
+			if($('[data-filter-users="true"]').parent().hasClass("user_container")){
+				console.log("scroll user enhance fix");
+
+				this.setFilterWidth();
+				$("#filters li.reset a").click();
+			}
 		},
 		getUsers: function(callback){
 			var that = this;
@@ -94,12 +113,14 @@ var gridUserHandler = {
 
 
 							if(value.gallery[0] != undefined){
-								featureAvatarThumbnail = "retrieveimage?image_id="+value.gallery[0].imgId+"&width=480";
+								featureAvatarThumbnail = "retrieveimage?image_id="+value.gallery[0].imgId+"&width=180";
 							}
 
 							//populate person
 							var template = '<li class="element odd" data-user-country="'+country+'" data-user-interests="" data-user-ethnicity="'+ethnicity+'" data-user-age="'+age+'" data-user-pictures="'+haspictures+'" data-user-online="'+isOnline+'" data-user-gender="'+gender+'" data-user-name="'+title+'" data-user-id="'+id+'"><div class="avatar"><a href="'+url+'"><img src="'+featureAvatarThumbnail+'"></a></div></li>';
 							$('[data-filter-users="true"]').isotope( 'insert',  $(template) );
+
+							galleryFix.triggerRatioCheckAfterLoad('li[data-user-id='+id+'] img');
 
 							that.getInterests(id, function(interests){
 								$('[data-filter-users="true"]').find('li[data-user-id='+id+']').attr('data-user-interests', interests);
@@ -125,9 +146,10 @@ var gridUserHandler = {
 				that.start = that.end;
 				that.end +=nextBatch;
 				that.getUsers(function(response){
-					if(hasFiltered){
-						$("#filters li.showall a").click();
-					}
+					$("#filters li.reset a").click();
+					//window.setTimeout(function(){
+						that.filteruserscrollenhance();
+					//},200);
 				});
 			});
 		}

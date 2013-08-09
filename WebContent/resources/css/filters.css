@@ -2,7 +2,7 @@
 
 
 
-		#filters{
+		#filterspane{
 			display:none;
 		}
 
@@ -29,7 +29,7 @@
 			background: lightgrey;
 			color: #ffffff;
 		}
-		
+
 
 		#filters .optional{
 			display:none;
@@ -38,8 +38,8 @@
 			position:relative;
 		}
 
-		
-		
+
+
 		#filters .optional .wrappers{}
 
 		#filters .optional .wrappers form{
@@ -78,26 +78,26 @@
 			float:left;
 			width:100%;
 		}
-		
-	
+
+
 	.ageslider{
 		margin:9px;
 	}
-	
+
 	.ageslider a{
 		height: 21px!important;
 		width: 13px!important;
-	}	
-		
+	}
+
 	#filters{
 		background: #eeeeee;
 	}
-	
+
 	.pruneoptions{
 		padding:20px;
 		width: 54%;
 	}
-	
+
 	.submitoptions{
 		width: 16%;
 		float: right!important;
@@ -105,12 +105,12 @@
 		margin-top:26px;
 		padding-right: 15px;
 	}
-	
+
 	#filters label{
 		font-size: 12px;
 		colour: #eeeeee;
 	}
-	
+
 	#filters input[type="submit"]{
 		background: grey;
 		border: 0;

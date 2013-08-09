@@ -30,7 +30,7 @@
 					<div class="gallery">
 						<div class="featureImg">
 							<a class="fancyboximage fancybox.image" rel="gallery1" href="retrieveimage?image_id=${people[1].galleryResponse[0].imgId}&height=750" title="Hot Girl">
-								<img src="retrieveimage?image_id=${people[1].galleryResponse[0].imgId}&height=480">
+								<img src="retrieveimage?image_id=${people[1].galleryResponse[0].imgId}&width=430">
 							</a>
 						</div>
 						<div class="profilePics">
@@ -55,7 +55,7 @@
 												
 														<div class="imageholder">
 															<a class="fancyboximage fancybox.image" rel="gallery1" href="retrieveimage?image_id=${gImages.imgId}&height=750" title="Hot Girl">
-																<img src="retrieveimage?image_id=${gImages.imgId}&width=115">
+																<img src="retrieveimage?image_id=${gImages.imgId}&width=160">
 															</a>
 														</div>
 												

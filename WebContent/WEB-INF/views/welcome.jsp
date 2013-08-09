@@ -39,43 +39,6 @@
 
 
 		<div id="container"><!--container-->
-			<div id="tooltip">
-				<div class="pointer"></div>
-				<div class="biodetails">
-					<div class="wrapper">
-						<div class="bioimg">
-							<div class="avatar">
-								<img src="http://3.bp.blogspot.com/-nPkfVayQelQ/TlVBikw7SpI/AAAAAAAABFU/xii61syZwP8/s400/Jessica+Alba+iPhone+Wallpaper-11.jpg">
-							</div>
-							<div class="goals">
-								<div class="head"></div>
-								<div class="heart"></div>
-								<div class="hand"></div>
-								<div class="hotspothead"></div>
-								<div class="hotspotheart"></div>
-								<div class="hotspothand"></div>
-							</div>
-						</div>
-						<div class="biospec">
-							<h2>Jean Midel</h2>
-							<div class="piechart">
-								<div id="biometricPie"></div>
-								<div class="nodata">No data</div>
-							</div>
-							<div class="gender"></div>
-						</div>
-					</div>
-				</div>
-				<div class="fullprofile"><div class="placement"><a href="#">See full profile</a></div></div>
-				<nav class="icons">
-					<ul>
-						<li class="myphotos"><a href="#">My Photos</a> <span>0</span></li>
-						<li class="followers"><a href="#">Followers</a> <span>0</span></li>
-						<li class="followme"><a href="#">Follow me</a></li>
-						<li class="talktome"><a href="#">Talk to me</a></li>
-					</ul>
-				<nav>
-			</div>
 			<div id="contents">
 				<div class="wrap">
 

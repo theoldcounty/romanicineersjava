@@ -46,6 +46,9 @@ var searchFilters = Backbone.View.extend({
 			var obj = { filter: $('.element:interest('+filterChoice+')') };
 			that.runIsotope(obj);
 			//take query and process it on filter
+
+			gridUserHandler.setFilterWidth();
+			//$("#filters li.reset a").click();
 		});
 
 

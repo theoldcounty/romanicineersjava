@@ -29,6 +29,9 @@ romApplication = {
 
 		mcustomscroller.init();
 
+
+		galleryFix.init();
+
 		/*home controller*/
 		if(lastParameter == ""){
 			//home page
