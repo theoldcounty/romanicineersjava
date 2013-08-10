@@ -256,21 +256,37 @@
 	}
 
 
-.progressbar{
-	right: 0;
-	width: 107px;
-	height: 15px;
-	background: grey;
-	position: relative;
-	padding: 2px;
-}
 
-.progressbar .bar{
-	background: green;
-	height: 15px;
-	z-index: 99999999999999999;
-	width: 37%;
-}
+	.usersummary{
+		overflow:hidden;
+	}
+	.gendersign {
+		background: grey;
+		height:30px;
+		width:30px;
+	}
+	.gendersign.male {
+		background: red;
+	}
+	.gendersign.female {
+		background: blue;
+	}
+
+	.progressbar{
+		width: 107px;
+		height: 15px;
+		background: grey;
+		position: relative;
+		padding: 2px;
+		float:right;
+	}
+
+	.progressbar .bar{
+		background: green;
+		height: 15px;
+		z-index: 1;
+		width: 37%;
+	}
 
 
 

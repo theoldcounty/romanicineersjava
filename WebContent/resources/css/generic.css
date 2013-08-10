@@ -192,6 +192,7 @@
 			width:100%;
 			position: relative;
 			height:100px;
+			overflow: hidden;
 		}
 
 		#googlebelt .title{
@@ -208,7 +209,7 @@
 		}
 
 		#googlebelt .location{
-			height: 100px;
+			height: 500px;
 			width: 100%;
 			position: absolute;
 			top: 0;

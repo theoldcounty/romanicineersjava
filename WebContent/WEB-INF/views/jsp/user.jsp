@@ -10,13 +10,18 @@
 					
 						${people[0]}
 						${people[1]}
+						
+						
 
-					<div class="gendersign"></div>
-					<h2>
-						<c:if test="${people[0].whichscreenname == 'realname'}">${people[0].realname}</c:if>
-						<c:if test="${people[0].whichscreenname != 'realname'}">${people[0].username}</c:if>
-					</h2>
-					<div class="progressbar"><div class="bar"></div></div>
+					<div class="usersummary">
+						<div class="gendersign ${fn:toLowerCase(people[0].gender)}"></div>
+						<h2>
+							<c:if test="${people[0].whichscreenname == 'realname'}">${people[0].realname}</c:if>
+							<c:if test="${people[0].whichscreenname != 'realname'}">${people[0].username}</c:if>
+						</h2>
+						<div class="progressbar"><div class="bar"></div></div>
+					</div>
+					
 					<div class="details" data-uid="${people[0]._id}">
 						<c:forEach var="countryList" items="${countryList}">
 							<c:choose>
