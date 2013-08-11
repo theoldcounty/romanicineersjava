@@ -104,6 +104,14 @@ InfoBox.prototype.createElement = function() {
 			return false;
 		});
 
+
+
+		$(div).find('.link-button').bind('click', function(){
+			console.log("CLICKED ON INFO BUTTOn");
+			$(_this).trigger(InfoBox.ClickMoreInfoButton);
+			return false;
+		});
+
 		panes.floatPane.appendChild(div);
 
 		this.setInfoBoxOptions($(div));

@@ -85,7 +85,7 @@ var GoogleMaps = Backbone.View.extend({
 
 		//console.log("this.map", this.map);
 
-		var image = 'http://www.nrtca.co.uk/map_marker_icon.gif';
+		var image = 'resources/img/usermarker.png';
 		var myLatLng = new google.maps.LatLng(latitute, longitute);
 
 		var marker = new google.maps.Marker({

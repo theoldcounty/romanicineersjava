@@ -10,6 +10,9 @@ var VenueOverlay = Backbone.View.extend({
 	mobileInfoLayer: null,
 
 	initialize: function(attributes) {
+
+		console.log("attributes", attributes);
+
 		this.venueInfoVO = new VenueInfoVO({venueInfo: attributes});
 		this.createMarker();
 		this.bindEvents();
@@ -46,7 +49,7 @@ var VenueOverlay = Backbone.View.extend({
 		if(!this.infoBox) {
 			this.infoBox = new InfoBox({latlng: this.getLatLng(), map: this.map, infoLayer: $(this.getInfoLayer())});
 			$(this.infoBox).bind(InfoBox.ClickCloseButton, _.bind(this.onCloseButtonInfoBox, this));
-			
+
 			console.log("created info box");
 			$(this.infoBox).bind(InfoBox.ClickMoreInfoButton, _.bind(this.onClickMoreInfoButton, this));
 		}
@@ -66,14 +69,12 @@ var VenueOverlay = Backbone.View.extend({
 
 	onClickMoreInfoButton: function(event) {
 		event.preventDefault();
-		
+
 		console.log("clicked on more info", this.venueInfoVO);
-		shazamOverlay.show("venueform?fid=22jsjkfljsdlkf");
-		//if mobile info layer already exist set layer null
-		if(this.mobileInfoLayer != null) {
-			this.mobileInfoLayer = null;
-		}
-		//this.mobileInfoLayer = new MobileInfoLayer({venueInfoVO: this.venueInfoVO});
+		var venueId = 23432432;
+		//venueId
+
+		$.fancybox( { type: 'iframe', href : 'http://robot-oi772f3re:8080/springApp21/date?venueId=23432432&senderUid=32432432&recepientUid=23423432', title : 'Lorem lipsum'} );
 	},
 
 	clearVenueOverLayer: function() {
@@ -112,8 +113,7 @@ var VenueOverlay = Backbone.View.extend({
 							'</ul>' +
 						'</div>' +
 						'<div class="button-container">' +
-							'<a href="#" class="link-button arrow-right"><span class="text">More Information</span></a>' +
-							'<a href="#" class="link-button no-icon" data-role="mobile-info-layer"><span class="text">Mobile Mode</span></a>' +
+							'<a class="link-button arrow-right" href="scheduledate?venueId='+ this.venueInfoVO.getId() +'"><span class="text">Schedule a date at this venue</span></a>' +
 						'</div>' +
 					'</div>' +
 				'</div>';
@@ -306,6 +306,13 @@ var VenueInfoVO = Backbone.View.extend({
 			}
 		}
 		return services;
+	},
+
+	getId: function(){
+
+		console.log("this.venueInfo", this.venueInfo.id);
+		var id = 2;
+		return id;
 	},
 
 	getHeaderInfo: function() {

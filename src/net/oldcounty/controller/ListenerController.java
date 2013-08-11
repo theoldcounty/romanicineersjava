@@ -435,6 +435,37 @@ public class ListenerController{
         	return new ModelAndView("jsp/json/response", "json", personManager.registerUser(person));  	
     	}    	
     }
+  
+    
+
+    /**
+     * Send Private Message
+     * @return 
+     * @throws MongoException
+     * @throws UnknownHostException
+    */
+    @RequestMapping("/date")
+    public ModelAndView date(
+    		HttpServletRequest request,
+    		@RequestParam(value="senderUid", required=false) String senderUid,
+    		@RequestParam(value="recepientUid", required=false) String recepientUid,
+    		@RequestParam(value="message", required=false) String message,
+    		@RequestParam(value="submitted", required=false) String submitted
+    		) throws UnknownHostException, MongoException
+    {    	
+    	
+    	PrivateMessage privatemessage = new PrivateMessage();
+			privatemessage.setRecepientUserId(recepientUid);
+			privatemessage.setSenderUserId(senderUid);
+			privatemessage.setMessage(message);	
+			
+    	if(submitted == null){
+    		//__if not yet added a chart return html form	    	
+			return new ModelAndView("jsp/scheduledate/date");   	
+    	}else{
+    		return new ModelAndView("jsp/json/response", "json", PrivateMessageDao.sendPrivateMessage(privatemessage));  	
+    	}       	
+    } 
     
     
     /**

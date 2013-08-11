@@ -61,7 +61,7 @@ h1 {
 	font-size: 13px;
 }
 
-.info-icon, 
+.info-icon,
 .close-button {
 	display: block;
 	text-indent: -9000px;
@@ -213,4 +213,9 @@ a, a:visited, button {
 
 .info-window .button-container .link-button, .mobile-info-layer .button-container .link-button, .info-window .button-container .share-button, .mobile-info-layer .button-container .share-button {
 	margin: 1.1875em;
+}
+
+
+.info-window .button-container .link-button{
+	left:0;
 }
