@@ -10,7 +10,6 @@ var VenueOverlay = Backbone.View.extend({
 	mobileInfoLayer: null,
 
 	initialize: function(attributes) {
-
 		console.log("attributes", attributes);
 
 		this.venueInfoVO = new VenueInfoVO({venueInfo: attributes});
@@ -23,7 +22,6 @@ var VenueOverlay = Backbone.View.extend({
 			position: this.getLatLng(),
 			icon: this.getMarkerIcon()
 		});
-
 	},
 
 	bindEvents: function() {
@@ -70,11 +68,18 @@ var VenueOverlay = Backbone.View.extend({
 	onClickMoreInfoButton: function(event) {
 		event.preventDefault();
 
-		console.log("clicked on more info", this.venueInfoVO);
-		var venueId = 23432432;
-		//venueId
+		var venueId = this.venueInfoVO.venueInfo.id;
+		var senderUid = "51895628d1efa7a5d9df83c9";
+		var recepientUid = "518b090fd1ef11c72b4bcb85";
 
-		$.fancybox( { type: 'iframe', href : 'http://robot-oi772f3re:8080/springApp21/date?venueId=23432432&senderUid=32432432&recepientUid=23423432', title : 'Lorem lipsum'} );
+		$.fancybox({
+			type: 'ajax',
+			href : 'http://robot-oi772f3re:8080/springApp21/date?venueId='+venueId+'&senderUid='+senderUid+'&recepientUid='+recepientUid,
+			title : 'Lorem lipsum',
+			beforeShow : function(){
+				date.init();
+			}
+		});
 	},
 
 	clearVenueOverLayer: function() {
@@ -113,7 +118,7 @@ var VenueOverlay = Backbone.View.extend({
 							'</ul>' +
 						'</div>' +
 						'<div class="button-container">' +
-							'<a class="link-button arrow-right" href="scheduledate?venueId='+ this.venueInfoVO.getId() +'"><span class="text">Schedule a date at this venue</span></a>' +
+							'<a class="link-button arrow-right" href="#"><span class="text">Schedule a date at this venue</span></a>' +
 						'</div>' +
 					'</div>' +
 				'</div>';

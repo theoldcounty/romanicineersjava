@@ -255,8 +255,6 @@
 
 
 
-
-
 	.wrapper{
 		position: relative;
 		width: 480px;
@@ -287,20 +285,20 @@
 		display:none;
 	}
 
-#cboxtopcenter,
-#cboxtopright,
-#cboxtopleft,
-#cboxbottomcenter,
-#cboxbottomleft,
-#cboxbottomright,
-#cboxmiddleleft,
-#cboxmiddleright{
-	background:none!important;
-}
+	#cboxtopcenter,
+	#cboxtopright,
+	#cboxtopleft,
+	#cboxbottomcenter,
+	#cboxbottomleft,
+	#cboxbottomright,
+	#cboxmiddleleft,
+	#cboxmiddleright{
+		background:none!important;
+	}
 
-#cboxcontent{
-	padding:10px;
-}
+	#cboxcontent{
+		padding:10px;
+	}
 
 
 

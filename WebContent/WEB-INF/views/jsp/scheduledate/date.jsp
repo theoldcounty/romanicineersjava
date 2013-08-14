@@ -3,18 +3,50 @@
 
 <div id="shazam-wrapper" class="regular">
 		
-		<form id="date" action="date" enctype="multipart/form-data" method="post" action="">
+		<form id="date" data-venue-id="<%=request.getParameter("venueId")%>" data-senderUid="<%=request.getParameter("senderUid")%>" data-recepientUid="<%=request.getParameter("recepientUid")%>" action="date" enctype="multipart/form-data" method="post" action="">
 			
 			<fieldset id="step1">				
 			
-				Venue data
+				<!--  
 				<%=request.getParameter("venueId")%>
-				
-				<br>
-				person data
 				<%=request.getParameter("senderUid")%>
-				
 				<%=request.getParameter("recepientUid")%>
+				-->
+						
+				<div id="canvasMap" data-lat="" data-long=""></div>
+				
+				<div id="venue">
+					<div id="name"></div>
+					<!-- <div id="id"></div>-->
+					<div id="location"></div>
+					<div id="rating"></div>
+					
+					<ul id="photos"></ul>
+					
+					<ul id="tips"></ul>
+				</div>
+				
+				<style>
+					#photos{
+						overflow:hidden;
+						width: 55%;
+					}
+					#photos li{
+						float:left;
+					}
+					
+					#photos li img{
+						width: 150px;
+					}
+				</style>
+				
+				
+				<ul class="venueImages">
+					<li></li>
+				</ul>				
+				
+				
+				
 			</fieldset>
 			
 			

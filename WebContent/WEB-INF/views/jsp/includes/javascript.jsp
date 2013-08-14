@@ -13,8 +13,6 @@
 		<script type="text/javascript" src="resources/js/libs/idangerous.swiper-2.0.min.js"></script>
 		<script type="text/javascript" src="resources/js/libs/jquery.mCustomScrollbar.concat.min.js"></script>
 		
-				
-		
 		<script type="text/javascript" src="resources/js/libs/underscore-min.js"></script>
 		<script type="text/javascript" src="resources/js/libs/backbone-min.js"></script>
 		<script type="text/javascript" src="resources/js/libs/colorbrewer/colorbrewer.js"></script>
@@ -26,6 +24,11 @@
 		<script type="text/javascript" src="resources/js/rom/googlemaps/infoBox.js"></script>
 		<script type="text/javascript" src="resources/js/rom/googlemaps/googlemaps.js"></script>
 		<script type="text/javascript" src="resources/js/rom/rom.foursquare.js"></script>
+
+		<script type="text/javascript" src="resources/js/rom/rom.date.js"></script>
+		
+
+
 
 		<!-- Plugins  -->
 		<script type="text/javascript" src="resources/js/plugins/rom.doughnut.knob.js"></script>

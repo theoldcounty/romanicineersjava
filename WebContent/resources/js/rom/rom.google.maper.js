@@ -33,7 +33,7 @@ var googleMaper = {
 		this.latUser = latUser;
 		this.longUser = longUser;
 
-        var image = 'http://www.nrtca.co.uk/map_marker_icon.gif';
+        var image = 'resources/img/usermarker.png';
         var myLatLng = new google.maps.LatLng(latUser, longUser);
 
         var beachMarker = new google.maps.Marker({

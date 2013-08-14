@@ -13,8 +13,8 @@
 							<section class="maps-panel">
 								<div class="data-attributes">
 									<div id="googleMapData">
-										<a id="userData" href="#" data-user-lat="51.529622428012544" data-user-long="-0.1381740757634631">User Focused</a><br>
-										<a id="candidateData" href="#" data-candidate-lat="53.331647402998776" data-candidate-long="-2.9767332668951405">Candidate Focused</a><br>
+										<a id="userData" href="#" data-user-id="" data-user-lat="51.529622428012544" data-user-long="-0.1381740757634631">User Focused</a><br>
+										<a id="candidateData" href="#" data-user-id=""  data-candidate-lat="53.331647402998776" data-candidate-long="-2.9767332668951405">Candidate Focused</a><br>
 									</div>
 								</div>
 								<ul class="control-container">
@@ -82,14 +82,3 @@
 
 <!--include footer-->
 <jsp:include page="includes/footer.jsp" />
-
-
-
-
-
-
-
-
-
-
-

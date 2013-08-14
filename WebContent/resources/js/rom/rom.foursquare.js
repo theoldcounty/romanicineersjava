@@ -33,8 +33,8 @@
 					callback(data);
 				}, 'jsonp');
 			},
-			getPhoto: function(){
-
+			getPhoto: function(prefix, url){
+				return url.replace("original",prefix);
 			},
 			bindTrendEvent: function(){
 				var that = this;
@@ -137,6 +137,10 @@
 					var template = '<ul id="trendResults"></ul>';
 					$('body').append(template);
 
+					console.log("getting trends", data);
+
+
+
 					$.each(setOfVenues, function(index, value) {
 						var innterListItem = '<li><a class="trendlist" data-venueid="'+value.id+'" href="#">'+value.name+' - '+value.id+'</a></i>';
 						$('#trendResults').append(innterListItem);
@@ -149,7 +153,7 @@
 
 				var url = "https://api.foursquare.com/v2/venues/"+venueId+"/events?oauth_token="+this.oauth_token;
 				this.getJson(url, function(data){
-					//console.log("getting events", data);
+					console.log("getting events", data);
 
 					var setOfEvents = data.response.events.items;
 					//var template = '<ul id="eventResults"></ul>';
@@ -174,39 +178,63 @@
 					var thePhotos = theVenue.photos.groups;
 
 					//var venue = data.response.venue;
-					//console.log("venue",venue);
+
+					console.log("data",data);
+
+
+					$('#venue #name').html(theVenue.name);
+					$('#venue #id').html(theVenue.id);
+					//$('#venue #location').html(venue.location.address+"<br>"+venue.location.city+"<br>"+venue.location.country+"<br>"+venue.location.postalCode);
+					$('#venue #rating').html(theVenue.rating);
 
 					/*
-					$('#venue #name').html(venue.name);
-					$('#venue #id').html(venue.id);
-					$('#venue #location').html(venue.location.address+"<br>"+venue.location.city+"<br>"+venue.location.country+"<br>"+venue.location.postalCode);
-					$('#venue #rating').html(venue.rating);
 					$('#venue').data("venueId", venue.id);
 
 
 					that.viewEvents(venue.id);
 
+					*/
+
 					var foursquareObj = {
-											id: venue.id,
-											name: venue.name,
-											streetAddress: venue.location.address,
-											locality: venue.location.city,
-											region: venue.location.state,
-											postalCode: venue.location.postalCode,
+											id: theVenue.id,
+											name: theVenue.name,
+											streetAddress: theVenue.location.address,
+											locality: theVenue.location.city,
+											region: theVenue.location.state,
+											postalCode: theVenue.location.postalCode,
 										};
 
-					var venuePhotoCount = venue.photos.count;
-					var venueAlbums = venue.photos.groups;
+					var venuePhotoCount = theVenue.photos.count;
+					var venueAlbums = theVenue.photos.groups;
 
 					var album = "";
 					//loop over groups
 					$.each(venueAlbums, function(index, value) {
+
+						console.log("value",value);
+
 						//loop over items
 						$.each(value.items, function(index, v) {
-							album += '<li><img src="'+v.url+'"></li>';
+							album += '<li><img src="'+that.getPhoto("300x300",v.url)+'"></li>';
 						});
 					});
 					$('#venue #photos').html(album);
+
+
+					var tips = "";
+					$.each(theTips, function(index, value) {
+
+						console.log("value",value);
+
+						//loop over items
+						$.each(value.items, function(index, v) {
+							tips += '<li>'+v.text+'</li>';
+						});
+					});
+
+					$('#venue #tips').html(tips);
+
+					/*
 					that.bindVenueEvent();
 					that.myFoursquareReplaceSave(foursquareObj);
 

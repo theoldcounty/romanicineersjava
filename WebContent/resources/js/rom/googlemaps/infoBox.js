@@ -99,15 +99,15 @@ InfoBox.prototype.createElement = function() {
 		});
 
 		//trigger InfoBox.ClickMoreInfoButton if user click on more info button (button appears in mobile version)
+/*
 		$(div).find('[data-role="mobile-info-layer"]').bind('click', function(){
 			$(_this).trigger(InfoBox.ClickMoreInfoButton);
 			return false;
 		});
-
+*/
 
 
 		$(div).find('.link-button').bind('click', function(){
-			console.log("CLICKED ON INFO BUTTOn");
 			$(_this).trigger(InfoBox.ClickMoreInfoButton);
 			return false;
 		});
