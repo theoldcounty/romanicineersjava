@@ -218,9 +218,11 @@ public class PersonManager {
         	if(!CommonUtils.isEmailUnique(emailaddress)){
         	    // search query
         	    BasicDBObject searchQuery = new BasicDBObject();
-        	    	searchQuery.put("emailaddress", emailaddress);        		
+        	    	searchQuery.put("emailaddress", emailaddress);
+        	    
+       	    	BasicDBObject excludeFields = new BasicDBObject();
         		
-        	    List<DBObject> user = (List<DBObject>) PersonDao.getUniqueUser(searchQuery).get(0).get("user");
+        	    List<DBObject> user = (List<DBObject>) PersonDao.getUniqueUser(searchQuery, excludeFields).get(0).get("user");
         	    	String userId = (String) user.get(0).get("_id").toString();      		
         		
             	person.setUid(userId);
@@ -279,8 +281,10 @@ public class PersonManager {
         	    BasicDBObject searchQuery = new BasicDBObject();
         	    	searchQuery.put("emailaddress", emailaddress);
         	    	searchQuery.put("password", password);
-        		
-        	    List<DBObject> user = (List<DBObject>) PersonDao.getUniqueUser(searchQuery).get(0).get("user");
+        	    
+        	    BasicDBObject excludeFields = new BasicDBObject();
+        	    
+        	    List<DBObject> user = (List<DBObject>) PersonDao.getUniqueUser(searchQuery, excludeFields).get(0).get("user");
         	    	String userId = (String) user.get(0).get("_id").toString();      		
         		
             	person.setUid(userId);

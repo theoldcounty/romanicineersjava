@@ -212,4 +212,9 @@ a, a:visited, button {
 
 .info-window .button-container .link-button{
 	left:0;
+	background: red;
+	border-radius: 7px;
+	padding: 7px;
+	display: block;
+	text-align: center;
 }

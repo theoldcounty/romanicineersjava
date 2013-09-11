@@ -82,6 +82,7 @@ public class MongoApp {
 	
 	public static List<DBObject> searchCollections(
 			BasicDBObject searchQuery,
+			BasicDBObject excludeFields,
 			String collectionName
 		) throws UnknownHostException, MongoException{
 
@@ -90,8 +91,8 @@ public class MongoApp {
 
 		//_getCollection
 		DBCollection collection = MongoApp.getCollection(collectionName);
-
-	    DBCursor cursor = collection.find(searchQuery);
+		
+	    DBCursor cursor = collection.find(searchQuery, excludeFields);
 
         // loop over the cursor and display the result
     	while (cursor.hasNext()) {

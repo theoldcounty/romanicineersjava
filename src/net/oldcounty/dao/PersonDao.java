@@ -201,12 +201,12 @@ public class PersonDao {
 	 * @throws MongoException
 	 * @throws UnknownHostException
 	 **/
-	public static List<DBObject> getUniqueUser(BasicDBObject searchQuery) throws UnknownHostException, MongoException{
+	public static List<DBObject> getUniqueUser(BasicDBObject searchQuery, BasicDBObject excludeFields) throws UnknownHostException, MongoException{
 		//__Prepare response
 		List<DBObject> response = new ArrayList<DBObject>();
 		BasicDBObject results = new BasicDBObject();
 
-	    List<DBObject> uniqueUser = MongoApp.searchCollections(searchQuery, "myCollection");
+	    List<DBObject> uniqueUser = MongoApp.searchCollections(searchQuery, excludeFields, "myCollection");
 
 	    	if(uniqueUser.size()>0 ){
 				results.put("response", "OK");

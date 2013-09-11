@@ -94,9 +94,11 @@ public class InterestDao {
 	    	searchQuery.put("uid", interest.getUserId());
 	    	searchQuery.put("chartType", interest.getName());
 	    	
-	    List<DBObject> uniqueInterests = null;
+    	BasicDBObject excludeFields = new BasicDBObject();
+
+    	List<DBObject> uniqueInterests = null;
 		try {
-			uniqueInterests = MongoApp.searchCollections(searchQuery, collectionName);
+			uniqueInterests = MongoApp.searchCollections(searchQuery, excludeFields, collectionName);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (MongoException e) {

@@ -10,6 +10,7 @@ package net.oldcounty.controller;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import net.oldcounty.model.Person;
 
 import net.oldcounty.model.PrivateMessage;
 
+import org.bson.BasicBSONObject;
 import org.bson.types.ObjectId;
 
 import javax.servlet.ServletException;
@@ -505,23 +507,28 @@ public class ListenerController{
     */
     @RequestMapping("/viewPrivateMessages")
     public ModelAndView viewPrivateMessages(
-    		HttpServletRequest request
+    		HttpServletRequest request,
+    		String userId
     		) throws UnknownHostException, MongoException
     {    	
-    	String loggedUser = "1";//logged in user
+    	//String loggedUser = "518b090fd1ef11c72b4bcb85";//logged in user
+    	
+    	String loggedUser = userId;
+    	//51895628d1efa7a5d9df83c9 - robsy
+    	//518b090fd1ef11c72b4bcb85 - chops
     	
 		PrivateMessage privatemessage = new PrivateMessage();		
-			
 			privatemessage.setRecepientUserId(loggedUser);
-		List<DBObject> inboxMessages = PrivateMessageDao.getInboxPrivateMessage(privatemessage);
-			
+		
+		List<DBObject> inboxMessages = PrivateMessageController.enrichMessages(PrivateMessageDao.getInboxPrivateMessage(privatemessage), "recepient");
+		
 			privatemessage.setSenderUserId(loggedUser);
-		List<DBObject> sentMessages = PrivateMessageDao.getSentPrivateMessage(privatemessage);
-
+		List<DBObject> sentMessages = PrivateMessageController.enrichMessages(PrivateMessageDao.getSentPrivateMessage(privatemessage), "sender");
+		
 	    BasicDBObject privates = new BasicDBObject();
 			privates.put("inbox", inboxMessages.get(0).get("results"));
 			privates.put("sent", sentMessages.get(0).get("results"));
-	    	
+		
     	return new ModelAndView("jsp/user/view_private_message", "privatemessages", privates);      	
     }
     

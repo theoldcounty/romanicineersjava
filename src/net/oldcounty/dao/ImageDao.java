@@ -60,8 +60,6 @@ public class ImageDao {
 		return userImage;
 	}
 
-	
-
 	public static List<DBObject> getUsersImages(String userId) {
 		//DBCollection coll = db.getCollection("images");
 		
@@ -96,9 +94,6 @@ public class ImageDao {
 		return results;
 	}
 	
-	
-	
-	
 	public void saveUserImage(UserImage userImage) {
 		//_getCollection
 		DBCollection collection = null;
@@ -123,4 +118,22 @@ public class ImageDao {
 		
 		return null;
 	}
+	
+	public BasicDBObject deleteImage(String objId) throws UnknownHostException, MongoException{
+		//__Prepare result
+		BasicDBObject results = new BasicDBObject();
+
+		System.out.println("objId "+ objId);
+		
+	    BasicDBObject obj = new BasicDBObject();
+	    	obj.put("_id", new ObjectId(objId));
+
+	    	//_getCollection
+			MongoApp.deleteCollectionEntry(obj, collectionName);
+
+			results.put("response", "OK");
+			results.put("description", "Image has been deleted");
+
+		return results;
+	}	
 }

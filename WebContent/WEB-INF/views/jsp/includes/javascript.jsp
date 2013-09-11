@@ -42,6 +42,8 @@
 		<script type="text/javascript" src="resources/js/rom/rom.idangerous.swiper.handler.js"></script>
 		
 		
+		<script type="text/javascript" src="resources/js/rom/rom.tabs.js"></script>
+		
 		
 		<script type="text/javascript" src="resources/js/rom/rom.gallery.fix.js"></script>
 		

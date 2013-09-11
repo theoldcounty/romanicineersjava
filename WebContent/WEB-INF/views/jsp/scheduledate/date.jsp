@@ -12,24 +12,84 @@
 				<%=request.getParameter("senderUid")%>
 				<%=request.getParameter("recepientUid")%>
 				-->
-						
-				<div id="canvasMap" data-lat="" data-long=""></div>
 				
-				<div id="venue">
-					<div id="name"></div>
-					<!-- <div id="id"></div>-->
-					<div id="location"></div>
-					<div id="rating"></div>
-					
-					<ul id="photos"></ul>
-					
-					<ul id="tips"></ul>
-				</div>
+				<div class="grid"><!--grid-->
+					<div class="left fifty">		
+						<div id="venue">
+							<div class="grid"><!--grid-->
+								<div class="left fifty">
+									<div id="map"></div>
+									<div id="name"></div>
+									<div id="location"></div>
+									<div id="rating"></div>		
+								</div>
+								<div class="right fifty last">
+									<ul id="events"></ul>
+									<ul id="tips"></ul>
+								</div>
+							</div><!--grid-->
+							
+							<div class="grid"><!--grid-->			
+								<div class="left hundred">
+									<ul id="photos"></ul>
+								</div>
+							</div><!--grid-->
+						</div>
+					</div>
+					<div class="right twenty last">
+						<h3>Candidate profile</h3>
+						
+						picture<br/>
+						
+						<h3>Charlize Theron, 21</h3>
+						<h3>London, United Kingdom</h3>
+						
+						<div>
+							pie chart of interests
+						</div>
+						
+					</div>			
+				</div><!--grid-->				
 				
 				<style>
+					.grid{
+						overflow:hidden;
+					}
+					.left{
+						float:left;
+					}
+					.right{
+						float:right;
+					}
+					
+
+					.twenty{
+						width: 20%;
+					}
+					.fifty{
+						width: 50%;
+					}
+					.eighty{
+						width: 80%;
+					}
+					.hundred{
+						width: 100%;
+					}
+										
+					#date{
+						width: 100%;
+					}
+					
+					
+					#tips{
+						overflow:hidden;
+						height: 300px;
+					}
+					
+				
 					#photos{
 						overflow:hidden;
-						width: 55%;
+						padding: 0;
 					}
 					#photos li{
 						float:left;
@@ -49,7 +109,7 @@
 				
 			</fieldset>
 			
-			
+			<!-- 
 			<fieldset id="step2">				
 				<textarea name="message" rows="4" cols="50"></textarea>
 				<input type="text" value="" name="recepientUid"/>
@@ -58,7 +118,7 @@
 				<input type="hidden" value="submitted" name="submitted"/>
 				<input type="submit" value="submit" name="submit"/>				
 			
-			</fieldset>
+			</fieldset>-->
 		</form>
 		
 		<div class="error"></div>

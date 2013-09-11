@@ -120,8 +120,9 @@ public class PrivateMessageDao {
 		// search query
 	    BasicDBObject searchQuery = new BasicDBObject();
 	    	searchQuery.put("recepientUid", privatemessage.getRecepientUserId());
-	    	
-	    return getPrivateMessage(privatemessage, searchQuery);
+	    
+	    BasicDBObject excludeFields = new BasicDBObject();
+	    return getPrivateMessage(privatemessage, searchQuery, excludeFields);
 	}
 	
 	public static List<DBObject> getSentPrivateMessage(PrivateMessage privatemessage){
@@ -129,7 +130,8 @@ public class PrivateMessageDao {
 	    BasicDBObject searchQuery = new BasicDBObject();
 	    	searchQuery.put("senderUid", privatemessage.getSenderUserId());	    	
 	    
-	    return getPrivateMessage(privatemessage, searchQuery);
+	    BasicDBObject excludeFields = new BasicDBObject();
+	    return getPrivateMessage(privatemessage, searchQuery, excludeFields);
 	}
 	
 	/**
@@ -138,15 +140,17 @@ public class PrivateMessageDao {
 	 * @throws MongoException
 	 * @throws UnknownHostException
 	 **/
-	public static List<DBObject> getPrivateMessage(PrivateMessage privatemessage, BasicDBObject searchQuery){
+	public static List<DBObject> getPrivateMessage(PrivateMessage privatemessage, BasicDBObject searchQuery, BasicDBObject excludeFields){
 		
 		//__Prepare response
 		List<DBObject> response = new ArrayList<DBObject>();		
 		BasicDBObject results = new BasicDBObject();
+		
+		//BasicDBObject searchQuery = new BasicDBObject();
 	    
 	    List<DBObject> uniquePrivateMessages = null;
 		try {
-			uniquePrivateMessages = MongoApp.searchCollections(searchQuery, collectionName);
+			uniquePrivateMessages = MongoApp.searchCollections(searchQuery, excludeFields, collectionName);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (MongoException e) {

@@ -23,6 +23,8 @@ var fancybox = {
 
 				var section = $(this).attr("href");
 				pageHandler.reBindEvents(section);
+				
+				tabs.init();
 			}
 		});
 

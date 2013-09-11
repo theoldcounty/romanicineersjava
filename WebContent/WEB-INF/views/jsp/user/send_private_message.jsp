@@ -7,8 +7,8 @@
 			
 			<fieldset id="step1">				
 				<textarea name="message" rows="4" cols="50"></textarea>
-				<input type="text" value="" name="recepientUid"/>
-				<input type="text" value="" name="senderUid"/>
+				<input type="text" name="recepientUid" value="51895628d1efa7a5d9df83c9"/>
+				<input type="text" name="senderUid" value="518b090fd1ef11c72b4bcb85"/>
 
 				<input type="hidden" value="submitted" name="submitted"/>
 				<input type="submit" value="submit" name="submit"/>				

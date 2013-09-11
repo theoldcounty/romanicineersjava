@@ -60,6 +60,14 @@
 					that.markToDo(venueId);
 				});
 			},
+			convertTimeStamp: function(unix_timestamp){
+				var d = new Date(unix_timestamp*1000);
+
+
+				var dateCombination = d.getDate()+"-"+(parseInt(d.getMonth(),10)+1)+"-"+d.getFullYear()+" "+d.getHours()+":"+d.getMinutes();
+
+				return dateCombination;
+			},
 			search: function(queryObj, callback){
 
 				var query = queryObj.q;
@@ -149,21 +157,24 @@
 				});
 
 			},
-			viewEvents: function(venueId){
+			viewEvents: function(venueId, callback){
 
 				var url = "https://api.foursquare.com/v2/venues/"+venueId+"/events?oauth_token="+this.oauth_token;
 				this.getJson(url, function(data){
-					console.log("getting events", data);
+					//console.log("getting events", data);
 
-					var setOfEvents = data.response.events.items;
-					//var template = '<ul id="eventResults"></ul>';
-					//$('body').append(template);
+					callback(data);
+					/*
+						var setOfEvents = data.response.events.items;
+						//var template = '<ul id="eventResults"></ul>';
+						//$('body').append(template);
 
-					$.each(setOfEvents, function(index, value) {
-						//var innterListItem = '<li><a class="trendlist" data-venueid="'+value.id+'" href="#">'+value.name+' - '+value.id+'</a></i>';
-						//$('#eventResults').append(innterListItem);
-					});
-					//that.bindTrendEvent();
+						$.each(setOfEvents, function(index, value) {
+							//var innterListItem = '<li><a class="trendlist" data-venueid="'+value.id+'" href="#">'+value.name+' - '+value.id+'</a></i>';
+							//$('#eventResults').append(innterListItem);
+						});
+						//that.bindTrendEvent();
+					*/
 				});
 
 			},
@@ -182,18 +193,51 @@
 					console.log("data",data);
 
 
+
+					var latitude = theVenue.location.lat;
+					var longitude = theVenue.location.lng;
+
+					var googleMap = '<img src="http://maps.google.com/maps/api/staticmap?center='+latitude+','+longitude+'&zoom=16&markers=icon:http://tinyurl.com/2ftvtt6|'+latitude+','+longitude+'&size=200x200&sensor=true">';
+
+
 					$('#venue #name').html(theVenue.name);
 					$('#venue #id').html(theVenue.id);
-					//$('#venue #location').html(venue.location.address+"<br>"+venue.location.city+"<br>"+venue.location.country+"<br>"+venue.location.postalCode);
+					$('#venue #map').html(googleMap);
+					$('#venue #location').html(theVenue.location.address+"<br>"+theVenue.location.city+"<br>"+theVenue.location.country+"<br>"+theVenue.location.postalCode);
+
 					$('#venue #rating').html(theVenue.rating);
 
 					/*
 					$('#venue').data("venueId", venue.id);
 
-
-					that.viewEvents(venue.id);
-
 					*/
+
+					that.viewEvents(theVenue.id, function(data){
+						console.log("data",data);
+						var setOfEvents = data.response.events.items;
+						$.each(setOfEvents, function(index, value) {
+
+							console.log("all day val", value.allDay);
+							console.log("name val", value.name);
+
+							console.log("startAt val", value.startAt);
+							console.log("endAt val", value.endAt);
+
+							var times = "";
+
+							if(value.allDay){
+								times = "All Day";
+							}else{
+								times = that.convertTimeStamp(value.startAt)+" to "+that.convertTimeStamp(value.endAt);
+							}
+
+
+
+							var innterListItem = '<li>'+value.name+' - '+times+'</i>';
+							$('#venue #events').append(innterListItem);
+						});
+					});
+
 
 					var foursquareObj = {
 											id: theVenue.id,
@@ -211,7 +255,7 @@
 					//loop over groups
 					$.each(venueAlbums, function(index, value) {
 
-						console.log("value",value);
+						console.log("photos value",value);
 
 						//loop over items
 						$.each(value.items, function(index, v) {

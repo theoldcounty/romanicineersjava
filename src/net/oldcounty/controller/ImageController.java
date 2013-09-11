@@ -7,6 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.UnknownHostException;
 
 import javax.imageio.ImageIO;
 
@@ -25,6 +26,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.MongoException;
 
 @Controller
 public class ImageController {
@@ -70,6 +74,16 @@ public class ImageController {
 		) {
 		return new ModelAndView("jsp/gallery/imagestore");
 	}
+	
+	@RequestMapping("/deleteimage")
+	public ModelAndView imageform(
+			@RequestParam(value = "image_id", required = false) String imageId
+		) throws UnknownHostException, MongoException {
+		
+		BasicDBObject userImage = ImageDao.getInstance().deleteImage(imageId);
+		System.out.println("userImage "+ userImage);
+		return new ModelAndView("jsp/gallery/imagedelete", userImage);
+	}	
 
 	@RequestMapping("/retrieveimage")
 	protected static ResponseEntity<byte[]> retrieveImage(
@@ -131,7 +145,6 @@ public class ImageController {
 
 		}
 		return null;
-
 	}
 
 	public static BufferedImage getScaledImage(BufferedImage image, int width,
@@ -149,5 +162,5 @@ public class ImageController {
 		return bilinearScaleOp.filter(image, new BufferedImage(width, height,
 				image.getType()));
 	}
-
+	
 }

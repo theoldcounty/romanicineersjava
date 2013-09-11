@@ -100,7 +100,7 @@
 							<li><a class="fancyboxtrigger fancybox.ajax" href="imageform?userId=${people[0]._id}">*(Logged In)My Photos/Add Picture (overlay)</a></li>
 
 							<li><a class="fancyboxtrigger fancybox.ajax" href="sendPrivateMessages">*(unlogged)Private Message user (overlay)</a></li>
-							<li><a class="fancyboxtrigger fancybox.ajax" href="viewPrivateMessages">*(Logged In)My Inbox view messages (overlay)</a></li>
+							<li><a class="fancyboxtrigger fancybox.ajax" href="viewPrivateMessages?userId=${people[0]._id}">*(Logged In)My Inbox view messages (overlay)</a></li>
 						</ul>
 					</div>
 

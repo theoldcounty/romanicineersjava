@@ -27,6 +27,7 @@ romApplication = {
 		fancybox.init();
 		gridUserHandler.init();
 
+		tabs.init();	
 		mcustomscroller.init();
 
 
