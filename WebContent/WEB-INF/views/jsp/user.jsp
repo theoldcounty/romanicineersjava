@@ -33,7 +33,7 @@
 						, ${people[1].ageInYears} years old</div>
 
 					<div class="gallery">
-						<div class="featureImg">
+						<div class="featureImg" data-image-id="${gImages.imgId}">
 							<a class="fancyboximage fancybox.image" rel="gallery1" href="retrieveimage?image_id=${people[1].galleryResponse[0].imgId}&height=750" title="Hot Girl">
 								<img src="retrieveimage?image_id=${people[1].galleryResponse[0].imgId}&width=430">
 							</a>
@@ -58,7 +58,7 @@
 														</c:otherwise>   												
 													</c:choose>																					
 												
-														<div class="imageholder">
+														<div class="imageholder" data-image-id="${gImages.imgId}">
 															<a class="fancyboximage fancybox.image" rel="gallery1" href="retrieveimage?image_id=${gImages.imgId}&height=750" title="Hot Girl">
 																<img src="retrieveimage?image_id=${gImages.imgId}&width=160">
 															</a>

@@ -15,10 +15,6 @@ var fancybox = {
 			fitToView	: false,
 			width		: '70%',
 			height		: '70%',
-			autoSize	: false,
-			closeClick	: false,
-			openEffect	: 'none',
-			closeEffect	: 'none',
 			beforeShow: function(){
 
 				var section = $(this).attr("href");
@@ -29,8 +25,6 @@ var fancybox = {
 		});
 
 		$(".fancyboximage").fancybox({
-			openEffect	: 'none',
-			closeEffect	: 'none'
 		});
 	}
 };

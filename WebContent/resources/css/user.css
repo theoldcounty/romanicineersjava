@@ -222,6 +222,7 @@
 
 	.profilePics .swiper-slide{
 		overflow:hidden;
+		padding-top: 0;
 	}
 
 	.profilePics .imageholder{
@@ -231,11 +232,20 @@
 		overflow: hidden;
 		margin-right: 7px;
 		margin-bottom: 7px;
+		position: relative;
 	}
 	.profilePics .imageholder a{
 		display:block;
 	}
-
+	
+	.profilePics .imageholder .cog{
+		background: red;
+		width: 15px;
+		height: 15px;
+		position: absolute;
+		bottom: 15px;
+		right: 15px;
+	}
 
 	.scheduleDate{
 		height:730px;

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/activation.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/aopalliance-1.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-fileupload-1.2.2.jar"/>
@@ -19,6 +18,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/logback-core-0.9.29.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mail.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mailapi.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mongo-2.10.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org.springframework.aop-3.1.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org.springframework.asm-3.1.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org.springframework.aspects-3.1.1.RELEASE.jar"/>
@@ -46,6 +46,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/smtp.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-aop.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-beans.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-context.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-core.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-dao-2.0.8.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-data-commons-core-1.1.0.M1.jar"/>
@@ -62,11 +63,9 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-webmvc-3.0.7.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-webmvc-portlet.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-webmvc.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/standard.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/velocity-1.7-dep.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/velocity-1.7.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-context.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mongo-2.10.1.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>

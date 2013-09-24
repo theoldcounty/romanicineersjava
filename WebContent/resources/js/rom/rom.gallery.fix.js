@@ -13,7 +13,30 @@ var galleryFix = {
 			that.triggerRatioCheckAfterLoad(this);
 		});
 
+		
+		
 
+		$(".imageholder").mouseenter(function() {
+			
+			var imageHolder = $(this);
+			
+			imageHolder.prepend('<div class="cog"><a href="deleteimage?image_id='+$(this).data("image-id")+'">x</a></div>');   
+		
+			$(".cog a").click(function(e) {
+				e.preventDefault();
+				
+				$.ajax({
+					  url: $(this).attr("href"),
+					  cache: false
+					}).done(function( html ) {
+					  console.log("deleted");
+					});				
+				
+				imageHolder.fadeOut(200);
+			});		
+		}).mouseleave(function() {
+			$(this).find('.cog').remove();
+		});
 
 	},
 	triggerRatioCheckAfterLoad: function(selectorimg){

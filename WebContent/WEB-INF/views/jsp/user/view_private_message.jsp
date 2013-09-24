@@ -16,8 +16,6 @@
 				$(document).ready(function() {
 				    console.log( "ready!" );
 				    
-				    
-
 					$(".list .messageData .subject a").click(function() {
 						console.log("Handler for .click() called.");
 					});
@@ -87,7 +85,7 @@
 						<ul>
 							<c:forEach items="${privatemessages.inbox}" varStatus="loop">
 								<li>
-									<div class="image"><img src="retrieveimage?image_id=${privatemessages.inbox[loop.index].UserImg[0].imgId}&width=50"></div>
+									<div class="image"><img src="retrieveimage?image_id=${privatemessages.inbox[loop.index].UserImg[0].imgId}&width=90"></div>
 									<div class="userData">
 										<div class="name">${privatemessages.inbox[loop.index].userDetails[0].realname}</div>
 										<div class="date"><!-- July 23rd 2012 at 1:34p.m. --> ${privatemessages.inbox[loop.index].date.ts}</div>								
@@ -122,7 +120,7 @@
 					<ul>
 						<c:forEach items="${privatemessages.sent}" varStatus="loop">
 							<li>
-								<div class="image"><img src="retrieveimage?image_id=${privatemessages.sent[loop.index].UserImg[0].imgId}&width=50"></div>
+								<div class="image"><img src="retrieveimage?image_id=${privatemessages.sent[loop.index].UserImg[0].imgId}&width=90"></div>
 								<div class="userData">
 									<div class="name">${privatemessages.sent[loop.index].userDetails[0].realname}</div>
 									<div class="date"><!-- July 23rd 2012 at 1:34p.m. --> ${privatemessages.sent[loop.index].date.ts}</div>								
