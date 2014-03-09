@@ -324,7 +324,7 @@ var GoogleMaps = Backbone.View.extend({
 
 		var self = this;
 		$.each(data, function(index, venue) {
-			//console.log("venue", venue);
+			console.log("venue", venue);
 			var venueOverlay = new VenueOverlay({venueInfo: venue});
 			venueOverlay.setMap(self.map);
 			venueOverlay.on(VenueOverlay.ClickOnMarkerEvent, _.bind(self.onMarkerClicked, self));
@@ -334,9 +334,9 @@ var GoogleMaps = Backbone.View.extend({
 	},
 
 	onServiceError: function(xhr, ajaxOptions, thrownError) {
-		//console.log("xhr", xhr);
-		//console.log("ajaxOptions", ajaxOptions);
-		//console.log("thrownError", thrownError);
+		console.log("xhr", xhr);
+		console.log("ajaxOptions", ajaxOptions);
+		console.log("thrownError", thrownError);
 	},
 
 	onMarkerClicked: function(marker) {

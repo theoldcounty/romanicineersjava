@@ -77,8 +77,8 @@
 				//var location = "29.43601,106.503525"; //china
 				//var location = "51.165691,10.451526"; //germany
 
-				//console.log("query", query);
-				//console.log("location", location);
+				console.log("query", query);
+				console.log("location", location);
 
 				//this.viewTrends(location);
 
@@ -86,10 +86,25 @@
 
 				var that = this;
 
-				var url = "https://api.foursquare.com/v2/venues/search?ll="+location+"&query="+query+"&limit="+limit+"&oauth_token="+this.oauth_token;
+				var url = "https://api.foursquare.com/v2/venues/search?ll="+location+"&query="+query+"&limit="+limit+"&oauth_token="+this.oauth_token+"&v=20140308";
 				this.getJson(url, function(data){
-					var setOfVenues = data.response.groups[0].items;
+					var setOfVenues = "";
 
+
+					/*
+					if(data.response.groups != undefined){
+						setOfVenues = data.response.groups[0].items;
+					}*/
+					
+					
+					if(data.response.venues != undefined){
+						setOfVenues = data.response.venues;
+					}
+					
+					
+					
+					console.log("setOfVenues", setOfVenues);
+					
 					callback(setOfVenues);
 
 					/*
@@ -139,7 +154,7 @@
 
 				//&limit="+limit+"&radius="+radius+"
 
-				var url = "https://api.foursquare.com/v2/venues/trending?ll="+location+"&oauth_token="+this.oauth_token;
+				var url = "https://api.foursquare.com/v2/venues/trending?ll="+location+"&oauth_token="+this.oauth_token+"&v=20140308";
 				this.getJson(url, function(data){
 					var setOfVenues = data.response.venues;
 					var template = '<ul id="trendResults"></ul>';
@@ -159,7 +174,7 @@
 			},
 			viewEvents: function(venueId, callback){
 
-				var url = "https://api.foursquare.com/v2/venues/"+venueId+"/events?oauth_token="+this.oauth_token;
+				var url = "https://api.foursquare.com/v2/venues/"+venueId+"/events?oauth_token="+this.oauth_token+"&v=20140308";
 				this.getJson(url, function(data){
 					//console.log("getting events", data);
 
@@ -179,14 +194,14 @@
 
 			},
 			exploreVenue: function(venueId){
-				var url = "https://api.foursquare.com/v2/venues/"+venueId+"?oauth_token="+this.oauth_token;
+				var url = "https://api.foursquare.com/v2/venues/"+venueId+"?oauth_token="+this.oauth_token+"&v=20140308";
 
 				var that = this;
 				this.getJson(url, function(data){
 
 					var theVenue = data.response.venue;
-					var theTips = theVenue.tips.groups;
-					var thePhotos = theVenue.photos.groups;
+					//var theTips = theVenue.tips.groups;
+					//var thePhotos = theVenue.photos.groups;
 
 					//var venue = data.response.venue;
 
@@ -247,7 +262,8 @@
 											region: theVenue.location.state,
 											postalCode: theVenue.location.postalCode,
 										};
-
+					
+					/*
 					var venuePhotoCount = theVenue.photos.count;
 					var venueAlbums = theVenue.photos.groups;
 
@@ -263,8 +279,12 @@
 						});
 					});
 					$('#venue #photos').html(album);
-
-
+					*/
+					
+					
+					
+					
+					/*
 					var tips = "";
 					$.each(theTips, function(index, value) {
 
@@ -277,6 +297,7 @@
 					});
 
 					$('#venue #tips').html(tips);
+					*/
 
 					/*
 					that.bindVenueEvent();

@@ -71,10 +71,12 @@ var VenueOverlay = Backbone.View.extend({
 		var venueId = this.venueInfoVO.venueInfo.id;
 		var senderUid = "51895628d1efa7a5d9df83c9";
 		var recepientUid = "518b090fd1ef11c72b4bcb85";
+		
+		console.log("venueId2 ", venueId);
 
 		$.fancybox({
 			type: 'ajax',
-			href : 'http://robot-oi772f3re:8080/springApp21/date?venueId='+venueId+'&senderUid='+senderUid+'&recepientUid='+recepientUid,
+			href : 'date?venueId='+venueId+'&senderUid='+senderUid+'&recepientUid='+recepientUid,
 			title : 'Lorem lipsum',
 			beforeShow : function(){
 				date.init();
@@ -134,13 +136,15 @@ var VenueOverlay = Backbone.View.extend({
 
 	getMarkerIcon: function() {
 
-		var customIcon = this.symbolUrl;
-
+		//var customIcon = this.symbolUrl;
+		var customIcon = "http://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Push-Pin-1-Right-Azure-icon.png";
 		if(this.venueInfoVO.venueInfo.categories[0]){
-			customIcon = this.venueInfoVO.venueInfo.categories[0].icon;
+			//customIcon = this.venueInfoVO.venueInfo.categories[0].icon;
 
-			customType = (this.venueInfoVO.venueInfo.categories[0].name).toLowerCase();
-			console.log("customType", customType);
+			//customType = "http://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Push-Pin-1-Right-Azure-icon.png";
+
+			//customType = (this.venueInfoVO.venueInfo.categories[0].name).toLowerCase();
+			//console.log("customType", customType);
 
 			//theater
 			//indie theater
